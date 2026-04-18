@@ -28,7 +28,7 @@ Each of the above has a symmetric counterpart under `src/content/docs/es/`.
 
 ## Contributing
 
-- English and Spanish versions MUST stay in sync. Write EN first, then rewrite idiomatic ES (Rioplatense / voseo).
+- English and Spanish versions MUST stay in sync. Write EN first, then rewrite idiomatic ES in neutral / international Spanish (tuteo — "tú", "aquí", "empieza").
 - Auto-generated directories (`reference/cli-commands/`, `reference/api/`, `changes/`) are in `.gitignore`. They are rebuilt by `pnpm sync`. Do not commit or hand-edit them.
 - For non-trivial additions that mirror a new feature in `aurora-catalyst-cli`, invoke the `docs-from-spec` skill — see `CLAUDE.md`.
 

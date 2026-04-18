@@ -69,7 +69,7 @@ pnpm sync
 - If the user is wrong, explain WHY with evidence. If you were wrong, acknowledge with proof.
 - Always propose alternatives with tradeoffs when relevant.
 - Every page under `src/content/docs/en/` MUST have a counterpart at the same path under `src/content/docs/es/` — and vice versa. Both locales ship in the same PR.
-- Spanish content is written in Rioplatense Spanish (voseo), not translated literally.
+- Spanish content is written in neutral / international Spanish using tuteo ("tú", "aquí", "empieza"), not translated literally.
 - Never edit files under `reference/cli-commands/`, `reference/api/`, or `changes/` — those are overwritten by `pnpm sync`.
 - Never create categories outside Diátaxis (tutorials / guides / reference / concepts). If something does not fit, raise it with the user before creating the directory.
 - Docs URLs are contracts. Do not rename or delete existing pages without explicit user confirmation.

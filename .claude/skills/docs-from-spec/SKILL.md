@@ -5,8 +5,8 @@ description: >
   (concepts, guides, reference stubs) in both English and Spanish. Invoke after
   a change is archived in the source repo.
 metadata:
-  version: '0.1'
-  trigger: 'After /opsx:archive in aurora-catalyst-cli or similar, when the user wants to document the new feature.'
+  version: "0.1"
+  trigger: "After /opsx:archive in aurora-catalyst-cli or similar, when the user wants to document the new feature."
 ---
 
 ## When to use
@@ -71,8 +71,8 @@ description: <one-line description>
 
 ## Related
 
-- [How-to: …](/guides/…/)  ← link to the practical recipes
-- [Reference: …](/reference/…/)  ← link to auto-generated parts
+- [How-to: …](/guides/…/) ← link to the practical recipes
+- [Reference: …](/reference/…/) ← link to auto-generated parts
 ```
 
 ### 2. How-to guide (when the feature changes user workflow)
@@ -150,7 +150,7 @@ Only when the feature changes the getting-started experience or introduces a ste
 
 ## Language coverage
 
-Every page you write MUST exist in both EN (`src/content/docs/en/…`) and ES (`src/content/docs/es/…`) at symmetric paths. Write the EN version first, then the ES version — do NOT machine-translate, rewrite idiomatically in Rioplatense Spanish (voseo) following the user's preference.
+Every page you write MUST exist in both EN (`src/content/docs/en/…`) and ES (`src/content/docs/es/…`) at symmetric paths. Write the EN version first, then the ES version — do NOT machine-translate, rewrite idiomatically in **neutral / international Spanish using tuteo** ("tú", "aquí", "empieza").
 
 Both versions live in the same PR.
 
