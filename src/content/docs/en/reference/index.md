@@ -5,7 +5,7 @@ description: Auto-generated technical reference for Aurora Catalyst.
 
 Reference material is **information-oriented**: accurate, complete, consultable quickly.
 
-Most of this section is **auto-generated** from the Aurora repositories by the `import-from-catalyst` script and a scheduled GitHub Action. Do not edit auto-generated pages by hand — changes will be overwritten on the next import.
+Most of this section is **auto-generated** from the Aurora repositories by the `import-from-sources` script. Do not edit auto-generated pages by hand — changes will be overwritten on the next `pnpm sync`.
 
 ## What lives here
 

@@ -32,7 +32,9 @@ Plus one operational section:
 - **Human-curated** (edited in this repo): `tutorials/`, `guides/`, `concepts/`, and any hand-written files under `reference/` (e.g. YAML schema).
 - **Auto-generated** (overwritten on every import): `reference/cli-commands/`, `reference/api/`, `changes/`.
 
-The auto-generated directories are listed in `.gitignore` — they are rebuilt by `pnpm sync` (locally) and by the deploy workflow (on CI before `astro build` if/when configured).
+The auto-generated directories are **committed to the repo** so the GitHub Pages build has everything it needs. They are rebuilt locally by `pnpm sync`, which pulls the latest output from the sibling repos. Since CI has no access to the siblings, the deploy workflow trusts whatever is committed.
+
+**Before committing any change that should reach production, run `pnpm sync` locally first** if you touched the CLI, the framework, archived an openspec change, or regenerated TypeDoc / `oclif readme --multi`. Otherwise the site in production will lag behind your local.
 
 ## Cross-repo workflow
 
@@ -43,7 +45,7 @@ aurora-catalyst-cli (source of truth)     aurora-catalyst-docs (you are here)
 ├── openspec/changes/archive/       ─────►  changes/ (mirror)
 ├── docs/ (oclif readme output)     ─────►  reference/cli-commands/
 └── docs-api/ (TypeDoc output)      ─────►  reference/api/
-                                   ◄────── scripts/import-from-catalyst.ts
+                                   ◄────── scripts/import-from-sources.ts
 ```
 
 To update docs from a freshly-archived change:
@@ -71,6 +73,7 @@ pnpm sync
 - Every page under `src/content/docs/en/` MUST have a counterpart at the same path under `src/content/docs/es/` — and vice versa. Both locales ship in the same PR.
 - Spanish content is written in neutral / international Spanish using tuteo ("tú", "aquí", "empieza"), not translated literally.
 - Never edit files under `reference/cli-commands/`, `reference/api/`, or `changes/` — those are overwritten by `pnpm sync`.
+- Run `pnpm sync` before committing any change that should reach production docs. The CI build cannot reach the sibling repos — it trusts what is committed.
 - Never create categories outside Diátaxis (tutorials / guides / reference / concepts). If something does not fit, raise it with the user before creating the directory.
 - Docs URLs are contracts. Do not rename or delete existing pages without explicit user confirmation.
 

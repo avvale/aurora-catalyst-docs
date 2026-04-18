@@ -20,10 +20,7 @@ yarn-error.log*
 .vscode/
 .idea/
 
-# imported from sibling repos (rebuilt by scripts/import-from-catalyst.ts)
-src/content/docs/en/reference/cli-commands/**
-src/content/docs/en/reference/api/**
-src/content/docs/en/changes/**
-src/content/docs/es/reference/cli-commands/**
-src/content/docs/es/reference/api/**
-src/content/docs/es/changes/**
+# NOTE: content imported by scripts/import-from-sources.ts (cli-commands,
+# api, changes) is committed intentionally so the GitHub Pages build has
+# everything it needs. Run `pnpm sync` locally before committing any change
+# that should surface in those sections.
