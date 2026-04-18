@@ -144,6 +144,23 @@ const WELL_KNOWN_TITLES: Record<string, Record<Locale, string>> = {
 
 const SPEC_LABEL: Record<Locale, string> = { en: 'Spec', es: 'Spec' };
 
+/**
+ * Note added to every auto-generated landing page. Makes it explicit that
+ * technical content lives in the source language by design.
+ */
+const TRANSLATION_NOTE: Record<Locale, string> = {
+  en: [
+    ':::note[Auto-generated reference]',
+    'This section is auto-generated from the source code in the linked repo. The surrounding wrappers (titles, breadcrumbs, landings) are localized, but the technical content itself is kept in the source language to stay in sync with the source. Industry standard for technical reference.',
+    ':::',
+  ].join('\n'),
+  es: [
+    ':::note[Referencia autogenerada]',
+    'Esta sección se genera automáticamente desde el código fuente del repo vinculado. Los envoltorios (títulos, breadcrumbs, landings) están localizados, pero el contenido técnico se mantiene en el idioma de la fuente para estar sincronizado con ella. Es el estándar de la industria para referencia técnica.',
+    ':::',
+  ].join('\n'),
+};
+
 /** Convert a kebab-case slug to sentence case, stripping a YYYY-MM-DD- prefix. */
 function humanize(slug: string): string {
   const stripped = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
@@ -229,9 +246,23 @@ async function mirrorArchivesFor(source: Source): Promise<void> {
       locale === 'es'
         ? `Changes archivados de ${source.repo}. Autogenerado.`
         : `Archived changes from ${source.repo}. Auto-generated.`;
+    const intro =
+      locale === 'es'
+        ? `Changes archivados importados desde \`${source.repo}/openspec/changes/archive/\`.`
+        : `Archived changes imported from \`${source.repo}/openspec/changes/archive/\`.`;
     await writeFile(
       path.join(dest, 'index.md'),
-      `---\ntitle: ${yamlString(title)}\ndescription: ${yamlString(description)}\n---\n\nArchived changes imported from \`${source.repo}/openspec/changes/archive/\`.\n`,
+      [
+        `---`,
+        `title: ${yamlString(title)}`,
+        `description: ${yamlString(description)}`,
+        `---`,
+        ``,
+        intro,
+        ``,
+        TRANSLATION_NOTE[locale],
+        ``,
+      ].join('\n'),
       'utf8',
     );
     console.log(`[ok] ${source.slug} archives → ${path.relative(DOCS_ROOT, dest)}`);
@@ -248,19 +279,20 @@ async function writeChangesLanding(activeSources: Source[]): Promise<void> {
       locale === 'es'
         ? 'Changes archivados en los repos de Aurora. Autogenerado por source.'
         : 'Archived changes across the Aurora repos. Auto-generated per source.';
+    const groupHeader = locale === 'es' ? 'Grupos por repo:' : 'Grouped by source repo:';
     const lines = [
       `---`,
       `title: ${yamlString(title)}`,
       `description: ${yamlString(description)}`,
       `---`,
       ``,
-      locale === 'es'
-        ? 'Grupos por repo:'
-        : 'Grouped by source repo:',
+      groupHeader,
       ``,
       ...activeSources
         .filter((s) => s.hasArchives)
         .map((s) => `- **${s.label[locale]}** (\`${s.slug}\`) — \`${s.repo}\``),
+      ``,
+      TRANSLATION_NOTE[locale],
       ``,
     ];
     await writeFile(path.join(root, 'index.md'), lines.join('\n'), 'utf8');
@@ -285,6 +317,32 @@ async function mirrorCliCommandsFor(source: Source): Promise<void> {
     await resetDir(dest);
     await cp(sourceDir, dest, { recursive: true });
     await injectGenericFrontmatterUnder(dest);
+
+    // Localized landing that explains the section.
+    const title = locale === 'es' ? 'Comandos del CLI' : 'CLI commands';
+    const description =
+      locale === 'es'
+        ? `Referencia de los comandos de \`${source.repo}\`. Generada por \`oclif readme --multi\`.`
+        : `Reference for the \`${source.repo}\` commands. Produced by \`oclif readme --multi\`.`;
+    const intro =
+      locale === 'es'
+        ? `Cada página describe un topic de \`catalyst\` con sus flags, args y ejemplos.`
+        : `Each page describes a \`catalyst\` topic with its flags, args and examples.`;
+    await writeFile(
+      path.join(dest, 'index.md'),
+      [
+        `---`,
+        `title: ${yamlString(title)}`,
+        `description: ${yamlString(description)}`,
+        `---`,
+        ``,
+        intro,
+        ``,
+        TRANSLATION_NOTE[locale],
+        ``,
+      ].join('\n'),
+      'utf8',
+    );
     console.log(`[ok] ${source.slug} cli-commands → ${path.relative(DOCS_ROOT, dest)}`);
   }
 }
@@ -307,6 +365,33 @@ async function mirrorApiFor(source: Source): Promise<void> {
     await resetDir(dest);
     await cp(sourceDir, dest, { recursive: true });
     await injectGenericFrontmatterUnder(dest);
+
+    // Localized landing for this slug's API reference.
+    const title =
+      locale === 'es' ? `API · ${source.label.es}` : `API · ${source.label.en}`;
+    const description =
+      locale === 'es'
+        ? `Superficie TypeScript pública de \`${source.repo}\`. Generada por TypeDoc.`
+        : `Public TypeScript surface of \`${source.repo}\`. Produced by TypeDoc.`;
+    const intro =
+      locale === 'es'
+        ? `Cada página corresponde a un módulo, interfaz, función o tipo exportado desde \`${source.repo}\`.`
+        : `Each page corresponds to a module, interface, function, or type exported from \`${source.repo}\`.`;
+    await writeFile(
+      path.join(dest, 'index.md'),
+      [
+        `---`,
+        `title: ${yamlString(title)}`,
+        `description: ${yamlString(description)}`,
+        `---`,
+        ``,
+        intro,
+        ``,
+        TRANSLATION_NOTE[locale],
+        ``,
+      ].join('\n'),
+      'utf8',
+    );
     console.log(`[ok] ${source.slug} api → ${path.relative(DOCS_ROOT, dest)}`);
   }
 }
