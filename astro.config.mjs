@@ -12,9 +12,10 @@ export default defineConfig({
   site: `https://${REPO_OWNER}.github.io`,
   base: `/${REPO_NAME}`,
   // Redirect the bare base URL to the default locale so visitors never land
-  // on an empty page. Astro prepends `base` automatically for redirects.
+  // on an empty page. Astro does NOT prepend `base` to redirect targets, so
+  // we include it manually to keep the URL working both locally and on Pages.
   redirects: {
-    '/': '/en/',
+    '/': `/${REPO_NAME}/en/`,
   },
   integrations: [
     starlight({
