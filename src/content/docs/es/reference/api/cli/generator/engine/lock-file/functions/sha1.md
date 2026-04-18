@@ -12,9 +12,12 @@ title: "Sha1"
 
 > **sha1**(`content`): `string`
 
-Defined in: [generator/engine/lock-file.ts:18](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L18)
+Defined in: [generator/engine/lock-file.ts:23](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L23)
 
-Compute SHA-1 hash of a string.
+Compute the SHA-1 hash of a string as a lowercase hex digest.
+
+Used as the integrity primitive for the lockfile. Not cryptographically
+strong — the purpose is change detection, not security.
 
 ## Parameters
 

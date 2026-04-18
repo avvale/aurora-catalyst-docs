@@ -10,7 +10,10 @@ title: "PropertyArrayOptions"
 
 # Interface: PropertyArrayOptions
 
-Defined in: [generator/domain/model.ts:98](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L98)
+Defined in: [generator/domain/model.ts:133](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L133)
+
+Options for properties of type `array`. Describes the element type and,
+when the element is an enum, the allowed values.
 
 ## Properties
 
@@ -18,7 +21,9 @@ Defined in: [generator/domain/model.ts:98](https://github.com/avvale/aurora-cata
 
 > `optional` **enumOptions?**: `string`[]
 
-Defined in: [generator/domain/model.ts:99](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L99)
+Defined in: [generator/domain/model.ts:135](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L135)
+
+Values admitted when the array element is `enum`.
 
 ***
 
@@ -26,7 +31,7 @@ Defined in: [generator/domain/model.ts:99](https://github.com/avvale/aurora-cata
 
 > `optional` **length?**: `number`
 
-Defined in: [generator/domain/model.ts:100](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L100)
+Defined in: [generator/domain/model.ts:136](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L136)
 
 ***
 
@@ -34,7 +39,7 @@ Defined in: [generator/domain/model.ts:100](https://github.com/avvale/aurora-cat
 
 > `optional` **maxLength?**: `number`
 
-Defined in: [generator/domain/model.ts:101](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L101)
+Defined in: [generator/domain/model.ts:137](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L137)
 
 ***
 
@@ -42,4 +47,6 @@ Defined in: [generator/domain/model.ts:101](https://github.com/avvale/aurora-cat
 
 > **type**: [`PropertyType`](../type-aliases/PropertyType.md)
 
-Defined in: [generator/domain/model.ts:102](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L102)
+Defined in: [generator/domain/model.ts:139](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L139)
+
+Element type. Usually a primitive or `enum`.

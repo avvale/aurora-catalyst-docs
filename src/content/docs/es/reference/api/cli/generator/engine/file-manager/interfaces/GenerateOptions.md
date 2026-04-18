@@ -10,7 +10,15 @@ title: "GenerateOptions"
 
 # Interface: GenerateOptions
 
-Defined in: [generator/engine/file-manager.ts:34](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L34)
+Defined in: [generator/engine/file-manager.ts:49](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L49)
+
+Options accepted by [generateFromTemplate](../functions/generateFromTemplate.md) and [generateContents](../functions/generateContents.md).
+
+All fields are optional. The ones related to filtering (`excludedFiles`,
+`excludedOperations`) and iteration context (`currentProperty`,
+`currentAdditionalApi`) are set internally when the generator expands a
+template group; callers typically only set `force`, `lockFiles`,
+`templateData`, `verbose` and the bounded-context/module identifiers.
 
 ## Properties
 
@@ -18,7 +26,9 @@ Defined in: [generator/engine/file-manager.ts:34](https://github.com/avvale/auro
 
 > `optional` **boundedContextName?**: `string`
 
-Defined in: [generator/engine/file-manager.ts:35](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L35)
+Defined in: [generator/engine/file-manager.ts:51](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L51)
+
+Bounded context name used for filename substitution (e.g. `__bounded_context_name__`).
 
 ***
 
@@ -26,7 +36,9 @@ Defined in: [generator/engine/file-manager.ts:35](https://github.com/avvale/auro
 
 > `optional` **currentAdditionalApi?**: [`AdditionalApi`](../../../domain/model/interfaces/AdditionalApi.md)
 
-Defined in: [generator/engine/file-manager.ts:36](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L36)
+Defined in: [generator/engine/file-manager.ts:53](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L53)
+
+Currently iterated additional API when expanding additional-@api templates.
 
 ***
 
@@ -34,7 +46,9 @@ Defined in: [generator/engine/file-manager.ts:36](https://github.com/avvale/auro
 
 > `optional` **currentProperty?**: [`Property`](../../../domain/model/interfaces/Property.md)
 
-Defined in: [generator/engine/file-manager.ts:37](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L37)
+Defined in: [generator/engine/file-manager.ts:55](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L55)
+
+Currently iterated property when expanding per-property templates.
 
 ***
 
@@ -42,7 +56,9 @@ Defined in: [generator/engine/file-manager.ts:37](https://github.com/avvale/auro
 
 > `optional` **excludedFiles?**: `string`[]
 
-Defined in: [generator/engine/file-manager.ts:38](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L38)
+Defined in: [generator/engine/file-manager.ts:57](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L57)
+
+File path globs excluded from generation for this module.
 
 ***
 
@@ -50,7 +66,9 @@ Defined in: [generator/engine/file-manager.ts:38](https://github.com/avvale/auro
 
 > `optional` **excludedOperations?**: `string`[]
 
-Defined in: [generator/engine/file-manager.ts:39](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L39)
+Defined in: [generator/engine/file-manager.ts:59](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L59)
+
+CRUD operations excluded for this module (e.g. `delete`, `update`).
 
 ***
 
@@ -58,7 +76,9 @@ Defined in: [generator/engine/file-manager.ts:39](https://github.com/avvale/auro
 
 > `optional` **force?**: `boolean`
 
-Defined in: [generator/engine/file-manager.ts:40](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L40)
+Defined in: [generator/engine/file-manager.ts:61](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L61)
+
+If true, overwrite existing files respecting the lockfile integrity check.
 
 ***
 
@@ -66,7 +86,9 @@ Defined in: [generator/engine/file-manager.ts:40](https://github.com/avvale/auro
 
 > `optional` **lockFiles?**: [`LockFile`](../../../domain/model/interfaces/LockFile.md)[]
 
-Defined in: [generator/engine/file-manager.ts:41](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L41)
+Defined in: [generator/engine/file-manager.ts:63](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L63)
+
+Existing lockfile entries consulted when a file already exists on disk.
 
 ***
 
@@ -74,7 +96,9 @@ Defined in: [generator/engine/file-manager.ts:41](https://github.com/avvale/auro
 
 > `optional` **moduleName?**: `string`
 
-Defined in: [generator/engine/file-manager.ts:42](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L42)
+Defined in: [generator/engine/file-manager.ts:65](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L65)
+
+Module name used for filename substitution (`__module_name__`).
 
 ***
 
@@ -82,7 +106,9 @@ Defined in: [generator/engine/file-manager.ts:42](https://github.com/avvale/auro
 
 > `optional` **moduleNames?**: `string`
 
-Defined in: [generator/engine/file-manager.ts:43](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L43)
+Defined in: [generator/engine/file-manager.ts:67](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L67)
+
+Plural form of the module name (`__module_names__`).
 
 ***
 
@@ -90,7 +116,9 @@ Defined in: [generator/engine/file-manager.ts:43](https://github.com/avvale/auro
 
 > `optional` **templateData?**: [`TemplateData`](../../template-engine/interfaces/TemplateData.md)
 
-Defined in: [generator/engine/file-manager.ts:44](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L44)
+Defined in: [generator/engine/file-manager.ts:69](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L69)
+
+Data passed into the Eta renderer as `it`.
 
 ***
 
@@ -98,7 +126,9 @@ Defined in: [generator/engine/file-manager.ts:44](https://github.com/avvale/auro
 
 > `optional` **useTemplateEngine?**: `boolean`
 
-Defined in: [generator/engine/file-manager.ts:45](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L45)
+Defined in: [generator/engine/file-manager.ts:71](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L71)
+
+If false, skip Eta rendering and copy the template contents verbatim.
 
 ***
 
@@ -106,4 +136,6 @@ Defined in: [generator/engine/file-manager.ts:45](https://github.com/avvale/auro
 
 > `optional` **verbose?**: `boolean`
 
-Defined in: [generator/engine/file-manager.ts:46](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L46)
+Defined in: [generator/engine/file-manager.ts:73](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L73)
+
+If true, log per-file and per-region detail under INFO/OVERWRITE/REGION tags.

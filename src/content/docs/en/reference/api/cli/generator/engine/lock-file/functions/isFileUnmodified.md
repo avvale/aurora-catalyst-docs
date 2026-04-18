@@ -12,7 +12,7 @@ title: "IsFileUnmodified"
 
 > **isFileUnmodified**(`filePath`, `lockFiles`, `relativePath`): `boolean`
 
-Defined in: [generator/engine/lock-file.ts:339](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L339)
+Defined in: [generator/engine/lock-file.ts:355](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L355)
 
 Check if a file's current content matches its lock file integrity hash.
 Returns true if the file has NOT been modified by the user.

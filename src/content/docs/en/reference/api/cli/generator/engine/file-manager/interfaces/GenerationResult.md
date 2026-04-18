@@ -10,7 +10,10 @@ title: "GenerationResult"
 
 # Interface: GenerationResult
 
-Defined in: [generator/engine/file-manager.ts:51](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L51)
+Defined in: [generator/engine/file-manager.ts:82](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L82)
+
+Accumulated state of a generation run. Mutated across recursive calls so
+callers can inspect what was produced.
 
 ## Properties
 
@@ -18,7 +21,9 @@ Defined in: [generator/engine/file-manager.ts:51](https://github.com/avvale/auro
 
 > **lockFiles**: [`LockFile`](../../../domain/model/interfaces/LockFile.md)[]
 
-Defined in: [generator/engine/file-manager.ts:52](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L52)
+Defined in: [generator/engine/file-manager.ts:84](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L84)
+
+Lockfile entries captured during the run. Persisted by the caller.
 
 ***
 
@@ -26,4 +31,6 @@ Defined in: [generator/engine/file-manager.ts:52](https://github.com/avvale/auro
 
 > **originFiles**: `string`[]
 
-Defined in: [generator/engine/file-manager.ts:53](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L53)
+Defined in: [generator/engine/file-manager.ts:86](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L86)
+
+Paths of `.origin.*` files written because the skeleton was user-modified.

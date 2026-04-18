@@ -10,7 +10,11 @@ title: "ImportStatement"
 
 # Interface: ImportStatement
 
-Defined in: [generator/domain/model.ts:238](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L238)
+Defined in: [generator/domain/model.ts:361](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L361)
+
+Declaration of an import statement handled by `code-gen.importManager`.
+Allows templates to declare imports at render time and let the helper
+de-duplicate, group and sort them consistently.
 
 ## Properties
 
@@ -18,7 +22,9 @@ Defined in: [generator/domain/model.ts:238](https://github.com/avvale/aurora-cat
 
 > `optional` **defaultImport?**: `boolean`
 
-Defined in: [generator/domain/model.ts:239](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L239)
+Defined in: [generator/domain/model.ts:363](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L363)
+
+If true, emitted as a default import (`import X from '...'`).
 
 ***
 
@@ -26,7 +32,9 @@ Defined in: [generator/domain/model.ts:239](https://github.com/avvale/aurora-cat
 
 > **items**: `string` \| `string`[]
 
-Defined in: [generator/domain/model.ts:240](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L240)
+Defined in: [generator/domain/model.ts:365](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L365)
+
+Named imports, or a single default/namespace identifier.
 
 ***
 
@@ -34,7 +42,9 @@ Defined in: [generator/domain/model.ts:240](https://github.com/avvale/aurora-cat
 
 > `optional` **oneRowByItem?**: `boolean`
 
-Defined in: [generator/domain/model.ts:241](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L241)
+Defined in: [generator/domain/model.ts:367](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L367)
+
+If true, each named item goes on its own line.
 
 ***
 
@@ -42,4 +52,6 @@ Defined in: [generator/domain/model.ts:241](https://github.com/avvale/aurora-cat
 
 > **path**: `string`
 
-Defined in: [generator/domain/model.ts:242](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L242)
+Defined in: [generator/domain/model.ts:369](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L369)
+
+Module specifier (`@nestjs/common`, `./user.model`, ...).

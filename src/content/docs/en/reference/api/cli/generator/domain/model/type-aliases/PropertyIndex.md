@@ -12,4 +12,6 @@ title: "PropertyIndex"
 
 > **PropertyIndex** = `"index"` \| `"unique"`
 
-Defined in: [generator/domain/model.ts:28](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L28)
+Defined in: [generator/domain/model.ts:46](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L46)
+
+Database index kind: non-unique (`index`) or unique (`unique`).

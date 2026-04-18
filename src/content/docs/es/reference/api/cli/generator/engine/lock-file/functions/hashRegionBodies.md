@@ -12,7 +12,7 @@ title: "HashRegionBodies"
 
 > **hashRegionBodies**(`content`): `Record`\<`string`, `string`\>
 
-Defined in: [generator/engine/lock-file.ts:184](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L184)
+Defined in: [generator/engine/lock-file.ts:189](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L189)
 
 Hash each preservation region body in content. Returns a plain object
 ready to serialize into the lockfile. Empty input → empty object.

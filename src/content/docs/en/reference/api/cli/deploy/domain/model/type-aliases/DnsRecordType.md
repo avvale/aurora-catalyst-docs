@@ -12,4 +12,6 @@ title: "DnsRecordType"
 
 > **DnsRecordType** = `"A"` \| `"CNAME"`
 
-Defined in: [deploy/domain/model.ts:7](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L7)
+Defined in: [deploy/domain/model.ts:18](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L18)
+
+DNS record variant supported by the DNS adapter.

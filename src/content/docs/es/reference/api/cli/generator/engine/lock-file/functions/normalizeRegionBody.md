@@ -12,7 +12,7 @@ title: "NormalizeRegionBody"
 
 > **normalizeRegionBody**(`body`): `string`
 
-Defined in: [generator/engine/lock-file.ts:176](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L176)
+Defined in: [generator/engine/lock-file.ts:181](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L181)
 
 Normalize a region body for stable hashing: LF line endings and no trailing
 whitespace. Applied ONLY to the hash input; the stored body keeps its

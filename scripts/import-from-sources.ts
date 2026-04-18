@@ -398,6 +398,33 @@ async function mirrorApiFor(source: Source): Promise<void> {
 
 // ─── Main ────────────────────────────────────────────────────────────
 
+/**
+ * Clear the auto-generated roots once per run, BEFORE iterating sources.
+ *
+ * Each per-source mirror only writes into its own slug subdirectory (for
+ * multi-source kinds like archives/api) or into a flat root (for cli-commands).
+ * Without this global sweep, stale directories from removed/renamed sources —
+ * or from older layouts committed to the repo — survive across syncs and
+ * produce duplicates in the sidebar (`reference/api/deploy/...` next to
+ * `reference/api/cli/deploy/...`).
+ */
+async function resetAutoGenRoots(
+  options: Options,
+  sources: Source[],
+): Promise<void> {
+  for (const locale of CONTENT_LOCALES) {
+    if (!options.skipArchives && sources.some((s) => s.hasArchives)) {
+      await resetDir(targetFor(locale, 'changes'));
+    }
+    if (!options.skipCliCommands && sources.some((s) => s.hasCli)) {
+      await resetDir(targetFor(locale, 'reference/cli-commands'));
+    }
+    if (!options.skipApi && sources.some((s) => s.hasApi)) {
+      await resetDir(targetFor(locale, 'reference/api'));
+    }
+  }
+}
+
 async function main(): Promise<void> {
   const options = parseArgs(process.argv.slice(2));
   const sources = options.only
@@ -410,6 +437,8 @@ async function main(): Promise<void> {
     );
     process.exit(1);
   }
+
+  await resetAutoGenRoots(options, sources);
 
   for (const source of sources) {
     console.log(`\n→ ${source.slug} (${source.repo})`);

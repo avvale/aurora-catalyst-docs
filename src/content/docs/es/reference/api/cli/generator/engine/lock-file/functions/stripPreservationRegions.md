@@ -12,7 +12,7 @@ title: "StripPreservationRegions"
 
 > **stripPreservationRegions**(`content`): `string`
 
-Defined in: [generator/engine/lock-file.ts:148](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L148)
+Defined in: [generator/engine/lock-file.ts:153](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L153)
 
 Strip preservation region bodies from content, preserving markers.
 Renaming a marker invalidates the hash because the marker name stays in

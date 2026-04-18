@@ -10,7 +10,9 @@ title: "DnsRecordResult"
 
 # Interface: DnsRecordResult
 
-Defined in: [deploy/domain/model.ts:16](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L16)
+Defined in: [deploy/domain/model.ts:29](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L29)
+
+Outcome of an idempotent DNS upsert. Reveals whether anything actually changed.
 
 ## Properties
 
@@ -18,7 +20,7 @@ Defined in: [deploy/domain/model.ts:16](https://github.com/avvale/aurora-catalys
 
 > **action**: `"created"` \| `"unchanged"` \| `"updated"`
 
-Defined in: [deploy/domain/model.ts:17](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L17)
+Defined in: [deploy/domain/model.ts:30](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L30)
 
 ***
 
@@ -26,7 +28,7 @@ Defined in: [deploy/domain/model.ts:17](https://github.com/avvale/aurora-catalys
 
 > **domain**: `string`
 
-Defined in: [deploy/domain/model.ts:18](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L18)
+Defined in: [deploy/domain/model.ts:31](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L31)
 
 ***
 
@@ -34,7 +36,7 @@ Defined in: [deploy/domain/model.ts:18](https://github.com/avvale/aurora-catalys
 
 > **recordType**: [`DnsRecordType`](../type-aliases/DnsRecordType.md)
 
-Defined in: [deploy/domain/model.ts:19](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L19)
+Defined in: [deploy/domain/model.ts:32](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L32)
 
 ***
 
@@ -42,4 +44,4 @@ Defined in: [deploy/domain/model.ts:19](https://github.com/avvale/aurora-catalys
 
 > **value**: `string`
 
-Defined in: [deploy/domain/model.ts:20](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L20)
+Defined in: [deploy/domain/model.ts:33](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L33)

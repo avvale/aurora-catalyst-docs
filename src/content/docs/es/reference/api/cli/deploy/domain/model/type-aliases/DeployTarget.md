@@ -12,4 +12,6 @@ title: "DeployTarget"
 
 > **DeployTarget** = `"back"` \| `"front"`
 
-Defined in: [deploy/domain/model.ts:3](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L3)
+Defined in: [deploy/domain/model.ts:12](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L12)
+
+Which half of the stack is being deployed.

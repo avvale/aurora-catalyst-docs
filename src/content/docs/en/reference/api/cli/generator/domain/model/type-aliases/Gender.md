@@ -12,4 +12,6 @@ title: "Gender"
 
 > **Gender** = `"feminine"` \| `"masculine"`
 
-Defined in: [generator/domain/model.ts:30](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L30)
+Defined in: [generator/domain/model.ts:49](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L49)
+
+Grammatical gender of the module's singular noun. See [ModuleDefinitionSchema.front](../interfaces/ModuleDefinitionSchema.md#front).

@@ -10,7 +10,10 @@ title: "PropertyWebComponent"
 
 # Interface: PropertyWebComponent
 
-Defined in: [generator/domain/model.ts:118](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L118)
+Defined in: [generator/domain/model.ts:172](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L172)
+
+Frontend widget configuration. Added to a property when the detail/list
+view should render a specific reusable component.
 
 ## Properties
 
@@ -18,7 +21,9 @@ Defined in: [generator/domain/model.ts:118](https://github.com/avvale/aurora-cat
 
 > `optional` **detailSort?**: `number`
 
-Defined in: [generator/domain/model.ts:119](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L119)
+Defined in: [generator/domain/model.ts:174](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L174)
+
+Ordinal position in the detail form (ascending).
 
 ***
 
@@ -26,7 +31,9 @@ Defined in: [generator/domain/model.ts:119](https://github.com/avvale/aurora-cat
 
 > `optional` **isDetailHidden?**: `boolean`
 
-Defined in: [generator/domain/model.ts:120](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L120)
+Defined in: [generator/domain/model.ts:176](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L176)
+
+If true, hide the property from the detail form.
 
 ***
 
@@ -34,7 +41,9 @@ Defined in: [generator/domain/model.ts:120](https://github.com/avvale/aurora-cat
 
 > `optional` **isListHidden?**: `boolean`
 
-Defined in: [generator/domain/model.ts:121](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L121)
+Defined in: [generator/domain/model.ts:178](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L178)
+
+If true, hide the property from the list view.
 
 ***
 
@@ -42,7 +51,9 @@ Defined in: [generator/domain/model.ts:121](https://github.com/avvale/aurora-cat
 
 > `optional` **listSort?**: `number`
 
-Defined in: [generator/domain/model.ts:122](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L122)
+Defined in: [generator/domain/model.ts:180](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L180)
+
+Ordinal position in the list table (ascending).
 
 ***
 
@@ -50,7 +61,9 @@ Defined in: [generator/domain/model.ts:122](https://github.com/avvale/aurora-cat
 
 > **property**: [`Property`](Property.md)
 
-Defined in: [generator/domain/model.ts:123](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L123)
+Defined in: [generator/domain/model.ts:182](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L182)
+
+Back-reference to the owning [Property](Property.md). Used by templates.
 
 ***
 
@@ -58,4 +71,4 @@ Defined in: [generator/domain/model.ts:123](https://github.com/avvale/aurora-cat
 
 > **type**: [`WebComponentType`](../type-aliases/WebComponentType.md)
 
-Defined in: [generator/domain/model.ts:124](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L124)
+Defined in: [generator/domain/model.ts:183](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L183)

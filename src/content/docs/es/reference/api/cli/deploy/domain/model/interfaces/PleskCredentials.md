@@ -10,7 +10,9 @@ title: "PleskCredentials"
 
 # Interface: PleskCredentials
 
-Defined in: [deploy/domain/model.ts:77](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L77)
+Defined in: [deploy/domain/model.ts:124](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L124)
+
+Plesk control panel credentials. `sshKey` is an optional path on disk.
 
 ## Properties
 
@@ -18,7 +20,7 @@ Defined in: [deploy/domain/model.ts:77](https://github.com/avvale/aurora-catalys
 
 > **apiKey**: `string`
 
-Defined in: [deploy/domain/model.ts:78](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L78)
+Defined in: [deploy/domain/model.ts:125](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L125)
 
 ***
 
@@ -26,7 +28,7 @@ Defined in: [deploy/domain/model.ts:78](https://github.com/avvale/aurora-catalys
 
 > **host**: `string`
 
-Defined in: [deploy/domain/model.ts:79](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L79)
+Defined in: [deploy/domain/model.ts:126](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L126)
 
 ***
 
@@ -34,4 +36,6 @@ Defined in: [deploy/domain/model.ts:79](https://github.com/avvale/aurora-catalys
 
 > `optional` **sshKey?**: `string`
 
-Defined in: [deploy/domain/model.ts:80](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L80)
+Defined in: [deploy/domain/model.ts:128](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L128)
+
+Absolute path to the SSH private key used to reach the Plesk box.

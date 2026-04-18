@@ -12,7 +12,7 @@ title: "Sha1WithPreservation"
 
 > **sha1WithPreservation**(`content`): `string`
 
-Defined in: [generator/engine/lock-file.ts:167](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L167)
+Defined in: [generator/engine/lock-file.ts:172](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L172)
 
 Compute integrity hash EXCLUDING preservation region bodies.
 For files without regions this equals `sha1(content)` (backward compat).

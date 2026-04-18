@@ -12,7 +12,7 @@ title: "MergePreservationRegions"
 
 > **mergePreservationRegions**(`newContent`, `existingContent`, `priorHashes?`): [`MergeResult`](../interfaces/MergeResult.md)
 
-Defined in: [generator/engine/lock-file.ts:209](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L209)
+Defined in: [generator/engine/lock-file.ts:225](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L225)
 
 Merge preservation regions: per-region decision based on priorHashes.
 - If the existing body hash matches priorHashes[name] → use newContent body

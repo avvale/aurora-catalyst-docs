@@ -10,7 +10,11 @@ title: "ModuleDefinitionSchema"
 
 # Interface: ModuleDefinitionSchema
 
-Defined in: [generator/domain/model.ts:178](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L178)
+Defined in: [generator/domain/model.ts:278](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L278)
+
+Full schema for a generated module. This is the in-memory representation
+loaded from `cliter/<bc>/<module>.aurora.yaml`, after validation and
+default-filling.
 
 ## Properties
 
@@ -18,7 +22,7 @@ Defined in: [generator/domain/model.ts:178](https://github.com/avvale/aurora-cat
 
 > `optional` **additionalApis?**: [`AdditionalApi`](AdditionalApi.md)[]
 
-Defined in: [generator/domain/model.ts:179](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L179)
+Defined in: [generator/domain/model.ts:279](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L279)
 
 ***
 
@@ -26,7 +30,7 @@ Defined in: [generator/domain/model.ts:179](https://github.com/avvale/aurora-cat
 
 > **aggregateName**: `string`
 
-Defined in: [generator/domain/model.ts:180](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L180)
+Defined in: [generator/domain/model.ts:280](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L280)
 
 ***
 
@@ -34,7 +38,7 @@ Defined in: [generator/domain/model.ts:180](https://github.com/avvale/aurora-cat
 
 > **aggregateProperties**: [`Property`](Property.md)[]
 
-Defined in: [generator/domain/model.ts:181](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L181)
+Defined in: [generator/domain/model.ts:281](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L281)
 
 ***
 
@@ -42,7 +46,7 @@ Defined in: [generator/domain/model.ts:181](https://github.com/avvale/aurora-cat
 
 > **boundedContextName**: `string`
 
-Defined in: [generator/domain/model.ts:182](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L182)
+Defined in: [generator/domain/model.ts:282](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L282)
 
 ***
 
@@ -50,7 +54,9 @@ Defined in: [generator/domain/model.ts:182](https://github.com/avvale/aurora-cat
 
 > `optional` **excludedFiles?**: `string`[]
 
-Defined in: [generator/domain/model.ts:183](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L183)
+Defined in: [generator/domain/model.ts:284](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L284)
+
+Templates skipped when generating this module.
 
 ***
 
@@ -58,7 +64,9 @@ Defined in: [generator/domain/model.ts:183](https://github.com/avvale/aurora-cat
 
 > `optional` **excludedOperations?**: `string`[]
 
-Defined in: [generator/domain/model.ts:184](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L184)
+Defined in: [generator/domain/model.ts:286](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L286)
+
+CRUD operations skipped when generating this module.
 
 ***
 
@@ -66,7 +74,9 @@ Defined in: [generator/domain/model.ts:184](https://github.com/avvale/aurora-cat
 
 > `optional` **front?**: `object`
 
-Defined in: [generator/domain/model.ts:185](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L185)
+Defined in: [generator/domain/model.ts:288](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L288)
+
+Frontend-only presentation metadata (icon, grammatical gender, ...).
 
 #### gender?
 
@@ -99,7 +109,7 @@ without grammatical gender.
 
 > **hasAuditing**: `boolean`
 
-Defined in: [generator/domain/model.ts:198](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L198)
+Defined in: [generator/domain/model.ts:301](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L301)
 
 ***
 
@@ -107,7 +117,7 @@ Defined in: [generator/domain/model.ts:198](https://github.com/avvale/aurora-cat
 
 > **hasOAuth**: `boolean`
 
-Defined in: [generator/domain/model.ts:199](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L199)
+Defined in: [generator/domain/model.ts:302](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L302)
 
 ***
 
@@ -115,7 +125,7 @@ Defined in: [generator/domain/model.ts:199](https://github.com/avvale/aurora-cat
 
 > **hasTenant**: `boolean`
 
-Defined in: [generator/domain/model.ts:200](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L200)
+Defined in: [generator/domain/model.ts:303](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L303)
 
 ***
 
@@ -123,7 +133,7 @@ Defined in: [generator/domain/model.ts:200](https://github.com/avvale/aurora-cat
 
 > **moduleName**: `string`
 
-Defined in: [generator/domain/model.ts:201](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L201)
+Defined in: [generator/domain/model.ts:304](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L304)
 
 ***
 
@@ -131,4 +141,4 @@ Defined in: [generator/domain/model.ts:201](https://github.com/avvale/aurora-cat
 
 > **moduleNames**: `string`
 
-Defined in: [generator/domain/model.ts:202](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L202)
+Defined in: [generator/domain/model.ts:305](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L305)
