@@ -8,14 +8,19 @@ import starlight from '@astrojs/starlight';
 const REPO_OWNER = 'avvale';
 const REPO_NAME = 'aurora-catalyst-docs';
 
+// `base` must match the GitHub Pages path in production, but in local dev we
+// serve from the root so the redirect below stays consistent. Astro does NOT
+// prepend `base` to redirect targets — we must include it manually, so the
+// target also has to branch on environment.
+const IS_PROD = process.env.NODE_ENV === 'production';
+const BASE = IS_PROD ? `/${REPO_NAME}` : '/';
+const REDIRECT_TARGET = IS_PROD ? `/${REPO_NAME}/en/` : '/en/';
+
 export default defineConfig({
   site: `https://${REPO_OWNER}.github.io`,
-  base: `/${REPO_NAME}`,
-  // Redirect the bare base URL to the default locale so visitors never land
-  // on an empty page. Astro does NOT prepend `base` to redirect targets, so
-  // we include it manually to keep the URL working both locally and on Pages.
+  base: BASE,
   redirects: {
-    '/': `/${REPO_NAME}/en/`,
+    '/': REDIRECT_TARGET,
   },
   integrations: [
     starlight({
