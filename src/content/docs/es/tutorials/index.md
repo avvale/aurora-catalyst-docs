@@ -1,14 +1,14 @@
 ---
 title: Tutoriales
-description: Aprendé Aurora Catalyst haciendo. Lecciones paso a paso para quienes recién arrancan.
+description: Aprende Aurora Catalyst haciendo. Lecciones paso a paso para quienes recién empiezan.
 ---
 
 Los tutoriales están **orientados al aprendizaje**: te acompañan a través de una experiencia completa y concreta con Aurora para que construyas un modelo mental de cómo encaja todo.
 
-Si tenés un problema concreto que resolver y ya conocés lo básico, mirá las **guías** en lugar de los tutoriales.
+Si tienes un problema concreto que resolver y ya conoces lo básico, mira las **guías** en lugar de los tutoriales.
 
 ## Tutoriales disponibles
 
-_Se irán sumando a medida que se escriban. Arrancá con el de primeros pasos._
+_Se irán sumando a medida que se escriban. Empieza con el de primeros pasos._
 
-- [Primeros pasos](/es/tutorials/getting-started/) — instalá Aurora, generá tu primer bounded context y ejecutá el resultado.
+- [Primeros pasos](/es/tutorials/getting-started/) — instala Aurora, genera tu primer bounded context y ejecuta el resultado.

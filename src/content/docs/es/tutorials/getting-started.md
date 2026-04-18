@@ -1,6 +1,6 @@
 ---
 title: Primeros pasos
-description: Instalá Aurora Catalyst y generá tu primer bounded context.
+description: Instala Aurora Catalyst y genera tu primer bounded context.
 ---
 
 :::note[Placeholder]
@@ -19,4 +19,4 @@ Al terminar este tutorial vas a ser capaz de:
 ## Requisitos previos
 
 - Node.js ≥ 18
-- Un proyecto Aurora Catalyst vacío (o seguí los pasos de scaffold más abajo)
+- Un proyecto Aurora Catalyst vacío (o sigue los pasos de scaffold más abajo)
