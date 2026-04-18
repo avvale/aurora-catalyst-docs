@@ -1,0 +1,46 @@
+---
+// Root redirect that picks a locale based on `navigator.languages`, falling
+// back to English when the user's preferences don't match anything we ship.
+// Astro's `import.meta.env.BASE_URL` resolves to `/` in dev and
+// `/<repo>/` in production, so the redirect works in both environments
+// without hardcoding the base path.
+const SUPPORTED_LOCALES = ['en', 'es'];
+const DEFAULT_LOCALE = 'en';
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+const fallbackHref = `${base}${DEFAULT_LOCALE}/`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Aurora Catalyst</title>
+    <link rel="canonical" href={fallbackHref} />
+    <noscript>
+      <meta http-equiv="refresh" content={`0; url=${fallbackHref}`} />
+    </noscript>
+    <script is:inline define:vars={{ base, SUPPORTED_LOCALES, DEFAULT_LOCALE }}>
+      const candidates =
+        navigator.languages && navigator.languages.length
+          ? navigator.languages
+          : [navigator.language || DEFAULT_LOCALE];
+      let target = DEFAULT_LOCALE;
+      for (const full of candidates) {
+        const short = String(full).toLowerCase().split('-')[0];
+        if (SUPPORTED_LOCALES.indexOf(short) !== -1) {
+          target = short;
+          break;
+        }
+      }
+      window.location.replace(base + target + '/');
+    </script>
+  </head>
+  <body>
+    <p>
+      Redirecting… <a href={fallbackHref}>Click here if nothing happens.</a>
+    </p>
+  </body>
+</html>

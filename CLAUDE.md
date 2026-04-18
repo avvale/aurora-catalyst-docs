@@ -7,24 +7,24 @@ Documentation site for the Aurora Catalyst ecosystem: the `aurora-catalyst-cli` 
 - **Site builder**: Astro + Starlight (`astro.config.mjs`)
 - **Package manager**: pnpm (≥ 9)
 - **Node**: ≥ 20
-- **Languages**: English (default) + Español (Rioplatense, voseo)
+- **Languages**: English (default) + Español (default)
 - **Hosting**: GitHub Pages, deployed by `.github/workflows/deploy.yml`
 
 ## Content organization — Diátaxis
 
 All `.md` / `.mdx` under `src/content/docs/en/` (English) and `src/content/docs/es/` (Spanish) fall into exactly one of four categories:
 
-| Folder | Purpose | Example |
-|---|---|---|
-| `tutorials/` | Learning-oriented. Step-by-step for newcomers. | "Your first bounded context in 15 minutes" |
-| `guides/` | Task-oriented. Recipes for competent users. | "Add a preservation region to a form template" |
-| `reference/` | Information-oriented. Exhaustive, consultable fast. | CLI command list, API, YAML schema |
-| `concepts/` | Understanding-oriented. The _why_. | "Why deterministic codegen", "How preservation regions work" |
+| Folder       | Purpose                                             | Example                                                      |
+| ------------ | --------------------------------------------------- | ------------------------------------------------------------ |
+| `tutorials/` | Learning-oriented. Step-by-step for newcomers.      | "Your first bounded context in 15 minutes"                   |
+| `guides/`    | Task-oriented. Recipes for competent users.         | "Add a preservation region to a form template"               |
+| `reference/` | Information-oriented. Exhaustive, consultable fast. | CLI command list, API, YAML schema                           |
+| `concepts/`  | Understanding-oriented. The _why_.                  | "Why deterministic codegen", "How preservation regions work" |
 
 Plus one operational section:
 
-| Folder | Purpose |
-|---|---|
+| Folder     | Purpose                                                                               |
+| ---------- | ------------------------------------------------------------------------------------- |
 | `changes/` | Mirror of `openspec/changes/archive/` from source repos. Auto-generated, do NOT edit. |
 
 ## Human-curated vs auto-generated
@@ -76,17 +76,23 @@ pnpm sync
 
 ## Common Commands
 
-| Task | Command |
-|---|---|
-| Dev server | `pnpm dev` |
-| Build (with link check) | `pnpm build` |
-| Preview build | `pnpm preview` |
-| Import auto-generated content | `pnpm sync` |
-| Import overriding CLI path | `pnpm sync --cli-path /abs/path` |
-| Skip CLI or API import | `pnpm sync --skip-cli-commands --skip-api` |
+| Task                          | Command                                    |
+| ----------------------------- | ------------------------------------------ |
+| Dev server                    | `pnpm dev`                                 |
+| Build (with link check)       | `pnpm build`                               |
+| Preview build                 | `pnpm preview`                             |
+| Import auto-generated content | `pnpm sync`                                |
+| Import overriding CLI path    | `pnpm sync --cli-path /abs/path`           |
+| Skip CLI or API import        | `pnpm sync --skip-cli-commands --skip-api` |
 
 ## Skills
 
-| Skill | When to use |
-|---|---|
+| Skill            | When to use                                                                                                                                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `docs-from-spec` | After a change is archived in `aurora-catalyst-cli` (or similar). Generates concept + guide + reference stubs in EN and ES from the archive. Lives at `.claude/skills/docs-from-spec/SKILL.md`. |
+
+<!-- SKILLS-INDEX-START -->
+
+[Project Skills Index]|root:.claude|IMPORTANT:Prefer retrieval-led reasoning over pre-training.Read SKILL.md first,then related files.|skills/docs-from-spec:{SKILL.md}
+
+<!-- SKILLS-INDEX-END -->
