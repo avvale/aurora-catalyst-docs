@@ -32,7 +32,7 @@ Plus one operational section:
 - **Human-curated** (edited in this repo): `tutorials/`, `guides/`, `concepts/`, and any hand-written files under `reference/` (e.g. YAML schema).
 - **Auto-generated** (overwritten on every import): `reference/cli-commands/`, `reference/api/`, `changes/`.
 
-The auto-generated directories are listed in `.gitignore` — they are rebuilt by `pnpm import` (locally) and by the deploy workflow (on CI before `astro build` if/when configured).
+The auto-generated directories are listed in `.gitignore` — they are rebuilt by `pnpm sync` (locally) and by the deploy workflow (on CI before `astro build` if/when configured).
 
 ## Cross-repo workflow
 
@@ -57,7 +57,7 @@ claude --add-dir ../aurora-catalyst-cli
 #    → it reads the archive, produces concept/guide pages in EN + ES, opens a PR.
 
 # 4. Optionally pull the auto-generated parts:
-pnpm import
+pnpm sync
 ```
 
 ## Rules
@@ -70,7 +70,7 @@ pnpm import
 - Always propose alternatives with tradeoffs when relevant.
 - Every page under `src/content/docs/en/` MUST have a counterpart at the same path under `src/content/docs/es/` — and vice versa. Both locales ship in the same PR.
 - Spanish content is written in Rioplatense Spanish (voseo), not translated literally.
-- Never edit files under `reference/cli-commands/`, `reference/api/`, or `changes/` — those are overwritten by `pnpm import`.
+- Never edit files under `reference/cli-commands/`, `reference/api/`, or `changes/` — those are overwritten by `pnpm sync`.
 - Never create categories outside Diátaxis (tutorials / guides / reference / concepts). If something does not fit, raise it with the user before creating the directory.
 - Docs URLs are contracts. Do not rename or delete existing pages without explicit user confirmation.
 
@@ -81,9 +81,9 @@ pnpm import
 | Dev server | `pnpm dev` |
 | Build (with link check) | `pnpm build` |
 | Preview build | `pnpm preview` |
-| Import auto-generated content | `pnpm import` |
-| Import overriding CLI path | `pnpm import --cli-path /abs/path` |
-| Skip CLI or API import | `pnpm import --skip-cli-commands --skip-api` |
+| Import auto-generated content | `pnpm sync` |
+| Import overriding CLI path | `pnpm sync --cli-path /abs/path` |
+| Skip CLI or API import | `pnpm sync --skip-cli-commands --skip-api` |
 
 ## Skills
 

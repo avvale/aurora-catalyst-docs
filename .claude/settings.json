@@ -28,10 +28,6 @@
   },
   "additionalWorkingDirectories": [
     "~/Projects/aurora/aurora-catalyst-cli",
-    "~/Projects/aurora/aurora-catalyst-prototype",
-    "~/Projects/aurora/aurora-catalyst",
-    "~/Projects/aurora/aurora-core-front",
-    "~/Projects/aurora/aurora-core-back",
-    "~/Projects/aurora/aurora-core-common"
+    "~/Projects/aurora/aurora-catalyst"
   ]
 }

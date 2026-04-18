@@ -9,7 +9,7 @@ pnpm install
 pnpm dev           # local dev server on http://localhost:4321
 pnpm build         # static site in dist/
 pnpm preview       # preview the built site
-pnpm import        # pull auto-generated content from sibling repos
+pnpm sync          # pull auto-generated content from sibling repos
 ```
 
 Requires **Node 20+** and **pnpm 9+**.
@@ -29,7 +29,7 @@ Each of the above has a symmetric counterpart under `src/content/docs/es/`.
 ## Contributing
 
 - English and Spanish versions MUST stay in sync. Write EN first, then rewrite idiomatic ES (Rioplatense / voseo).
-- Auto-generated directories (`reference/cli-commands/`, `reference/api/`, `changes/`) are in `.gitignore`. They are rebuilt by `pnpm import`. Do not commit or hand-edit them.
+- Auto-generated directories (`reference/cli-commands/`, `reference/api/`, `changes/`) are in `.gitignore`. They are rebuilt by `pnpm sync`. Do not commit or hand-edit them.
 - For non-trivial additions that mirror a new feature in `aurora-catalyst-cli`, invoke the `docs-from-spec` skill — see `CLAUDE.md`.
 
 ## License

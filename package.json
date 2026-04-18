@@ -9,7 +9,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "import": "tsx scripts/import-from-catalyst.ts"
+    "sync": "tsx scripts/import-from-catalyst.ts"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.34.0",

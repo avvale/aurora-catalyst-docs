@@ -59,13 +59,12 @@ export default defineConfig({
           translations: { es: 'Conceptos' },
           autogenerate: { directory: 'concepts' },
         },
-        // Uncomment once `pnpm import` has populated src/content/docs/changes/:
-        // {
-        //   label: 'Change history',
-        //   translations: { es: 'Historial de cambios' },
-        //   autogenerate: { directory: 'changes' },
-        //   collapsed: true,
-        // },
+        {
+          label: 'Change history',
+          translations: { es: 'Historial de cambios' },
+          autogenerate: { directory: 'changes' },
+          collapsed: true,
+        },
       ],
       editLink: {
         baseUrl: `https://github.com/${REPO_OWNER}/${REPO_NAME}/edit/main/`,
