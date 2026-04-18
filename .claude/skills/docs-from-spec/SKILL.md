@@ -41,7 +41,7 @@ Decide per-change which categories apply. Not every change needs all four.
 
 ### 1. Concept page (almost always)
 
-Create or update `src/content/docs/concepts/<topic>.md` AND `src/content/docs/es/concepts/<topic>.md`.
+Create or update `src/content/docs/en/concepts/<topic>.md` AND `src/content/docs/es/concepts/<topic>.md`.
 
 Purpose: explain the _why_ of the feature. Reader already knows Aurora exists; they want to build a mental model.
 
@@ -77,7 +77,7 @@ description: <one-line description>
 
 ### 2. How-to guide (when the feature changes user workflow)
 
-Create or update `src/content/docs/guides/<area>/<action>.md` AND the Spanish mirror.
+Create or update `src/content/docs/en/guides/<area>/<action>.md` AND the Spanish mirror at `src/content/docs/es/guides/<area>/<action>.md`.
 
 Purpose: solve a concrete task. Reader has a goal.
 
@@ -120,7 +120,7 @@ Guides are task-focused. Do NOT explain _why_ here — link to the concept page.
 
 ### 3. Reference stub (when the feature adds a new structural surface)
 
-For new YAML fields, new lockfile fields, new file conventions: hand-write a stub in `src/content/docs/reference/<topic>.md`. For new CLI commands or API: do nothing — those come from `pnpm import`.
+For new YAML fields, new lockfile fields, new file conventions: hand-write a stub in `src/content/docs/en/reference/<topic>.md` (+ Spanish mirror). For new CLI commands or API: do nothing — those come from `pnpm import`.
 
 Template skeleton:
 
@@ -150,7 +150,7 @@ Only when the feature changes the getting-started experience or introduces a ste
 
 ## Language coverage
 
-Every page you write MUST exist in both EN (`src/content/docs/…`) and ES (`src/content/docs/es/…`). Write the EN version first, then the ES version — do NOT machine-translate, rewrite idiomatically in Rioplatense Spanish (voseo) following the user's preference.
+Every page you write MUST exist in both EN (`src/content/docs/en/…`) and ES (`src/content/docs/es/…`) at symmetric paths. Write the EN version first, then the ES version — do NOT machine-translate, rewrite idiomatically in Rioplatense Spanish (voseo) following the user's preference.
 
 Both versions live in the same PR.
 
@@ -158,14 +158,14 @@ Both versions live in the same PR.
 
 - [ ] Each page has a `title` and `description` in the frontmatter.
 - [ ] No duplicated prose between concept / guide / reference. Cross-link instead.
-- [ ] Links use the Starlight absolute form (`/concepts/foo/`, not `../concepts/foo.md`).
+- [ ] Links use the Starlight absolute form WITH the locale prefix (`/en/concepts/foo/`, `/es/concepts/foo/`), not relative paths like `../concepts/foo.md`.
 - [ ] No broken image references, no placeholder `TODO` left without an explicit `:::note[Placeholder]` block.
 - [ ] Spanish page is NOT a literal translation — paragraphs are idiomatic and may reorder.
 
 ## What you do NOT do
 
 - Do NOT modify `scripts/import-from-catalyst.ts`. That is plumbing for auto-generated pages.
-- Do NOT touch anything under `reference/cli-commands/`, `reference/api/`, or `changes/` — those are overwritten by the import script.
+- Do NOT touch anything under `{en,es}/reference/cli-commands/`, `{en,es}/reference/api/`, or `{en,es}/changes/` — those are overwritten by the import script.
 - Do NOT create categories outside the Diátaxis four (tutorials, guides, reference, concepts). If something doesn't fit, raise it with the user.
 - Do NOT delete or rename existing files without explicit user confirmation. Docs URLs are contracts.
 

@@ -21,9 +21,9 @@ yarn-error.log*
 .idea/
 
 # imported from sibling repos (rebuilt by scripts/import-from-catalyst.ts)
-src/content/docs/reference/cli-commands/**
-src/content/docs/reference/api/**
-src/content/docs/changes/**
+src/content/docs/en/reference/cli-commands/**
+src/content/docs/en/reference/api/**
+src/content/docs/en/changes/**
 src/content/docs/es/reference/cli-commands/**
 src/content/docs/es/reference/api/**
 src/content/docs/es/changes/**

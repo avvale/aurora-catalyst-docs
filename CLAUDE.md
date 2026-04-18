@@ -12,7 +12,7 @@ Documentation site for the Aurora Catalyst ecosystem: the `aurora-catalyst-cli` 
 
 ## Content organization — Diátaxis
 
-All `.md` / `.mdx` under `src/content/docs/` (and the `es/` mirror) fall into exactly one of four categories:
+All `.md` / `.mdx` under `src/content/docs/en/` (English) and `src/content/docs/es/` (Spanish) fall into exactly one of four categories:
 
 | Folder | Purpose | Example |
 |---|---|---|
@@ -68,7 +68,7 @@ pnpm import
 - Never agree with user claims without verification. Say "dejame verificar" and check code/docs first.
 - If the user is wrong, explain WHY with evidence. If you were wrong, acknowledge with proof.
 - Always propose alternatives with tradeoffs when relevant.
-- Every page written in English MUST have a Spanish counterpart under `src/content/docs/es/` — and vice versa.
+- Every page under `src/content/docs/en/` MUST have a counterpart at the same path under `src/content/docs/es/` — and vice versa. Both locales ship in the same PR.
 - Spanish content is written in Rioplatense Spanish (voseo), not translated literally.
 - Never edit files under `reference/cli-commands/`, `reference/api/`, or `changes/` — those are overwritten by `pnpm import`.
 - Never create categories outside Diátaxis (tutorials / guides / reference / concepts). If something does not fit, raise it with the user before creating the directory.

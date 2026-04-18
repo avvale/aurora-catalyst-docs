@@ -16,6 +16,6 @@ Most of this section is **auto-generated** from the Aurora repositories by the `
 
 ## What does NOT live here
 
-- Tutorials → [`/tutorials/`](/tutorials/)
-- How-to guides → [`/guides/`](/guides/)
-- Conceptual background → [`/concepts/`](/concepts/)
+- Tutorials → [`/tutorials/`](/en/tutorials/)
+- How-to guides → [`/guides/`](/en/guides/)
+- Conceptual background → [`/concepts/`](/en/concepts/)

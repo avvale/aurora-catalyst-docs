@@ -27,7 +27,7 @@ import { fileURLToPath } from 'node:url';
 const DOCS_ROOT = path.resolve(fileURLToPath(import.meta.url), '../..');
 const DEFAULT_CLI_PATH = path.resolve(DOCS_ROOT, '..', 'aurora-catalyst-cli');
 
-const CONTENT_LOCALES = ['', 'es'] as const; // '' = default (English), 'es' = Spanish
+const CONTENT_LOCALES = ['en', 'es'] as const;
 
 // ─── Args ───────────────────────────────────────────────────────────
 
@@ -80,9 +80,7 @@ async function resetDir(dir: string): Promise<void> {
 }
 
 function targetFor(locale: string, subdir: string): string {
-  return locale === ''
-    ? path.join(DOCS_ROOT, 'src/content/docs', subdir)
-    : path.join(DOCS_ROOT, 'src/content/docs', locale, subdir);
+  return path.join(DOCS_ROOT, 'src/content/docs', locale, subdir);
 }
 
 // ─── Importers ──────────────────────────────────────────────────────
@@ -111,7 +109,7 @@ async function mirrorArchives(cliPath: string): Promise<void> {
     const localeLabel = locale === 'es' ? 'Historial de cambios' : 'Change history';
     const description =
       locale === 'es'
-        ? 'Changes archivados desde los repos de código. Auto-generado.'
+        ? 'Changes archivados desde los repos de código. Autogenerado.'
         : 'Archived changes from the source repos. Auto-generated.';
     await writeFile(
       path.join(dest, 'index.md'),

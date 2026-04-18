@@ -5,7 +5,7 @@ description: The ideas, decisions, and philosophy behind Aurora Catalyst.
 
 Concept pages are **understanding-oriented**: they explain the _why_ behind Aurora rather than how to use it. Read these when you want to form a solid mental model.
 
-If you want to _do_ something, use the [how-to guides](/guides/). If you need exact facts, use the [reference](/reference/).
+If you want to _do_ something, use the [how-to guides](/en/guides/). If you need exact facts, use the [reference](/en/reference/).
 
 ## Topics
 

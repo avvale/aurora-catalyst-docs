@@ -11,6 +11,11 @@ const REPO_NAME = 'aurora-catalyst-docs';
 export default defineConfig({
   site: `https://${REPO_OWNER}.github.io`,
   base: `/${REPO_NAME}`,
+  // Redirect the bare base URL to the default locale so visitors never land
+  // on an empty page. Astro prepends `base` automatically for redirects.
+  redirects: {
+    '/': '/en/',
+  },
   integrations: [
     starlight({
       title: 'Aurora Catalyst',
@@ -54,12 +59,13 @@ export default defineConfig({
           translations: { es: 'Conceptos' },
           autogenerate: { directory: 'concepts' },
         },
-        {
-          label: 'Change history',
-          translations: { es: 'Historial de cambios' },
-          autogenerate: { directory: 'changes' },
-          collapsed: true,
-        },
+        // Uncomment once `pnpm import` has populated src/content/docs/changes/:
+        // {
+        //   label: 'Change history',
+        //   translations: { es: 'Historial de cambios' },
+        //   autogenerate: { directory: 'changes' },
+        //   collapsed: true,
+        // },
       ],
       editLink: {
         baseUrl: `https://github.com/${REPO_OWNER}/${REPO_NAME}/edit/main/`,

@@ -11,4 +11,4 @@ If you need to solve a specific problem and you already know the basics, look at
 
 _Tutorials will be listed here as they are written. Start with the getting-started guide below._
 
-- [Getting started](/tutorials/getting-started/) — install Aurora, generate your first bounded context, and run the result.
+- [Getting started](/en/tutorials/getting-started/) — install Aurora, generate your first bounded context, and run the result.

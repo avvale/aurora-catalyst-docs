@@ -18,13 +18,13 @@ Requires **Node 20+** and **pnpm 9+**.
 
 Content is organized following the [Diátaxis](https://diataxis.fr/) framework:
 
-- `src/content/docs/tutorials/` — learn by doing (newcomers)
-- `src/content/docs/guides/` — task-oriented recipes
-- `src/content/docs/reference/` — technical reference (some auto-generated)
-- `src/content/docs/concepts/` — understanding-oriented explanations
-- `src/content/docs/changes/` — auto-mirrored change history from `openspec/changes/archive/`
+- `src/content/docs/en/tutorials/` — learn by doing (newcomers)
+- `src/content/docs/en/guides/` — task-oriented recipes
+- `src/content/docs/en/reference/` — technical reference (some auto-generated)
+- `src/content/docs/en/concepts/` — understanding-oriented explanations
+- `src/content/docs/en/changes/` — auto-mirrored change history from `openspec/changes/archive/`
 
-Each of the above also exists under `src/content/docs/es/` for the Spanish version.
+Each of the above has a symmetric counterpart under `src/content/docs/es/`.
 
 ## Contributing
 
