@@ -50,7 +50,19 @@ export default defineConfig({
         {
           label: 'Reference',
           translations: { es: 'Referencia' },
-          autogenerate: { directory: 'reference' },
+          items: [
+            { slug: 'reference' },
+            {
+              label: 'CLI Commands',
+              translations: { es: 'Comandos CLI' },
+              autogenerate: { directory: 'reference/cli-commands' },
+            },
+            {
+              label: 'API',
+              autogenerate: { directory: 'reference/api' },
+              collapsed: true,
+            },
+          ],
         },
         {
           label: 'Concepts',

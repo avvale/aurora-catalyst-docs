@@ -95,7 +95,5 @@ pnpm sync
 | `docs-from-spec` | After a change is archived in `aurora-catalyst-cli` (or similar). Generates concept + guide + reference stubs in EN and ES from the archive. Lives at `.claude/skills/docs-from-spec/SKILL.md`. |
 
 <!-- SKILLS-INDEX-START -->
-
 [Project Skills Index]|root:.claude|IMPORTANT:Prefer retrieval-led reasoning over pre-training.Read SKILL.md first,then related files.|skills/docs-from-spec:{SKILL.md}
-
 <!-- SKILLS-INDEX-END -->
