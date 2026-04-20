@@ -4,7 +4,7 @@ description: Install Aurora Catalyst and generate your first bounded context.
 ---
 
 :::note[Placeholder]
-This tutorial is a stub. The full getting-started walkthrough will be written once the `docs-from-spec` skill generates the first pass from the CLI's initial release notes.
+This tutorial is a stub. The full getting-started walkthrough will be written once the `catalyst-docs-from-spec` skill generates the first pass from the CLI's initial release notes.
 :::
 
 ## What you will learn

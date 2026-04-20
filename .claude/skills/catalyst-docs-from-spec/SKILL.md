@@ -1,5 +1,5 @@
 ---
-name: docs-from-spec
+name: catalyst-docs-from-spec
 description: >
   Turn a completed Aurora openspec change into Diátaxis-structured documentation
   (concepts, guides, reference stubs) in both English and Spanish. Invoke after

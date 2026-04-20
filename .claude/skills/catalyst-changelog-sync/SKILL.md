@@ -21,7 +21,7 @@ The user wants to update `src/content/docs/{en,es}/changes/` after one or more a
 ## When NOT to use
 
 - Updating CLI command reference or TypeDoc API reference. Those live under `reference/cli-commands/` and `reference/api/` and are refreshed by `pnpm sync` — a pure deterministic script, no LLM involvement.
-- Writing hand-curated tutorials, guides, or concept pages. Use `docs-from-spec` for that.
+- Writing hand-curated tutorials, guides, or concept pages. Use `catalyst-docs-from-spec` for that.
 - Writing anything under `changes/` by hand. Every entry under `src/content/docs/{en,es}/changes/<repo>/<slug>.md` MUST be produced by this skill so the registry stays in sync.
 
 ## Invocation flags the user may ask for

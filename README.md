@@ -43,8 +43,8 @@ Both kinds are **committed to this repo**. The GitHub Actions workflow that depl
 | Section (under `src/content/docs/{en,es}/`) | Kind | Origin |
 | --- | --- | --- |
 | `tutorials/` | Human-curated | Written in this repo |
-| `guides/` | Human-curated | Written in this repo (optionally drafted by the `docs-from-spec` skill) |
-| `concepts/` | Human-curated | Written in this repo (optionally drafted by the `docs-from-spec` skill) |
+| `guides/` | Human-curated | Written in this repo (optionally drafted by the `catalyst-docs-from-spec` skill) |
+| `concepts/` | Human-curated | Written in this repo (optionally drafted by the `catalyst-docs-from-spec` skill) |
 | `reference/` (top-level, e.g. YAML schema) | Human-curated | Written in this repo |
 | `reference/cli-commands/` | Auto | `aurora-catalyst-cli/docs/` — produced by `oclif readme --multi` |
 | `reference/api/cli/` | Auto | `aurora-catalyst-cli/docs-api/` — produced by TypeDoc |
@@ -123,7 +123,7 @@ Steps below assume you just closed a change in `aurora-catalyst-cli` (same patte
    ```
 
 4. **Optional — draft new docs pages for the feature.**
-   The `docs-from-spec` skill reads the archive you just cut and generates Diátaxis-compliant concept pages and guide stubs in both locales. See `CLAUDE.md` and `.claude/skills/docs-from-spec/SKILL.md` for how to invoke it.
+   The `catalyst-docs-from-spec` skill reads the archive you just cut and generates Diátaxis-compliant concept pages and guide stubs in both locales. See `CLAUDE.md` and `.claude/skills/catalyst-docs-from-spec/SKILL.md` for how to invoke it.
 
 5. **Review, commit, push.**
    ```bash

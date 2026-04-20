@@ -63,7 +63,7 @@ claude --add-dir ../aurora-catalyst-cli
 # 3. Invoke the catalyst-changelog-sync skill (from this repo):
 #    → detects the new archive, classifies it (publish / dismiss),
 #      drafts EN + ES entries when it qualifies, updates the registry.
-# 4. Optionally also invoke docs-from-spec if concept / guide pages need rewriting.
+# 4. Optionally also invoke catalyst-docs-from-spec if concept / guide pages need rewriting.
 # 5. Refresh the deterministic reference (CLI commands, API) if relevant:
 pnpm sync
 ```
@@ -103,9 +103,9 @@ pnpm sync
 
 | Skill                      | When to use                                                                                                                                                                                                                                                |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `docs-from-spec`           | After a change is archived in `aurora-catalyst-cli` (or similar). Generates concept + guide + reference stubs in EN and ES from the archive. Lives at `.claude/skills/docs-from-spec/SKILL.md`.                                                            |
+| `catalyst-docs-from-spec`           | After a change is archived in `aurora-catalyst-cli` (or similar). Generates concept + guide + reference stubs in EN and ES from the archive. Lives at `.claude/skills/catalyst-docs-from-spec/SKILL.md`.                                                            |
 | `catalyst-changelog-sync`  | After one or more changes are archived in a sibling repo. Detects new archives, classifies each as publish / dismiss (user-facing impact contract), drafts bilingual entries for publish, records every decision in `scripts/changelog-registry.json`. Supports dry-run and bidirectional override. Lives at `.claude/skills/catalyst-changelog-sync/SKILL.md`. |
 
 <!-- SKILLS-INDEX-START -->
-[Project Skills Index]|root:.claude|IMPORTANT:Prefer retrieval-led reasoning over pre-training.Read SKILL.md first,then related files.|skills/docs-from-spec:{SKILL.md}|skills/openspec-apply-change:{SKILL.md}|skills/openspec-archive-change:{SKILL.md}|skills/openspec-explore:{SKILL.md}|skills/openspec-propose:{SKILL.md}|commands:{apply.md,archive.md,explore.md,propose.md}
+[Project Skills Index]|root:.claude|IMPORTANT:Prefer retrieval-led reasoning over pre-training.Read SKILL.md first,then related files.|skills/catalyst-changelog-sync:{SKILL.md}|skills/catalyst-docs-from-spec:{SKILL.md}|skills/openspec-apply-change:{SKILL.md}|skills/openspec-archive-change:{SKILL.md}|skills/openspec-explore:{SKILL.md}|skills/openspec-propose:{SKILL.md}|commands:{apply.md,archive.md,explore.md,propose.md}
 <!-- SKILLS-INDEX-END -->
