@@ -1,13 +1,15 @@
 ---
-title: "Historial de cambios"
-description: "Changes archivados en los repos de Aurora. Autogenerado por source."
+title: Historial de cambios
+description: Changelog orientado a developers de los repos de Aurora Catalyst, filtrado a cambios visibles de uso.
 ---
 
-Grupos por repo:
+Lista curada de novedades de uso en el ecosistema Aurora Catalyst — nuevas APIs públicas, flujos nuevos, breaking changes y deprecations. Los refactors internos, mejoras de rendimiento y corrección de bugs se omiten a propósito para que esta sección sea útil para aprender o actualizar.
 
-- **Aurora Catalyst CLI** (`cli`) — `aurora-catalyst-cli`
-- **Aurora Catalyst Framework** (`catalyst`) — `aurora-catalyst`
+Cada entrada se redacta a partir de la propuesta original del openspec en el repo fuente y enlaza al archive, de forma que siempre puedes ir al contexto completo de la decisión cuando lo necesites.
 
-:::note[Referencia autogenerada]
-Esta sección se genera automáticamente desde el código fuente del repo vinculado. Los envoltorios (títulos, breadcrumbs, landings) están localizados, pero el contenido técnico se mantiene en el idioma de la fuente para estar sincronizado con ella. Es el estándar de la industria para referencia técnica.
-:::
+## Por repo fuente
+
+- [**Aurora Catalyst CLI**](./cli/) — `aurora-catalyst-cli`, el generador de código.
+- [**Aurora Catalyst Framework**](./catalyst/) — `aurora-catalyst`, el framework Angular + NestJS que genera el CLI.
+
+Las entradas se agrupan por la versión semver que las publica. Los cambios archivados después del último release aparecen bajo **Sin publicar** hasta que se corta una nueva versión.

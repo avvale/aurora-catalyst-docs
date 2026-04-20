@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import { Badge } from '@astrojs/starlight/components';
+
+interface Props {
+  /** Source repo slug (e.g. "cli", "catalyst"). Matches the directory under changes/. */
+  repo: string;
+  /** Content locale ("en" or "es"). Used to scope the query and pick labels. */
+  locale: 'en' | 'es';
+}
+
+const { repo, locale } = Astro.props;
+
+interface IndexEntry {
+  slug: string;
+  title: string;
+  description: string | undefined;
+  date: Date | undefined;
+  version: string;
+  classification: 'feature' | 'breaking' | 'deprecation' | undefined;
+  href: string;
+}
+
+function parseSemver(tag: string): [number, number, number] | null {
+  const match = /^v?(\d+)\.(\d+)\.(\d+)$/.exec(tag);
+  if (!match) return null;
+  return [Number(match[1]), Number(match[2]), Number(match[3])];
+}
+
+function compareVersions(a: string, b: string): number {
+  if (a === b) return 0;
+  if (a === 'Unreleased') return -1;
+  if (b === 'Unreleased') return 1;
+  const parsedA = parseSemver(a);
+  const parsedB = parseSemver(b);
+  if (parsedA && parsedB) {
+    for (let i = 0; i < 3; i++) {
+      if (parsedA[i] !== parsedB[i]) return parsedB[i] - parsedA[i];
+    }
+    return 0;
+  }
+  if (parsedA && !parsedB) return -1;
+  if (!parsedA && parsedB) return 1;
+  return b.localeCompare(a);
+}
+
+function compareDatesDesc(a: Date | undefined, b: Date | undefined): number {
+  const ta = a ? a.getTime() : 0;
+  const tb = b ? b.getTime() : 0;
+  return tb - ta;
+}
+
+const classificationVariant: Record<
+  NonNullable<IndexEntry['classification']>,
+  'default' | 'danger' | 'caution'
+> = {
+  feature: 'default',
+  breaking: 'danger',
+  deprecation: 'caution',
+};
+
+const classificationLabel: Record<
+  NonNullable<IndexEntry['classification']>,
+  Record<Props['locale'], string>
+> = {
+  feature: { en: 'Feature', es: 'Funcionalidad' },
+  breaking: { en: 'Breaking', es: 'Breaking' },
+  deprecation: { en: 'Deprecation', es: 'Obsolescencia' },
+};
+
+const emptyLabel: Record<Props['locale'], string> = {
+  en: 'No entries yet.',
+  es: 'Todavía no hay entradas.',
+};
+
+const unreleasedLabel: Record<Props['locale'], string> = {
+  en: 'Unreleased',
+  es: 'Sin publicar',
+};
+
+const prefix = `${locale}/changes/${repo}/`;
+
+const all = await getCollection('docs', ({ id, data }) => {
+  if (!id.startsWith(prefix)) return false;
+  if (id === `${prefix}index`) return false;
+  return Boolean(data.version);
+});
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const entries: IndexEntry[] = all.map((entry) => ({
+  slug: entry.id.replace(prefix, ''),
+  title: entry.data.title,
+  description: entry.data.description,
+  date: entry.data.date,
+  version: entry.data.version ?? 'Unreleased',
+  classification: entry.data.classification,
+  href: `${base}/${entry.id.replace(/\.(md|mdx)$/, '')}/`,
+}));
+
+const grouped = new Map<string, IndexEntry[]>();
+for (const entry of entries) {
+  const bucket = grouped.get(entry.version) ?? [];
+  bucket.push(entry);
+  grouped.set(entry.version, bucket);
+}
+
+for (const bucket of grouped.values()) {
+  bucket.sort((a, b) => compareDatesDesc(a.date, b.date));
+}
+
+const sortedVersions = [...grouped.keys()].sort(compareVersions);
+---
+
+{entries.length === 0 && <p>{emptyLabel[locale]}</p>}
+
+{
+  sortedVersions.map((version) => (
+    <section class="changelog-version">
+      <h2 id={version}>
+        {version === 'Unreleased' ? unreleasedLabel[locale] : version}
+      </h2>
+      <ul class="changelog-entries">
+        {grouped.get(version)!.map((entry) => (
+          <li>
+            <a href={entry.href}>{entry.title}</a>
+            {entry.classification && (
+              <>
+                {' '}
+                <Badge
+                  text={classificationLabel[entry.classification][locale]}
+                  variant={classificationVariant[entry.classification]}
+                />
+              </>
+            )}
+            {entry.date && (
+              <span class="changelog-date">
+                {' · '}
+                {entry.date.toISOString().slice(0, 10)}
+              </span>
+            )}
+            {entry.description && <p class="changelog-description">{entry.description}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))
+}
+
+<style>
+  .changelog-version + .changelog-version {
+    margin-top: 2rem;
+  }
+  .changelog-entries {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .changelog-entries > li + li {
+    margin-top: 1rem;
+  }
+  .changelog-date {
+    color: var(--sl-color-gray-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .changelog-description {
+    margin: 0.25rem 0 0 0;
+    color: var(--sl-color-gray-2);
+  }
+</style>

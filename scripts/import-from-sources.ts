@@ -3,75 +3,44 @@
  *
  * Mirrors auto-generated content from sibling Aurora repos into the docs site,
  * grouped by source repo:
- *   - <source>/openspec/changes/archive/* → src/content/docs/<locale>/changes/<slug>/
  *   - <source>/docs/                       → src/content/docs/<locale>/reference/cli-commands/  (only slug=cli)
  *   - <source>/docs-api/                   → src/content/docs/<locale>/reference/api/<slug>/
+ *
+ * Changelog entries (from `openspec/changes/archive/`) are NOT handled here —
+ * they are produced by the `changelog-sync` skill, which requires LLM reasoning
+ * (classification + bilingual authoring) and therefore lives outside this
+ * purely-deterministic script. See `scripts/changelog-sync.ts`.
  *
  * Human-curated pages (tutorials, guides, concepts, hand-written reference)
  * are NEVER touched by this script.
  *
  * Usage:
- *   pnpm sync                              # import from every source
+ *   pnpm sync                              # import every supported section from every source
  *   pnpm sync --source cli                 # only the CLI repo
  *   pnpm sync --skip-cli-commands          # keep existing cli-commands dir as-is
- *   pnpm sync --skip-api --skip-archives   # only refresh what's left
+ *   pnpm sync --skip-api                   # keep existing api dir as-is
  *   pnpm sync --help
  */
 
-import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-// ─── Paths & sources ─────────────────────────────────────────────────
-
-const DOCS_ROOT = path.resolve(fileURLToPath(import.meta.url), '../..');
-const SIBLINGS_ROOT = path.resolve(DOCS_ROOT, '..');
-
-const CONTENT_LOCALES = ['en', 'es'] as const;
-type Locale = (typeof CONTENT_LOCALES)[number];
-
-interface Source {
-  /** Short identifier used in URLs and as a sidebar label. */
-  slug: string;
-  /** Repo folder name on disk (resolved relative to SIBLINGS_ROOT). */
-  repo: string;
-  hasArchives: boolean;
-  hasCli: boolean;
-  hasApi: boolean;
-  /** Pretty label shown to the reader in index pages. */
-  label: { en: string; es: string };
-}
-
-const SOURCES: Source[] = [
-  {
-    slug: 'cli',
-    repo: 'aurora-catalyst-cli',
-    hasArchives: true,
-    hasCli: true,
-    hasApi: true,
-    label: { en: 'Aurora Catalyst CLI', es: 'Aurora Catalyst CLI' },
-  },
-  {
-    slug: 'catalyst',
-    repo: 'aurora-catalyst',
-    hasArchives: true,
-    hasCli: false,
-    hasApi: false,
-    label: { en: 'Aurora Catalyst Framework', es: 'Aurora Catalyst Framework' },
-  },
-];
-
-function sourcePath(source: Source): string {
-  return path.resolve(SIBLINGS_ROOT, source.repo);
-}
+import {
+  CONTENT_LOCALES,
+  DOCS_ROOT,
+  type Locale,
+  type Source,
+  SOURCES,
+  sourcePath,
+  targetFor,
+} from './lib/sources.js';
 
 // ─── Args ────────────────────────────────────────────────────────────
 
 interface Options {
   only: null | string;
   skipApi: boolean;
-  skipArchives: boolean;
   skipCliCommands: boolean;
 }
 
@@ -79,13 +48,11 @@ function parseArgs(argv: string[]): Options {
   const options: Options = {
     only: null,
     skipApi: false,
-    skipArchives: false,
     skipCliCommands: false,
   };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg === '--source') options.only = argv[++i];
-    else if (arg === '--skip-archives') options.skipArchives = true;
     else if (arg === '--skip-cli-commands') options.skipCliCommands = true;
     else if (arg === '--skip-api') options.skipApi = true;
     else if (arg === '--help' || arg === '-h') {
@@ -94,10 +61,11 @@ Usage: pnpm sync [options]
 
 Options:
   --source <slug>       Only import from this source (one of: ${SOURCES.map((s) => s.slug).join(', ')})
-  --skip-archives       Skip openspec archive mirror
   --skip-cli-commands   Skip CLI reference generation
   --skip-api            Skip TypeDoc API generation
   --help                Show this help
+
+Note: changelog entries are produced by the changelog-sync skill, not by this script.
 `);
       process.exit(0);
     }
@@ -116,10 +84,6 @@ async function resetDir(dir: string): Promise<void> {
   await ensureDir(dir);
 }
 
-function targetFor(locale: string, subdir: string): string {
-  return path.join(DOCS_ROOT, 'src/content/docs', locale, subdir);
-}
-
 async function walkMarkdown(dir: string): Promise<string[]> {
   const out: string[] = [];
   const entries = await readdir(dir, { withFileTypes: true });
@@ -134,20 +98,8 @@ async function walkMarkdown(dir: string): Promise<string[]> {
   return out;
 }
 
-// ─── Frontmatter injection (openspec/oclif/TypeDoc output comes raw) ─
+// ─── Frontmatter injection (oclif/TypeDoc output comes raw) ──────────
 
-const WELL_KNOWN_TITLES: Record<string, Record<Locale, string>> = {
-  design: { en: 'Design', es: 'Diseño' },
-  proposal: { en: 'Proposal', es: 'Propuesta' },
-  tasks: { en: 'Tasks', es: 'Tareas' },
-};
-
-const SPEC_LABEL: Record<Locale, string> = { en: 'Spec', es: 'Spec' };
-
-/**
- * Note added to every auto-generated landing page. Makes it explicit that
- * technical content lives in the source language by design.
- */
 const TRANSLATION_NOTE: Record<Locale, string> = {
   en: [
     ':::note[Auto-generated reference]',
@@ -161,7 +113,6 @@ const TRANSLATION_NOTE: Record<Locale, string> = {
   ].join('\n'),
 };
 
-/** Convert a kebab-case slug to sentence case, stripping a YYYY-MM-DD- prefix. */
 function humanize(slug: string): string {
   const stripped = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
   const words = stripped.split('-').filter(Boolean);
@@ -175,15 +126,6 @@ function yamlString(s: string): string {
   return `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
 }
 
-function titleForArchiveMd(filePath: string, locale: Locale): string {
-  const base = path.basename(filePath, path.extname(filePath));
-  const parent = path.basename(path.dirname(filePath));
-  if (base === 'spec') return `${SPEC_LABEL[locale]}: ${humanize(parent)}`;
-  const well = WELL_KNOWN_TITLES[base];
-  if (well) return well[locale];
-  return humanize(base);
-}
-
 async function ensureFrontmatter(filePath: string, title: string): Promise<void> {
   const raw = await readFile(filePath, 'utf8');
   if (raw.startsWith('---\n') || raw.startsWith('---\r\n')) return;
@@ -191,7 +133,6 @@ async function ensureFrontmatter(filePath: string, title: string): Promise<void>
   await writeFile(filePath, fm + raw, 'utf8');
 }
 
-/** Add a frontmatter with `title: humanize(basename)` to every .md in a dir. */
 async function injectGenericFrontmatterUnder(dir: string): Promise<void> {
   const files = await walkMarkdown(dir);
   for (const file of files) {
@@ -202,102 +143,6 @@ async function injectGenericFrontmatterUnder(dir: string): Promise<void> {
 }
 
 // ─── Importers ───────────────────────────────────────────────────────
-
-async function mirrorArchivesFor(source: Source): Promise<void> {
-  const repoRoot = sourcePath(source);
-  if (!existsSync(repoRoot)) {
-    console.warn(`[skip] ${source.slug}: repo not found at ${repoRoot}`);
-    return;
-  }
-  const sourceDir = path.join(repoRoot, 'openspec/changes/archive');
-  if (!existsSync(sourceDir)) {
-    console.warn(`[skip] ${source.slug}: no archives at ${sourceDir}`);
-    return;
-  }
-
-  for (const locale of CONTENT_LOCALES) {
-    const dest = targetFor(locale, path.join('changes', source.slug));
-    await resetDir(dest);
-    const entries = await readdir(sourceDir);
-
-    for (const entry of entries) {
-      const entrySrc = path.join(sourceDir, entry);
-      const entryStat = await stat(entrySrc);
-      if (!entryStat.isDirectory()) continue;
-      const entryDst = path.join(dest, entry);
-      await cp(entrySrc, entryDst, { recursive: true });
-
-      const changeTitle = humanize(entry);
-      await writeFile(
-        path.join(entryDst, 'index.md'),
-        `---\ntitle: ${yamlString(changeTitle)}\n---\n\nArchived change \`${entry}\` from \`${source.repo}\`.\n`,
-        'utf8',
-      );
-
-      const mdFiles = await walkMarkdown(entryDst);
-      for (const file of mdFiles) {
-        await ensureFrontmatter(file, titleForArchiveMd(file, locale));
-      }
-    }
-
-    // Landing index for this source's changes section.
-    const title = source.label[locale];
-    const description =
-      locale === 'es'
-        ? `Changes archivados de ${source.repo}. Autogenerado.`
-        : `Archived changes from ${source.repo}. Auto-generated.`;
-    const intro =
-      locale === 'es'
-        ? `Changes archivados importados desde \`${source.repo}/openspec/changes/archive/\`.`
-        : `Archived changes imported from \`${source.repo}/openspec/changes/archive/\`.`;
-    await writeFile(
-      path.join(dest, 'index.md'),
-      [
-        `---`,
-        `title: ${yamlString(title)}`,
-        `description: ${yamlString(description)}`,
-        `---`,
-        ``,
-        intro,
-        ``,
-        TRANSLATION_NOTE[locale],
-        ``,
-      ].join('\n'),
-      'utf8',
-    );
-    console.log(`[ok] ${source.slug} archives → ${path.relative(DOCS_ROOT, dest)}`);
-  }
-}
-
-/** Write a top-level index.md at changes/ aggregating every source group. */
-async function writeChangesLanding(activeSources: Source[]): Promise<void> {
-  for (const locale of CONTENT_LOCALES) {
-    const root = targetFor(locale, 'changes');
-    await ensureDir(root);
-    const title = locale === 'es' ? 'Historial de cambios' : 'Change history';
-    const description =
-      locale === 'es'
-        ? 'Changes archivados en los repos de Aurora. Autogenerado por source.'
-        : 'Archived changes across the Aurora repos. Auto-generated per source.';
-    const groupHeader = locale === 'es' ? 'Grupos por repo:' : 'Grouped by source repo:';
-    const lines = [
-      `---`,
-      `title: ${yamlString(title)}`,
-      `description: ${yamlString(description)}`,
-      `---`,
-      ``,
-      groupHeader,
-      ``,
-      ...activeSources
-        .filter((s) => s.hasArchives)
-        .map((s) => `- **${s.label[locale]}** (\`${s.slug}\`) — \`${s.repo}\``),
-      ``,
-      TRANSLATION_NOTE[locale],
-      ``,
-    ];
-    await writeFile(path.join(root, 'index.md'), lines.join('\n'), 'utf8');
-  }
-}
 
 async function mirrorCliCommandsFor(source: Source): Promise<void> {
   const repoRoot = sourcePath(source);
@@ -318,7 +163,6 @@ async function mirrorCliCommandsFor(source: Source): Promise<void> {
     await cp(sourceDir, dest, { recursive: true });
     await injectGenericFrontmatterUnder(dest);
 
-    // Localized landing that explains the section.
     const title = locale === 'es' ? 'Comandos del CLI' : 'CLI commands';
     const description =
       locale === 'es'
@@ -366,7 +210,6 @@ async function mirrorApiFor(source: Source): Promise<void> {
     await cp(sourceDir, dest, { recursive: true });
     await injectGenericFrontmatterUnder(dest);
 
-    // Localized landing for this slug's API reference.
     const title =
       locale === 'es' ? `API · ${source.label.es}` : `API · ${source.label.en}`;
     const description =
@@ -398,24 +241,11 @@ async function mirrorApiFor(source: Source): Promise<void> {
 
 // ─── Main ────────────────────────────────────────────────────────────
 
-/**
- * Clear the auto-generated roots once per run, BEFORE iterating sources.
- *
- * Each per-source mirror only writes into its own slug subdirectory (for
- * multi-source kinds like archives/api) or into a flat root (for cli-commands).
- * Without this global sweep, stale directories from removed/renamed sources —
- * or from older layouts committed to the repo — survive across syncs and
- * produce duplicates in the sidebar (`reference/api/deploy/...` next to
- * `reference/api/cli/deploy/...`).
- */
 async function resetAutoGenRoots(
   options: Options,
   sources: Source[],
 ): Promise<void> {
   for (const locale of CONTENT_LOCALES) {
-    if (!options.skipArchives && sources.some((s) => s.hasArchives)) {
-      await resetDir(targetFor(locale, 'changes'));
-    }
     if (!options.skipCliCommands && sources.some((s) => s.hasCli)) {
       await resetDir(targetFor(locale, 'reference/cli-commands'));
     }
@@ -442,19 +272,12 @@ async function main(): Promise<void> {
 
   for (const source of sources) {
     console.log(`\n→ ${source.slug} (${source.repo})`);
-    if (!options.skipArchives && source.hasArchives) {
-      await mirrorArchivesFor(source);
-    }
     if (!options.skipCliCommands && source.hasCli) {
       await mirrorCliCommandsFor(source);
     }
     if (!options.skipApi && source.hasApi) {
       await mirrorApiFor(source);
     }
-  }
-
-  if (!options.skipArchives) {
-    await writeChangesLanding(sources);
   }
 
   console.log('\nDone.');
