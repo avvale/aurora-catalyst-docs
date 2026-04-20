@@ -5,7 +5,6 @@ description: "Archived changes across the Aurora repos. Auto-generated per sourc
 
 Grouped by source repo:
 
-- **Aurora Catalyst CLI** (`cli`) — `aurora-catalyst-cli`
 - **Aurora Catalyst Framework** (`catalyst`) — `aurora-catalyst`
 
 :::note[Auto-generated reference]
