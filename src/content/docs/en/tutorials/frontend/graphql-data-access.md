@@ -231,6 +231,6 @@ The test is simple: **do you need a signal?** If yes, composable. If no, fetcher
 
 ## Related
 
-- [Change history: Add GraphQL Fetchers](../../changes/catalyst/2026-04-22-query-mutate-layer-separation/) — the original proposal and design notes.
-- [How-to guides](../../guides/) — task-oriented recipes once you know the basics.
-- [Reference: API](../../reference/api/) — the full TypeScript surface of `@aurora`.
+- [Change history: Add GraphQL Fetchers](../../../changes/catalyst/2026-04-22-query-mutate-layer-separation/) — the original proposal and design notes.
+- [How-to guides](../../../guides/) — task-oriented recipes once you know the basics.
+- [Reference: API](../../../reference/api/) — the full TypeScript surface of `@aurora`.

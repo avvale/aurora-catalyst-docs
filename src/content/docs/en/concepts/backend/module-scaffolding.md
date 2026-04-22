@@ -28,7 +28,7 @@ emits files across the backend, grouped by layer:
 | `@app/<bc>/<mod>/domain/`                             | Entity, value objects, field schema, repository interface     |
 | `@app/<bc>/<mod>/infrastructure/`                     | Sequelize model, repository implementation, seed              |
 
-The command also runs `pnpm back:graphql:types` by default, so the generated GraphQL types stay aligned with the YAML. Pass `--noGraphQLTypes` (`-g`) to skip that step. See the [`catalyst load` reference](../../reference/cli-commands/load/) for every flag.
+The command also runs `pnpm back:graphql:types` by default, so the generated GraphQL types stay aligned with the YAML. Pass `--noGraphQLTypes` (`-g`) to skip that step. See the [`catalyst load` reference](../../../reference/cli-commands/load/) for every flag.
 
 ### Operations the CLI recognizes
 
@@ -70,7 +70,7 @@ Editing the body of a handler's `main()` is safe: the scaffold around it stays i
 - You scaffold a new module, add a field, or add an operation — edit the YAML, run `catalyst load …`, commit both the YAML and the generated files.
 - You see a `.origin` file after regeneration — a hand edit diverged from the previous scaffold; decide which version wins and delete the `.origin`.
 - You want a custom verb — declare it under `additionalApis`, regenerate, and fill in the stub the CLI produced.
-- You want to opt out of specific operations or files — see [Exclude CLI-generated APIs from a module](../../guides/backend/exclude-generated-apis/).
+- You want to opt out of specific operations or files — see [Exclude CLI-generated APIs from a module](../../../guides/backend/exclude-generated-apis/).
 
 ## Trade-offs and limits
 
@@ -80,6 +80,6 @@ Editing the body of a handler's `main()` is safe: the scaffold around it stays i
 
 ## Related
 
-- [Exclude CLI-generated APIs from a module](../../guides/backend/exclude-generated-apis/) — how `excludedOperations` and `excludedFiles` work in practice.
-- [`catalyst load` reference](../../reference/cli-commands/load/) — every flag and argument.
-- [Preservation regions](../frontend/preservation-regions/) — how to protect custom code inside a generated template file.
+- [Exclude CLI-generated APIs from a module](../../../guides/backend/exclude-generated-apis/) — how `excludedOperations` and `excludedFiles` work in practice.
+- [`catalyst load` reference](../../../reference/cli-commands/load/) — every flag and argument.
+- [Preservation regions](../../frontend/preservation-regions/) — how to protect custom code inside a generated template file.

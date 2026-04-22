@@ -22,7 +22,7 @@ Evitar que el CLI de Catalyst emita operaciones o archivos que no quieres — ya
    - Para sacar una operación completa — sin controller, sin resolver, sin handler, sin service, sin DTO, sin fragmento de GraphQL — usa `excludedOperations`.
    - Para mantener la operación pero omitir **un archivo específico** (porque lo escribiste a mano o choca con un archivo de `additionalApis`), usa `excludedFiles`.
 
-3. **Edita la YAML en su nivel superior.** Las dos claves viven junto a `aggregateProperties` y `additionalApis`. Los nombres que puedes listar en `excludedOperations` son los de la [tabla de operaciones](../../concepts/backend/module-scaffolding/#operaciones-que-el-cli-reconoce).
+3. **Edita la YAML en su nivel superior.** Las dos claves viven junto a `aggregateProperties` y `additionalApis`. Los nombres que puedes listar en `excludedOperations` son los de la [tabla de operaciones](../../../concepts/backend/module-scaffolding/#operaciones-que-el-cli-reconoce).
 
    ```yaml
    # cliter/iam/role.aurora.yaml
@@ -64,15 +64,15 @@ Evitar que el CLI de Catalyst emita operaciones o archivos que no quieres — ya
 ## Solución de problemas
 
 **La operación no reapareció después de sacarla de `excludedOperations`.**
-Revisa si hay errores de tipeo. Los nombres son sensibles a mayúsculas/minúsculas y deben coincidir exactamente con el [conjunto soportado](../../concepts/backend/module-scaffolding/#operaciones-que-el-cli-reconoce). Vuelve a correr con `--force --verbose` para ver cada archivo que el CLI consideró.
+Revisa si hay errores de tipeo. Los nombres son sensibles a mayúsculas/minúsculas y deben coincidir exactamente con el [conjunto soportado](../../../concepts/backend/module-scaffolding/#operaciones-que-el-cli-reconoce). Vuelve a correr con `--force --verbose` para ver cada archivo que el CLI consideró.
 
 **Aparecieron archivos `.origin` en operaciones que no toqué.**
-Eso significa que los archivos en disco tienen ediciones manuales cuyo SHA-1 ya no coincide con el del lockfile. No tiene relación con la exclusión — mira [Scaffolding de un módulo backend → Lockfile y archivos `.origin`](../../concepts/backend/module-scaffolding/#lockfile-y-archivos-origin). Resuelve cada `.origin`, o pasa `--noReview` si quieres atenderlos después.
+Eso significa que los archivos en disco tienen ediciones manuales cuyo SHA-1 ya no coincide con el del lockfile. No tiene relación con la exclusión — mira [Scaffolding de un módulo backend → Lockfile y archivos `.origin`](../../../concepts/backend/module-scaffolding/#lockfile-y-archivos-origin). Resuelve cada `.origin`, o pasa `--noReview` si quieres atenderlos después.
 
 **Excluí una operación pero el esquema GraphQL todavía la referencia.**
 Los tipos de GraphQL se regeneran después del load del módulo. Si omitiste ese paso con `--noGraphQLTypes`, ejecuta `pnpm back:graphql:types` a mano para refrescar los exports.
 
 ## Relacionado
 
-- [Scaffolding de un módulo backend](../../concepts/backend/module-scaffolding/) — el concepto detrás de qué se emite y por qué.
-- [Referencia de `catalyst load`](../../reference/cli-commands/load/) — cada flag y argumento.
+- [Scaffolding de un módulo backend](../../../concepts/backend/module-scaffolding/) — el concepto detrás de qué se emite y por qué.
+- [Referencia de `catalyst load`](../../../reference/cli-commands/load/) — cada flag y argumento.

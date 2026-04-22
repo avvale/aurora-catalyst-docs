@@ -22,7 +22,7 @@ Stop the Catalyst CLI from emitting operations or files you do not want — eith
    - To remove a whole operation — no controller, no resolver, no handler, no service, no DTO, no GraphQL fragment — use `excludedOperations`.
    - To keep the operation but skip **one specific file** (because you wrote it by hand or it collides with an `additionalApis` file), use `excludedFiles`.
 
-3. **Edit the YAML at its top level.** Both keys live next to `aggregateProperties` and `additionalApis`. The names you can list under `excludedOperations` are the ones from the [operations table](../../concepts/backend/module-scaffolding/#operations-the-cli-recognizes).
+3. **Edit the YAML at its top level.** Both keys live next to `aggregateProperties` and `additionalApis`. The names you can list under `excludedOperations` are the ones from the [operations table](../../../concepts/backend/module-scaffolding/#operations-the-cli-recognizes).
 
    ```yaml
    # cliter/iam/role.aurora.yaml
@@ -64,15 +64,15 @@ Stop the Catalyst CLI from emitting operations or files you do not want — eith
 ## Troubleshooting
 
 **The operation did not reappear after I removed it from `excludedOperations`.**
-Double-check for typos. Operation names are case-sensitive and must match the [supported set](../../concepts/backend/module-scaffolding/#operations-the-cli-recognizes) exactly. Rerun with `--force --verbose` to see every file the CLI considered.
+Double-check for typos. Operation names are case-sensitive and must match the [supported set](../../../concepts/backend/module-scaffolding/#operations-the-cli-recognizes) exactly. Rerun with `--force --verbose` to see every file the CLI considered.
 
 **`.origin` files appeared for operations I did not touch.**
-That means the on-disk files have hand edits whose SHA-1 no longer matches the lockfile. This is unrelated to exclusion — see [Backend module scaffolding → Lockfile and `.origin` files](../../concepts/backend/module-scaffolding/#lockfile-and-origin-files). Reconcile each `.origin`, or pass `--noReview` if you want to handle them later.
+That means the on-disk files have hand edits whose SHA-1 no longer matches the lockfile. This is unrelated to exclusion — see [Backend module scaffolding → Lockfile and `.origin` files](../../../concepts/backend/module-scaffolding/#lockfile-and-origin-files). Reconcile each `.origin`, or pass `--noReview` if you want to handle them later.
 
 **I excluded an operation but the GraphQL schema still references it.**
 The GraphQL type exports regenerate after the module load. If you skipped that step with `--noGraphQLTypes`, run `pnpm back:graphql:types` by hand to refresh the exports.
 
 ## Related
 
-- [Backend module scaffolding](../../concepts/backend/module-scaffolding/) — the concept behind what gets emitted and why.
-- [`catalyst load` reference](../../reference/cli-commands/load/) — every flag and argument.
+- [Backend module scaffolding](../../../concepts/backend/module-scaffolding/) — the concept behind what gets emitted and why.
+- [`catalyst load` reference](../../../reference/cli-commands/load/) — every flag and argument.
