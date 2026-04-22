@@ -12,4 +12,4 @@ Si tienes un problema concreto que resolver y ya conoces lo básico, mira las **
 _Se irán sumando a medida que se escriban. Empieza con el de primeros pasos._
 
 - [Primeros pasos](./getting-started/) — instala Aurora, genera tu primer bounded context y ejecuta el resultado.
-- [Conectar datos GraphQL a la UI](./graphql-data-access/) — precarga datos en un resolver con fetchers y renderízalos en un componente con composables, usando `iam/tag` como ejemplo.
+- [Conectar datos GraphQL a la UI](./frontend/graphql-data-access/) — precarga datos en un resolver con fetchers y renderízalos en un componente con composables, usando `iam/tag` como ejemplo.

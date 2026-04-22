@@ -1,6 +1,8 @@
 ---
 title: Getting started
 description: Install Aurora Catalyst and generate your first bounded context.
+sidebar:
+  order: 1
 ---
 
 :::note[Placeholder]

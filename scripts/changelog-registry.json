@@ -14,6 +14,13 @@
       "source_commit": "7a17c6e1add03d4b6b5bce810df80723f7199204",
       "override": null
     },
+    "2026-04-22-catalyst-handler-composer-skill": {
+      "status": "dismissed",
+      "reason": "New Claude Code skill (catalyst-handler-composer) teaching the AI how to compose CLI-generated handlers in the catalyst backend. Internal AI tooling only — proposal states 'No runtime code changes. Documentation + skill only.'",
+      "classified_at": "2026-04-22T21:56:25.087Z",
+      "source_commit": "baa8a2752844e6a1dcaaa1758d4bc88489cf896a",
+      "override": null
+    },
     "2026-04-22-query-mutate-layer-separation": {
       "status": "published",
       "classification": "feature",

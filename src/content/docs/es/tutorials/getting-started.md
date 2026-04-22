@@ -1,6 +1,8 @@
 ---
 title: Primeros pasos
 description: Instala Aurora Catalyst y genera tu primer bounded context.
+sidebar:
+  order: 1
 ---
 
 :::note[Placeholder]

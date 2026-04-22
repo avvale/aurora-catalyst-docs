@@ -1,10 +1,6 @@
 ---
 title: Wire GraphQL data into the UI
 description: Pre-load data in a resolver with fetchers, then render it in a component with composables — using the generated iam/tag module as a running example.
-sidebar:
-  badge:
-    text: Frontend
-    variant: note
 ---
 
 In this tutorial you will trace a single piece of data from the GraphQL server all the way to a form field. Along the way you will meet the two layers of `@aurora/modules/graphql/`:
@@ -235,6 +231,6 @@ The test is simple: **do you need a signal?** If yes, composable. If no, fetcher
 
 ## Related
 
-- [Change history: Add GraphQL Fetchers](../changes/catalyst/2026-04-22-query-mutate-layer-separation/) — the original proposal and design notes.
-- [How-to guides](../guides/) — task-oriented recipes once you know the basics.
-- [Reference: API](../reference/api/) — the full TypeScript surface of `@aurora`.
+- [Change history: Add GraphQL Fetchers](../../changes/catalyst/2026-04-22-query-mutate-layer-separation/) — the original proposal and design notes.
+- [How-to guides](../../guides/) — task-oriented recipes once you know the basics.
+- [Reference: API](../../reference/api/) — the full TypeScript surface of `@aurora`.

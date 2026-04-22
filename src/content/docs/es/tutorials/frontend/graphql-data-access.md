@@ -1,10 +1,6 @@
 ---
 title: Conectar datos GraphQL a la UI
 description: Precarga datos en un resolver con fetchers y luego renderízalos en un componente con composables — usando el módulo generado iam/tag como ejemplo.
-sidebar:
-  badge:
-    text: Frontend
-    variant: note
 ---
 
 En este tutorial vas a seguir el viaje de un dato desde el servidor GraphQL hasta un campo de formulario. Por el camino conocerás las dos capas de `@aurora/modules/graphql/`:
@@ -235,6 +231,6 @@ El test es simple: **¿necesitas una signal?** Si sí, composable. Si no, fetche
 
 ## Relacionado
 
-- [Historial de cambios: Añadir GraphQL Fetchers](../changes/catalyst/2026-04-22-query-mutate-layer-separation/) — la propuesta original y las notas de diseño.
-- [Guías](../guides/) — recetas orientadas a tareas cuando ya manejes lo básico.
-- [Referencia: API](../reference/api/) — la superficie TypeScript completa de `@aurora`.
+- [Historial de cambios: Añadir GraphQL Fetchers](../../changes/catalyst/2026-04-22-query-mutate-layer-separation/) — la propuesta original y las notas de diseño.
+- [Guías](../../guides/) — recetas orientadas a tareas cuando ya manejes lo básico.
+- [Referencia: API](../../reference/api/) — la superficie TypeScript completa de `@aurora`.
