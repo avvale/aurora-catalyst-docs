@@ -5,7 +5,7 @@ description: Recetas orientadas a tareas para quienes ya conocen lo básico de A
 
 Las guías están **orientadas a tareas**: asumen que ya entendiste los fundamentos y sólo necesitas resolver un problema concreto.
 
-Si Aurora es nuevo para ti, empieza con los [tutoriales](/es/tutorials/).
+Si Aurora es nuevo para ti, empieza con los [tutoriales](../tutorials/).
 
 ## Categorías
 

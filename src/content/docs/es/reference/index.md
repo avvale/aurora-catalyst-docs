@@ -16,6 +16,6 @@ La mayor parte de esta sección se **autogenera** desde los repos de Aurora medi
 
 ## Qué NO vive aquí
 
-- Tutoriales → [`/es/tutorials/`](/es/tutorials/)
-- Guías → [`/es/guides/`](/es/guides/)
-- Fondo conceptual → [`/es/concepts/`](/es/concepts/)
+- Tutoriales → [`/es/tutorials/`](../tutorials/)
+- Guías → [`/es/guides/`](../guides/)
+- Fondo conceptual → [`/es/concepts/`](../concepts/)

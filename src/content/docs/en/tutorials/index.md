@@ -11,4 +11,5 @@ If you need to solve a specific problem and you already know the basics, look at
 
 _Tutorials will be listed here as they are written. Start with the getting-started guide below._
 
-- [Getting started](/en/tutorials/getting-started/) — install Aurora, generate your first bounded context, and run the result.
+- [Getting started](./getting-started/) — install Aurora, generate your first bounded context, and run the result.
+- [Wire GraphQL data into the UI](./graphql-data-access/) — pre-load data in a resolver with fetchers and render it in a component with composables, using `iam/tag` as the running example.

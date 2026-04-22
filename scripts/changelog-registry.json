@@ -6,6 +6,20 @@
       "classified_at": "2026-04-20T11:53:51.438Z",
       "source_commit": "ae5d855758847fb2fabf7eb7f7c89a7006c5cc7c",
       "override": null
+    },
+    "2026-04-22-catalyst-data-layer-skill": {
+      "status": "dismissed",
+      "reason": "New Claude Code skill (catalyst-data-layer) teaching the AI how to wire components/resolvers to @aurora/modules/graphql. Internal AI tooling only — proposal states 'No runtime code changes. This is a skill documentation change only.'",
+      "classified_at": "2026-04-22T07:24:56.861Z",
+      "source_commit": "7a17c6e1add03d4b6b5bce810df80723f7199204",
+      "override": null
+    },
+    "2026-04-22-query-mutate-layer-separation": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-04-22T07:24:56.862Z",
+      "source_commit": "7a17c6e1add03d4b6b5bce810df80723f7199204",
+      "override": null
     }
   },
   "cli": {
