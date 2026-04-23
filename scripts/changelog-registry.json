@@ -27,6 +27,13 @@
       "classified_at": "2026-04-22T07:24:56.862Z",
       "source_commit": "7a17c6e1add03d4b6b5bce810df80723f7199204",
       "override": null
+    },
+    "2026-04-23-catalyst-field-schema": {
+      "status": "dismissed",
+      "reason": "New backend Claude Code skill (catalyst-field-schema) teaching the AI how to use the already-existing FieldSchema / @ApplySchema / QueryStatement layer. Documentation + AI skill only, no runtime or public-API change.",
+      "classified_at": "2026-04-23T09:07:38.807Z",
+      "source_commit": "66a58089d2cb738c9cb0b53abebb15e256738a9e",
+      "override": null
     }
   },
   "cli": {
