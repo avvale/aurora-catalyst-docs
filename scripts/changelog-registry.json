@@ -48,6 +48,13 @@
       "classified_at": "2026-04-23T10:24:24.771Z",
       "source_commit": "7b057bc44c8d9328e471ccc34963f4bd3529df10",
       "override": null
+    },
+    "2026-04-24-add-relationship-components": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-04-27T18:58:54.018Z",
+      "source_commit": "4884bc261337588b0954bac2cf88cb86b4f9353d",
+      "override": null
     }
   },
   "cli": {
@@ -56,6 +63,48 @@
       "classification": "feature",
       "classified_at": "2026-04-20T11:53:51.438Z",
       "source_commit": "79c30b8f0bb7b3eb894c33374707926bd2bf5449",
+      "override": null
+    },
+    "2026-04-24-emit-relation-field-schema-entries": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-04-27T18:58:54.017Z",
+      "source_commit": "beba3ac948a4960edadc791f560ad893022de9ea",
+      "override": null
+    },
+    "2026-04-24-fix-many-to-many-null-guard": {
+      "status": "dismissed",
+      "reason": "Bug fix in generated Sequelize repository — createdAggregateHook now guards m2m payload fields with Array.isArray. No contract change.",
+      "classified_at": "2026-04-27T18:58:54.018Z",
+      "source_commit": "dd5878ea729096b5461da3796fac116144658252",
+      "override": null
+    },
+    "2026-04-25-spec-08-form-extraction-detail-mode": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-04-27T18:58:54.018Z",
+      "source_commit": "3cb501aa990280454f628109a15f1f05726fe268",
+      "override": null
+    },
+    "2026-04-26-rename-web-component-to-widget": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-04-27T18:58:54.018Z",
+      "source_commit": "773499a5266d7775d98e956ec8e374ba863f42ba",
+      "override": null
+    },
+    "2026-04-26-spec-09-relationship-webcomponent-dispatch": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-04-27T18:58:54.018Z",
+      "source_commit": "bb7e223b54e09d8bd4017dff57715fb9f25b3e99",
+      "override": null
+    },
+    "2026-04-27-spec-14-form-field-width-system": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-04-27T19:01:44.115Z",
+      "source_commit": "f5e8b7eae51c25bc70e00c17693733d83e253622",
       "override": null
     }
   }
