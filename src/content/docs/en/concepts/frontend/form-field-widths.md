@@ -84,4 +84,3 @@ A container with exactly one field always renders at span 12, by the same algori
 
 - [Detail mode: view or dialog](../detail-mode/) — both shells render the form using this same grid and span system.
 - [Preservation regions](../preservation-regions/) — `AURORA:FORM-FIELDS-START/END` lives inside `*-form.component.ts` so customised field bodies survive regeneration.
-- [12-column form grid + widget.span](../../../changes/cli/2026-04-27-spec-14-form-field-width-system/) — the change that introduced this model.

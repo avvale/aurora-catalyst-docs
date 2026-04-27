@@ -101,11 +101,15 @@
       "override": null
     },
     "2026-04-27-spec-14-form-field-width-system": {
-      "status": "published",
-      "classification": "feature",
-      "classified_at": "2026-04-27T19:01:44.115Z",
+      "status": "dismissed",
+      "reason": "Bundled into the broader frontend SPEC cluster; tracked via concept pages instead of per-spec changelog entries.",
+      "classified_at": "2026-04-27T19:21:10.132Z",
       "source_commit": "f5e8b7eae51c25bc70e00c17693733d83e253622",
-      "override": null
+      "override": {
+        "by": "user",
+        "at": "2026-04-27T19:21:10.131Z",
+        "previous_status": "published"
+      }
     }
   }
 }
