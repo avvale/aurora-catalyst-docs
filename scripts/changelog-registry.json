@@ -110,6 +110,13 @@
         "at": "2026-04-27T19:21:10.131Z",
         "previous_status": "published"
       }
+    },
+    "2026-04-30-spec-15-grid-elements-manager-widget": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-04-30T08:27:09.170Z",
+      "source_commit": "14a603038b0620dfa11a1c5015b404bc99e3d902",
+      "override": null
     }
   }
 }
