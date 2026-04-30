@@ -117,6 +117,20 @@
       "classified_at": "2026-04-30T08:27:09.170Z",
       "source_commit": "14a603038b0620dfa11a1c5015b404bc99e3d902",
       "override": null
+    },
+    "2026-04-30-spec-16-search-select-widgets": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-04-30T16:18:46.548Z",
+      "source_commit": "a66d99c7b089c5241889331a97e0dc144feaf090",
+      "override": null
+    },
+    "2026-04-30-spec-17-fk-column-auto-include": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-04-30T18:13:52.533Z",
+      "source_commit": "77945962c7228c7a6f92c75ede0a3cbe5119ccc0",
+      "override": null
     }
   }
 }
