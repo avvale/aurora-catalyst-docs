@@ -83,4 +83,6 @@ Un contenedor con exactamente un campo siempre renderiza a span 12, por el mismo
 ## Relacionado
 
 - [Detail mode: view o dialog](../detail-mode/) — los dos shells renderizan el form con este mismo sistema de grid y span.
+- [Embed mode (padre-hijo)](../embed-mode/) — el widget embed ignora `widget.span` y siempre renderiza a ancho completo.
 - [Regiones de preservación](../preservation-regions/) — `AURORA:FORM-FIELDS-START/END` vive dentro de `*-form.component.ts` para que tus cuerpos de campo personalizados sobrevivan a la regeneración.
+- [Cómo: Configurar un módulo frontend](../../../guides/frontend/configure-a-frontend-module/) — aplica los ajustes de span y layout dentro de la configuración completa de un módulo.

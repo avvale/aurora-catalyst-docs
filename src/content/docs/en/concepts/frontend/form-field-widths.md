@@ -83,4 +83,6 @@ A container with exactly one field always renders at span 12, by the same algori
 ## Related
 
 - [Detail mode: view or dialog](../detail-mode/) — both shells render the form using this same grid and span system.
+- [Embed mode (parent-child)](../embed-mode/) — the embed widget ignores `widget.span` and always renders full-width.
 - [Preservation regions](../preservation-regions/) — `AURORA:FORM-FIELDS-START/END` lives inside `*-form.component.ts` so customised field bodies survive regeneration.
+- [How-to: Configure a frontend module](../../../guides/frontend/configure-a-frontend-module/) — apply span and layout settings inside a complete module setup.
