@@ -131,6 +131,13 @@
       "classified_at": "2026-04-30T18:13:52.533Z",
       "source_commit": "77945962c7228c7a6f92c75ede0a3cbe5119ccc0",
       "override": null
+    },
+    "2026-05-02-spec-18-boolean-cell-dispatch": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-01T23:07:34.705Z",
+      "source_commit": "fb1cc7e512286a20656a11d965aa02029a6fe3a7",
+      "override": null
     }
   }
 }
