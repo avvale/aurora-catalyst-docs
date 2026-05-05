@@ -53,6 +53,11 @@ export default defineConfig({
           items: [
             { slug: 'reference' },
             {
+              label: 'Frontend',
+              translations: { es: 'Frontend' },
+              autogenerate: { directory: 'reference/frontend' },
+            },
+            {
               label: 'CLI Commands',
               translations: { es: 'Comandos CLI' },
               autogenerate: { directory: 'reference/cli-commands' },

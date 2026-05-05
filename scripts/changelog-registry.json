@@ -55,6 +55,13 @@
       "classified_at": "2026-04-27T18:58:54.018Z",
       "source_commit": "4884bc261337588b0954bac2cf88cb86b4f9353d",
       "override": null
+    },
+    "2026-05-05-refactor-data-table-to-atomic-composables": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-05-05T21:48:23.592Z",
+      "source_commit": "c28bb6027810bc9a05d262ed3b9913cc57d2166b",
+      "override": null
     }
   },
   "cli": {
