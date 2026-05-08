@@ -59,8 +59,22 @@
     "2026-05-05-refactor-data-table-to-atomic-composables": {
       "status": "published",
       "classification": "breaking",
-      "classified_at": "2026-05-05T21:48:23.592Z",
+      "classified_at": "2026-05-08T10:36:15.515Z",
       "source_commit": "c28bb6027810bc9a05d262ed3b9913cc57d2166b",
+      "override": null
+    },
+    "2026-05-08-au-data-table-sticky-responsive": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-08T10:36:35.023Z",
+      "source_commit": "4234c6600ba7a0ba3f3ef173125643e42906ede8",
+      "override": null
+    },
+    "2026-05-08-au-data-table-user-pinning": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-08T10:36:35.023Z",
+      "source_commit": "8c7f3936ef622d7b830b2de3d06776f479bfc821",
       "override": null
     }
   },
@@ -221,6 +235,34 @@
       "reason": "Umbrella proposal whose user-facing scope is delivered by sub-changes A (add-front-display-field), B (skip-pivot-frontend-emission), and C (grid-multi-manager-pattern-emission), already published as separate entries.",
       "classified_at": "2026-05-07T16:25:09.824Z",
       "source_commit": "bece9aa87e7267cc501c63cff124291598ab1588",
+      "override": null
+    },
+    "2026-05-07-simplify-displayfield-attribute": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-05-08T10:36:35.023Z",
+      "source_commit": "1e43a47739202de45970bf29644cd56709d196fa",
+      "override": null
+    },
+    "2026-05-08-emit-bc-icons-aggregator": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-08T10:36:35.023Z",
+      "source_commit": "5b4b6cb56ea9cfbf4e7979017ad6c6f95bc647c0",
+      "override": null
+    },
+    "2026-05-08-emit-no-results-found-translations": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-08T10:36:35.023Z",
+      "source_commit": "c70036405358d68a5cd055c473a8118e88ebde5b",
+      "override": null
+    },
+    "2026-05-08-emit-responsive-data-table-columns": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-08T10:36:35.023Z",
+      "source_commit": "a41e3fb048b4c4374b235314d856608a1e6abbeb",
       "override": null
     }
   }
