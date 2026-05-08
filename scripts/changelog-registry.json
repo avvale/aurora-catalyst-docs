@@ -145,6 +145,83 @@
       "classified_at": "2026-05-01T23:07:34.705Z",
       "source_commit": "fb1cc7e512286a20656a11d965aa02029a6fe3a7",
       "override": null
+    },
+    "2026-05-06-add-front-display-field": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-07T16:25:09.823Z",
+      "source_commit": "f4ddb20e9b220e14ea57d8a52b63fbcd56e4a06f",
+      "override": null
+    },
+    "2026-05-06-fix-codegen-template-emission-bugs": {
+      "status": "dismissed",
+      "reason": "Bug fixes to make codegen output compile (NgIcon import gating, grid-multi widget deferral stub, FK target type imports, FormGroup bracket access).",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "e8976d1d7b8816fea7296ee8da82af684bcc17de",
+      "override": null
+    },
+    "2026-05-06-migrate-list-template-to-paginated-data-table": {
+      "status": "dismissed",
+      "reason": "Internal refactor of the list-component template to consume the usePaginatedDataTable composable preset.",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "2576efbf76eda48aa404955ea6844ed739509268",
+      "override": null
+    },
+    "2026-05-06-restructure-claude-md-conventions": {
+      "status": "dismissed",
+      "reason": "Internal documentation-discipline convention partitioning CLAUDE.md content from archive memos.",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "8bbb17dd77e89dc6d65be5ac2a1d2d0245eb42a2",
+      "override": null
+    },
+    "2026-05-06-skip-pivot-frontend-emission": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "112009585ee2d3415004730e24f914e5f6e4462f",
+      "override": null
+    },
+    "2026-05-06-spec-12-form-tabs-and-detail-ordering": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "2576efbf76eda48aa404955ea6844ed739509268",
+      "override": null
+    },
+    "2026-05-07-extract-shared-data-table-component": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "e04288f0802e1e23ff6fc017f5ea8d566268a29b",
+      "override": null
+    },
+    "2026-05-07-fix-grid-multi-init-race-and-fk-includes": {
+      "status": "dismissed",
+      "reason": "Bug fixes for the manager-pattern emission: initial-load race condition between membership and linked table, missing FK relation includes.",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "04a6238b28d87ad5e49039471cec64410168bb44",
+      "override": null
+    },
+    "2026-05-07-grid-multi-manager-pattern-emission": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "51ca231bee2c5e5437221f555c40b682b7c4878c",
+      "override": null
+    },
+    "2026-05-07-grid-multi-render-as-shell-section": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "e04288f0802e1e23ff6fc017f5ea8d566268a29b",
+      "override": null
+    },
+    "2026-05-07-pivot-and-displayfield-emission-strategy": {
+      "status": "dismissed",
+      "reason": "Umbrella proposal whose user-facing scope is delivered by sub-changes A (add-front-display-field), B (skip-pivot-frontend-emission), and C (grid-multi-manager-pattern-emission), already published as separate entries.",
+      "classified_at": "2026-05-07T16:25:09.824Z",
+      "source_commit": "bece9aa87e7267cc501c63cff124291598ab1588",
+      "override": null
     }
   }
 }
