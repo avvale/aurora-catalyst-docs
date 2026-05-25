@@ -12,7 +12,7 @@ Que el usuario gestione los hijos del padre directamente desde la vista de detai
 - Un proyecto Catalyst con dos módulos frontend ya scaffoldeados — un padre (p. ej. `iam/bounded-context`) y un hijo (p. ej. `iam/permission`).
 - El YAML del hijo declara una relación `many-to-one` apuntando de vuelta al padre — esa es la FK que el codegen lee para cablear el widget. La mayoría de los módulos hijos ya la tienen.
 - El `front.detailMode` del padre está sin declarar o en `view`. El modo dialog no puede alojar el widget — el codegen avisa y lo omite para no anidar un diálogo dentro de otro diálogo.
-- Puedes ejecutar `catalyst load front module --force` localmente.
+- Puedes ejecutar `catalyst generate front module --force` localmente.
 
 ## Pasos
 
@@ -27,7 +27,7 @@ Que el usuario gestione los hijos del padre directamente desde la vista de detai
 2. **Regenera el hijo.**
 
    ```bash
-   catalyst load front module --name=iam/permission --force
+   catalyst generate front module --name=iam/permission --force
    ```
 
    Aparecen tres artefactos nuevos:
@@ -58,7 +58,7 @@ Que el usuario gestione los hijos del padre directamente desde la vista de detai
 4. **Regenera el padre.**
 
    ```bash
-   catalyst load front module --name=iam/bounded-context --force
+   catalyst generate front module --name=iam/bounded-context --force
    ```
 
    El codegen lee `iam/permission.aurora.yaml`, encuentra la property cuya `relationship.type === 'many-to-one'` y `relationship.modulePath === 'iam/bounded-context'` (p. ej. `boundedContextId`) y emite la partial dentro del detail shell del padre — envuelta en `@if (mode() === 'edit')` para que solo aparezca cuando el padre ya tiene id. La lista embebida recibe `parentFilter: { field: 'boundedContextId', value: bcId() }` y `parentDefaults: { boundedContextId: bcId() }`.
@@ -100,4 +100,4 @@ Es lo esperado. El widget es una sección, no un campo — `widget.span` se igno
 - [Widget grid-elements-manager](../../../changes/cli/2026-04-30-spec-15-grid-elements-manager-widget/) — el cambio que introdujo el widget.
 - [Detail mode: view o dialog](../../../concepts/frontend/detail-mode/) — por qué el modo dialog no puede alojar el widget.
 - [Ancho de campos en formulario](../../../concepts/frontend/form-field-widths/) — el grid que usa el form del padre; el widget renderiza como sección hermana, no como campo.
-- [Referencia de `catalyst load`](../../../reference/cli-commands/load/) — cada flag y argumento.
+- [Referencia de `catalyst generate`](../../../reference/cli-commands/generate/) — cada flag y argumento.

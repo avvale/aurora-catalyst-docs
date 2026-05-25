@@ -34,7 +34,7 @@ Aurora resuelve esto con dos modos declarados y un comando para alternarlos. El 
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | Forma del código        | Consumir, no construir. Reutilizar composables, componentes y utilidades de `@aurora/`.                                                  |
 | Alcance                 | El requisito que tienes delante. Nada de andamiaje para necesidades imaginarias.                                                       |
-| CLI primero             | Recurrir a `catalyst load`, `catalyst add`, etc. antes de escribir a mano. El código manual es el último recurso.                      |
+| CLI primero             | Recurrir a `catalyst generate`, `catalyst add`, etc. antes de escribir a mano. El código manual es el último recurso.                  |
 | Arquitectura            | Quedarte dentro de la arquitectura actual. Introducir estructura nueva solo cuando el requisito no encaje en nada que ya exista.       |
 | Trade-off               | Velocidad de entrega por encima de flexibilidad futura.                                                                                |
 | Público de tu código    | La feature en sí. Sigue los patrones documentados en las skills — no inventes nuevos.                                                  |
@@ -91,4 +91,4 @@ Una heurística útil: si tu cambio se perdería — o se repetiría — cuando 
 ## Relacionado
 
 - [Scaffolding de un módulo backend](../../backend/module-scaffolding/) — el workflow CLI-first sobre el que se apoya el modo Solution.
-- [Referencia de `catalyst load`](../../../reference/cli-commands/load/) — el comando al que recurres primero en modo Solution.
+- [Referencia de `catalyst generate`](../../../reference/cli-commands/generate/) — el comando al que recurres primero en modo Solution.

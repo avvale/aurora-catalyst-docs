@@ -11,7 +11,7 @@ Stop the Catalyst CLI from emitting operations or files you do not want — eith
 
 - You have a Catalyst project with at least one backend module already scaffolded.
 - You know the bounded context and module name (for example, `iam/role`).
-- You can run `catalyst load back module --force` locally.
+- You can run `catalyst generate back module --force` locally.
 
 ## Steps
 
@@ -45,17 +45,17 @@ Stop the Catalyst CLI from emitting operations or files you do not want — eith
 4. **Regenerate.**
 
    ```bash
-   catalyst load back module --name=iam/role --force
+   catalyst generate back module --name=iam/role --force
    ```
 
-5. **Remove orphan files by hand.** If you just excluded an operation that used to be generated, the files the CLI produced previously stay on disk — the CLI never deletes. Delete them manually, commit, and rerun `catalyst load …` to confirm the output is consistent.
+5. **Remove orphan files by hand.** If you just excluded an operation that used to be generated, the files the CLI produced previously stay on disk — the CLI never deletes. Delete them manually, commit, and rerun `catalyst generate …` to confirm the output is consistent.
 
 ## Verify it worked
 
 - Rerun with `--verbose` and confirm the excluded operation is not among the emitted paths:
 
   ```bash
-  catalyst load back module --name=iam/role --force --verbose
+  catalyst generate back module --name=iam/role --force --verbose
   ```
 
 - For `excludedFiles`: confirm the listed path is not reported in the output log.
@@ -67,7 +67,7 @@ Stop the Catalyst CLI from emitting operations or files you do not want — eith
 Double-check for typos. Operation names are case-sensitive and must match the [supported set](../../../concepts/backend/module-scaffolding/#operations-the-cli-recognizes) exactly. Rerun with `--force --verbose` to see every file the CLI considered.
 
 **`.origin` files appeared for operations I did not touch.**
-That means the on-disk files have hand edits whose SHA-1 no longer matches the lockfile. This is unrelated to exclusion — see [Backend module scaffolding → Lockfile and `.origin` files](../../../concepts/backend/module-scaffolding/#lockfile-and-origin-files). Reconcile each `.origin`, or pass `--noReview` if you want to handle them later.
+That means the on-disk files have hand edits whose SHA-1 no longer matches the lockfile. This is unrelated to exclusion — see [Backend module scaffolding → Lockfile and `.origin` files](../../../concepts/backend/module-scaffolding/#lockfile-and-origin-files). Reconcile each `.origin` with `catalyst origin review` when you are ready, or run `catalyst origin list` to see what is pending.
 
 **I excluded an operation but the GraphQL schema still references it.**
 The GraphQL type exports regenerate after the module load. If you skipped that step with `--noGraphQLTypes`, run `pnpm back:graphql:types` by hand to refresh the exports.
@@ -75,4 +75,4 @@ The GraphQL type exports regenerate after the module load. If you skipped that s
 ## Related
 
 - [Backend module scaffolding](../../../concepts/backend/module-scaffolding/) — the concept behind what gets emitted and why.
-- [`catalyst load` reference](../../../reference/cli-commands/load/) — every flag and argument.
+- [`catalyst generate` reference](../../../reference/cli-commands/generate/) — every flag and argument.

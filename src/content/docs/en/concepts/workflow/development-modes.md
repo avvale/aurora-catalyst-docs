@@ -34,7 +34,7 @@ Aurora solves this with two declared modes and a command to switch between them.
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | Code shape             | Consume, don't build. Reuse composables, components, and utilities from `@aurora/`.                                    |
 | Scope                  | The requirement in front of you. No scaffolding for imaginary needs.                                                   |
-| CLI first              | Reach for `catalyst load`, `catalyst add`, etc. before writing by hand. Manual code is the last resort.                |
+| CLI first              | Reach for `catalyst generate`, `catalyst add`, etc. before writing by hand. Manual code is the last resort.            |
 | Architecture           | Stay inside the current architecture. Introduce new structure only when the requirement cannot fit anywhere that exists. |
 | Trade-off              | Delivery speed over future flexibility.                                                                                |
 | Audience for your code | The feature itself. Follow the patterns documented in skills — do not invent new ones.                                 |
@@ -91,4 +91,4 @@ A useful heuristic: if your change would be lost — or repeated — if someone 
 ## Related
 
 - [Backend module scaffolding](../../backend/module-scaffolding/) — the CLI-first workflow that Solution mode leans on.
-- [`catalyst load` reference](../../../reference/cli-commands/load/) — the command you reach for first in Solution mode.
+- [`catalyst generate` reference](../../../reference/cli-commands/generate/) — the command you reach for first in Solution mode.

@@ -76,6 +76,20 @@
       "classified_at": "2026-05-08T10:36:35.023Z",
       "source_commit": "8c7f3936ef622d7b830b2de3d06776f479bfc821",
       "override": null
+    },
+    "2026-05-10-add-iam-account-create-orchestration": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-13T23:15:05.840Z",
+      "source_commit": "b9e2580ad11e2388bd4cdecc55ca79cf4a9b51a9",
+      "override": null
+    },
+    "2026-05-10-establish-cross-bc-ports-pattern": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-05-13T23:15:05.840Z",
+      "source_commit": "b9e2580ad11e2388bd4cdecc55ca79cf4a9b51a9",
+      "override": null
     }
   },
   "cli": {
@@ -263,6 +277,27 @@
       "classification": "feature",
       "classified_at": "2026-05-08T10:36:35.023Z",
       "source_commit": "a41e3fb048b4c4374b235314d856608a1e6abbeb",
+      "override": null
+    },
+    "2026-05-12-decouple-review-and-add-origin-subcommand": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-05-13T23:15:05.839Z",
+      "source_commit": "8f2ee6d3f1450981119949419ed519e25bd52177",
+      "override": null
+    },
+    "2026-05-12-extend-frontend-codegen-one-to-one": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-05-13T23:15:05.840Z",
+      "source_commit": "b3f40fe16086184a448d2057589a3eb6e9c99332",
+      "override": null
+    },
+    "2026-05-12-rename-load-command-to-generate": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-05-13T23:15:05.840Z",
+      "source_commit": "d99213d6d26f3485e0bdcbd1fd53e134392b839f",
       "override": null
     }
   }

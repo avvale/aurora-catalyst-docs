@@ -14,7 +14,7 @@ Catalyst treats the module's `*.aurora.yaml` file as the single source of truth.
 Every module lives at `cliter/<bounded-context>/<module>.aurora.yaml`. Running:
 
 ```bash
-catalyst load back module --name=<bounded-context>/<module> --force
+catalyst generate back module --name=<bounded-context>/<module> --force
 ```
 
 emits files across the backend, grouped by layer:
@@ -28,7 +28,7 @@ emits files across the backend, grouped by layer:
 | `@app/<bc>/<mod>/domain/`                             | Entity, value objects, field schema, repository interface     |
 | `@app/<bc>/<mod>/infrastructure/`                     | Sequelize model, repository implementation, seed              |
 
-The command also runs `pnpm back:graphql:types` by default, so the generated GraphQL types stay aligned with the YAML. Pass `--noGraphQLTypes` (`-g`) to skip that step. See the [`catalyst load` reference](../../../reference/cli-commands/load/) for every flag.
+The command also runs `pnpm back:graphql:types` by default, so the generated GraphQL types stay aligned with the YAML. Pass `--noGraphQLTypes` (`-g`) to skip that step. See the [`catalyst generate` reference](../../../reference/cli-commands/generate/) for every flag.
 
 ### Operations the CLI recognizes
 
@@ -61,13 +61,13 @@ Every generated file has a lockfile entry recording the SHA-1 of the content the
 - **Hashes match** → no hand edits. The CLI overwrites the file with the new output.
 - **Hashes differ** → the file has hand edits. The CLI writes the new output to `<file>.origin` next to yours and leaves you to reconcile.
 
-The `--noReview` flag skips the interactive reconciliation prompt at the end of the run.
+`catalyst generate` exits after emitting the files — origin reconciliation lives in the sibling `catalyst origin` subcommands (`list`, `diff`, `accept`, `reject`, `ignore`, `review`). Run `catalyst origin review` for an interactive walk-through.
 
 Editing the body of a handler's `main()` is safe: the scaffold around it stays intact, so the next regeneration produces a `.origin` that is effectively identical to your file. Editing decorators, imports, or method signatures is what produces real `.origin` conflicts.
 
 ## When it applies
 
-- You scaffold a new module, add a field, or add an operation — edit the YAML, run `catalyst load …`, commit both the YAML and the generated files.
+- You scaffold a new module, add a field, or add an operation — edit the YAML, run `catalyst generate …`, commit both the YAML and the generated files.
 - You see a `.origin` file after regeneration — a hand edit diverged from the previous scaffold; decide which version wins and delete the `.origin`.
 - You want a custom verb — declare it under `additionalApis`, regenerate, and fill in the stub the CLI produced.
 - You want to opt out of specific operations or files — see [Exclude CLI-generated APIs from a module](../../../guides/backend/exclude-generated-apis/).
@@ -81,5 +81,5 @@ Editing the body of a handler's `main()` is safe: the scaffold around it stays i
 ## Related
 
 - [Exclude CLI-generated APIs from a module](../../../guides/backend/exclude-generated-apis/) — how `excludedOperations` and `excludedFiles` work in practice.
-- [`catalyst load` reference](../../../reference/cli-commands/load/) — every flag and argument.
+- [`catalyst generate` reference](../../../reference/cli-commands/generate/) — every flag and argument.
 - [Preservation regions](../../frontend/preservation-regions/) — how to protect custom code inside a generated template file.

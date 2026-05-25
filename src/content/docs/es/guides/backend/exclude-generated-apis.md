@@ -11,7 +11,7 @@ Evitar que el CLI de Catalyst emita operaciones o archivos que no quieres — ya
 
 - Tienes un proyecto Catalyst con al menos un módulo backend ya scaffoldeado.
 - Conoces el bounded context y el nombre del módulo (por ejemplo, `iam/role`).
-- Puedes ejecutar `catalyst load back module --force` en tu entorno.
+- Puedes ejecutar `catalyst generate back module --force` en tu entorno.
 
 ## Pasos
 
@@ -45,17 +45,17 @@ Evitar que el CLI de Catalyst emita operaciones o archivos que no quieres — ya
 4. **Regenera.**
 
    ```bash
-   catalyst load back module --name=iam/role --force
+   catalyst generate back module --name=iam/role --force
    ```
 
-5. **Borra los archivos huérfanos a mano.** Si acabas de excluir una operación que antes se generaba, los archivos que el CLI emitió previamente siguen en disco — el CLI nunca borra. Elimínalos manualmente, commitea y vuelve a ejecutar `catalyst load …` para confirmar que la salida quedó consistente.
+5. **Borra los archivos huérfanos a mano.** Si acabas de excluir una operación que antes se generaba, los archivos que el CLI emitió previamente siguen en disco — el CLI nunca borra. Elimínalos manualmente, commitea y vuelve a ejecutar `catalyst generate …` para confirmar que la salida quedó consistente.
 
 ## Verifica que funcionó
 
 - Vuelve a correr con `--verbose` y confirma que la operación excluida no aparece entre las rutas emitidas:
 
   ```bash
-  catalyst load back module --name=iam/role --force --verbose
+  catalyst generate back module --name=iam/role --force --verbose
   ```
 
 - Para `excludedFiles`: confirma que la ruta que listaste no aparece en el log de salida.
@@ -67,7 +67,7 @@ Evitar que el CLI de Catalyst emita operaciones o archivos que no quieres — ya
 Revisa si hay errores de tipeo. Los nombres son sensibles a mayúsculas/minúsculas y deben coincidir exactamente con el [conjunto soportado](../../../concepts/backend/module-scaffolding/#operaciones-que-el-cli-reconoce). Vuelve a correr con `--force --verbose` para ver cada archivo que el CLI consideró.
 
 **Aparecieron archivos `.origin` en operaciones que no toqué.**
-Eso significa que los archivos en disco tienen ediciones manuales cuyo SHA-1 ya no coincide con el del lockfile. No tiene relación con la exclusión — mira [Scaffolding de un módulo backend → Lockfile y archivos `.origin`](../../../concepts/backend/module-scaffolding/#lockfile-y-archivos-origin). Resuelve cada `.origin`, o pasa `--noReview` si quieres atenderlos después.
+Eso significa que los archivos en disco tienen ediciones manuales cuyo SHA-1 ya no coincide con el del lockfile. No tiene relación con la exclusión — mira [Scaffolding de un módulo backend → Lockfile y archivos `.origin`](../../../concepts/backend/module-scaffolding/#lockfile-y-archivos-origin). Resuelve cada `.origin` con `catalyst origin review` cuando puedas, o usa `catalyst origin list` para ver lo pendiente.
 
 **Excluí una operación pero el esquema GraphQL todavía la referencia.**
 Los tipos de GraphQL se regeneran después del load del módulo. Si omitiste ese paso con `--noGraphQLTypes`, ejecuta `pnpm back:graphql:types` a mano para refrescar los exports.
@@ -75,4 +75,4 @@ Los tipos de GraphQL se regeneran después del load del módulo. Si omitiste ese
 ## Relacionado
 
 - [Scaffolding de un módulo backend](../../../concepts/backend/module-scaffolding/) — el concepto detrás de qué se emite y por qué.
-- [Referencia de `catalyst load`](../../../reference/cli-commands/load/) — cada flag y argumento.
+- [Referencia de `catalyst generate`](../../../reference/cli-commands/generate/) — cada flag y argumento.

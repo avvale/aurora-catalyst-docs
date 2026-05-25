@@ -12,7 +12,7 @@ Let users manage a parent's children directly from the parent's detail view. The
 - A Catalyst project with two related frontend modules already scaffolded — a parent (e.g. `iam/bounded-context`) and a child (e.g. `iam/permission`).
 - The child YAML declares a `many-to-one` relationship pointing back to the parent — that is the FK the codegen reads to wire the widget. Most child modules already have it.
 - The parent's `front.detailMode` is unset or `view`. Dialog mode cannot host the widget — the codegen warns and omits it to avoid a dialog-in-dialog UX.
-- You can run `catalyst load front module --force` locally.
+- You can run `catalyst generate front module --force` locally.
 
 ## Steps
 
@@ -27,7 +27,7 @@ Let users manage a parent's children directly from the parent's detail view. The
 2. **Regenerate the child.**
 
    ```bash
-   catalyst load front module --name=iam/permission --force
+   catalyst generate front module --name=iam/permission --force
    ```
 
    Three new artefacts appear:
@@ -58,7 +58,7 @@ Let users manage a parent's children directly from the parent's detail view. The
 4. **Regenerate the parent.**
 
    ```bash
-   catalyst load front module --name=iam/bounded-context --force
+   catalyst generate front module --name=iam/bounded-context --force
    ```
 
    The codegen reads `iam/permission.aurora.yaml`, finds the property whose `relationship.type === 'many-to-one'` and `relationship.modulePath === 'iam/bounded-context'` (e.g. `boundedContextId`), and emits the partial inside the parent's detail shell — wrapped in `@if (mode() === 'edit')` so it only shows once the parent has an id. The list embed receives `parentFilter: { field: 'boundedContextId', value: bcId() }` and `parentDefaults: { boundedContextId: bcId() }`.
@@ -100,4 +100,4 @@ Expected. The widget is a section, not a field — `widget.span` is ignored on `
 - [Grid elements manager widget](../../../changes/cli/2026-04-30-spec-15-grid-elements-manager-widget/) — the change that introduced the widget.
 - [Detail mode: view or dialog](../../../concepts/frontend/detail-mode/) — why dialog mode cannot host the widget.
 - [Form field widths](../../../concepts/frontend/form-field-widths/) — the grid the parent's form uses; the widget renders as a sibling section, not as a field.
-- [`catalyst load` reference](../../../reference/cli-commands/load/) — every flag and argument.
+- [`catalyst generate` reference](../../../reference/cli-commands/generate/) — every flag and argument.

@@ -10,7 +10,7 @@ Take a freshly-scaffolded frontend module and configure it through its `*.aurora
 ## Before you start
 
 - A scaffolded module under `cliter/<bounded-context>/<module>.aurora.yaml`.
-- The `catalyst` CLI available locally (`catalyst load front module --force` works).
+- The `catalyst` CLI available locally (`catalyst generate front module --force` works).
 - Translation files for the bounded context and module — Aurora generates the structure but never the strings.
 
 ## Steps
@@ -42,7 +42,7 @@ Take a freshly-scaffolded frontend module and configure it through its `*.aurora
 7. **Regenerate.**
 
    ```bash
-   catalyst load front module --name=<bounded-context>/<module> --force
+   catalyst generate front module --name=<bounded-context>/<module> --force
    ```
 
    For embed scenarios, regenerate the **child first** so the parent's regen can read the child's YAML with `embedSupport: true` already in place.
@@ -83,4 +83,4 @@ Expected — the widget is a section, not a field, and always renders full-width
 - [Embed mode (parent-child)](../../../concepts/frontend/embed-mode/) — the parent-child model.
 - [Preservation regions](../../../concepts/frontend/preservation-regions/) — owning a slice of generated code.
 - [Implement a grid-elements-manager widget](./implement-grid-elements-manager/) — focused recipe for the embed widget.
-- [`catalyst load` reference](../../../reference/cli-commands/load/) — every flag and argument.
+- [`catalyst generate` reference](../../../reference/cli-commands/generate/) — every flag and argument.

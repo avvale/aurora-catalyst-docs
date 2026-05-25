@@ -14,7 +14,7 @@ Catalyst trata el archivo `*.aurora.yaml` del módulo como la única fuente de v
 Cada módulo vive en `cliter/<bounded-context>/<module>.aurora.yaml`. Al ejecutar:
 
 ```bash
-catalyst load back module --name=<bounded-context>/<module> --force
+catalyst generate back module --name=<bounded-context>/<module> --force
 ```
 
 el CLI emite archivos en todas las capas del backend:
@@ -28,7 +28,7 @@ el CLI emite archivos en todas las capas del backend:
 | `@app/<bc>/<mod>/domain/`                             | Entidad, value objects, field schema, interfaz del repositorio      |
 | `@app/<bc>/<mod>/infrastructure/`                     | Modelo de Sequelize, implementación del repositorio, seed           |
 
-El comando también ejecuta `pnpm back:graphql:types` por defecto, así los tipos GraphQL quedan alineados con la YAML. Usa `--noGraphQLTypes` (`-g`) para omitir ese paso. Consulta la [referencia de `catalyst load`](../../../reference/cli-commands/load/) para el listado completo de flags.
+El comando también ejecuta `pnpm back:graphql:types` por defecto, así los tipos GraphQL quedan alineados con la YAML. Usa `--noGraphQLTypes` (`-g`) para omitir ese paso. Consulta la [referencia de `catalyst generate`](../../../reference/cli-commands/generate/) para el listado completo de flags.
 
 ### Operaciones que el CLI reconoce
 
@@ -61,13 +61,13 @@ Cada archivo generado tiene una entrada de lockfile que guarda el SHA-1 del cont
 - **Los hashes coinciden** → no hay ediciones manuales. El CLI sobreescribe el archivo con la nueva salida.
 - **Los hashes difieren** → el archivo tiene ediciones manuales. El CLI escribe la nueva salida en `<archivo>.origin` al lado del tuyo y te deja a ti resolver la discrepancia.
 
-La flag `--noReview` omite la revisión interactiva al final del proceso.
+`catalyst generate` termina justo tras emitir los ficheros — la reconciliación de los `.origin` vive en los subcomandos hermanos `catalyst origin` (`list`, `diff`, `accept`, `reject`, `ignore`, `review`). Lanza `catalyst origin review` para un recorrido interactivo.
 
 Editar el cuerpo de `main()` de un handler es seguro: el scaffold alrededor queda intacto, así que la siguiente regeneración produce un `.origin` prácticamente idéntico a tu archivo. Editar decoradores, imports o firmas de métodos es lo que genera conflictos reales en el `.origin`.
 
 ## Cuándo aplica
 
-- Scaffoldeas un módulo nuevo, agregas un campo o agregas una operación — editas la YAML, ejecutas `catalyst load …` y commiteas tanto la YAML como los archivos generados.
+- Scaffoldeas un módulo nuevo, agregas un campo o agregas una operación — editas la YAML, ejecutas `catalyst generate …` y commiteas tanto la YAML como los archivos generados.
 - Ves un archivo `.origin` después de regenerar — una edición a mano divergió del scaffold anterior; decide qué versión queda y borra el `.origin`.
 - Quieres un verbo personalizado — decláralo en `additionalApis`, regenera y completa el stub que el CLI produce.
 - Quieres omitir operaciones o archivos específicos — consulta [Excluir APIs](../../../guides/backend/exclude-generated-apis/).
@@ -81,5 +81,5 @@ Editar el cuerpo de `main()` de un handler es seguro: el scaffold alrededor qued
 ## Relacionado
 
 - [Excluir APIs](../../../guides/backend/exclude-generated-apis/) — cómo funcionan `excludedOperations` y `excludedFiles` en la práctica.
-- [Referencia de `catalyst load`](../../../reference/cli-commands/load/) — cada flag y argumento.
+- [Referencia de `catalyst generate`](../../../reference/cli-commands/generate/) — cada flag y argumento.
 - [Regiones de preservación](../../frontend/preservation-regions/) — cómo proteger código personalizado dentro de una plantilla generada.
