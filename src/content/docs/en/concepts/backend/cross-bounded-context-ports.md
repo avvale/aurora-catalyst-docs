@@ -15,7 +15,7 @@ The temptation when one BC needs data or behavior from another is to wire them a
 
 ### 1. Port — what the consumer needs
 
-A TypeScript interface plus the minimal DTO the consumer cares about, written in the consumer's vocabulary, not the supplier's.
+A TypeScript interface plus the DTO the consumer exchanges with the supplier. Two flavors depending on direction — see [Read ports vs write ports](#read-ports-vs-write-ports) below for the full distinction. The example here is the canonical *read* shape: a minimal DTO in the consumer's vocabulary.
 
 ```ts
 // backend/src/@bridges/iam/client/ports/iam-client-reader.port.ts
@@ -118,19 +118,44 @@ A future BC that imports `OAuthModule` sees `OAuthClientReaderAdapter` and nothi
 
 ## What lives where today
 
-| Token                  | Port                                                                                | Adapter                                                                          | Consumer            | Supplier            |
-| ---------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------- | ------------------- |
-| `IAM_CLIENT_READER`    | `@bridges/iam/client/ports/iam-client-reader.port.ts`                               | `@bridges/o-auth/client/adapters/o-auth-client-reader.adapter.ts`                | `iam` (BC)          | `o-auth` (BC)       |
-| `CREDENTIAL_VERIFIER`  | `@aurora/modules/authentication/domain/ports/credential-verifier.port.ts`           | `@bridges/iam/user/adapters/iam-credential-verifier.adapter.ts`                  | `authentication`    | `iam` (BC)          |
-| `ACCOUNT_LOADER`       | `@aurora/modules/authentication/domain/ports/account-loader.port.ts`                | `@bridges/iam/account/adapters/iam-account-loader.adapter.ts`                    | `authentication`    | `iam` (BC)          |
+| Token                          | Variant | Port                                                                                | Adapter                                                                          | Consumer            | Supplier            |
+| ------------------------------ | ------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------- | ------------------- |
+| `IAM_CLIENT_READER`            | read    | `@bridges/iam/client/ports/iam-client-reader.port.ts`                               | `@bridges/o-auth/client/adapters/o-auth-client-reader.adapter.ts`                | `iam` (BC)          | `o-auth` (BC)       |
+| `CREDENTIAL_VERIFIER`          | read    | `@aurora/modules/authentication/domain/ports/credential-verifier.port.ts`           | `@bridges/iam/user/adapters/iam-credential-verifier.adapter.ts`                  | `authentication`    | `iam` (BC)          |
+| `ACCOUNT_LOADER`               | read    | `@aurora/modules/authentication/domain/ports/account-loader.port.ts`                | `@bridges/iam/account/adapters/iam-account-loader.adapter.ts`                    | `authentication`    | `iam` (BC)          |
+| `IAM_BOUNDED_CONTEXT_SEEDER`   | write   | `@bridges/o-auth/seeding/ports/iam-bounded-context-seeder.port.ts`                  | `@bridges/iam/bounded-context/adapters/iam-bounded-context-seeder.adapter.ts`    | `o-auth` (BC)       | `iam` (BC)          |
+| `IAM_PERMISSION_SEEDER`        | write   | `@bridges/o-auth/seeding/ports/iam-permission-seeder.port.ts`                       | `@bridges/iam/permission/adapters/iam-permission-seeder.adapter.ts`              | `o-auth` (BC)       | `iam` (BC)          |
 
-The first row is the canonical case and the one to imitate: a BC-to-BC contract where `iam` declares what it needs from `o-auth`, the port lives in iam's territory under `@bridges/iam/`, and the adapter lives in o-auth's territory under `@bridges/o-auth/`.
+The first row is the canonical *read* case: `iam` declares what it needs from `o-auth`, the port lives in iam's territory under `@bridges/iam/`, and the adapter lives in o-auth's territory under `@bridges/o-auth/`.
 
-The next two rows are an exception. Their ports live in `@aurora/modules/authentication/domain/ports/` because `authentication` is framework infrastructure, not a BC — the framework module owns the contract that any concrete BC may fulfil. New BC-to-BC dependencies do not use this layout; they belong under `@bridges/<consumer-bc>/`.
+Rows 2 and 3 are read ports whose consumer is a framework module instead of a BC. Their ports live in `@aurora/modules/authentication/domain/ports/` because `authentication` is framework infrastructure — the framework module owns the contract that any concrete BC may fulfil. New BC-to-BC dependencies do not use this layout; they belong under `@bridges/<consumer-bc>/`.
 
-## Anti-Corruption Layer
+The last two rows are *write* ports for o-auth's bootstrap seeding into iam — see the next section.
 
-The port DTO is the consumer's vocabulary, not the supplier's. The adapter is responsible for any translation — flattening relations, renaming fields, dropping the ones the consumer does not need. If `o-auth` renames `applications` to `apis` tomorrow, only `OAuthClientReaderAdapter` breaks; `iam` does not see the rename. This is DDD's Anti-Corruption Layer expressed in plain NestJS DI, without a message bus.
+## Read ports vs write ports
+
+The same four pieces wire two different intents. What changes between them is the DTO in the port: whether the consumer projects what it sees or simply relays what it writes.
+
+### Read ports — the consumer projects what it needs
+
+The port returns a DTO shaped to the consumer's vocabulary, not the supplier's. The adapter translates the supplier's internal model into that DTO — flattening relations, renaming fields, dropping the ones the consumer does not need. This is DDD's **Anti-Corruption Layer** expressed in plain NestJS DI: if `o-auth` renames `applications` to `apis` tomorrow, only `OAuthClientReaderAdapter` breaks; `iam` does not see the rename.
+
+Canonical case: `IIamClientReader.findByIdWithApplications()` returns a hand-written `IamClientWithApplications` containing just `id` and `applicationCodes` — not the full `OAuthClient` model. The DTO file is the consumer's, sitting next to the port under `@bridges/iam/client/ports/`.
+
+### Write ports — the consumer relays data to the supplier
+
+The consumer has no domain vocabulary for the resource it is writing; it is orchestrating data into a supplier that owns it. The DTO IS the supplier's input contract, reused as-is from upstream — typically a framework-level type from `@aurorajs.dev/core-back` (`SeederBoundedContext`, `RepositoryOptions`) or the supplier's GraphQL `*Input` type. The adapter is a pass-through with no mapping.
+
+Canonical case: `IIamBoundedContextSeeder.seedAll(items, options)` accepts `SeederBoundedContext[]` and `RepositoryOptions` straight from core-back. The Anti-Corruption Layer adds no value here — there is no projection to do — and hand-writing the DTO would only introduce drift when the supplier's input contract evolves.
+
+### Choosing between them
+
+> Does the consumer have its own vocabulary for this resource?
+>
+> - **Yes** — the consumer reduces, flattens, or renames the supplier's model → write a custom DTO in the consumer's territory. **Read port.**
+> - **No** — the consumer relays data that semantically belongs to the supplier → reuse the supplier's or framework's existing type. **Write port.**
+
+Both variants share the identical 4-file shape (port, token, adapter, bridge entry) and the same composition-root registration.
 
 ## When it applies
 
