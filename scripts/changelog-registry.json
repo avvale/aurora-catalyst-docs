@@ -90,6 +90,153 @@
       "classified_at": "2026-05-13T23:15:05.840Z",
       "source_commit": "b9e2580ad11e2388bd4cdecc55ca79cf4a9b51a9",
       "override": null
+    },
+    "2026-05-19-split-token-store-from-authentication-service": {
+      "status": "dismissed",
+      "reason": "Internal frontend refactor — splits state into TokenStore to break an Apollo<->Auth DI cycle (NG0200); narrows the internal AuthenticationService surface.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "acd4bdd050228103dcf8fac7ae120c152863c4be",
+      "override": null
+    },
+    "2026-05-20-add-client-scope-options-selector": {
+      "status": "dismissed",
+      "reason": "UI regression fix — restores the scope multi-select widget on the o-auth client form; specific to one generated form.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "ac6252e1772c84c41b3cc3be807f2f04613679c0",
+      "override": null
+    },
+    "2026-05-22-redistribute-authentication-as-aurora-module": {
+      "status": "dismissed",
+      "reason": "Pure internal refactor — relocates the JWT validator/guards to @aurora and fixes a layer inversion; no end-to-end behavior change.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "d09a8aad9c17a69371d181ee41f89b1a11289662",
+      "override": null
+    },
+    "2026-05-26-add-local-provider-graphql-login": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T18:14:13.009Z",
+      "source_commit": "2ba8a72f3e1aff639b3182bfdb5cc4d8aed0a987",
+      "override": null
+    },
+    "2026-05-26-add-local-provider-oauth2-password-grant": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T18:14:13.009Z",
+      "source_commit": "d09a8aad9c17a69371d181ee41f89b1a11289662",
+      "override": null
+    },
+    "2026-05-26-fix-oauth-application-client-resolution": {
+      "status": "dismissed",
+      "reason": "Bugfix — resolves client_id as OAuthApplication.code instead of OAuthClient UUID, aligning impl with the documented model.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "2ba8a72f3e1aff639b3182bfdb5cc4d8aed0a987",
+      "override": null
+    },
+    "2026-05-27-add-graphql-token-rate-limiting": {
+      "status": "dismissed",
+      "reason": "Security hardening — adds rate-limit parity to the GraphQL token mutation; internal protection, no new usage surface.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "201430841bdcb23db0a083f72a0b197da02720fd",
+      "override": null
+    },
+    "2026-05-27-add-iam-me-account": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T18:14:13.009Z",
+      "source_commit": "1447bcf2114d4076395f7fc237d6464c7d1728cf",
+      "override": null
+    },
+    "2026-05-27-add-local-provider-logout": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "1447bcf2114d4076395f7fc237d6464c7d1728cf",
+      "override": null
+    },
+    "2026-05-27-add-transparent-token-refresh": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "90c8d83a94124dd7b7f6deba51954e65532a393b",
+      "override": null
+    },
+    "2026-05-28-add-harness-rules-catalog": {
+      "status": "dismissed",
+      "reason": "Internal dev/AI tooling — the Harness Rules catalog (architectural guidance); no runtime or public-API change.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "24e57b1cf4f46e54be2f1707a1e0fb43ad91b7b1",
+      "override": null
+    },
+    "2026-05-29-activate-harness-rules": {
+      "status": "dismissed",
+      "reason": "Internal dev/AI tooling — activates Harness Rules via prompt injection and hooks; no platform-usage change.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "e4b7f6535c3bf524194d42abc939b498854d5101",
+      "override": null
+    },
+    "2026-05-29-add-harness-rules-audit": {
+      "status": "dismissed",
+      "reason": "Internal tooling — adds the /harness-rules:audit health/drift report; project-internal, not a platform capability.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "c2a4db33a45fc71a881645e8522cf0cb9ffd6234",
+      "override": null
+    },
+    "2026-05-29-harden-catalog-hooks": {
+      "status": "dismissed",
+      "reason": "Internal tooling — hardens the catalog enforcement hooks; no behavior change for platform consumers.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "1ea074d2fc02fa08bbebcc83628ad450c23f18aa",
+      "override": null
+    },
+    "2026-06-02-authentication-none-mode": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "eea7ce68b8e9d26500fe7263b3987bb0d4046ff0",
+      "override": null
+    },
+    "2026-06-02-relocate-token-retention-to-oauth-bc": {
+      "status": "dismissed",
+      "reason": "Internal refactor — relocates TokenRetentionService into the o-auth BC to remove an @aurora->@app import inversion; no new abstraction.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "e8daf91723bb0fa75502c60aa54e618c3024f21b",
+      "override": null
+    },
+    "2026-06-02-replace-handlebars-helpers-with-mjml-adapter": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "f6e4ea61dd17c20cc374514291a319c9073adaf4",
+      "override": null
+    },
+    "2026-06-03-none-mode-anonymous-account-loader": {
+      "status": "dismissed",
+      "reason": "Bugfix — wires a scaffold-only anonymous ACCOUNT_LOADER so a clean none-mode install boots; DI fix, no usage surface.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "23dd3d504bcd23f65ffc475970dd408ae1640449",
+      "override": null
+    },
+    "2026-06-03-none-mode-frontend-scaffold": {
+      "status": "dismissed",
+      "reason": "Bugfix — makes the clean frontend scaffold compile and boot (Apollo 4.2 bump + strips dangling BC references).",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "73ebdacb7198bed8c2305ea8d8897ee7a7da70ff",
+      "override": null
+    },
+    "2026-06-08-add-oauth-authorization-code-flow": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T17:36:46.212Z",
+      "source_commit": "f7c1e260443c9310e7e7da7677eb370f1ded29c8",
+      "override": null
+    },
+    "2026-06-08-align-satellite-oauth-authorization-code": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-06-08T17:36:46.212Z",
+      "source_commit": "f7c1e260443c9310e7e7da7677eb370f1ded29c8",
+      "override": null
     }
   },
   "cli": {
@@ -298,6 +445,48 @@
       "classification": "breaking",
       "classified_at": "2026-05-13T23:15:05.840Z",
       "source_commit": "d99213d6d26f3485e0bdcbd1fd53e134392b839f",
+      "override": null
+    },
+    "2026-05-15-mark-required-form-fields": {
+      "status": "dismissed",
+      "reason": "Cosmetic codegen enhancement — adds a required-field asterisk and aria-required to generated forms; no change to how the platform is used.",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "8907113784ee5f5e693a4e18446f5f7c4e8158db",
+      "override": null
+    },
+    "2026-05-19-introduce-to-options-pipe": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "9a43677f61bf3fd6a89ce726e9741c7f84a4f3e7",
+      "override": null
+    },
+    "2026-05-20-support-many-to-many-form-widgets": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "9a43677f61bf3fd6a89ce726e9741c7f84a4f3e7",
+      "override": null
+    },
+    "2026-05-22-adopt-snake-case-db-naming": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "79f8b1e4e533f1b48b510d46db0251e4542e37f1",
+      "override": null
+    },
+    "2026-06-04-add-frontend-identity-installer": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "4550336b34c6769b5a9ec9625d740be70cb909ec",
+      "override": null
+    },
+    "2026-06-04-add-identity-package-installer": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-08T18:14:13.010Z",
+      "source_commit": "bc7af6679d2605e11d4d231e2c3f8c05cddf7d61",
       "override": null
     }
   }
