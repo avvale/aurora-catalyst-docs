@@ -29,7 +29,7 @@ export interface IIamClientReader {
 }
 ```
 
-The port lives in **the consumer's territory**: `@bridges/<consumer-bc>/<resource>/ports/`. The canonical case is `@bridges/iam/client/ports/iam-client-reader.port.ts` — `iam` declares what it needs from `o-auth` in its own vocabulary.
+The port lives **where its DTO lives** — see [Read ports vs write ports](#read-ports-vs-write-ports) below for the full rule. For this read example, the consumer (iam) owns the DTO, so the port sits in iam's territory at `@bridges/iam/client/ports/iam-client-reader.port.ts`.
 
 ### 2. Token — the injection key
 
@@ -123,8 +123,8 @@ A future BC that imports `OAuthModule` sees `OAuthClientReaderAdapter` and nothi
 | `IAM_CLIENT_READER`            | read    | `@bridges/iam/client/ports/iam-client-reader.port.ts`                               | `@bridges/o-auth/client/adapters/o-auth-client-reader.adapter.ts`                | `iam` (BC)          | `o-auth` (BC)       |
 | `CREDENTIAL_VERIFIER`          | read    | `@aurora/modules/authentication/domain/ports/credential-verifier.port.ts`           | `@bridges/iam/user/adapters/iam-credential-verifier.adapter.ts`                  | `authentication`    | `iam` (BC)          |
 | `ACCOUNT_LOADER`               | read    | `@aurora/modules/authentication/domain/ports/account-loader.port.ts`                | `@bridges/iam/account/adapters/iam-account-loader.adapter.ts`                    | `authentication`    | `iam` (BC)          |
-| `IAM_BOUNDED_CONTEXT_SEEDER`   | write   | `@bridges/o-auth/seeding/ports/iam-bounded-context-seeder.port.ts`                  | `@bridges/iam/bounded-context/adapters/iam-bounded-context-seeder.adapter.ts`    | `o-auth` (BC)       | `iam` (BC)          |
-| `IAM_PERMISSION_SEEDER`        | write   | `@bridges/o-auth/seeding/ports/iam-permission-seeder.port.ts`                       | `@bridges/iam/permission/adapters/iam-permission-seeder.adapter.ts`              | `o-auth` (BC)       | `iam` (BC)          |
+| `IAM_BOUNDED_CONTEXT_SEEDER`   | write   | `@bridges/iam/bounded-context/ports/iam-bounded-context-seeder.port.ts`             | `@bridges/iam/bounded-context/adapters/iam-bounded-context-seeder.adapter.ts`    | `o-auth` (BC)       | `iam` (BC)          |
+| `IAM_PERMISSION_SEEDER`        | write   | `@bridges/iam/permission/ports/iam-permission-seeder.port.ts`                       | `@bridges/iam/permission/adapters/iam-permission-seeder.adapter.ts`              | `o-auth` (BC)       | `iam` (BC)          |
 
 The first row is the canonical *read* case: `iam` declares what it needs from `o-auth`, the port lives in iam's territory under `@bridges/iam/`, and the adapter lives in o-auth's territory under `@bridges/o-auth/`.
 
@@ -134,28 +134,34 @@ The last two rows are *write* ports for o-auth's bootstrap seeding into iam — 
 
 ## Read ports vs write ports
 
-The same four pieces wire two different intents. What changes between them is the DTO in the port: whether the consumer projects what it sees or simply relays what it writes.
+The same four pieces wire two different intents. The DTO inside the port is what changes between them — and the DTO's ownership decides where the port file lives.
+
+> **The rule:** the port lives where its DTO lives.
 
 ### Read ports — the consumer projects what it needs
 
 The port returns a DTO shaped to the consumer's vocabulary, not the supplier's. The adapter translates the supplier's internal model into that DTO — flattening relations, renaming fields, dropping the ones the consumer does not need. This is DDD's **Anti-Corruption Layer** expressed in plain NestJS DI: if `o-auth` renames `applications` to `apis` tomorrow, only `OAuthClientReaderAdapter` breaks; `iam` does not see the rename.
 
-Canonical case: `IIamClientReader.findByIdWithApplications()` returns a hand-written `IamClientWithApplications` containing just `id` and `applicationCodes` — not the full `OAuthClient` model. The DTO file is the consumer's, sitting next to the port under `@bridges/iam/client/ports/`.
+The DTO is consumer-shaped → **the port file lives in the consumer's territory** (`@bridges/<consumer-bc>/<feature>/ports/`). Hand-write the DTO next to the port, with the `<Consumer><DescriptiveName>` naming.
+
+Canonical case: `IIamClientReader.findByIdWithApplications()` returns a hand-written `IamClientWithApplications` containing just `id` and `applicationCodes` — not the full `OAuthClient` model. The port sits at `@bridges/iam/client/ports/iam-client-reader.port.ts`.
 
 ### Write ports — the consumer relays data to the supplier
 
 The consumer has no domain vocabulary for the resource it is writing; it is orchestrating data into a supplier that owns it. The DTO IS the supplier's input contract, reused as-is from upstream — typically a framework-level type from `@aurorajs.dev/core-back` (`SeederBoundedContext`, `RepositoryOptions`) or the supplier's GraphQL `*Input` type. The adapter is a pass-through with no mapping.
 
-Canonical case: `IIamBoundedContextSeeder.seedAll(items, options)` accepts `SeederBoundedContext[]` and `RepositoryOptions` straight from core-back. The Anti-Corruption Layer adds no value here — there is no projection to do — and hand-writing the DTO would only introduce drift when the supplier's input contract evolves.
+The DTO is supplier-shaped → **the port file lives in the supplier's territory** (`@bridges/<supplier-bc>/<resource>/ports/`). The port is essentially the supplier's driving interface for cross-BC writes — a contract that any consumer in the project can inject by token. The file prefix matches the supplier (e.g. `iam-bounded-context-seeder.port.ts` under `@bridges/iam/bounded-context/ports/`).
+
+Canonical case: `IIamBoundedContextSeeder.seedAll(items, options)` accepts `SeederBoundedContext[]` and `RepositoryOptions` straight from core-back. Hand-writing a near-duplicate DTO would only introduce drift when the supplier's input contract evolves, and gain no Anti-Corruption value (there is no projection to do).
 
 ### Choosing between them
 
 > Does the consumer have its own vocabulary for this resource?
 >
-> - **Yes** — the consumer reduces, flattens, or renames the supplier's model → write a custom DTO in the consumer's territory. **Read port.**
-> - **No** — the consumer relays data that semantically belongs to the supplier → reuse the supplier's or framework's existing type. **Write port.**
+> - **Yes** — the consumer reduces, flattens, or renames the supplier's model → write a custom DTO in the consumer's territory, next to the port. **Read port.**
+> - **No** — the consumer relays data that semantically belongs to the supplier → reuse the supplier's or framework's existing type, and place the port in the supplier's territory. **Write port.**
 
-Both variants share the identical 4-file shape (port, token, adapter, bridge entry) and the same composition-root registration.
+Both variants share the identical 4-file shape (port, token, adapter, bridge entry) and the same composition-root registration. Only the port's DTO source and its file location differ.
 
 ## When it applies
 
