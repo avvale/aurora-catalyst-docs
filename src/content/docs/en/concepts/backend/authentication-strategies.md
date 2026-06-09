@@ -57,7 +57,7 @@ In `aurora-hub` mode the satellite issues nothing. On each request it validates 
 ## When it applies
 
 - You see the boot warning that `OAUTH_STRATEGY=none` and need to pick a real provider.
-- You are wiring a new app to delegate login to an existing hub — see [Connect a satellite to an Aurora Hub](/aurora-catalyst-docs/en/guides/auth/connect-a-satellite-to-an-aurora-hub/).
+- You are wiring a new app to delegate login to an existing hub — see [Connect a satellite to an Aurora Hub](/aurora-catalyst-docs/en/tutorials/getting-started/install-satellite/).
 - You are debugging a `401 invalid_client` or `400 invalid_request` during the Authorization Code round-trip.
 
 ## Trade-offs and limits
@@ -70,5 +70,5 @@ In `aurora-hub` mode the satellite issues nothing. On each request it validates 
 
 ## Related
 
-- [Connect a satellite to an Aurora Hub](/aurora-catalyst-docs/en/guides/auth/connect-a-satellite-to-an-aurora-hub/) — the practical recipe.
+- [Connect a satellite to an Aurora Hub](/aurora-catalyst-docs/en/tutorials/getting-started/install-satellite/) — the practical recipe.
 - [`catalyst keys`](/aurora-catalyst-docs/en/reference/cli-commands/keys/) — generate the RSA key pair.

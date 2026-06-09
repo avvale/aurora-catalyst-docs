@@ -57,7 +57,7 @@ En modo `aurora-hub` el satélite no emite nada. En cada petición valida el Bea
 ## Cuándo aplica
 
 - Ves el aviso de arranque de que `OAUTH_STRATEGY=none` y necesitas elegir un proveedor real.
-- Estás conectando una app nueva para que delegue el login en un hub existente — mira [Conectar un satélite a un Aurora Hub](/aurora-catalyst-docs/es/guides/auth/connect-a-satellite-to-an-aurora-hub/).
+- Estás conectando una app nueva para que delegue el login en un hub existente — mira [Conectar un satélite a un Aurora Hub](/aurora-catalyst-docs/es/tutorials/getting-started/install-satellite/).
 - Estás depurando un `401 invalid_client` o un `400 invalid_request` durante el ida y vuelta del Authorization Code.
 
 ## Concesiones y límites
@@ -70,5 +70,5 @@ En modo `aurora-hub` el satélite no emite nada. En cada petición valida el Bea
 
 ## Relacionado
 
-- [Conectar un satélite a un Aurora Hub](/aurora-catalyst-docs/es/guides/auth/connect-a-satellite-to-an-aurora-hub/) — la receta práctica.
+- [Conectar un satélite a un Aurora Hub](/aurora-catalyst-docs/es/tutorials/getting-started/install-satellite/) — la receta práctica.
 - [`catalyst keys`](/aurora-catalyst-docs/es/reference/cli-commands/keys/) — genera el par de claves RSA.

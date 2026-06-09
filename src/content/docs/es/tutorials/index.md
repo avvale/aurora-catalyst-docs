@@ -11,5 +11,5 @@ Si tienes un problema concreto que resolver y ya conoces lo básico, mira las **
 
 _Se irán sumando a medida que se escriban. Empieza con el de primeros pasos._
 
-- [Primeros pasos](./getting-started/) — instala Aurora, genera tu primer bounded context y ejecuta el resultado.
+- [Primeros pasos](./getting-started/) — levanta un Aurora Hub con IAM + OAuth y conecta una app satélite que delega su login.
 - [Conectar datos GraphQL a la UI](./frontend/graphql-data-access/) — precarga datos en un resolver con fetchers y renderízalos en un componente con composables, usando `iam/tag` como ejemplo.
