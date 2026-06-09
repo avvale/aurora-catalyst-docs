@@ -237,6 +237,13 @@
       "classified_at": "2026-06-08T17:36:46.212Z",
       "source_commit": "f7c1e260443c9310e7e7da7677eb370f1ded29c8",
       "override": null
+    },
+    "2026-06-09-add-rp-initiated-hub-logout": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-09T08:11:08.850Z",
+      "source_commit": "2169b75bf56639459517dded70036bba8dfd7255",
+      "override": null
     }
   },
   "cli": {
