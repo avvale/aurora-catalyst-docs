@@ -2,7 +2,7 @@
 title: Instalar un satélite Aurora
 description: Genera una segunda app Catalyst y delega todo su login en el hub mediante el flujo Authorization Code de OAuth 2.1 con PKCE.
 sidebar:
-  order: 3
+  order: 4
 ---
 
 Un **satélite** es una app Catalyst que no conserva formulario de login propio. Los usuarios no autenticados se redirigen al hub, el hub emite los tokens, y el satélite los valida contra el JWKS del hub. Este paso crea uno y lo conecta al hub de los pasos anteriores.

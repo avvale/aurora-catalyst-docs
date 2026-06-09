@@ -2,7 +2,7 @@
 title: Añadir IAM + OAuth al hub
 description: Instala los paquetes de Identidad, genera las claves de firma, arranca el hub y entra como el admin sembrado.
 sidebar:
-  order: 2
+  order: 3
 ---
 
 Ahora convierte el proyecto vacío del paso anterior en un **Aurora Hub**: una instancia Catalyst que es dueña de la identidad y firma sus propios tokens OAuth.

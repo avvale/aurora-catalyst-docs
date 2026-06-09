@@ -2,10 +2,10 @@
 title: Instalar Aurora Catalyst
 description: Genera un nuevo monorepo Catalyst y apunta su backend a una base de datos.
 sidebar:
-  order: 1
+  order: 2
 ---
 
-Este primer paso genera el proyecto que se convertirá en tu **hub**. El procedimiento es el mismo para cualquier app Catalyst — la distinción hub/satélite llega después, desde la configuración.
+Con el CLI ya instalado, este paso genera el proyecto que se convertirá en tu **hub**. El procedimiento es el mismo para cualquier app Catalyst — la distinción hub/satélite llega después, desde la configuración.
 
 ## 1. Genera el proyecto
 

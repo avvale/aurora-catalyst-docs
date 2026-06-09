@@ -2,10 +2,10 @@
 title: Install Aurora Catalyst
 description: Scaffold a new Catalyst monorepo and point its backend at a database.
 sidebar:
-  order: 1
+  order: 2
 ---
 
-This first step scaffolds the project that will become your **hub**. The procedure is the same for any Catalyst app — the hub/satellite distinction comes later, from configuration.
+With the CLI installed, this step scaffolds the project that will become your **hub**. The procedure is the same for any Catalyst app — the hub/satellite distinction comes later, from configuration.
 
 ## 1. Scaffold the project
 

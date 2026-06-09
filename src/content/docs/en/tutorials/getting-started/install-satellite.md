@@ -2,7 +2,7 @@
 title: Install an Aurora satellite
 description: Scaffold a second Catalyst app and delegate all of its login to the hub via the OAuth 2.1 Authorization Code flow with PKCE.
 sidebar:
-  order: 3
+  order: 4
 ---
 
 A **satellite** is a Catalyst app that keeps no login form of its own. Unauthenticated users are bounced to the hub, the hub issues the tokens, and the satellite validates them against the hub's JWKS. This step builds one and wires it to the hub from the previous steps.

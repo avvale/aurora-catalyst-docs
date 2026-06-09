@@ -2,7 +2,7 @@
 title: Add IAM + OAuth to the hub
 description: Install the Identity packages, generate signing keys, run the hub, and log in as the seeded admin.
 sidebar:
-  order: 2
+  order: 3
 ---
 
 Now turn the bare project from the previous step into an **Aurora Hub**: a Catalyst instance that owns identity and signs its own OAuth tokens.
