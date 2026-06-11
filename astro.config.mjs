@@ -30,6 +30,8 @@ export default defineConfig({
       title: 'Aurora Catalyst',
       description:
         'Documentation for the Aurora Catalyst ecosystem — CLI, framework, and conventions.',
+      // Project styles layered on top of Starlight's theme.
+      customCss: ['./src/styles/custom.css'],
       defaultLocale: 'en',
       locales: {
         en: { label: 'English', lang: 'en' },

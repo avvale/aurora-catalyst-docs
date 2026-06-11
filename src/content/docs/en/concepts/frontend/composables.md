@@ -1,13 +1,13 @@
 ---
 title: "Composables: atoms and presets"
+sidebar:
+  order: 2
 description: "Why @aurora/composables splits brain logic into single-responsibility atoms and opinionated presets, and how the binding layer wires them to TanStack Table."
 ---
 
 ## Why this exists
 
-The visual layer of Aurora is already atomic. `hlm-checkbox`, `hlm-input`, `hlm-popover`, `hlm-button` — each one does one thing, and complex compositions like a form or a dialog are built by sticking those pieces together. The brain layer was not. `useDataTable` mixed sort, pagination, column filters, visibility, selection and ordering into a single signal blob; the `useGraphqlX` family lived scattered across `@aurora/modules/graphql/composables/`; `useAggregateShell` lived in `@aurora/lib/`. Whenever a screen needed something slightly outside the canonical list — a many-to-many manager with two coordinated paginated tables, for example — the only options were to duplicate the boilerplate twice or write a new monolithic composable that overlapped responsibilities with the existing one. Neither produces an architecture that survives "hundreds of very different projects", which is the explicit design constraint of Aurora Catalyst.
-
-The fix is to align the brain layer with the visual layer: single-responsibility composables ("the lego bricks") under `atoms/` plus opinionated compositions under `presets/` for the typical cases. A consumer with a rare need (kanban table, virtual list, tree table) picks the atoms; the common case (server-paginated list) picks the preset. State lives in **one** place — the atoms — and presets are pure orchestration on top.
+Aurora's visual layer is atomic — `hlm-checkbox`, `hlm-input`, `hlm-button`: each does one thing, and complex compositions are built by sticking those pieces together. The brain layer follows the same principle: instead of one composable that does everything, logic is split into single-responsibility atoms, with opinionated presets layered on top for the typical cases. This page describes that convention. The underlying argument (why composition rather than inheritance) lives in [Composition vs inheritance](../composition-over-inheritance/).
 
 ## How it works
 
@@ -42,6 +42,10 @@ without ever caring about the internal path.
 
 ### Atom catalog — `data-table`
 
+<div class="nowrap-first-col">
+
+
+
 | Atom                          | Single responsibility                                                            |
 | ----------------------------- | -------------------------------------------------------------------------------- |
 | `useTableSearch`              | Free-text search query plus a debounced derived signal for refetch.              |
@@ -54,9 +58,13 @@ without ever caring about the internal path.
 | `useTableExport`              | Pure helpers — generate CSV/XLS blobs and trigger the download. No state.        |
 | `useTableData<T>`             | Server-paginated load via a `paginate` callback; supports `seed()` for resolver prefetch. |
 
+</div>
+
 ### Atom catalog — `graphql`
 
 Each atom delegates to its fetcher under `@aurora/modules/graphql/fetchers/`. The atom's responsibility is limited to the `loading` signal lifecycle; no `apollo.query`/`apollo.mutate` lives inside an atom.
+
+<div class="nowrap-first-col">
 
 | Atom                       | Fetcher delegated to        | What it does                                              |
 | -------------------------- | --------------------------- | --------------------------------------------------------- |
@@ -71,7 +79,11 @@ Each atom delegates to its fetcher under `@aurora/modules/graphql/fetchers/`. Th
 | `useGraphqlDeleteByKeys`   | `mutateDeleteByKeys`        | Composite-key delete — pivot aggregates with multi-column PK. |
 | `useGraphqlDelete`         | `mutateDelete`              | Where-based bulk delete.                                  |
 
+</div>
+
 ### Preset catalog
+
+<div class="nowrap-first-col">
 
 | Preset                    | Composes                                                                                              | Use it when                                                                  |
 | ------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -84,6 +96,8 @@ Each atom delegates to its fetcher under `@aurora/modules/graphql/fetchers/`. Th
 | `usePivotMembership`      | `useGraphqlGet` + `useGraphqlInsert` + `useGraphqlDelete`.                                            | The membership layer of a many-to-many: full id set, `link()`, `unlink()`, `refresh()`. |
 | `useRelationshipPivot`    | Two `usePaginatedDataTable` (linked + candidates) + one `usePivotMembership`.                         | A many-to-many manager screen — two coordinated tables plus pivot mutations.  |
 
+</div>
+
 After a successful `link()` or `unlink()`, `useRelationshipPivot` automatically calls `linked.refetch()`. The orchestration is in the preset; the atoms stay clean.
 
 ## When it applies
@@ -91,15 +105,14 @@ After a successful `link()` or `unlink()`, `useRelationshipPivot` automatically 
 - You are writing a new server-paginated list page. Reach for `usePaginatedDataTable + seed()`. The handlers (`onSearch`, `onFiltersChange`, …) collapse to one-liners.
 - You are writing a many-to-many manager (a role's permissions, a user's tags). Reach for `useRelationshipPivot` — the two coordinated tables, the pivot membership, and the auto-refetch are already wired.
 - You need a custom composition that does not match any preset (kanban, virtual list, tree table). Pick the atoms directly and write the orchestration inline; promote it to a preset only when a second consumer needs the same orchestration.
-- You are migrating an old list component. The inline `useDataTable + sortSignal + paginationSignal + filtersSignal + fetchData()` block is the smell — replace it with `usePaginatedDataTable`. Expect to lose roughly 25 lines per file.
+- You have a list with the inline `useDataTable + sortSignal + paginationSignal + filtersSignal + fetchData()` wiring. That block is the smell — replace it with `usePaginatedDataTable`. Expect to lose roughly 25 lines per file.
 
 ## Trade-offs and limits
 
 - **Atomization stops at "appears in two presets".** A concern that only surfaces in a single preset stays inline. Atomizing speculatively pollutes `atoms/` with primitives nobody else uses.
 - **Persistence is not the atom's problem.** `useTableColumnVisibility` and `useTableColumnOrder` are in-memory. If you need to persist the layout per `gridId`, wrap the atom in a separate composable that talks to `column-config-storage`. The atom stays pure.
-- **`useDataTable` is no longer a state owner.** Code that read `useDataTable().sortSignal` directly (because the old version exposed one) must now read it from the atom — either passed in by the caller or re-exposed by the preset on its return value.
-- **Imports through `@aurora` keep resolving — except for `grid-select-multiple-elements`.** The barrels make every relocation transparent at the import level. The one breaking surface is the `grid-select-multiple-elements` component contract: it is now a many-to-many manager with `(linkRequested)` / `(unlinkRequested)` outputs, not a batch picker with Apply/Cancel. Existing consumers must migrate their template wiring.
-- **Codegen still emits the old list pattern.** The `aurora-catalyst-cli` generator has not yet been updated to emit `usePaginatedDataTable + seed()`. Until the sibling change lands on the CLI side, regenerating an IAM list module will revert it to the old inline pattern. Manual migrations stay on the new pattern.
+- **`useDataTable` is not a state owner.** It is pure wiring. To read sort, pagination, or any other state, read it from the relevant atom — either passed in by the caller or re-exposed by the preset on its return value.
+- **`grid-select-multiple-elements` needs specific wiring.** The `@aurora` barrels keep every import resolving transparently, so the rest of the components need no attention. The exception is this one: it is a many-to-many manager with `(linkRequested)` / `(unlinkRequested)` outputs, and the template that mounts it must wire those outputs. It only emits the intent because it does not know where to persist the link: membership is mutated immediately, outside the form's create/update lifecycle, so the host orchestrator runs the mutation and refreshes the data.
 
 ## Related
 

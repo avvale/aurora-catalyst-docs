@@ -1,13 +1,13 @@
 ---
 title: "Composables: atoms y presets"
+sidebar:
+  order: 2
 description: "Por qué @aurora/composables separa la capa cerebro en atoms de responsabilidad única y presets opinados, y cómo el binding layer los conecta a TanStack Table."
 ---
 
 ## Por qué existe
 
-La capa visual de Aurora ya estaba atomizada. `hlm-checkbox`, `hlm-input`, `hlm-popover`, `hlm-button` — cada uno hace una sola cosa, y las composiciones complejas (un formulario, un dialog) se construyen pegando piezas. La capa cerebro no lo estaba. `useDataTable` mezclaba sort, paginación, filtros de columna, visibilidad, selección y orden de columnas en un único blob de signals; la familia `useGraphqlX` vivía dispersa en `@aurora/modules/graphql/composables/`; `useAggregateShell` vivía en `@aurora/lib/`. Cuando una pantalla necesitaba algo ligeramente fuera del caso canónico — un manager many-to-many con dos tablas paginadas coordinadas, por ejemplo — las únicas opciones eran duplicar todo el boilerplate o escribir un nuevo composable monolítico que solapaba responsabilidades con el existente. Ninguna produce una arquitectura sostenible para "cientos de proyectos muy diferentes", que es la restricción de diseño explícita de Aurora Catalyst.
-
-La salida es alinear la capa cerebro con la visual: composables de responsabilidad única ("las piezas lego") bajo `atoms/`, más composiciones opinadas bajo `presets/` para los casos típicos. Un consumer con una necesidad rara (kanban, virtual list, tree table) elige los atoms; el caso común (lista paginada en servidor) elige el preset. El estado vive en **un único sitio** — los atoms — y los presets son orquestación pura encima.
+La capa visual de Aurora es atómica — `hlm-checkbox`, `hlm-input`, `hlm-button`: cada pieza hace una sola cosa y las composiciones complejas se construyen pegándolas. La capa cerebro sigue el mismo principio: en lugar de un único composable que lo hace todo, la lógica se reparte en atoms de responsabilidad única, y los casos típicos se arman con presets opinados por encima. Esta página describe esa convención. El argumento de fondo (por qué composición y no herencia) vive en [Composición vs herencia](../composition-over-inheritance/).
 
 ## Cómo funciona
 
@@ -42,6 +42,10 @@ sin tener que conocer la ruta interna.
 
 ### Catálogo de atoms — `data-table`
 
+<div class="nowrap-first-col">
+
+
+
 | Atom                          | Responsabilidad única                                                            |
 | ----------------------------- | -------------------------------------------------------------------------------- |
 | `useTableSearch`              | Query de búsqueda libre más un signal derivado con debounce para refetch.        |
@@ -54,9 +58,13 @@ sin tener que conocer la ruta interna.
 | `useTableExport`              | Helpers puros — generan blobs CSV/XLS y disparan la descarga. Sin estado.        |
 | `useTableData<T>`             | Carga server-paginated vía un callback `paginate`; soporta `seed()` para prefetch desde resolver. |
 
+</div>
+
 ### Catálogo de atoms — `graphql`
 
 Cada atom delega en su fetcher bajo `@aurora/modules/graphql/fetchers/`. La responsabilidad del atom se limita al ciclo de vida del signal `loading`; ningún `apollo.query` / `apollo.mutate` vive dentro de un atom.
+
+<div class="nowrap-first-col">
 
 | Atom                       | Fetcher en el que delega    | Qué hace                                                  |
 | -------------------------- | --------------------------- | --------------------------------------------------------- |
@@ -71,7 +79,11 @@ Cada atom delega en su fetcher bajo `@aurora/modules/graphql/fetchers/`. La resp
 | `useGraphqlDeleteByKeys`   | `mutateDeleteByKeys`        | Borrado por clave compuesta — agregados pivot con PK multi-columna. |
 | `useGraphqlDelete`         | `mutateDelete`              | Borrado en bulk basado en where.                          |
 
+</div>
+
 ### Catálogo de presets
+
+<div class="nowrap-first-col">
 
 | Preset                    | Compone                                                                                               | Úsalo cuando                                                                  |
 | ------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
@@ -84,6 +96,8 @@ Cada atom delega en su fetcher bajo `@aurora/modules/graphql/fetchers/`. La resp
 | `usePivotMembership`      | `useGraphqlGet` + `useGraphqlInsert` + `useGraphqlDelete`.                                            | La capa de membership de un many-to-many: set completo de ids, `link()`, `unlink()`, `refresh()`. |
 | `useRelationshipPivot`    | Dos `usePaginatedDataTable` (linked + candidates) + un `usePivotMembership`.                          | Pantalla de manager many-to-many: dos tablas coordinadas más mutaciones del pivot. |
 
+</div>
+
 Tras un `link()` o `unlink()` exitoso, `useRelationshipPivot` invoca automáticamente `linked.refetch()`. La orquestación está en el preset; los atoms se mantienen limpios.
 
 ## Cuándo aplica
@@ -91,15 +105,14 @@ Tras un `link()` o `unlink()` exitoso, `useRelationshipPivot` invoca automática
 - Estás escribiendo una nueva página de lista paginada en servidor. Empieza por `usePaginatedDataTable + seed()`. Los handlers (`onSearch`, `onFiltersChange`, …) se reducen a one-liners.
 - Estás escribiendo un manager many-to-many (los permisos de un rol, las tags de un usuario). Empieza por `useRelationshipPivot` — las dos tablas coordinadas, la membership del pivot y el auto-refetch ya están conectados.
 - Necesitas una composición personalizada que no encaja en ningún preset (kanban, virtual list, tree table). Coge los atoms directamente y escribe la orquestación inline; promuévela a preset solo cuando un segundo consumer necesite la misma orquestación.
-- Estás migrando un list component antiguo. El bloque inline `useDataTable + sortSignal + paginationSignal + filtersSignal + fetchData()` es el smell — sustitúyelo por `usePaginatedDataTable`. Espera perder unas 25 líneas por archivo.
+- Tienes una lista con el cableado inline `useDataTable + sortSignal + paginationSignal + filtersSignal + fetchData()`. Ese bloque es el smell — sustitúyelo por `usePaginatedDataTable`. Espera perder unas 25 líneas por archivo.
 
 ## Concesiones y límites
 
 - **La atomización para en "aparece en dos presets".** Un concern que solo aflora en un preset se queda inline. Atomizar especulativamente contamina `atoms/` con primitivas que nadie reusa.
 - **La persistencia no es problema del atom.** `useTableColumnVisibility` y `useTableColumnOrder` son in-memory. Si necesitas persistir el layout por `gridId`, envuelve el atom en un composable separado que hable con `column-config-storage`. El atom se mantiene puro.
-- **`useDataTable` ya no es propietario de estado.** El código que leía `useDataTable().sortSignal` directamente (porque la versión antigua lo exponía) ahora debe leerlo desde el atom — pasado por el caller o reexpuesto por el preset en su retorno.
-- **Los imports a través de `@aurora` siguen resolviendo — excepto `grid-select-multiple-elements`.** Los barrels hacen transparente cada relocalización a nivel de import. La única superficie breaking es el contrato del componente `grid-select-multiple-elements`: ahora es un manager many-to-many con outputs `(linkRequested)` / `(unlinkRequested)`, no un picker batch con Apply/Cancel. Los consumers existentes deben migrar el cableado del template.
-- **El codegen sigue emitiendo el patrón antiguo de list.** El generador de `aurora-catalyst-cli` aún no se ha actualizado para emitir `usePaginatedDataTable + seed()`. Hasta que aterrice el change hermano en el lado CLI, regenerar un módulo IAM de tipo lista lo revertirá al patrón inline antiguo. Las migraciones manuales se quedan en el patrón nuevo.
+- **`useDataTable` no es propietario de estado.** Es puro cableado. Para leer sort, paginación o cualquier otro estado, hazlo desde el atom correspondiente — pasado por el caller o reexpuesto por el preset en su retorno.
+- **`grid-select-multiple-elements` exige un cableado específico.** Los barrels de `@aurora` mantienen los imports resolviendo de forma transparente, así que el resto de componentes no requieren atención. La excepción es este: es un manager many-to-many con outputs `(linkRequested)` / `(unlinkRequested)`, y el template que lo monta debe cablear esos outputs. Solo emite la intención porque no sabe dónde persistir el vínculo: la pertenencia se muta al instante, fuera del ciclo create/update del formulario, así que el orquestador host hace la mutación y refresca los datos.
 
 ## Relacionado
 

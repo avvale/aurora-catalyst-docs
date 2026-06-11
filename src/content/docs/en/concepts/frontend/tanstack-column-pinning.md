@@ -1,5 +1,7 @@
 ---
-title: "TanStack column pinning order"
+title: "Column pinning (TanStack)"
+sidebar:
+  order: 8
 description: "Why pinning a column does not move it — and how the data-table reorders pinned columns by writing to both `setColumnPinning` and `setColumnOrder`."
 ---
 

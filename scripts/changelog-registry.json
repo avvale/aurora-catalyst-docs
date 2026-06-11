@@ -244,6 +244,62 @@
       "classified_at": "2026-06-09T08:11:08.850Z",
       "source_commit": "2169b75bf56639459517dded70036bba8dfd7255",
       "override": null
+    },
+    "2026-06-10-add-hub-app-dashboard": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-11T21:16:55.843Z",
+      "source_commit": "18d529e6ef97474bfb5b63f8c3db3eac8017ac6d",
+      "override": null
+    },
+    "2026-06-10-add-hub-app-favorites": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-11T21:16:55.843Z",
+      "source_commit": "11af874f36473608c69cedec257834257f36c6f9",
+      "override": null
+    },
+    "2026-06-10-add-hub-oauth-provisioning": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-11T21:16:55.843Z",
+      "source_commit": "7426f19dbc88c4ab65b416427a951210a43f5f85",
+      "override": null
+    },
+    "2026-06-11-add-hub-app-deprovisioning": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-11T21:16:55.843Z",
+      "source_commit": "f55fa4f57bc968031eea633a79ad6f347ed3f044",
+      "override": null
+    },
+    "2026-06-11-add-hub-per-app-access-permission": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-11T21:16:55.843Z",
+      "source_commit": "a19011dbe0608c483e3027375cd1d56cbd8c344a",
+      "override": null
+    },
+    "2026-06-11-add-oauth-application-secret-hashing": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-06-11T21:16:55.843Z",
+      "source_commit": "2a40bd9908012dcab4ec010b5bcc19a4361d2137",
+      "override": null
+    },
+    "2026-06-11-add-permission-gated-navigation": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-11T21:16:55.843Z",
+      "source_commit": "276f3ac4073926a3c5e50e65ca316f5ae5d772ee",
+      "override": null
+    },
+    "2026-06-11-refresh-dpermissions-on-token-issuance": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-11T21:16:55.843Z",
+      "source_commit": "15878aea6259969da06ee4aeec8eb2574e17e4a2",
+      "override": null
     }
   },
   "cli": {
@@ -494,6 +550,13 @@
       "classification": "feature",
       "classified_at": "2026-06-08T18:14:13.010Z",
       "source_commit": "bc7af6679d2605e11d4d231e2c3f8c05cddf7d61",
+      "override": null
+    },
+    "2026-06-09-auto-review-on-tty": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-11T21:16:55.842Z",
+      "source_commit": "dccd05508c72d48b58dce66dcf65099e3581b91f",
       "override": null
     }
   }

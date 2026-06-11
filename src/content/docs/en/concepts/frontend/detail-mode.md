@@ -1,5 +1,7 @@
 ---
-title: "Detail mode: view or dialog"
+title: "Detail mode"
+sidebar:
+  order: 4
 description: How `front.detailMode` chooses between a routed detail page and a list-with-modal CRUD, and why both shells embed the same form component.
 ---
 

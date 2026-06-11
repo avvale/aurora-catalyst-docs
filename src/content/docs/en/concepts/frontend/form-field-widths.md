@@ -1,5 +1,7 @@
 ---
 title: Form field widths
+sidebar:
+  order: 6
 description: How the 12-column grid, type-based defaults, the `widget.span` override, and the auto-expand pass decide how wide each field renders.
 ---
 

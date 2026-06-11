@@ -1,5 +1,7 @@
 ---
-title: "Embed mode (padre-hijo)"
+title: "Embed mode"
+sidebar:
+  order: 5
 description: "Cómo `front.embedSupport: true` activa el modo embed en un módulo hijo para que se integre dentro del detail del padre, y qué cambia en el codegen cuando lo haces."
 ---
 

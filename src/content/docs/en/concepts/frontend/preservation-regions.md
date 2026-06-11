@@ -1,5 +1,7 @@
 ---
 title: Preservation regions
+sidebar:
+  order: 7
 description: How Aurora lets you own a slice of a generated file — and why that slice survives regeneration.
 ---
 

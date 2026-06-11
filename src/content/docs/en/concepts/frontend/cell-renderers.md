@@ -1,5 +1,7 @@
 ---
 title: "Cell renderers"
+sidebar:
+  order: 3
 description: "How the data-table dispatches by property type and renders each cell through a dedicated component under `cells/`, and how to override the rendering per column."
 ---
 

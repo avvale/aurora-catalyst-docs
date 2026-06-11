@@ -1,5 +1,7 @@
 ---
-title: "Composición frente a herencia: por qué composables"
+title: "Composición vs herencia"
+sidebar:
+  order: 1
 description: "Por qué la capa cerebro de Aurora se extiende horizontalmente componiendo funciones de un solo concern, en lugar de verticalmente mediante jerarquías de clases."
 ---
 

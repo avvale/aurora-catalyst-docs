@@ -1,5 +1,7 @@
 ---
 title: Preservation regions
+sidebar:
+  order: 7
 description: Cómo Aurora te deja adueñarte de un pedazo de un fichero generado — y por qué ese pedazo sobrevive a las regeneraciones.
 ---
 

@@ -1,5 +1,7 @@
 ---
-title: "Composition over inheritance: why composables"
+title: "Composition vs inheritance"
+sidebar:
+  order: 1
 description: "Why Aurora's brain layer extends horizontally by composing single-concern functions instead of vertically through class hierarchies."
 ---
 

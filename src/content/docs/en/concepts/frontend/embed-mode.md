@@ -1,5 +1,7 @@
 ---
-title: "Embed mode (parent-child)"
+title: "Embed mode"
+sidebar:
+  order: 5
 description: "How `front.embedSupport: true` opts a child module into being embedded inside its parent's detail view, and what changes in the codegen when it does."
 ---
 

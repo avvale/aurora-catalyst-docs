@@ -1,0 +1,7 @@
+/* Identifier-style first columns (composable catalogs, etc.) should stay on a
+   single line so long names like `useTableColumnVisibility` are not wrapped.
+   Opt a table in by wrapping it in <div class="nowrap-first-col"> in Markdown. */
+.nowrap-first-col th:first-child,
+.nowrap-first-col td:first-child {
+  white-space: nowrap;
+}

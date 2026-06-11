@@ -1,5 +1,7 @@
 ---
 title: "Renderers de celdas"
+sidebar:
+  order: 3
 description: "Cómo la data-table dispatcha por tipo de property y renderiza cada celda con un componente dedicado en `cells/`, y cómo personalizar el renderizado por columna."
 ---
 

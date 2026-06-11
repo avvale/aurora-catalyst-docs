@@ -1,5 +1,7 @@
 ---
-title: "Ancho de campos en formulario"
+title: "Ancho de campos"
+sidebar:
+  order: 6
 description: Cómo el grid de 12 columnas, los defaults por tipo, el override `widget.span` y la pasada de auto-expansión deciden la anchura de cada campo.
 ---
 

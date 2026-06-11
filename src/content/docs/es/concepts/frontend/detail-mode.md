@@ -1,5 +1,7 @@
 ---
-title: "Detail mode: view o dialog"
+title: "Detail mode"
+sidebar:
+  order: 4
 description: Cómo `front.detailMode` elige entre página de detalle enrutada y CRUD modal sobre la lista, y por qué ambos shells embeben el mismo componente de form.
 ---
 
