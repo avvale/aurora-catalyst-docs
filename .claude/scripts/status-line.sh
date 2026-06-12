@@ -15,12 +15,4 @@ if [ -n "$BRANCH" ]; then
   GIT_SEGMENT="$GIT_SEGMENT |"
 fi
 
-# Dev mode from project root
-MODE_FILE=".catalyst-dev-mode"
-if [ -f "$MODE_FILE" ]; then
-  MODE=$(tr -d '[:space:]' < "$MODE_FILE")
-else
-  MODE="Solution"
-fi
-
-echo "[$MODEL] 📁 $DIR |$GIT_SEGMENT 🧠 ${PERCENT}% | ⚙️ $MODE"
+echo "[$MODEL] 📁 $DIR |$GIT_SEGMENT 🧠 ${PERCENT}%"
