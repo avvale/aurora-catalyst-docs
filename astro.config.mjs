@@ -32,6 +32,15 @@ export default defineConfig({
         'Documentation for the Aurora Catalyst ecosystem — CLI, framework, and conventions.',
       // Project styles layered on top of Starlight's theme.
       customCss: ['./src/styles/custom.css'],
+      // `eta` is the CLI codegen template language and is not in Shiki's bundle.
+      // Alias it to the bundled ERB grammar (same `<% %>` delimiters) so the
+      // auto-generated API reference snippets highlight instead of falling back
+      // to txt with a build warning. (Those pages are produced by `pnpm sync`.)
+      expressiveCode: {
+        shiki: {
+          langAlias: { eta: 'erb' },
+        },
+      },
       defaultLocale: 'en',
       locales: {
         en: { label: 'English', lang: 'en' },
