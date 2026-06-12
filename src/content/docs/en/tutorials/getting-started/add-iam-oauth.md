@@ -49,7 +49,31 @@ pnpm dev
 
 On first boot the bootstrap seeder creates the IAM/OAuth tables and populates them — the default admin account, roles, and the Password OAuth client.
 
-## 6. Log in
+## 6. Wire the frontend to the hub
+
+Before you log in, align both ends of the connection: the frontend's OAuth credentials and the backend's allowed origin.
+
+**Frontend — OAuth credentials.** The frontend logs in through the Password grant by presenting an OAuth **application code** and **secret**. These must match the OAuth application the seeder just registered in the database (step 5). Each environment file under `frontend/src/environments/` carries its own `oAuth` block:
+
+```ts
+// frontend/src/environments/environment.ts (and .local.ts, .dev.ts, .qa.ts, .prod.ts)
+oAuth: {
+  applicationCode: 'aurora',
+  applicationSecret: 'aurora-dev-secret',
+},
+```
+
+The scaffold ships these dev values already aligned with the seeded application, so local login works out of the box. When you register a different application — or override `BOOTSTRAP_OAUTH_APP_CODE` / `BOOTSTRAP_OAUTH_APP_SECRET` on the backend — set `applicationCode` and `applicationSecret` in **every** `environment.*.ts` to the values registered in the database, or the Password grant will be rejected.
+
+**Backend — allowed origin (CORS).** In `backend/.env`, set `APP_CORS_ORIGIN` to the frontend URL that will call the hub:
+
+```dotenv
+APP_CORS_ORIGIN = http://localhost:4200
+```
+
+The scaffold leaves it empty, which enables open, credential-less CORS — enough for the local password login. But the hub's credentialed flows (the `hub_session` cookie of the Authorization Code flow) need an explicit allowlist — a wildcard is not allowed with credentials — so it's best to pin it to the real frontend origin from the start.
+
+## 7. Log in
 
 Open the frontend at [http://localhost:4200](http://localhost:4200) and sign in with the seeded admin:
 
@@ -58,15 +82,15 @@ Open the frontend at [http://localhost:4200](http://localhost:4200) and sign in 
 | Email | `admin@aurora.dev` |
 | Password | `admin1234` |
 
-## 7. Allow your satellites through CORS
+## 8. Allow your satellites through CORS
 
-If you plan to add satellite apps (the next step), list every frontend origin that will call this hub in `backend/.env`:
+If you plan to add satellite apps (the next step), extend the `APP_CORS_ORIGIN` you set in step 6 with each frontend origin that will call this hub, comma-separated:
 
 ```dotenv
 APP_CORS_ORIGIN = http://localhost:4200,http://localhost:4201
 ```
 
-The scaffold default is `*`, which is fine for a quick local run but should be narrowed to the real origins. Include the hub's own frontend (`:4200`) and each satellite frontend (e.g. `:4201`).
+Keep the hub's own frontend (`:4200`) and add each satellite frontend (e.g. `:4201`).
 
 ## Next
 

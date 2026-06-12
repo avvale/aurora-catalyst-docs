@@ -3,6 +3,7 @@ title: Install the Aurora Catalyst CLI
 description: Install the aurora-catalyst-cli globally so the `catalyst` command is available before you scaffold anything.
 sidebar:
   order: 1
+  hidden: true
 ---
 
 Everything in this walkthrough runs through the **Aurora Catalyst CLI** — the `catalyst` command that scaffolds projects, installs packages, and generates code. Install it once, globally, before anything else.
@@ -16,7 +17,7 @@ npm install -g @aurorajs.dev/catalyst-cli
 This pulls [`@aurorajs.dev/catalyst-cli`](https://www.npmjs.com/package/@aurorajs.dev/catalyst-cli) from npm and puts a `catalyst` executable on your `PATH`, so you can run it from any directory.
 
 :::note
-The CLI requires **Node.js ≥ 18**. If you prefer another package manager, the global-install equivalents work too — `pnpm add -g @aurorajs.dev/catalyst-cli` or `yarn global add @aurorajs.dev/catalyst-cli`.
+The CLI requires **Node.js ≥ 24**. If you prefer another package manager, the global-install equivalents work too — `pnpm add -g @aurorajs.dev/catalyst-cli` or `yarn global add @aurorajs.dev/catalyst-cli`.
 :::
 
 ## 2. Verify the install

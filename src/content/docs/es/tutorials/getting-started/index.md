@@ -26,14 +26,14 @@ Para el cuadro completo de los tres modos y el flujo de tokens, mira [Estrategia
 
 ## Requisitos previos
 
-- Node.js ≥ 18 (y el `npm` que viene con él) — el CLI lo instalarás en el primer paso.
+- El **CLI de Aurora Catalyst** instalado — mira [Instalar CLI Aurora Catalyst](/aurora-catalyst-docs/es/tutorials/getting-started/install-cli/).
+- Node.js ≥ 24 (y el `npm` que viene con él).
 - Una base de datos SQL accesible para **cada** app — el hub y el satélite no deben compartir el mismo esquema.
 
-## Los cuatro pasos
+## Los tres pasos
 
-1. [Instalar el CLI de Aurora Catalyst](/aurora-catalyst-docs/es/tutorials/getting-started/install-cli/) — instala el comando `catalyst` de forma global.
-2. [Instalar Aurora Catalyst](/aurora-catalyst-docs/es/tutorials/getting-started/install-aurora/) — genera el hub y apúntalo a una base de datos.
-3. [Añadir IAM + OAuth al hub](/aurora-catalyst-docs/es/tutorials/getting-started/add-iam-oauth/) — instala los paquetes de identidad, genera las claves de firma y entra.
-4. [Instalar un satélite Aurora](/aurora-catalyst-docs/es/tutorials/getting-started/install-satellite/) — genera una segunda app y delega su login en el hub.
+1. [Instalar Aurora Catalyst](/aurora-catalyst-docs/es/tutorials/getting-started/install-aurora/) — genera el hub y apúntalo a una base de datos.
+2. [Añadir IAM + OAuth al hub](/aurora-catalyst-docs/es/tutorials/getting-started/add-iam-oauth/) — instala los paquetes de identidad, genera las claves de firma y entra.
+3. [Instalar un satélite Aurora](/aurora-catalyst-docs/es/tutorials/getting-started/install-satellite/) — genera una segunda app y delega su login en el hub.
 
 Síguelos en orden — cada paso asume que el anterior está hecho.

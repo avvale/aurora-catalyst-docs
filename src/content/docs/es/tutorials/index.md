@@ -9,7 +9,8 @@ Si tienes un problema concreto que resolver y ya conoces lo básico, mira las **
 
 ## Tutoriales disponibles
 
-_Se irán sumando a medida que se escriban. Empieza con el de primeros pasos._
+_Se irán sumando a medida que se escriban. Instala primero el CLI y empieza con el de Aurora Hub._
 
-- [Primeros pasos](./getting-started/) — levanta un Aurora Hub con IAM + OAuth y conecta una app satélite que delega su login.
+- [Instalar CLI Aurora Catalyst](./getting-started/install-cli/) — instala el comando `catalyst` de forma global antes que nada.
+- [Aurora Hub](./getting-started/) — levanta un Aurora Hub con IAM + OAuth y conecta una app satélite que delega su login.
 - [Conectar datos GraphQL a la UI](./frontend/graphql-data-access/) — precarga datos en un resolver con fetchers y renderízalos en un componente con composables, usando `iam/tag` como ejemplo.

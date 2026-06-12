@@ -25,7 +25,7 @@ DATABASE_HOST = localhost
 DATABASE_PORT = 5432
 DATABASE_USER = postgres
 DATABASE_PASSWORD = postgres
-DATABASE_SCHEMA =
+DATABASE_SCHEMA = database-schema
 ```
 
 El scaffold usa PostgreSQL por defecto. Cada app Catalyst necesita su **propia** base de datos o esquema — cuando añadas un satélite más adelante, dale uno separado para que no choquen.
