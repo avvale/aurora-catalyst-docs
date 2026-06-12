@@ -27,13 +27,13 @@ For the full picture of the three modes and the token flow, see [Authentication 
 ## Prerequisites
 
 - The **Aurora Catalyst CLI** installed — see [Install Aurora Catalyst CLI](/aurora-catalyst-docs/en/tutorials/getting-started/install-cli/).
+- An **Aurora Catalyst project** scaffolded and pointed at a database — see [Install Aurora Catalyst](/aurora-catalyst-docs/en/tutorials/getting-started/install-aurora/).
 - Node.js ≥ 24 (and the `npm` that ships with it).
 - A reachable SQL database for **each** app — the hub and the satellite must not share the same schema.
 
-## The three steps
+## The two steps
 
-1. [Install Aurora Catalyst](/aurora-catalyst-docs/en/tutorials/getting-started/install-aurora/) — scaffold the hub and point it at a database.
-2. [Add IAM + OAuth to the hub](/aurora-catalyst-docs/en/tutorials/getting-started/add-iam-oauth/) — install the identity packages, generate signing keys, and log in.
-3. [Install an Aurora satellite](/aurora-catalyst-docs/en/tutorials/getting-started/install-satellite/) — scaffold a second app and delegate its login to the hub.
+1. [Add IAM + OAuth to the hub](/aurora-catalyst-docs/en/tutorials/getting-started/add-iam-oauth/) — install the identity packages, generate signing keys, and log in.
+2. [Install an Aurora satellite](/aurora-catalyst-docs/en/tutorials/getting-started/install-satellite/) — scaffold a second app and delegate its login to the hub.
 
 Follow them in order — each step assumes the previous one is done.

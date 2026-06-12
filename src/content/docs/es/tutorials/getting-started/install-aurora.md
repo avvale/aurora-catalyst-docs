@@ -3,17 +3,18 @@ title: Instalar Aurora Catalyst
 description: Genera un nuevo monorepo Catalyst y apunta su backend a una base de datos.
 sidebar:
   order: 2
+  hidden: true
 ---
 
-Con el CLI ya instalado, este paso genera el proyecto que se convertirá en tu **hub**. El procedimiento es el mismo para cualquier app Catalyst — la distinción hub/satélite llega después, desde la configuración.
+Con el CLI ya instalado, este paso genera un nuevo proyecto Aurora Catalyst. El procedimiento es el mismo para cualquier app Catalyst — el rol que cumpla se decide más adelante, desde la configuración.
 
 ## 1. Genera el proyecto
 
 ```bash
-catalyst new aurora-hub
+catalyst new my-project
 ```
 
-Esto crea un monorepo Aurora (un workspace `backend/` + `frontend/`) llamado `aurora-hub`. Mira [`catalyst new`](/aurora-catalyst-docs/es/reference/cli-commands/new/).
+Esto crea un monorepo Aurora (un workspace `backend/` + `frontend/`) llamado `my-project`. Mira [`catalyst new`](/aurora-catalyst-docs/es/reference/cli-commands/new/).
 
 ## 2. Establece la conexión a la base de datos
 
@@ -28,7 +29,7 @@ DATABASE_PASSWORD = postgres
 DATABASE_SCHEMA = database-schema
 ```
 
-El scaffold usa PostgreSQL por defecto. Cada app Catalyst necesita su **propia** base de datos o esquema — cuando añadas un satélite más adelante, dale uno separado para que no choquen.
+El scaffold usa PostgreSQL por defecto. Cada app Catalyst necesita su **propia** base de datos o esquema — si vas a levantar varias apps, dale a cada una la suya para que no choquen.
 
 ## 3. Deja que Catalyst cree las tablas
 
@@ -46,4 +47,4 @@ Con la sincronización activada, el ORM construye el esquema a partir de las ent
 
 ## Siguiente
 
-Tu proyecto está generado y conectado a una base de datos. Ahora, [añade IAM + OAuth al hub](/aurora-catalyst-docs/es/tutorials/getting-started/add-iam-oauth/) para convertirlo en un proveedor de identidad.
+Tu proyecto está generado y conectado a una base de datos. El siguiente paso, [añadir IAM + OAuth](/aurora-catalyst-docs/es/tutorials/getting-started/add-iam-oauth/), lo convierte en un proveedor de identidad.
