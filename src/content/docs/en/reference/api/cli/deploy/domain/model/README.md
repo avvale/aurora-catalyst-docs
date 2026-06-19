@@ -2,26 +2,26 @@
 title: "Overview"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../README.md) / deploy/domain/model
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / deploy/domain/model
 
 # deploy/domain/model
 
 ## Interfaces
 
-- [DeployCredentials](interfaces/DeployCredentials.md)
-- [DeploymentPlan](interfaces/DeploymentPlan.md)
-- [DnsRecordResult](interfaces/DnsRecordResult.md)
-- [IonosCredentials](interfaces/IonosCredentials.md)
-- [PleskCredentials](interfaces/PleskCredentials.md)
-- [SshKeyPair](interfaces/SshKeyPair.md)
-- [SubscriptionResult](interfaces/SubscriptionResult.md)
+- [DeployCredentials](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/deploycredentials/)
+- [DeploymentPlan](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/deploymentplan/)
+- [DnsRecordResult](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/dnsrecordresult/)
+- [IonosCredentials](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/ionoscredentials/)
+- [PleskCredentials](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/pleskcredentials/)
+- [SshKeyPair](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/sshkeypair/)
+- [SubscriptionResult](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/subscriptionresult/)
 
 ## Type Aliases
 
-- [DatabaseType](type-aliases/DatabaseType.md)
-- [DeployTarget](type-aliases/DeployTarget.md)
-- [DnsRecordType](type-aliases/DnsRecordType.md)
+- [DatabaseType](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/type-aliases/databasetype/)
+- [DeployTarget](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/type-aliases/deploytarget/)
+- [DnsRecordType](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/type-aliases/dnsrecordtype/)

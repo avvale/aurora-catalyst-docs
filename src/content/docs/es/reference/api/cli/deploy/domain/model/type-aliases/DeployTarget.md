@@ -2,11 +2,11 @@
 title: "DeployTarget"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/domain/model](../README.md) / DeployTarget
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [deploy/domain/model](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/readme/) / DeployTarget
 
 # Type Alias: DeployTarget
 

@@ -2,11 +2,11 @@
 title: "SshPort"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/ports/ssh.port](../README.md) / SshPort
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [deploy/ports/ssh.port](/aurora-catalyst-docs/en/reference/api/cli/deploy/ports/sshport/readme/) / SshPort
 
 # Interface: SshPort
 
@@ -21,7 +21,7 @@ The reference adapter shells out to `ssh-keygen` (`src/deploy/adapters/ssh-keyge
 
 ### generateKeyPair()
 
-> **generateKeyPair**(`comment`): `Promise`\<[`SshKeyPair`](../../../domain/model/interfaces/SshKeyPair.md)\>
+> **generateKeyPair**(`comment`): `Promise`\<[`SshKeyPair`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/sshkeypair/)\>
 
 Defined in: [deploy/ports/ssh.port.ts:16](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/ssh.port.ts#L16)
 
@@ -38,4 +38,4 @@ Text appended to the public key (RFC 4716 "comment"),
 
 #### Returns
 
-`Promise`\<[`SshKeyPair`](../../../domain/model/interfaces/SshKeyPair.md)\>
+`Promise`\<[`SshKeyPair`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/sshkeypair/)\>

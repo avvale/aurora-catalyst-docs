@@ -35,6 +35,9 @@ import {
   sourcePath,
   targetFor,
 } from './lib/sources.js';
+import { rewriteApiLinks } from './lib/api-links.js';
+
+const SITE_BASE = '/aurora-catalyst-docs'; // mirrors astro.config.mjs `base`
 
 // ─── Args ────────────────────────────────────────────────────────────
 
@@ -208,6 +211,16 @@ async function mirrorApiFor(source: Source): Promise<void> {
     const dest = targetFor(locale, path.join('reference/api', source.slug));
     await resetDir(dest);
     await cp(sourceDir, dest, { recursive: true });
+
+    // Rewrite TypeDoc-relative .md links to root-absolute slugified URLs
+    const apiRoot = targetFor(locale, 'reference/api');
+    for (const file of await walkMarkdown(dest)) {
+      const sourceRelPath = path.relative(apiRoot, file).split(path.sep).join('/');
+      const content = await readFile(file, 'utf8');
+      const rewritten = rewriteApiLinks(content, { sourceRelPath, base: SITE_BASE, locale });
+      if (rewritten !== content) await writeFile(file, rewritten, 'utf8');
+    }
+
     await injectGenericFrontmatterUnder(dest);
 
     const title =

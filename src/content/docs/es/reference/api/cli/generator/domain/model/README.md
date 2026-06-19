@@ -2,44 +2,44 @@
 title: "Overview"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../README.md) / generator/domain/model
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / generator/domain/model
 
 # generator/domain/model
 
 ## Interfaces
 
-- [AdditionalApi](interfaces/AdditionalApi.md)
-- [ConstructorInjectionStatement](interfaces/ConstructorInjectionStatement.md)
-- [GenerationContext](interfaces/GenerationContext.md)
-- [ImportStatement](interfaces/ImportStatement.md)
-- [LockFile](interfaces/LockFile.md)
-- [ModuleDefinitionSchema](interfaces/ModuleDefinitionSchema.md)
-- [Property](interfaces/Property.md)
-- [PropertyArrayOptions](interfaces/PropertyArrayOptions.md)
-- [PropertyRelationship](interfaces/PropertyRelationship.md)
-- [PropertyWebComponent](interfaces/PropertyWebComponent.md)
-- [RelationshipPivot](interfaces/RelationshipPivot.md)
-- [ReturnTypeStatement](interfaces/ReturnTypeStatement.md)
-- [VariableInjectionStatement](interfaces/VariableInjectionStatement.md)
+- [AdditionalApi](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/additionalapi/)
+- [ConstructorInjectionStatement](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/constructorinjectionstatement/)
+- [GenerationContext](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/generationcontext/)
+- [ImportStatement](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/importstatement/)
+- [LockFile](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/lockfile/)
+- [ModuleDefinitionSchema](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/moduledefinitionschema/)
+- [Property](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/property/)
+- [PropertyArrayOptions](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertyarrayoptions/)
+- [PropertyRelationship](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertyrelationship/)
+- [PropertyWebComponent](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertywebcomponent/)
+- [RelationshipPivot](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/relationshippivot/)
+- [ReturnTypeStatement](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/returntypestatement/)
+- [VariableInjectionStatement](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/variableinjectionstatement/)
 
 ## Type Aliases
 
-- [Gender](type-aliases/Gender.md)
-- [HttpMethod](type-aliases/HttpMethod.md)
-- [PropertyIndex](type-aliases/PropertyIndex.md)
-- [PropertyIndexUsing](type-aliases/PropertyIndexUsing.md)
-- [PropertyType](type-aliases/PropertyType.md)
-- [RelationshipType](type-aliases/RelationshipType.md)
-- [ResolverType](type-aliases/ResolverType.md)
-- [Scope](type-aliases/Scope.md)
-- [ScopeElement](type-aliases/ScopeElement.md)
-- [TemplateElement](type-aliases/TemplateElement.md)
-- [WebComponentType](type-aliases/WebComponentType.md)
+- [Gender](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/gender/)
+- [HttpMethod](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/httpmethod/)
+- [PropertyIndex](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertyindex/)
+- [PropertyIndexUsing](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertyindexusing/)
+- [PropertyType](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertytype/)
+- [RelationshipType](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/relationshiptype/)
+- [ResolverType](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/resolvertype/)
+- [Scope](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/scope/)
+- [ScopeElement](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/scopeelement/)
+- [TemplateElement](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/templateelement/)
+- [WebComponentType](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/webcomponenttype/)
 
 ## Functions
 
-- [buildPivotSchema](functions/buildPivotSchema.md)
+- [buildPivotSchema](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/functions/buildpivotschema/)

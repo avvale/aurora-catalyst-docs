@@ -2,11 +2,11 @@
 title: "IonosCredentials"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/domain/model](../README.md) / IonosCredentials
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [deploy/domain/model](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/readme/) / IonosCredentials
 
 # Interface: IonosCredentials
 

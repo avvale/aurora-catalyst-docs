@@ -2,11 +2,11 @@
 title: "RelationshipPivot"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/domain/model](../README.md) / RelationshipPivot
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/domain/model](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/readme/) / RelationshipPivot
 
 # Interface: RelationshipPivot
 
@@ -20,7 +20,7 @@ for the pivot itself using this metadata.
 
 ### additionalApis?
 
-> `optional` **additionalApis?**: [`AdditionalApi`](AdditionalApi.md)[]
+> `optional` **additionalApis?**: [`AdditionalApi`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/additionalapi/)[]
 
 Defined in: [generator/domain/model.ts:257](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L257)
 
@@ -36,7 +36,7 @@ Defined in: [generator/domain/model.ts:258](https://github.com/avvale/aurora-cat
 
 ### aggregateProperties
 
-> **aggregateProperties**: [`Property`](Property.md)[]
+> **aggregateProperties**: [`Property`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/property/)[]
 
 Defined in: [generator/domain/model.ts:260](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L260)
 

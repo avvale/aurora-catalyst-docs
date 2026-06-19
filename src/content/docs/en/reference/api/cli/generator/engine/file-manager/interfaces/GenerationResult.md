@@ -2,11 +2,11 @@
 title: "GenerationResult"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/file-manager](../README.md) / GenerationResult
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/engine/file-manager](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/readme/) / GenerationResult
 
 # Interface: GenerationResult
 
@@ -19,7 +19,7 @@ callers can inspect what was produced.
 
 ### lockFiles
 
-> **lockFiles**: [`LockFile`](../../../domain/model/interfaces/LockFile.md)[]
+> **lockFiles**: [`LockFile`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/lockfile/)[]
 
 Defined in: [generator/engine/file-manager.ts:84](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L84)
 

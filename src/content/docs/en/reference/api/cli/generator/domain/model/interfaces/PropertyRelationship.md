@@ -2,11 +2,11 @@
 title: "PropertyRelationship"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/domain/model](../README.md) / PropertyRelationship
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/domain/model](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/readme/) / PropertyRelationship
 
 # Interface: PropertyRelationship
 
@@ -89,7 +89,7 @@ External package when the target lives outside the current bounded context.
 
 ### pivot?
 
-> `optional` **pivot?**: [`RelationshipPivot`](RelationshipPivot.md)
+> `optional` **pivot?**: [`RelationshipPivot`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/relationshippivot/)
 
 Defined in: [generator/domain/model.ts:162](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L162)
 
@@ -109,6 +109,6 @@ Singular form of the target name (used for foreign key column naming).
 
 ### type
 
-> **type**: [`RelationshipType`](../type-aliases/RelationshipType.md)
+> **type**: [`RelationshipType`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/type-aliases/relationshiptype/)
 
 Defined in: [generator/domain/model.ts:165](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L165)

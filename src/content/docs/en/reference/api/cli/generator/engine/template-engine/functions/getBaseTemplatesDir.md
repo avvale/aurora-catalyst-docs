@@ -2,11 +2,11 @@
 title: "GetBaseTemplatesDir"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/template-engine](../README.md) / getBaseTemplatesDir
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/engine/template-engine](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/template-engine/readme/) / getBaseTemplatesDir
 
 # Function: getBaseTemplatesDir()
 

@@ -2,11 +2,11 @@
 title: "DnsRecordResult"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/domain/model](../README.md) / DnsRecordResult
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [deploy/domain/model](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/readme/) / DnsRecordResult
 
 # Interface: DnsRecordResult
 
@@ -34,7 +34,7 @@ Defined in: [deploy/domain/model.ts:31](https://github.com/avvale/aurora-catalys
 
 ### recordType
 
-> **recordType**: [`DnsRecordType`](../type-aliases/DnsRecordType.md)
+> **recordType**: [`DnsRecordType`](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/type-aliases/dnsrecordtype/)
 
 Defined in: [deploy/domain/model.ts:32](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L32)
 

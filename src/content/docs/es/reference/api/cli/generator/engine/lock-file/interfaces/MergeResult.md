@@ -2,17 +2,17 @@
 title: "MergeResult"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/lock-file](../README.md) / MergeResult
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [generator/engine/lock-file](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/lock-file/readme/) / MergeResult
 
 # Interface: MergeResult
 
 Defined in: [generator/engine/lock-file.ts:205](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L205)
 
-Outcome of [mergePreservationRegions](../functions/mergePreservationRegions.md).
+Outcome of [mergePreservationRegions](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/lock-file/functions/mergepreservationregions/).
 
 The three name arrays are disjoint and together describe what happened to
 every region present in either input. Useful for emitting per-region log

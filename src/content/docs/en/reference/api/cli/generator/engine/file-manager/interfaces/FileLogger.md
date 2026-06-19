@@ -2,11 +2,11 @@
 title: "FileLogger"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/file-manager](../README.md) / FileLogger
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/engine/file-manager](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/readme/) / FileLogger
 
 # Interface: FileLogger
 

@@ -2,11 +2,11 @@
 title: "CiCdPort"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/ports/cicd.port](../README.md) / CiCdPort
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [deploy/ports/cicd.port](/aurora-catalyst-docs/en/reference/api/cli/deploy/ports/cicdport/readme/) / CiCdPort
 
 # Interface: CiCdPort
 

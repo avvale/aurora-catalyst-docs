@@ -2,11 +2,11 @@
 title: "Render"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/template-engine](../README.md) / render
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/engine/template-engine](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/template-engine/readme/) / render
 
 # Function: render()
 
@@ -29,7 +29,7 @@ Absolute or templates-dir-relative path to the `.eta`
 
 ### data
 
-[`TemplateData`](../interfaces/TemplateData.md)
+[`TemplateData`](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/template-engine/interfaces/templatedata/)
 
 Values passed to the template. They appear as `it.<key>`
   inside the template, together with the injected helper namespaces.

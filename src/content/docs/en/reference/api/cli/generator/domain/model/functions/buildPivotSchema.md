@@ -2,15 +2,15 @@
 title: "BuildPivotSchema"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/domain/model](../README.md) / buildPivotSchema
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/domain/model](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/readme/) / buildPivotSchema
 
 # Function: buildPivotSchema()
 
-> **buildPivotSchema**(`pivot`): [`ModuleDefinitionSchema`](../interfaces/ModuleDefinitionSchema.md)
+> **buildPivotSchema**(`pivot`): [`ModuleDefinitionSchema`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/moduledefinitionschema/)
 
 Defined in: [generator/domain/model.ts:313](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L313)
 
@@ -22,8 +22,8 @@ TypeScript will force it to be added here.
 
 ### pivot
 
-[`RelationshipPivot`](../interfaces/RelationshipPivot.md)
+[`RelationshipPivot`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/relationshippivot/)
 
 ## Returns
 
-[`ModuleDefinitionSchema`](../interfaces/ModuleDefinitionSchema.md)
+[`ModuleDefinitionSchema`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/moduledefinitionschema/)

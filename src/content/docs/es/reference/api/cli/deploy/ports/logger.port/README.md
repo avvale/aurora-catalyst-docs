@@ -2,15 +2,15 @@
 title: "Overview"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../README.md) / deploy/ports/logger.port
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / deploy/ports/logger.port
 
 # deploy/ports/logger.port
 
 ## Interfaces
 
-- [LoggerPort](interfaces/LoggerPort.md)
-- [Spinner](interfaces/Spinner.md)
+- [LoggerPort](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/loggerport/interfaces/loggerport/)
+- [Spinner](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/loggerport/interfaces/spinner/)

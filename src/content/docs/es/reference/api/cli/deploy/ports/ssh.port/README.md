@@ -2,14 +2,14 @@
 title: "Overview"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../README.md) / deploy/ports/ssh.port
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / deploy/ports/ssh.port
 
 # deploy/ports/ssh.port
 
 ## Interfaces
 
-- [SshPort](interfaces/SshPort.md)
+- [SshPort](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/sshport/interfaces/sshport/)

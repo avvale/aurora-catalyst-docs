@@ -2,11 +2,11 @@
 title: "PropertyArrayOptions"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/domain/model](../README.md) / PropertyArrayOptions
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [generator/domain/model](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/readme/) / PropertyArrayOptions
 
 # Interface: PropertyArrayOptions
 
@@ -45,7 +45,7 @@ Defined in: [generator/domain/model.ts:137](https://github.com/avvale/aurora-cat
 
 ### type
 
-> **type**: [`PropertyType`](../type-aliases/PropertyType.md)
+> **type**: [`PropertyType`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertytype/)
 
 Defined in: [generator/domain/model.ts:139](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L139)
 

@@ -2,11 +2,11 @@
 title: "DeployCredentials"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/domain/model](../README.md) / DeployCredentials
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [deploy/domain/model](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/readme/) / DeployCredentials
 
 # Interface: DeployCredentials
 
@@ -18,7 +18,7 @@ Aggregated credentials passed to the adapter factory.
 
 ### ionos
 
-> **ionos**: [`IonosCredentials`](IonosCredentials.md)
+> **ionos**: [`IonosCredentials`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/ionoscredentials/)
 
 Defined in: [deploy/domain/model.ts:133](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L133)
 
@@ -26,6 +26,6 @@ Defined in: [deploy/domain/model.ts:133](https://github.com/avvale/aurora-cataly
 
 ### plesk
 
-> **plesk**: [`PleskCredentials`](PleskCredentials.md)
+> **plesk**: [`PleskCredentials`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/pleskcredentials/)
 
 Defined in: [deploy/domain/model.ts:134](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L134)

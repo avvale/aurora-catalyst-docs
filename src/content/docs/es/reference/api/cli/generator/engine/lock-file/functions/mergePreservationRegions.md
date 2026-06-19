@@ -2,15 +2,15 @@
 title: "MergePreservationRegions"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/lock-file](../README.md) / mergePreservationRegions
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [generator/engine/lock-file](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/lock-file/readme/) / mergePreservationRegions
 
 # Function: mergePreservationRegions()
 
-> **mergePreservationRegions**(`newContent`, `existingContent`, `priorHashes?`): [`MergeResult`](../interfaces/MergeResult.md)
+> **mergePreservationRegions**(`newContent`, `existingContent`, `priorHashes?`): [`MergeResult`](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/lock-file/interfaces/mergeresult/)
 
 Defined in: [generator/engine/lock-file.ts:225](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L225)
 
@@ -38,4 +38,4 @@ Merge preservation regions: per-region decision based on priorHashes.
 
 ## Returns
 
-[`MergeResult`](../interfaces/MergeResult.md)
+[`MergeResult`](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/lock-file/interfaces/mergeresult/)

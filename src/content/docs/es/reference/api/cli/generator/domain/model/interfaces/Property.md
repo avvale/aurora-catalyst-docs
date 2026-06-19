@@ -2,11 +2,11 @@
 title: "Property"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/domain/model](../README.md) / Property
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [generator/domain/model](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/readme/) / Property
 
 # Interface: Property
 
@@ -39,7 +39,7 @@ For `timestamp`: store with timezone when true.
 
 ### arrayOptions?
 
-> `optional` **arrayOptions?**: [`PropertyArrayOptions`](PropertyArrayOptions.md)
+> `optional` **arrayOptions?**: [`PropertyArrayOptions`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertyarrayoptions/)
 
 Defined in: [generator/domain/model.ts:196](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L196)
 
@@ -104,13 +104,13 @@ Concrete example surfaced in Swagger / GraphQL docs.
 Defined in: [generator/domain/model.ts:211](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L211)
 
 Faker locale method name used by the mocker (e.g. `name.firstName`).
-Overrides the default seed picked from [PropertyType](../type-aliases/PropertyType.md).
+Overrides the default seed picked from [PropertyType](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertytype/).
 
 ***
 
 ### index?
 
-> `optional` **index?**: [`PropertyIndex`](../type-aliases/PropertyIndex.md)
+> `optional` **index?**: [`PropertyIndex`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertyindex/)
 
 Defined in: [generator/domain/model.ts:212](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L212)
 
@@ -136,7 +136,7 @@ Defined in: [generator/domain/model.ts:215](https://github.com/avvale/aurora-cat
 
 ### indexUsing?
 
-> `optional` **indexUsing?**: [`PropertyIndexUsing`](../type-aliases/PropertyIndexUsing.md)
+> `optional` **indexUsing?**: [`PropertyIndexUsing`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertyindexusing/)
 
 Defined in: [generator/domain/model.ts:216](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L216)
 
@@ -222,7 +222,7 @@ Defined in: [generator/domain/model.ts:228](https://github.com/avvale/aurora-cat
 
 ### relationship?
 
-> `optional` **relationship?**: [`PropertyRelationship`](PropertyRelationship.md)
+> `optional` **relationship?**: [`PropertyRelationship`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertyrelationship/)
 
 Defined in: [generator/domain/model.ts:230](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L230)
 
@@ -232,7 +232,7 @@ Relationship metadata when `type` is `relationship`.
 
 ### type
 
-> **type**: [`PropertyType`](../type-aliases/PropertyType.md)
+> **type**: [`PropertyType`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertytype/)
 
 Defined in: [generator/domain/model.ts:231](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L231)
 
@@ -250,7 +250,7 @@ Integer-only: unsigned column when true.
 
 ### webComponent?
 
-> `optional` **webComponent?**: [`PropertyWebComponent`](PropertyWebComponent.md)
+> `optional` **webComponent?**: [`PropertyWebComponent`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertywebcomponent/)
 
 Defined in: [generator/domain/model.ts:235](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L235)
 

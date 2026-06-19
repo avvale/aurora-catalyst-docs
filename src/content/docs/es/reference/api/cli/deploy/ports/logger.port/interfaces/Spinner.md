@@ -2,17 +2,17 @@
 title: "Spinner"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/ports/logger.port](../README.md) / Spinner
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [deploy/ports/logger.port](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/loggerport/readme/) / Spinner
 
 # Interface: Spinner
 
 Defined in: [deploy/ports/logger.port.ts:6](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L6)
 
-Progress indicator returned by [LoggerPort.step](LoggerPort.md#step). Backed by `ora` in
+Progress indicator returned by [LoggerPort.step](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/loggerport/interfaces/loggerport/#step). Backed by `ora` in
 the default adapter. Call exactly one of `succeed` / `fail` / `warn` to
 close the spinner.
 

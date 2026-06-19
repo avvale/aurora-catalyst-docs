@@ -2,14 +2,14 @@
 title: "Overview"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../README.md) / deploy/ports/dns.port
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / deploy/ports/dns.port
 
 # deploy/ports/dns.port
 
 ## Interfaces
 
-- [DnsPort](interfaces/DnsPort.md)
+- [DnsPort](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/dnsport/interfaces/dnsport/)

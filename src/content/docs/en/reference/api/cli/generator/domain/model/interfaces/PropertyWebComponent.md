@@ -2,11 +2,11 @@
 title: "PropertyWebComponent"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/domain/model](../README.md) / PropertyWebComponent
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/domain/model](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/readme/) / PropertyWebComponent
 
 # Interface: PropertyWebComponent
 
@@ -59,16 +59,16 @@ Ordinal position in the list table (ascending).
 
 ### property
 
-> **property**: [`Property`](Property.md)
+> **property**: [`Property`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/property/)
 
 Defined in: [generator/domain/model.ts:182](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L182)
 
-Back-reference to the owning [Property](Property.md). Used by templates.
+Back-reference to the owning [Property](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/property/). Used by templates.
 
 ***
 
 ### type
 
-> **type**: [`WebComponentType`](../type-aliases/WebComponentType.md)
+> **type**: [`WebComponentType`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/type-aliases/webcomponenttype/)
 
 Defined in: [generator/domain/model.ts:183](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L183)

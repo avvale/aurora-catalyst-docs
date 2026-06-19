@@ -2,11 +2,11 @@
 title: "SaveLockFiles"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/lock-file](../README.md) / saveLockFiles
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [generator/engine/lock-file](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/lock-file/readme/) / saveLockFiles
 
 # Function: saveLockFiles()
 
@@ -28,11 +28,11 @@ Save lock files to `cliter/{boundedContext}/.locks/{scope}/{moduleName}.lock.jso
 
 ### lockFiles
 
-[`LockFile`](../../../domain/model/interfaces/LockFile.md)[]
+[`LockFile`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/lockfile/)[]
 
 ### scope
 
-[`Scope`](../../../domain/model/type-aliases/Scope.md)
+[`Scope`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/scope/)
 
 ### cwd?
 

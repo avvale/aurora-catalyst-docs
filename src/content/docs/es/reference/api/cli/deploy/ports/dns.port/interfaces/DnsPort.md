@@ -2,11 +2,11 @@
 title: "DnsPort"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/ports/dns.port](../README.md) / DnsPort
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [deploy/ports/dns.port](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/dnsport/readme/) / DnsPort
 
 # Interface: DnsPort
 
@@ -21,7 +21,7 @@ Swapping providers is done by implementing a new adapter and wiring it in
 
 ### upsertRecord()
 
-> **upsertRecord**(`params`): `Promise`\<[`DnsRecordResult`](../../../domain/model/interfaces/DnsRecordResult.md)\>
+> **upsertRecord**(`params`): `Promise`\<[`DnsRecordResult`](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/interfaces/dnsrecordresult/)\>
 
 Defined in: [deploy/ports/dns.port.ts:22](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/dns.port.ts#L22)
 
@@ -43,7 +43,7 @@ Fully qualified domain (e.g. `api.example.com`).
 
 ###### type
 
-[`DnsRecordType`](../../../domain/model/type-aliases/DnsRecordType.md)
+[`DnsRecordType`](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/type-aliases/dnsrecordtype/)
 
 Record type (`A` or `CNAME`).
 
@@ -61,4 +61,4 @@ DNS zone the record belongs to (e.g. `example.com`).
 
 #### Returns
 
-`Promise`\<[`DnsRecordResult`](../../../domain/model/interfaces/DnsRecordResult.md)\>
+`Promise`\<[`DnsRecordResult`](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/interfaces/dnsrecordresult/)\>

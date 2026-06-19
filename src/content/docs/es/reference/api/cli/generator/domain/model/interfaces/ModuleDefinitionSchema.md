@@ -2,11 +2,11 @@
 title: "ModuleDefinitionSchema"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/domain/model](../README.md) / ModuleDefinitionSchema
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [generator/domain/model](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/readme/) / ModuleDefinitionSchema
 
 # Interface: ModuleDefinitionSchema
 
@@ -20,7 +20,7 @@ default-filling.
 
 ### additionalApis?
 
-> `optional` **additionalApis?**: [`AdditionalApi`](AdditionalApi.md)[]
+> `optional` **additionalApis?**: [`AdditionalApi`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/additionalapi/)[]
 
 Defined in: [generator/domain/model.ts:279](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L279)
 
@@ -36,7 +36,7 @@ Defined in: [generator/domain/model.ts:280](https://github.com/avvale/aurora-cat
 
 ### aggregateProperties
 
-> **aggregateProperties**: [`Property`](Property.md)[]
+> **aggregateProperties**: [`Property`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/property/)[]
 
 Defined in: [generator/domain/model.ts:281](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L281)
 
@@ -80,7 +80,7 @@ Frontend-only presentation metadata (icon, grammatical gender, ...).
 
 #### gender?
 
-> `optional` **gender?**: [`Gender`](../type-aliases/Gender.md)
+> `optional` **gender?**: [`Gender`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/gender/)
 
 Grammatical gender of the module's singular noun. Used by the
 generator to pick `F`/`M` variants from the global i18n JSON

@@ -2,11 +2,11 @@
 title: "Gender"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/domain/model](../README.md) / Gender
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [generator/domain/model](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/readme/) / Gender
 
 # Type Alias: Gender
 
@@ -14,4 +14,4 @@ title: "Gender"
 
 Defined in: [generator/domain/model.ts:49](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L49)
 
-Grammatical gender of the module's singular noun. See [ModuleDefinitionSchema.front](../interfaces/ModuleDefinitionSchema.md#front).
+Grammatical gender of the module's singular noun. See [ModuleDefinitionSchema.front](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/moduledefinitionschema/#front).

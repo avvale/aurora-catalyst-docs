@@ -2,15 +2,15 @@
 title: "FindLockFile"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/lock-file](../README.md) / findLockFile
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/engine/lock-file](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/lock-file/readme/) / findLockFile
 
 # Function: findLockFile()
 
-> **findLockFile**(`lockFiles`, `relativePath`): [`LockFile`](../../../domain/model/interfaces/LockFile.md) \| `undefined`
+> **findLockFile**(`lockFiles`, `relativePath`): [`LockFile`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/lockfile/) \| `undefined`
 
 Defined in: [generator/engine/lock-file.ts:341](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L341)
 
@@ -20,7 +20,7 @@ Find a lock file entry by relative file path.
 
 ### lockFiles
 
-[`LockFile`](../../../domain/model/interfaces/LockFile.md)[]
+[`LockFile`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/lockfile/)[]
 
 ### relativePath
 
@@ -28,4 +28,4 @@ Find a lock file entry by relative file path.
 
 ## Returns
 
-[`LockFile`](../../../domain/model/interfaces/LockFile.md) \| `undefined`
+[`LockFile`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/lockfile/) \| `undefined`

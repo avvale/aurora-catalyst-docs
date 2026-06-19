@@ -10,13 +10,13 @@ title: "Overview"
 
 ## Modules
 
-- [deploy/domain/model](deploy/domain/model/README.md)
-- [deploy/ports/cicd.port](deploy/ports/cicd.port/README.md)
-- [deploy/ports/dns.port](deploy/ports/dns.port/README.md)
-- [deploy/ports/hosting.port](deploy/ports/hosting.port/README.md)
-- [deploy/ports/logger.port](deploy/ports/logger.port/README.md)
-- [deploy/ports/ssh.port](deploy/ports/ssh.port/README.md)
-- [generator/domain/model](generator/domain/model/README.md)
-- [generator/engine/file-manager](generator/engine/file-manager/README.md)
-- [generator/engine/lock-file](generator/engine/lock-file/README.md)
-- [generator/engine/template-engine](generator/engine/template-engine/README.md)
+- [deploy/domain/model](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/readme/)
+- [deploy/ports/cicd.port](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/cicdport/readme/)
+- [deploy/ports/dns.port](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/dnsport/readme/)
+- [deploy/ports/hosting.port](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/hostingport/readme/)
+- [deploy/ports/logger.port](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/loggerport/readme/)
+- [deploy/ports/ssh.port](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/sshport/readme/)
+- [generator/domain/model](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/readme/)
+- [generator/engine/file-manager](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/file-manager/readme/)
+- [generator/engine/lock-file](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/lock-file/readme/)
+- [generator/engine/template-engine](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/template-engine/readme/)

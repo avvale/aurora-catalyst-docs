@@ -2,21 +2,21 @@
 title: "Overview"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../README.md) / generator/engine/template-engine
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / generator/engine/template-engine
 
 # generator/engine/template-engine
 
 ## Interfaces
 
-- [TemplateData](interfaces/TemplateData.md)
+- [TemplateData](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/template-engine/interfaces/templatedata/)
 
 ## Functions
 
-- [getBaseTemplatesDir](functions/getBaseTemplatesDir.md)
-- [getTemplatesDir](functions/getTemplatesDir.md)
-- [render](functions/render.md)
-- [renderString](functions/renderString.md)
+- [getBaseTemplatesDir](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/template-engine/functions/getbasetemplatesdir/)
+- [getTemplatesDir](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/template-engine/functions/gettemplatesdir/)
+- [render](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/template-engine/functions/render/)
+- [renderString](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/template-engine/functions/renderstring/)

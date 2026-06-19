@@ -2,11 +2,11 @@
 title: "GenerateContents"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/file-manager](../README.md) / generateContents
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/engine/file-manager](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/readme/) / generateContents
 
 # Function: generateContents()
 
@@ -17,16 +17,16 @@ Defined in: [generator/engine/file-manager.ts:148](https://github.com/avvale/aur
 Recursively walk a template directory on disk and generate every file
 within it into the target location. Applies filename substitution,
 exclusion filters (`excludedFiles`, `excludedOperations`) and the
-overwrite rules defined in [GenerateOptions](../interfaces/GenerateOptions.md).
+overwrite rules defined in [GenerateOptions](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/interfaces/generateoptions/).
 
-Use [generateFromTemplate](generateFromTemplate.md) unless you need to generate from a custom
+Use [generateFromTemplate](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/functions/generatefromtemplate/) unless you need to generate from a custom
 directory outside the bundled template tree.
 
 ## Parameters
 
 ### logger
 
-[`FileLogger`](../interfaces/FileLogger.md)
+[`FileLogger`](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/interfaces/filelogger/)
 
 ### originPath
 
@@ -42,11 +42,11 @@ directory outside the bundled template tree.
 
 ### options?
 
-[`GenerateOptions`](../interfaces/GenerateOptions.md) = `{}`
+[`GenerateOptions`](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/interfaces/generateoptions/) = `{}`
 
 ### result?
 
-[`GenerationResult`](../interfaces/GenerationResult.md) = `...`
+[`GenerationResult`](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/interfaces/generationresult/) = `...`
 
 ## Returns
 

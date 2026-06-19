@@ -2,11 +2,11 @@
 title: "GenerationContext"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/domain/model](../README.md) / GenerationContext
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [generator/domain/model](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/readme/) / GenerationContext
 
 # Interface: GenerationContext
 
@@ -68,7 +68,7 @@ Enable per-file / per-region log lines.
 
 ### lockFiles
 
-> **lockFiles**: [`LockFile`](LockFile.md)[]
+> **lockFiles**: [`LockFile`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/lockfile/)[]
 
 Defined in: [generator/domain/model.ts:423](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L423)
 
@@ -88,7 +88,7 @@ Paths of files whose skeleton was detected as user-modified this run.
 
 ### schema
 
-> **schema**: [`ModuleDefinitionSchema`](ModuleDefinitionSchema.md)
+> **schema**: [`ModuleDefinitionSchema`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/moduledefinitionschema/)
 
 Defined in: [generator/domain/model.ts:426](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L426)
 
@@ -96,6 +96,6 @@ Defined in: [generator/domain/model.ts:426](https://github.com/avvale/aurora-cat
 
 ### scope
 
-> **scope**: [`Scope`](../type-aliases/Scope.md)
+> **scope**: [`Scope`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/type-aliases/scope/)
 
 Defined in: [generator/domain/model.ts:427](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L427)

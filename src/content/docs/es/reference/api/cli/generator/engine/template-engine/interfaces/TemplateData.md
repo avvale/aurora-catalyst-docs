@@ -2,11 +2,11 @@
 title: "TemplateData"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/template-engine](../README.md) / TemplateData
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [generator/engine/template-engine](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/template-engine/readme/) / TemplateData
 
 # Interface: TemplateData
 
@@ -15,7 +15,7 @@ Defined in: [generator/engine/template-engine.ts:39](https://github.com/avvale/a
 Bag of values passed to an Eta template as `it`. Templates access both
 user-provided data (schema, moduleName, etc.) and injected helper
 namespaces (`it.filters`, `it.mappers`, `it.fmt`, `it.gen`, `it.mock`,
-`it.predicates`, `it.config`, `it.uuid`) — see [render](../functions/render.md).
+`it.predicates`, `it.config`, `it.uuid`) — see [render](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/template-engine/functions/render/).
 
 ## Indexable
 

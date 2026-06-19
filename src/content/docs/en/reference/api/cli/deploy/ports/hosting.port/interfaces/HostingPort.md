@@ -2,11 +2,11 @@
 title: "HostingPort"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/ports/hosting.port](../README.md) / HostingPort
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [deploy/ports/hosting.port](/aurora-catalyst-docs/en/reference/api/cli/deploy/ports/hostingport/readme/) / HostingPort
 
 # Interface: HostingPort
 
@@ -50,7 +50,7 @@ Subscription/domain identifier returned by
 
 ###### type
 
-[`DatabaseType`](../../../domain/model/type-aliases/DatabaseType.md)
+[`DatabaseType`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/type-aliases/databasetype/)
 
 ###### user
 
@@ -64,7 +64,7 @@ Subscription/domain identifier returned by
 
 ### createSubscription()
 
-> **createSubscription**(`params`): `Promise`\<[`SubscriptionResult`](../../../domain/model/interfaces/SubscriptionResult.md)\>
+> **createSubscription**(`params`): `Promise`\<[`SubscriptionResult`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/subscriptionresult/)\>
 
 Defined in: [deploy/ports/hosting.port.ts:32](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/hosting.port.ts#L32)
 
@@ -92,7 +92,7 @@ Create (or reuse) a hosting subscription and its FTP credentials for a domain.
 
 #### Returns
 
-`Promise`\<[`SubscriptionResult`](../../../domain/model/interfaces/SubscriptionResult.md)\>
+`Promise`\<[`SubscriptionResult`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/subscriptionresult/)\>
 
 Object with `domainId` (numeric identifier used by later calls)
   and `action: 'created' | 'existing'`.

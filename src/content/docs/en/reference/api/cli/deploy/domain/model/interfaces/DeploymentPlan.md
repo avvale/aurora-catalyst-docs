@@ -2,11 +2,11 @@
 title: "DeploymentPlan"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/domain/model](../README.md) / DeploymentPlan
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / [deploy/domain/model](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/readme/) / DeploymentPlan
 
 # Interface: DeploymentPlan
 
@@ -39,7 +39,7 @@ Database provisioning config. Omitted when the target has no DB.
 
 #### type
 
-> **type**: [`DatabaseType`](../type-aliases/DatabaseType.md)
+> **type**: [`DatabaseType`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/type-aliases/databasetype/)
 
 #### user
 
@@ -59,7 +59,7 @@ Working directory on the server (e.g. `/httpdocs`).
 
 ### dnsRecordType
 
-> **dnsRecordType**: [`DnsRecordType`](../type-aliases/DnsRecordType.md)
+> **dnsRecordType**: [`DnsRecordType`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/type-aliases/dnsrecordtype/)
 
 Defined in: [deploy/domain/model.ts:63](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L63)
 
@@ -303,6 +303,6 @@ Node.js entry file. Auto-detected from `package.json` `main`.
 
 ### target
 
-> **target**: [`DeployTarget`](../type-aliases/DeployTarget.md)
+> **target**: [`DeployTarget`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/type-aliases/deploytarget/)
 
 Defined in: [deploy/domain/model.ts:113](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L113)

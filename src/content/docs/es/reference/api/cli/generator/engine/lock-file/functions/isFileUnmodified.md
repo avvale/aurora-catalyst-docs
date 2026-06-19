@@ -2,11 +2,11 @@
 title: "IsFileUnmodified"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [generator/engine/lock-file](../README.md) / isFileUnmodified
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [generator/engine/lock-file](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/lock-file/readme/) / isFileUnmodified
 
 # Function: isFileUnmodified()
 
@@ -25,7 +25,7 @@ Returns true if the file has NOT been modified by the user.
 
 ### lockFiles
 
-[`LockFile`](../../../domain/model/interfaces/LockFile.md)[]
+[`LockFile`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/lockfile/)[]
 
 ### relativePath
 

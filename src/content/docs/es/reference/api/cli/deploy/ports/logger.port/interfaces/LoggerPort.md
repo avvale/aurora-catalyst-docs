@@ -2,11 +2,11 @@
 title: "LoggerPort"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/es/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../../README.md) / [deploy/ports/logger.port](../README.md) / LoggerPort
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/es/reference/api/cli/readme/) / [deploy/ports/logger.port](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/loggerport/readme/) / LoggerPort
 
 # Interface: LoggerPort
 
@@ -117,7 +117,7 @@ Append a structured entry to the log file about a caught error.
 
 ### step()
 
-> **step**(`label`): [`Spinner`](Spinner.md)
+> **step**(`label`): [`Spinner`](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/loggerport/interfaces/spinner/)
 
 Defined in: [deploy/ports/logger.port.ts:40](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L40)
 
@@ -132,7 +132,7 @@ closing it via `succeed` / `fail` / `warn`.
 
 #### Returns
 
-[`Spinner`](Spinner.md)
+[`Spinner`](/aurora-catalyst-docs/es/reference/api/cli/deploy/ports/loggerport/interfaces/spinner/)
 
 ***
 

@@ -2,21 +2,21 @@
 title: "Overview"
 ---
 
-[**@aurorajs.dev/catalyst-cli**](../../../README.md)
+[**@aurorajs.dev/catalyst-cli**](/aurora-catalyst-docs/en/reference/api/cli/readme/)
 
 ***
 
-[@aurorajs.dev/catalyst-cli](../../../README.md) / generator/engine/file-manager
+[@aurorajs.dev/catalyst-cli](/aurora-catalyst-docs/en/reference/api/cli/readme/) / generator/engine/file-manager
 
 # generator/engine/file-manager
 
 ## Interfaces
 
-- [FileLogger](interfaces/FileLogger.md)
-- [GenerateOptions](interfaces/GenerateOptions.md)
-- [GenerationResult](interfaces/GenerationResult.md)
+- [FileLogger](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/interfaces/filelogger/)
+- [GenerateOptions](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/interfaces/generateoptions/)
+- [GenerationResult](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/interfaces/generationresult/)
 
 ## Functions
 
-- [generateContents](functions/generateContents.md)
-- [generateFromTemplate](functions/generateFromTemplate.md)
+- [generateContents](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/functions/generatecontents/)
+- [generateFromTemplate](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/functions/generatefromtemplate/)
