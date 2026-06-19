@@ -91,6 +91,7 @@ pnpm sync
 | Dev server                        | `pnpm dev`                                    |
 | Build (with link check)           | `pnpm build`                                  |
 | Preview build                     | `pnpm preview`                                |
+| Check internal links (post-build) | `pnpm check:links`                            |
 | Unit tests (script helpers)       | `pnpm test`                                   |
 | Import CLI commands + API         | `pnpm sync`                                   |
 | Import from a single source       | `pnpm sync --source cli`                      |
