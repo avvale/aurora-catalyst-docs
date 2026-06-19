@@ -1,22 +1,21 @@
 import { describe, it, expect } from 'vitest';
 import {
-  EXTERNAL_SKIP,
+  isExternalTo,
   selectBroken,
   formatReport,
   type LinkLike,
 } from '../link-check.js';
 
-describe('EXTERNAL_SKIP', () => {
-  const re = new RegExp(EXTERNAL_SKIP);
-
-  it('matches (skips) external links', () => {
-    expect(re.test('https://example.com/docs')).toBe(true);
-    expect(re.test('http://github.com/avvale')).toBe(true);
+describe('isExternalTo', () => {
+  const origin = 'http://localhost:4322';
+  it('treats different-origin URLs as external (skipped)', () => {
+    expect(isExternalTo(origin, 'https://example.com/docs')).toBe(true);
+    expect(isExternalTo(origin, 'http://github.com/avvale')).toBe(true);
+    expect(isExternalTo(origin, 'http://localhost:9999/x')).toBe(true);
   });
-
-  it('does not match (keeps) local preview links', () => {
-    expect(re.test('http://localhost:4321/aurora-catalyst-docs/en/')).toBe(false);
-    expect(re.test('http://localhost:5000/aurora-catalyst-docs/es/guides/')).toBe(false);
+  it('treats same-origin URLs as internal (validated)', () => {
+    expect(isExternalTo(origin, 'http://localhost:4322/aurora-catalyst-docs/en/')).toBe(false);
+    expect(isExternalTo(origin, 'http://localhost:4322/aurora-catalyst-docs/es/guides/')).toBe(false);
   });
 });
 

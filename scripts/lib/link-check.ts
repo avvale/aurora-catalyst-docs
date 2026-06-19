@@ -12,12 +12,14 @@ export interface LinkLike {
 }
 
 /**
- * linksToSkip regex source. A link is skipped when it MATCHES this pattern.
- * The negative lookahead matches every URL that does NOT start with the local
- * preview origin, so all external (http/https) links are skipped while the
- * localhost preview links (any port) are still validated.
+ * Whether `url` is external to the crawl — i.e. not served from `origin`
+ * (the resolved preview origin, e.g. "http://localhost:4322"). Passed to
+ * linkinator's linksToSkip so only same-origin internal links are validated,
+ * regardless of the scheme/host/port the preview actually advertised.
  */
-export const EXTERNAL_SKIP = '^(?!http://localhost)';
+export function isExternalTo(origin: string, url: string): boolean {
+  return !url.startsWith(origin);
+}
 
 /** Keep only the links linkinator flagged as broken. */
 export function selectBroken(links: LinkLike[]): LinkLike[] {

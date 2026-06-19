@@ -11,7 +11,7 @@
 import { spawn, type ChildProcess } from 'node:child_process';
 import { LinkChecker } from 'linkinator';
 import {
-  EXTERNAL_SKIP,
+  isExternalTo,
   selectBroken,
   formatReport,
   type LinkLike,
@@ -79,11 +79,12 @@ async function main(): Promise<number> {
   const { url, stop } = await startPreview();
   console.log(`Crawling ${url} for broken internal links…`);
   try {
+    const origin = new URL(url).origin;
     const checker = new LinkChecker();
     const result = await checker.check({
       path: url,
       recurse: true,
-      linksToSkip: [EXTERNAL_SKIP],
+      linksToSkip: (link: string) => Promise.resolve(isExternalTo(origin, link)),
     });
 
     const broken = selectBroken(result.links as LinkLike[]);
