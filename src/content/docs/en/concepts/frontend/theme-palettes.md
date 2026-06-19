@@ -50,8 +50,8 @@ The same chain runs twice, at two different moments, for two different reasons:
    │            a stale or unknown value, and exposes the palette() signal as the
    │            single post-bootstrap source of truth.
    │
- RUNTIME        service.set(id) swaps the .theme-* class on <body>,
-   │            persists to localStorage, and updates the signal.
+ RUNTIME        service.set(id) swaps the .theme-* class on <body>, loads the
+   │            palette's font if it declares one, persists, updates the signal.
    │
  PROPAGATION    The --* design tokens cascade from <body> to the whole UI.
                 Spartan maps --color-* on top of them, so every component
@@ -69,6 +69,7 @@ Each palette is two self-contained CSS blocks, scoped by the `<body>` class and 
   color-scheme: light;
   --background: oklch(…);
   --primary: oklch(…);
+  --font-sans: Inter, sans-serif;
   --chart-1: oklch(…);
   /* …all the design tokens… */
 }
@@ -79,7 +80,24 @@ Each palette is two self-contained CSS blocks, scoped by the `<body>` class and 
 }
 ```
 
-Tokens are the only contract. Components never name colors directly — they read `--*` tokens — so a palette swap or a light/dark toggle re-colors everything for free. Categorical data uses `--chart-1..5`; semantic states use tokens like `--destructive`.
+Tokens are the only contract. Components never name colors directly — they read `--*` tokens — so a palette swap or a light/dark toggle re-colors everything for free. Categorical data uses `--chart-1..5`; semantic states use tokens like `--destructive`. A palette can also carry a `fontHref` in its registry entry (see below).
+
+## How fonts follow the theme
+
+A token is only half the story: declaring `--font-sans` in a palette does nothing until something *applies* it. Colors were already applied through Spartan's Tailwind utilities; typography was not — until an explicit binding in `styles.css`:
+
+```css
+body {
+  /* the theme-* class lives on <body>, so --font-sans resolves from the active palette */
+  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+}
+```
+
+Because the binding reads `--font-sans` off `<body>` — where the palette class lives — switching palette also switches typography, with a safe system fallback when a palette omits the token.
+
+Loading the font *file* is separate and on demand. A palette may carry a `fontHref` (a Google Fonts URL) in its registry entry (`environment.appearance.palettes`); when that palette becomes active, `ThemePaletteService` injects a single `<link rel="stylesheet" data-theme-font="<id>">` into `<head>` — once (idempotent) and only for the active palette, so no build ships a font it isn't using. Palettes that rely on a system stack have no `fontHref` and load nothing.
+
+**Edge case:** the login page does not instantiate `ThemePaletteService`, so a palette's web font is not loaded there — although the anti-FOUC script still applies the palette class.
 
 ## How charts stay in sync
 

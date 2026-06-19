@@ -1,13 +1,13 @@
 ---
 title: Gestionar themes
-description: "Usar el selector de paletas del header, añadir una paleta nueva desde un export de tweakcn y mantener el selector oculto en los builds de producción."
+description: "Usar el selector de paletas del header, añadir una paleta nueva desde un export de tweakcn en un comando y mantener el selector oculto en los builds de producción."
 ---
 
 ## Objetivo
 
-Trabajar con el **gestor de themes** de un frontend Aurora scaffoldeado: cambiar la paleta de color activa desde el header, añadir una paleta nueva desde un export de [tweakcn.com](https://tweakcn.com) y entender por qué el selector desaparece en un build de producción.
+Trabajar con el **gestor de themes** de un frontend Aurora scaffoldeado: cambiar la paleta de color activa desde el header, añadir una paleta nueva desde un export de [tweakcn.com](https://tweakcn.com) en **un solo comando** (CSS, registro y cableado de la fuente incluidos), y entender por qué el selector desaparece en un build de producción.
 
-Para el *porqué* de fondo — la cadena de resolución de tres capas, el flujo anti-**FOUC** y cómo las paletas se propagan a toda la UI incluyendo los charts — mira el concepto [Paletas de theme](../../../concepts/frontend/theme-palettes/). FOUC (*Flash Of Unstyled —o Incorrect— Content*) es ese parpadeo en el que, al cargar la página, ves por un instante el aspecto "equivocado" antes de que se aplique el estilo correcto.
+Para el *porqué* de fondo — la cadena de resolución de tres capas, el flujo anti-**FOUC** y cómo las paletas se propagan a toda la UI incluyendo fuentes y charts — mira el concepto [Paletas de theme](../../../concepts/frontend/theme-palettes/). FOUC (*Flash Of Unstyled —o Incorrect— Content*) es ese parpadeo en el que, al cargar la página, ves por un instante el aspecto "equivocado" antes de que se aplique el estilo correcto.
 
 Dos términos que se usan a lo largo de esta guía:
 
@@ -18,72 +18,76 @@ La paleta activa se resuelve `localStorage["theme-palette"]` → `environment.ap
 
 ## Cambiar de paleta desde el header
 
-El selector de paletas vive en el header (`frontend/src/app/domains/admin/layout/site-header.ts`) tras el icono de paleta (swatch book). Itera `service.palettes` (la lista de `environment.appearance.palettes`), marca con un check la activa y, al hacer clic, llama a `ThemePaletteService.set(id)` — que swapea la clase, persiste la elección y actualiza la signal. Es totalmente independiente del selector claro/oscuro que tiene al lado.
+El selector de paletas vive en el header (`frontend/src/app/domains/admin/layout/site-header.ts`) tras el icono de paleta (swatch book). Itera `service.palettes` (la lista de `environment.appearance.palettes`), marca con un check la activa y, al hacer clic, llama a `ThemePaletteService.set(id)` — que swapea la clase, carga la fuente de la paleta si hace falta, persiste la elección y actualiza la signal. Es totalmente independiente del selector claro/oscuro que tiene al lado.
 
 ## Añadir una paleta nueva
 
-Cuatro pasos llevan una paleta desde la herramienta de diseño hasta el selector.
+Dar de alta una paleta es **un comando**. Escribe el CSS, registra la paleta en todos los environments y cablea su web font — sin editar a mano el servicio ni los ficheros de environment.
 
-1. **Diseña y exporta la paleta** en [tweakcn.com](https://tweakcn.com) y guarda el CSS crudo en un fichero (p. ej. `ocean-export.css`).
+1. **Diseña y exporta** la paleta en [tweakcn.com](https://tweakcn.com) y guarda el CSS crudo en `themes/` (p. ej. `themes/theme-ocean.css`).
 
-2. **Adapta el export** a la convención del proyecto con el importador, ejecutándolo **desde la raíz del proyecto** (donde viven los scripts de `pnpm`), y añádelo a la hoja de estilos:
+2. **Ejecuta el importador desde la raíz del proyecto** (donde viven los scripts de `pnpm` y la carpeta `themes/`) con `--append`:
 
    ```bash
-   # imprime el bloque adaptado por stdout para revisarlo primero
-   pnpm theme:adapt ./ocean-export.css theme-ocean
-
-   # o añádelo directamente a frontend/src/styles.css
-   pnpm theme:adapt ./ocean-export.css theme-ocean --append
+   pnpm theme:adapt themes/theme-ocean.css theme-ocean --name "Ocean" --append
    ```
 
-   El importador emite dos bloques scoped autocontenidos. Revisa lo que aterrizó en `frontend/src/styles.css`:
+   Ese único comando:
 
-   ```css
-   :root .theme-ocean {
-     color-scheme: light;
+   - **appendea** los dos bloques CSS scoped (`:root .theme-ocean` y `:root.dark .theme-ocean`) a `frontend/src/styles.css`;
+   - **registra** `{ id, label, fontHref? }` en los cinco ficheros `environment*.ts` — idempotente, así que reejecutarlo nunca duplica un id existente;
+   - **detecta la web font** del export (`--font-sans` / `--font-serif` / `--font-mono`, ignorando stacks de sistema) y guarda la URL de Google Fonts como `fontHref`.
 
-     --background: oklch(0.98 0 0);
-     --primary: oklch(0.55 0.13 240);
-     /* …cada token del :root del export… */
-     --chart-1: oklch(0.7 0.13 240);
-     --chart-2: oklch(0.62 0.15 250);
-     /* …--chart-3..5… */
-   }
+   `--name` es opcional; sin él, el label se deriva del id (`theme-amber-minimal` → "Amber Minimal"). Quita `--append` para imprimir el CSS adaptado por stdout sin tocar ningún fichero.
 
-   :root.dark .theme-ocean {
-     color-scheme: dark;
-     /* …cada token del bloque .dark del export… */
-   }
-   ```
-
-3. **Registra la paleta** en `environment.appearance.palettes` — la lista de paletas disponibles, declarada por environment en `frontend/src/environments/environment*.ts`. Añade la entrada a cada environment que deba ofrecerla. El `id` debe coincidir con el nombre de la clase scoped; el `label` es lo que muestra el selector:
+   La entrada de registro resultante (en cada env) queda así:
 
    ```ts
-   // frontend/src/environments/environment.ts  (repite en los envs que deban ofrecerla)
+   // frontend/src/environments/environment.ts  (y los otros cuatro envs)
    appearance: {
      theme: 'theme-neutral',     // default del build (debe ser una de las paletas de abajo)
      layout: '',
      themeSelector: true,        // muestra el selector del header en este build
      palettes: [
        { id: 'theme-neutral', label: 'Neutral' },
-       { id: 'theme-amber-minimal', label: 'Amber' },
-       { id: 'theme-ocean', label: 'Ocean' }, // ← tu paleta nueva
+       {
+         id: 'theme-ocean',
+         label: 'Ocean',
+         fontHref: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap',
+       },
      ],
    },
    ```
 
-4. **Carga la web font, si la hay.** Si la paleta declara una web font (p. ej. Inter para `theme-amber-minimal`), añade su `<link>` en `frontend/src/index.html`. `theme-neutral` usa stacks de fuentes del sistema y no carga nada.
+3. **Recarga la app.** La paleta aparece en el selector del header (en builds con `themeSelector: true`), y su fuente se carga sola si la declaró.
 
-La paleta ya aparece en el selector del header en cualquier build con `themeSelector: true`.
+Eso es todo el flujo: CSS + registro en los cinco envs + detección de fuente, en un comando.
 
 ### Qué hace el importador con el export
 
-`pnpm theme:adapt` está implementado por la función pura `adaptTweakcnExport(css, name)` en `scripts/theme/adapt-tweakcn.ts` (cubierta por `pnpm test:theme`). Toma un export crudo de tweakcn — con `:root {}`, `.dark {}`, `@import`, `@theme inline` y similares — y:
+`pnpm theme:adapt` está implementado en `scripts/theme/adapt-tweakcn.ts` por funciones puras — `adaptTweakcnExport`, `detectFontHref`, `registerPaletteInEnvSource`, `deriveLabelFromId` (tests: `pnpm test:theme`). Firma:
 
-- Emite `:root .theme-<name>` a partir del bloque `:root` del export y `:root.dark .theme-<name>` a partir de su bloque `.dark`.
+```bash
+pnpm theme:adapt <export.css> <theme-id> [-n|--name "Etiqueta"] [--append]
+```
+
+Dado un export crudo de tweakcn (`:root {}`, `.dark {}`, `@import`, `@theme inline`, …):
+
+- Emite `:root .theme-<id>` a partir del bloque `:root` del export y `:root.dark .theme-<id>` a partir de su bloque `.dark`, inyectando el `color-scheme` correspondiente.
 - **Descarta** `@import`, `@custom-variant`, `@layer base` y `@theme inline` — eso lo aporta global el preset de Spartan, así que una copia por paleta sería redundante o conflictiva.
-- Inyecta el `color-scheme: light | dark` correspondiente en cada bloque.
+- **Detecta la web font** (primera familia de cada `--font-*`, filtrando stacks de sistema) y construye el `fontHref`.
 - **Avisa** si el export no traía bloque `.dark` (solo se emite el bloque claro).
+
+Con `--append` escribe el CSS en `frontend/src/styles.css` y registra la paleta en los cinco envs; sin él, solo imprime el CSS por stdout.
+
+## Las fuentes siguen al theme
+
+Normalmente no tocas las fuentes a mano — el importador las detecta y el framework las carga. Dos piezas lo hacen posible, ambas detalladas en el concepto:
+
+- **Aplicada:** `frontend/src/styles.css` enlaza `font-family: var(--font-sans, …)` en `<body>`, así que la tipografía sigue al token de la paleta activa.
+- **Cargada:** cuando una paleta declara `fontHref`, `ThemePaletteService` inyecta su `<link rel="stylesheet">` en `<head>` bajo demanda — una sola vez y solo para la paleta activa. Las paletas con stack de sistema no llevan `fontHref` y no cargan nada.
+
+Mira [Paletas de theme › Cómo las fuentes siguen al theme](../../../concepts/frontend/theme-palettes/#cómo-las-fuentes-siguen-al-theme) para el mecanismo y el caso límite de la página de login.
 
 ## Ocultar el selector en producción
 
@@ -107,5 +111,5 @@ Un build de producción, por tanto, sale **sin** el selector; los builds dev / l
 
 ## Relacionado
 
-- [Paletas de theme](../../../concepts/frontend/theme-palettes/) — el concepto: modelo de resolución, flujo anti-FOUC, propagación.
+- [Paletas de theme](../../../concepts/frontend/theme-palettes/) — el concepto: modelo de resolución, flujo anti-FOUC, fuentes, propagación.
 - [tweakcn.com](https://tweakcn.com) — el editor visual de themes que consume el importador.

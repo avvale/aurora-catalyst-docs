@@ -300,6 +300,48 @@
       "classified_at": "2026-06-11T21:16:55.843Z",
       "source_commit": "15878aea6259969da06ee4aeec8eb2574e17e4a2",
       "override": null
+    },
+    "2026-06-12-add-barrels-lint-guard": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "297e038c11b31954cde99c1f26702082d6af7281",
+      "override": null
+    },
+    "2026-06-12-add-hub-app-edit": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "f44716b0d44e6f3f379ba8d2c9f9fd0b3937ef52",
+      "override": null
+    },
+    "2026-06-15-canonicalize-validation-message-pipe": {
+      "status": "dismissed",
+      "reason": "Frontend mirror of the CLI pipe canonicalization: a pure rename of @aurora/pipes runtime symbols with no behavior or spec change (selectors unchanged).",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "da88f5a7e3dcc9f1ba8d71439378701b0edb57aa",
+      "override": null
+    },
+    "2026-06-16-migrate-account-form-to-signal-forms": {
+      "status": "dismissed",
+      "reason": "Behavior-preserving refactor of the IAM account form from Reactive Forms to Signal Forms; public surface unchanged, no new user-facing capability.",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "0b6e91c640589104d8e31a124ce242b4c77c7383",
+      "override": null
+    },
+    "2026-06-16-repository-write-input-generics": {
+      "status": "dismissed",
+      "reason": "Type-safety fix: splits the base repository Aggregate generic into backward-compatible write-input generics to clear a pre-existing TS2416. Invisible to platform usage; motivated by a compile-error bug fix.",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "b02dbf34a57f6d20d6065020069f58aefff9fd2e",
+      "override": null
+    },
+    "2026-06-17-add-color-picker-widget": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "1e9b764950807a5dffed95b56b298965c3711261",
+      "override": null
     }
   },
   "cli": {
@@ -557,6 +599,76 @@
       "classification": "feature",
       "classified_at": "2026-06-11T21:16:55.842Z",
       "source_commit": "dccd05508c72d48b58dce66dcf65099e3581b91f",
+      "override": null
+    },
+    "2026-06-12-emit-cross-module-barrel-imports": {
+      "status": "dismissed",
+      "reason": "Internal frontend codegen template change so generated cross-module references use barrel imports (HR-BARRELS-001 compliance); later superseded by barrel-export-hierarchy. No user-facing API or flow change.",
+      "classified_at": "2026-06-17T15:06:06.051Z",
+      "source_commit": "69393ecb945a933ebc6c788ccef6457d41075c69",
+      "override": null
+    },
+    "2026-06-14-barrel-export-hierarchy": {
+      "status": "dismissed",
+      "reason": "Bug fix in the frontend codegen barrel hierarchy (default exports not re-exported, embedded-list compile error). Internal generated-code correctness; does not change how the platform is used.",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "89de2e2fb072e16383448a9e8ec006ed319731f5",
+      "override": null
+    },
+    "2026-06-14-drop-preservation-region-engine": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "6434d041cba6acb2d8c43834970361a57fae3fa4",
+      "override": null
+    },
+    "2026-06-14-form-model-linked-signal": {
+      "status": "dismissed",
+      "reason": "Internal authoring refactor of generated forms from signal+effect to linkedSignal; public component contract is byte-for-byte unchanged.",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "a39e204ad2a2bf090097667b7391ed3f0a7a961f",
+      "override": null
+    },
+    "2026-06-15-canonicalize-validation-message-pipe": {
+      "status": "dismissed",
+      "reason": "Renames the validation-message pipe file/class and fixes a scaffold->codegen drift that broke fresh-project builds. Internal rename plus bug fix; selectors and runtime behavior unchanged.",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "0c1092a7b25295367053c6844290728c5ff6c7b1",
+      "override": null
+    },
+    "2026-06-15-gate-frontend-barrel-exports-by-excluded-files": {
+      "status": "dismissed",
+      "reason": "Bug fix: frontend barrels re-exported excludedFiles, producing dangling imports and broken builds. Internal codegen correctness.",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "bb1ff170bfb56e1de3bfda9bb2c2086f468d7da2",
+      "override": null
+    },
+    "2026-06-15-generator-payload-first-auth-arg-order": {
+      "status": "dismissed",
+      "reason": "Reorders generated tenant-aware write endpoints to payload-first so array-form @ApplySchema sanitizes the payload, not the account. Fixes a latent security bug class in generated code (no hasTenant module generated yet); internal arg-order fix with no API the developer calls differently.",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "b87b3eacd1710420e8ef38be7403217ab0f3492f",
+      "override": null
+    },
+    "2026-06-16-add-datetime-type-and-remodel-timestamp": {
+      "status": "published",
+      "classification": "breaking",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "6c30c60e54a8e951f21c1dd8156dfc7e7c1753ec",
+      "override": null
+    },
+    "2026-06-16-generator-array-element-non-null": {
+      "status": "dismissed",
+      "reason": "Bug fix: emit [X!] (non-null array elements) in generated GraphQL SDL to clear a frontend TS2345. Internal codegen correctness.",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "9d389a26af7ef663a08addf926a8fadef0fbad14",
+      "override": null
+    },
+    "2026-06-17-redesign-password-field-widget": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-06-17T15:06:06.052Z",
+      "source_commit": "49897aa3760888352f7db1b4d1c304418293528e",
       "override": null
     }
   }

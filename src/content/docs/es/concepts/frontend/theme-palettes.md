@@ -50,8 +50,8 @@ La misma cadena se ejecuta dos veces, en dos momentos distintos, por dos razones
    │            un valor obsoleto o desconocido y expone la signal palette() como
    │            única fuente de verdad post-bootstrap.
    │
- RUNTIME        service.set(id) swapea la clase .theme-* en <body>,
-   │            persiste en localStorage y actualiza la signal.
+ RUNTIME        service.set(id) swapea la clase .theme-* en <body>, carga la
+   │            fuente de la paleta si declara una, persiste y actualiza la signal.
    │
  PROPAGACIÓN    Los tokens --* cascadean desde <body> a toda la UI.
                 Spartan mapea --color-* encima, así que cada componente
@@ -69,6 +69,7 @@ Cada paleta son dos bloques CSS autocontenidos, scoped por la clase de `<body>` 
   color-scheme: light;
   --background: oklch(…);
   --primary: oklch(…);
+  --font-sans: Inter, sans-serif;
   --chart-1: oklch(…);
   /* …todos los tokens de diseño… */
 }
@@ -79,7 +80,24 @@ Cada paleta son dos bloques CSS autocontenidos, scoped por la clase de `<body>` 
 }
 ```
 
-Los tokens son el único contrato. Los componentes nunca nombran colores directamente — leen tokens `--*` — así que un cambio de paleta o de claro/oscuro recolorea todo gratis. Los datos categóricos usan `--chart-1..5`; los estados semánticos usan tokens como `--destructive`.
+Los tokens son el único contrato. Los componentes nunca nombran colores directamente — leen tokens `--*` — así que un cambio de paleta o de claro/oscuro recolorea todo gratis. Los datos categóricos usan `--chart-1..5`; los estados semánticos usan tokens como `--destructive`. Una paleta puede llevar además un `fontHref` en su entrada del registro (ver más abajo).
+
+## Cómo las fuentes siguen al theme
+
+Un token es solo la mitad de la historia: declarar `--font-sans` en una paleta no hace nada hasta que algo lo *aplica*. Los colores ya se aplicaban vía las utilidades de Tailwind de Spartan; la tipografía no — hasta un binding explícito en `styles.css`:
+
+```css
+body {
+  /* la clase theme-* vive en <body>, así que --font-sans se resuelve desde la paleta activa */
+  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+}
+```
+
+Como el binding lee `--font-sans` de `<body>` — donde vive la clase de la paleta — cambiar de paleta también cambia la tipografía, con un fallback de sistema seguro cuando una paleta omite el token.
+
+Cargar el *fichero* de fuente es algo aparte y bajo demanda. Una paleta puede llevar un `fontHref` (una URL de Google Fonts) en su entrada del registro (`environment.appearance.palettes`); cuando esa paleta se activa, `ThemePaletteService` inyecta un único `<link rel="stylesheet" data-theme-font="<id>">` en `<head>` — una sola vez (idempotente) y solo para la paleta activa, así que ningún build carga una fuente que no usa. Las paletas que se apoyan en un stack de sistema no llevan `fontHref` y no cargan nada.
+
+**Caso límite:** la página de login no instancia `ThemePaletteService`, así que la web font de una paleta no se carga ahí — aunque el script anti-FOUC sí aplica la clase de la paleta.
 
 ## Cómo se mantienen sincronizados los charts
 
