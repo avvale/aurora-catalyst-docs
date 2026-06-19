@@ -233,4 +233,4 @@ El test es simple: **¿necesitas una signal?** Si sí, composable. Si no, fetche
 
 - [Historial de cambios: Añadir GraphQL Fetchers](../../../changes/catalyst/2026-04-22-query-mutate-layer-separation/) — la propuesta original y las notas de diseño.
 - [Guías](../../../guides/) — recetas orientadas a tareas cuando ya manejes lo básico.
-- [Referencia: API](../../../reference/api/) — la superficie TypeScript completa de `@aurora`.
+- [Referencia: API](../../../reference/api/cli/) — la superficie TypeScript completa de `@aurora`.

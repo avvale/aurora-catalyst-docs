@@ -60,5 +60,5 @@ Preservation regions are built around a few explicit decisions worth knowing:
 
 - How-to: Customize a form preserving the layout *(coming)*
 - How-to: Add a preservation region to your own template *(coming)*
-- Reference: [`lock-file.ts` API](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/lock-file/)
+- Reference: [`lock-file.ts` API](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/lock-file/readme/)
 - Reference: lockfile format *(coming)*
