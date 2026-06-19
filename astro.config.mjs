@@ -95,7 +95,27 @@ export default defineConfig({
         {
           label: 'How-to guides',
           translations: { es: 'Guías' },
-          items: [{ autogenerate: { directory: 'guides' } }],
+          // Manual subgroups so the directory-derived labels render capitalized
+          // ("Backend"/"Frontend"/"Workflow") instead of the raw lowercase dir
+          // names a flat `autogenerate: { directory: 'guides' }` would produce.
+          items: [
+            { slug: 'guides' },
+            {
+              label: 'Backend',
+              translations: { es: 'Backend' },
+              items: [{ autogenerate: { directory: 'guides/backend' } }],
+            },
+            {
+              label: 'Frontend',
+              translations: { es: 'Frontend' },
+              items: [{ autogenerate: { directory: 'guides/frontend' } }],
+            },
+            {
+              label: 'Workflow',
+              translations: { es: 'Workflow' },
+              items: [{ autogenerate: { directory: 'guides/workflow' } }],
+            },
+          ],
         },
         {
           label: 'Reference',

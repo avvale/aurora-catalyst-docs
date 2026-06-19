@@ -73,5 +73,5 @@ Verificado en el DOM (`Code` a 90 px del borde izquierdo, `Name` a 250 px) cuand
 
 ## Relacionado
 
-- [Renderers de celdas](./cell-renderers/) — el concept hermano que cubre cómo se renderiza el valor de cada columna (el QUÉ). El pinning es el DÓNDE.
+- [Renderers de celdas](../cell-renderers/) — el concept hermano que cubre cómo se renderiza el valor de cada columna (el QUÉ). El pinning es el DÓNDE.
 - [Configurar un módulo frontend](../../../guides/frontend/configure-a-frontend-module/) — el workflow más amplio en el que vive esto.

@@ -73,5 +73,5 @@ Verified in the DOM (`Code` 90 px from the left edge, `Name` 250 px) when both c
 
 ## Related
 
-- [Cell renderers](./cell-renderers/) — the sibling concept that covers how each column's value is rendered (the WHAT). Pinning is the WHERE.
+- [Cell renderers](../cell-renderers/) — the sibling concept that covers how each column's value is rendered (the WHAT). Pinning is the WHERE.
 - [Configure a frontend module](../../../guides/frontend/configure-a-frontend-module/) — the broader workflow this lives inside.

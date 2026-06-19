@@ -35,7 +35,7 @@ Take a freshly-scaffolded frontend module and configure it through its `*.aurora
 
 4. **Tweak field widths.** The default span table covers most cases — `boolean` / `date` / `time` → 3, numerics → 4, `varchar` by `maxLength` (≤30 → 4, 31–80 → 6, >80 → 12), `text` and grid relations → 12. Override per property with `widget.span: 1–12` when the default does not fit. The last field of an incomplete row auto-expands to fill the gap. Concept: [Form field widths](../../../concepts/frontend/form-field-widths/).
 
-5. **(Optional) Opt the module into embed mode.** If this module is a CHILD that should be edited inside its parent's detail, declare `front.embedSupport: true` at the top level. The codegen then emits the polymorphic list (`mode: 'standalone' | 'embed'`), the form-embed component, and the embed columns factory. The PARENT's YAML separately declares `widget.type: grid-elements-manager` on the property pointing here. Concept: [Embed mode (parent-child)](../../../concepts/frontend/embed-mode/). Recipe: [Implement a grid-elements-manager widget](./implement-grid-elements-manager/).
+5. **(Optional) Opt the module into embed mode.** If this module is a CHILD that should be edited inside its parent's detail, declare `front.embedSupport: true` at the top level. The codegen then emits the polymorphic list (`mode: 'standalone' | 'embed'`), the form-embed component, and the embed columns factory. The PARENT's YAML separately declares `widget.type: grid-elements-manager` on the property pointing here. Concept: [Embed mode (parent-child)](../../../concepts/frontend/embed-mode/). Recipe: [Implement a grid-elements-manager widget](../implement-grid-elements-manager/).
 
 6. **Customize fields beyond the YAML's reach.** The form-component template emits `AURORA:FORM-FIELDS-START/END` markers around the field block. Anything you write inside that region survives regeneration byte-for-byte — custom validators, hand-tuned field reorderings, freeform markup, anything the layout cannot express declaratively. Concept: [Preservation regions](../../../concepts/frontend/preservation-regions/).
 
@@ -82,5 +82,5 @@ Expected — the widget is a section, not a field, and always renders full-width
 - [Form field widths](../../../concepts/frontend/form-field-widths/) — the grid system.
 - [Embed mode (parent-child)](../../../concepts/frontend/embed-mode/) — the parent-child model.
 - [Preservation regions](../../../concepts/frontend/preservation-regions/) — owning a slice of generated code.
-- [Implement a grid-elements-manager widget](./implement-grid-elements-manager/) — focused recipe for the embed widget.
+- [Implement a grid-elements-manager widget](../implement-grid-elements-manager/) — focused recipe for the embed widget.
 - [`catalyst generate` reference](../../../reference/cli-commands/generate/) — every flag and argument.

@@ -35,7 +35,7 @@ Coger un módulo frontend recién scaffoldeado y configurarlo a través de su `*
 
 4. **Ajusta los anchos de los campos.** La tabla de defaults cubre la mayoría de los casos — `boolean` / `date` / `time` → 3, numéricos → 4, `varchar` por `maxLength` (≤30 → 4, 31–80 → 6, >80 → 12), `text` y relaciones grid → 12. Sobreescribe por property con `widget.span: 1–12` cuando el default no encaje. El último campo de una fila incompleta se auto-expande para rellenar el hueco. Concepto: [Ancho de campos en formulario](../../../concepts/frontend/form-field-widths/).
 
-5. **(Opcional) Opta al módulo al modo embed.** Si este módulo es un HIJO que debe editarse dentro del detail de su padre, declara `front.embedSupport: true` a nivel raíz. El codegen emite entonces la lista polimórfica (`mode: 'standalone' | 'embed'`), el componente form-embed y la factory de columnas embed. El YAML del PADRE declara aparte `widget.type: grid-elements-manager` sobre la property que apunta aquí. Concepto: [Embed mode (padre-hijo)](../../../concepts/frontend/embed-mode/). Receta: [Implementar un widget grid-elements-manager](./implement-grid-elements-manager/).
+5. **(Opcional) Opta al módulo al modo embed.** Si este módulo es un HIJO que debe editarse dentro del detail de su padre, declara `front.embedSupport: true` a nivel raíz. El codegen emite entonces la lista polimórfica (`mode: 'standalone' | 'embed'`), el componente form-embed y la factory de columnas embed. El YAML del PADRE declara aparte `widget.type: grid-elements-manager` sobre la property que apunta aquí. Concepto: [Embed mode (padre-hijo)](../../../concepts/frontend/embed-mode/). Receta: [Implementar un widget grid-elements-manager](../implement-grid-elements-manager/).
 
 6. **Personaliza campos más allá de lo que el YAML expresa.** La plantilla del form-component emite los marcadores `AURORA:FORM-FIELDS-START/END` alrededor del bloque de campos. Cualquier cosa que escribas dentro de esa región sobrevive a la regeneración byte por byte — validadores custom, reordenamientos manuales, markup libre, todo lo que el layout no exprese de forma declarativa. Concepto: [Regiones de preservación](../../../concepts/frontend/preservation-regions/).
 
@@ -82,5 +82,5 @@ Es lo esperado — el widget es una sección, no un campo, y siempre renderiza a
 - [Ancho de campos en formulario](../../../concepts/frontend/form-field-widths/) — el sistema del grid.
 - [Embed mode (padre-hijo)](../../../concepts/frontend/embed-mode/) — el modelo padre-hijo.
 - [Regiones de preservación](../../../concepts/frontend/preservation-regions/) — poseer una porción de código generado.
-- [Implementar un widget grid-elements-manager](./implement-grid-elements-manager/) — receta enfocada al widget embed.
+- [Implementar un widget grid-elements-manager](../implement-grid-elements-manager/) — receta enfocada al widget embed.
 - [Referencia de `catalyst generate`](../../../reference/cli-commands/generate/) — cada flag y argumento.
