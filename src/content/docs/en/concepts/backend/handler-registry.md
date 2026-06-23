@@ -105,6 +105,37 @@ Put together, a single dispatch looks like this:
 3. The registry returns the array of handler instances filed under that key — the DI-managed singletons, in registration order.
 4. The dispatcher iterates and invokes whatever method the shared handler interface defines.
 
+The two phases — index once at boot, look up per event — look like this:
+
+```mermaid
+flowchart TD
+    subgraph boot["Boot — onModuleInit, runs once"]
+        direction TB
+        P1["UpdateInventory<br/>@Handler('order.created')"]
+        P2["SendConfirmation<br/>@Handler('order.created')"]
+        P3["ChargeCard<br/>@Handler('payment.received')"]
+        SCAN["DiscoveryService<br/>scans every provider"]
+        IDX["byKey index<br/>Map&lt;key, instances&gt;"]
+        P1 --> SCAN
+        P2 --> SCAN
+        P3 --> SCAN
+        SCAN --> IDX
+    end
+
+    subgraph runtime["Runtime — once per event"]
+        direction TB
+        EV["event.type = 'order.created'"]
+        RA["registry.resolveAll(key)"]
+        H1["UpdateInventory.handle(payload)"]
+        H2["SendConfirmation.handle(payload)"]
+        EV --> RA
+        RA -->|fan-out| H1
+        RA -->|fan-out| H2
+    end
+
+    IDX -. "lookup by key" .-> RA
+```
+
 That last step needs a method to call — and `handle` does **not** come from the registry. The registry returns raw instances and knows nothing about their methods. `handle` comes from a contract *you* define and every handler implements; you hand that contract to the registry as its generic type parameter so the returned instances are typed:
 
 ```ts
@@ -122,7 +153,7 @@ export class UpdateInventory implements OrderHandler {
 
 // 3. The dispatcher types the registry with that contract, so resolveAll returns OrderHandler[].
 @Injectable()
-export class EventDispatcher {
+export class OrderDispatcher {
   constructor(private readonly registry: KeyedHandlerRegistry<OrderHandler>) {}
 
   async dispatch(event: { type: string; payload: unknown }): Promise<void> {
@@ -152,6 +183,139 @@ registry.resolveAll('order.created'); // → [UpdateInventory, SendConfirmation,
 This is the registry's reason for existing over a plain `Map` lookup: a key fans out to every handler that subscribed to it, and the dispatcher loops over the result without knowing how many there are.
 
 The same instance can also appear under several keys — a provider with `@Handler('a', 'b')` is filed under both, and `resolveAll('a')` and `resolveAll('b')` return the same DI-managed singleton.
+
+## The EventDispatcher: the shipped single-method path
+
+The resolve-and-loop in `OrderDispatcher` above is so common that the module ships it generically — for the single-method fan-out case you inject it instead of writing the loop:
+
+```ts
+export interface Dispatchable<P = unknown> {
+  handle(payload: P): Promise<void>;
+}
+
+@Injectable()
+export class EventDispatcher {
+  constructor(private readonly registry: KeyedHandlerRegistry<Dispatchable>) {}
+
+  async dispatch<P>(key: string, payload: P): Promise<void> {
+    for (const handler of this.registry.resolveAll(key) as Dispatchable<P>[]) {
+      await handler.handle(payload); // sequential, fail-fast
+    }
+  }
+}
+```
+
+Consumers inject it and dispatch by a runtime key. Define that key once as a shared constant — referenced by the `@Handler` side and the `dispatch` side alike — never a bare string literal:
+
+```ts
+// order-events.keys.ts — the single source of truth for the key.
+export const ORDER_CREATED = 'order.created';
+
+// Handler side:
+@Handler(ORDER_CREATED)
+@Injectable()
+export class UpdateInventory implements Dispatchable { /* … */ }
+
+// Dispatch side:
+constructor(private readonly dispatcher: EventDispatcher) {}
+// …
+await this.dispatcher.dispatch(ORDER_CREATED, payload);
+```
+
+The key is an unchecked plain string at runtime: a typo on either side resolves silently to `[]` rather than erroring (see [Trade-offs and limits](#trade-offs-and-limits)). A shared constant guarantees both sides reference the same value.
+
+It is a **free add-on over the registry**, not a new mechanism: the same `resolveAll`, the same pull model, the single-method loop written once. It is opinionated on purpose:
+
+- **Returns `void`.** No result collection — returning results would tempt callers to couple to the count or order of an open fan-out set, the very thing fan-out hides. (If you need a result back, you are not fanning out; that is a single-handler query — resolve it and call it directly.)
+- **Sequential, fail-fast.** Handlers run in registration order; the first rejection propagates and the rest do not run. Not `Promise.all`, which would blur error attribution.
+- **Unknown key is a safe no-op** — `resolveAll` returns `[]`, so the loop runs zero times.
+
+A handler opts in by implementing `Dispatchable<P>` and carrying `@Handler(key)`. Anything whose contract is richer than a single `handle` does not belong here — that is the multi-method case below.
+
+## Beyond fan-out: coordinating handlers that share work
+
+Fan-out above assumes the handlers are **independent**: each one reacts to the key on its own, through a single `handle` method, and none of them needs anything from the others. That is the common case, and a one-method contract is all it needs.
+
+A second shape exists, and it is worth naming because it looks like fan-out but is not. Sometimes the handlers under a key are not independent reactions but **coordinated stages of one process that share data**. The canonical example in this codebase is the SAP sync worker: every projector for an event type knows both (a) what to fetch from the upstream system and (b) how to project the fetched payload into its replica. Those are two halves of one responsibility, so the contract has more than one method:
+
+```ts
+export interface SapEventProjector {
+  readonly handles: string[];
+  fetchSpec(event: SapEvent): SapFetchSpec;               // what to fetch
+  project(raw: unknown, event: SapEvent): Promise<void>;  // how to apply it
+  remove(key: string, event: SapEvent): Promise<void>;    // how to delete it
+}
+```
+
+The enabler is the same `resolveAll` you already saw — and it is worth being explicit about *why* it enables this. A command bus **pushes** the work away from you: you hand it a command and it travels to the handler (`command → handler`); once you let go, the bus invokes one method and you are out of the loop. The registry is the inverse — it **pulls**: you ask it for the handlers and they come back to you (`handler(s) ← registry`). You hold the instances, so you keep control after resolving and can invoke whatever methods the contract defines, in whatever order, coordinating across them.
+
+**CQRS command bus — push** (`command → handler`):
+
+```mermaid
+flowchart LR
+    C["caller"] -->|"command"| BUS["command bus"]
+    BUS -->|"dispatch"| H["handler<br/>.handle(command)"]
+```
+
+You hand the command off and step out of the loop. The bus owns the call and invokes exactly one method; nothing coordinates one handler with another.
+
+**Handler registry — pull** (`handler(s) ← registry`):
+
+```mermaid
+flowchart LR
+    C["caller"] -->|"resolveAll(key)"| R["registry"]
+    R -->|"[ handlerA, handlerB ]"| C
+    C -->|"fetchSpec() · project() · …"| H["handlerA · handlerB<br/>(multi-method contract)"]
+```
+
+The handlers come back to you. You hold the instances and stay in control: call whatever methods the contract defines, in any order, and coordinate across them (merge specs → one fetch → fan out).
+
+| Aspect | CQRS command bus — push | Handler registry — pull |
+| --- | --- | --- |
+| Direction | `command → handler`; the message travels in | `handler(s) ← registry`; the handlers come back |
+| Who invokes the method | the bus | you, the caller |
+| Methods called | one, fixed (`handle`) | any the contract defines, in your order |
+| Control after dispatch | caller is out of the loop | caller stays in control |
+| Coordinate across handlers | no — each runs independently | yes — merge, sequence, or share data |
+| Fits | fire-and-forget independent reactions | stages that share work (e.g. a coalesced fetch) |
+
+Concretely, that pull is what lets an orchestrator merge work across the handlers before acting:
+
+```ts
+const projectors = registry.resolveAll(event.type);
+// collect each projector's fetch spec, merge them into ONE, fetch once…
+const raw = await sap.fetch(mergeSpecs(projectors.map((p) => p.fetchSpec(event))));
+// …then fan the single result back to each projector.
+for (const p of projectors) await p.project(raw, event);
+```
+
+This is the only reason to reach for a multi-method contract instead of plain fan-out: **to coalesce work across the handlers**. Several projectors handle the same entity, so instead of each one fetching it separately, the orchestrator merges their fetch specs and issues a single upstream call, then distributes the one response. It is an optimization for the many-handlers-over-one-resource case — fewer round-trips to a rate-limited upstream.
+
+Be honest about when it earns its keep:
+
+- **With a single handler per key it buys nothing.** `mergeSpecs([oneSpec])` is that spec, one fetch, one project — identical to fan-out with extra ceremony. The shape only starts paying off when two or more handlers genuinely share the same resource under the same key.
+- **The orchestrator is no longer a dumb bus.** It carries the coordination logic — merge, single fetch, distribute. That logic is inherently cross-handler: it cannot live inside any one handler, so it has to sit above them. If you do not need cross-handler coordination, do not pay for it — keep the single-method `handle` contract.
+- **Coalescing often belongs in the fetch layer instead.** A loader that dedupes calls by resource key (the DataLoader pattern) gives you the same fewer-round-trips win while keeping every handler an autonomous, single-method reaction. Reach for multi-method orchestration only when coordination must happen at the dispatch level — for example, merging *different field selections* of the same entity into one request, which a key-only loader does not do on its own.
+
+In short: fan-out with a one-method contract is the default. The multi-method, orchestrated shape is a deliberate optimization for handlers that share a resource — not a richer or more correct way to use the registry, just the right tool when coalescing across handlers actually pays off.
+
+## Choosing the tool: event emitter, EventDispatcher, or the registry
+
+Three shapes, three tools — and most "react to something" needs are the first one.
+
+**1. An independent reaction, no orchestration → the event emitter.** Something happened and whoever cares reacts, decoupled. This is a **push**: the publisher emits and NestJS's `EventEmitter2` routes to every `@OnEvent` listener; the publisher neither holds the listeners nor waits on them. No registry, no dispatcher — the idiomatic and most common path. Aurora handlers already publish domain events this way with `@EmitEvent`. Reach for it whenever you do not need to await the reactions or control their outcome.
+
+**2. Single-method fan-out you must drive and await → `EventDispatcher`.** The same independent-reaction shape, but the dispatch point must **pull**: resolve the handlers by a runtime key, await them all, and fail if one throws. The canonical case is a queue worker or controller that pulls a job, looks up handlers by a key that is *data* (not a compile-time event name), runs them, and must reject the job on failure. Fire-and-forget cannot give you that completion-and-failure control; the registry's pull model can, and `EventDispatcher` is the ready-made loop.
+
+**3. Multi-method coordination → the `KeyedHandlerRegistry` directly.** Handlers are coordinated stages that share data — collect, merge, one I/O, distribute. Inject the registry typed to your port and orchestrate, as in [Beyond fan-out](#beyond-fan-out-coordinating-handlers-that-share-work).
+
+| You need… | Reach for | Model |
+| --- | --- | --- |
+| A decoupled reaction, with no need to await or control it | event emitter (`@EmitEvent` / `@OnEvent`) | push |
+| Single-method fan-out where the caller awaits and fails fast, keyed at runtime | `EventDispatcher` | pull |
+| Coordinated multi-method stages sharing a resource | `KeyedHandlerRegistry` (direct) | pull |
+
+Rule of thumb: if you do not need to **hold** the handlers — to await them, control their order, fail fast, or call more than one method — you probably do not need the registry at all. Emit an event.
 
 ## Trade-offs and limits
 

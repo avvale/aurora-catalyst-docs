@@ -1,5 +1,5 @@
 ---
-title: Registrar y resolver handlers por clave
+title: Registrar handlers por clave
 description: Decora un provider con @Handler, hace dispatch a todos los handlers de una clave en runtime con KeyedHandlerRegistry.resolveAll y verifica el descubrimiento en un TestingModule.
 ---
 

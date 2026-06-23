@@ -1,5 +1,5 @@
 ---
-title: Register and resolve handlers by key
+title: Register handlers by key
 description: Decorate a provider with @Handler, dispatch to all handlers for a runtime key with KeyedHandlerRegistry.resolveAll, and verify discovery in a TestingModule.
 ---
 
