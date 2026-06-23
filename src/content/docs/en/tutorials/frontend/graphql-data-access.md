@@ -111,7 +111,7 @@ import {
   useGraphqlList,
   type DataTableData,
 } from '@aurora';
-import { Operator } from '@aurorajs.dev/core-common';
+import { Operator } from '@aurorajs.dev/core-front';
 import { lastValueFrom } from 'rxjs';
 import { TAG_LIST_CONFIG } from '../data-access/tag.list-config';
 
@@ -226,7 +226,7 @@ The test is simple: **do you need a signal?** If yes, composable. If no, fetcher
 
 - **`inject(HttpClient)` for a GraphQL call.** The stack uses Apollo; a REST client breaks cache coherency and bypasses the interceptors.
 - **`new BehaviorSubject(...)` for local component state.** The project is signals-first. Use `signal()` instead.
-- **String operator literals like `'[iLike]'`.** Import `Operator` from `@aurorajs.dev/core-common` and use `Operator.iLike`. The literal form silently breaks on typos; the enum does not.
+- **String operator literals like `'[iLike]'`.** Import `Operator` from `@aurorajs.dev/core-front` and use `Operator.iLike`. The literal form silently breaks on typos; the enum does not.
 - **Calling `useGraphqlList(CONFIG).paginate(...)` from a resolver.** That instantiates a delete composable the resolver does not need and couples the resolver to a component-only contract. Reach for `queryPaginate` and destructure instead.
 
 ## Related

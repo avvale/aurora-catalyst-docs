@@ -11,7 +11,7 @@ Elegir el decorador correcto de field-schema para el handler que acabas de scaff
 
 - Tienes un módulo backend scaffoldeado y su archivo `*.field-schema.ts` existe en disco. El CLI lo generó desde `aggregateProperties` en la YAML del módulo; no lo edites a mano.
 - Sabes qué rol tiene el handler: ¿recibe un payload?, ¿devuelve la entidad?
-- `@aurorajs.dev/core-back` y `@aurorajs.dev/core-common` están instalados — ambos vienen con cualquier backend de Catalyst.
+- `@aurorajs.dev/core-back` está instalado — viene con cualquier backend de Catalyst.
 
 ## Pasos
 
@@ -70,7 +70,7 @@ Elegir el decorador correcto de field-schema para el handler que acabas de scaff
 5. **En handlers de update, calcula el delta con `Obj.diff`.** Tras la sanitización, persiste solo lo que cambió. Uso real en `iam-update-tag-by-id.handler.ts`:
 
    ```typescript
-   import { Obj } from '@aurorajs.dev/core-common';
+   import { Obj } from '@aurorajs.dev/core-back';
 
    const tag = await this.findByIdService.main(payload.id, constraint, handlerMeta);
    if (!tag) throw new NotFoundException(`IamTag with id: ${payload.id}, not found`);

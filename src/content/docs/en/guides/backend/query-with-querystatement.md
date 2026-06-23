@@ -15,14 +15,14 @@ Compose a typed `QueryStatement` inside a handler — `where`, `include`, `order
   - `constraint` — the **server-side scope** (tenant id, permission filter), injected upstream by middleware or decorators.
 
   Treat both as read-only. Merging them is the service layer's job.
-- `@aurorajs.dev/core-common` is installed — it ships with every Catalyst backend.
+- `@aurorajs.dev/core-back` is installed — it ships with every Catalyst backend.
 
 ## Steps
 
 1. **Import the typed helpers.** Always type the statement and always use the enum:
 
    ```typescript
-   import { Operator, QueryStatement } from '@aurorajs.dev/core-common';
+   import { Operator, QueryStatement } from '@aurorajs.dev/core-back';
    ```
 
 2. **Build `where` with `Operator.X` — never string literals.**

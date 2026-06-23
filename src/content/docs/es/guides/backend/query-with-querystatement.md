@@ -15,14 +15,14 @@ Componer un `QueryStatement` tipado dentro de un handler — `where`, `include`,
   - `constraint` — el **scope del servidor** (tenant id, filtro de permisos), inyectado río arriba por middleware o decoradores.
 
   Trátalos como de solo lectura. Combinarlos es trabajo de la capa de servicio.
-- `@aurorajs.dev/core-common` está instalado — viene con cualquier backend de Catalyst.
+- `@aurorajs.dev/core-back` está instalado — viene con cualquier backend de Catalyst.
 
 ## Pasos
 
 1. **Importa los helpers tipados.** Tipa siempre el statement y usa siempre el enum:
 
    ```typescript
-   import { Operator, QueryStatement } from '@aurorajs.dev/core-common';
+   import { Operator, QueryStatement } from '@aurorajs.dev/core-back';
    ```
 
 2. **Construye `where` con `Operator.X` — nunca con strings literales.**

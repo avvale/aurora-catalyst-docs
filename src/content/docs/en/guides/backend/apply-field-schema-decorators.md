@@ -11,7 +11,7 @@ Pick the correct field-schema decorator for the handler you just scaffolded, wir
 
 - You have a backend module scaffolded and its `*.field-schema.ts` file exists on disk. The CLI generated it from the module's YAML `aggregateProperties`; do not hand-edit it.
 - You know which role the handler plays: does it receive a payload? does it return the entity?
-- `@aurorajs.dev/core-back` and `@aurorajs.dev/core-common` are installed — both ship with every Catalyst backend.
+- `@aurorajs.dev/core-back` is installed — it ships with every Catalyst backend.
 
 ## Steps
 
@@ -70,7 +70,7 @@ Pick the correct field-schema decorator for the handler you just scaffolded, wir
 5. **On update handlers, compute the delta with `Obj.diff`.** After sanitation, persist only what changed. Real usage from `iam-update-tag-by-id.handler.ts`:
 
    ```typescript
-   import { Obj } from '@aurorajs.dev/core-common';
+   import { Obj } from '@aurorajs.dev/core-back';
 
    const tag = await this.findByIdService.main(payload.id, constraint, handlerMeta);
    if (!tag) throw new NotFoundException(`IamTag with id: ${payload.id}, not found`);
