@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import mermaid from 'astro-mermaid';
 
 // Publishing to GitHub Pages as a project site:
 //   https://<user>.github.io/<repo>/
@@ -26,6 +27,14 @@ export default defineConfig({
       `/${REPO_NAME}/es/tutorials/getting-started/install-satellite/`,
   },
   integrations: [
+    // Renders ```mermaid fenced code blocks as diagrams. MUST be listed before
+    // starlight() so its rehype plugin runs in the right order. `autoTheme`
+    // syncs the diagram palette with Starlight's light/dark `data-theme`.
+    mermaid({
+      theme: 'neutral',
+      autoTheme: true,
+      enableLog: false,
+    }),
     starlight({
       title: 'Aurora Catalyst',
       description:
@@ -123,6 +132,11 @@ export default defineConfig({
           items: [
             { slug: 'reference' },
             {
+              slug: 'reference/glossary',
+              label: 'Glossary',
+              translations: { es: 'Glosario' },
+            },
+            {
               label: 'Frontend',
               translations: { es: 'Frontend' },
               items: [{ autogenerate: { directory: 'reference/frontend' } }],
@@ -142,7 +156,28 @@ export default defineConfig({
         {
           label: 'Concepts',
           translations: { es: 'Conceptos' },
-          items: [{ autogenerate: { directory: 'concepts' } }],
+          // Manual subgroups so the directory-derived labels render capitalized
+          // ("Backend"/"Frontend"/"Workflow") instead of the raw lowercase dir
+          // names a flat `autogenerate: { directory: 'concepts' }` would produce.
+          // The Concepts overview sits at the top, above the subgroups.
+          items: [
+            { slug: 'concepts' },
+            {
+              label: 'Backend',
+              translations: { es: 'Backend' },
+              items: [{ autogenerate: { directory: 'concepts/backend' } }],
+            },
+            {
+              label: 'Frontend',
+              translations: { es: 'Frontend' },
+              items: [{ autogenerate: { directory: 'concepts/frontend' } }],
+            },
+            {
+              label: 'Workflow',
+              translations: { es: 'Workflow' },
+              items: [{ autogenerate: { directory: 'concepts/workflow' } }],
+            },
+          ],
         },
         {
           label: 'Change history',
