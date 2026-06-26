@@ -132,6 +132,11 @@ export default defineConfig({
           items: [
             { slug: 'reference' },
             {
+              slug: 'reference/glossary',
+              label: 'Glossary',
+              translations: { es: 'Glosario' },
+            },
+            {
               label: 'Frontend',
               translations: { es: 'Frontend' },
               items: [{ autogenerate: { directory: 'reference/frontend' } }],
