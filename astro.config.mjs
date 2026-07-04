@@ -137,6 +137,11 @@ export default defineConfig({
               translations: { es: 'Glosario' },
             },
             {
+              slug: 'reference/query-statement',
+              label: 'Query Statement (Aurora Query DSL)',
+              translations: { es: 'Query Statement (Aurora Query DSL)' },
+            },
+            {
               label: 'Frontend',
               translations: { es: 'Frontend' },
               items: [{ autogenerate: { directory: 'reference/frontend' } }],
