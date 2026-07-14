@@ -1,11 +1,11 @@
 ---
 title: "Gestionar migraciones de esquema con drizzle-kit"
-description: "El ciclo completo para evolucionar el esquema de la base de datos: editar la YAML, generar la migración, revisarla y aplicarla — y qué reemplaza al sync()/alter() de Sequelize."
+description: "El ciclo completo para evolucionar el esquema de la base de datos: editar la YAML, generar la migración, revisarla y aplicarla — con verificación de drift en CI."
 ---
 
 ## Objetivo
 
-Recorrer el ciclo completo para llevar un cambio de esquema desde la YAML de Aurora hasta una base de datos real, entender qué reemplaza al antiguo auto-sync de Sequelize y saber qué hacer cuando el chequeo de CI (`schema-drift-check`) falla en tu PR.
+Recorrer el ciclo completo para llevar un cambio de esquema desde la YAML de Aurora hasta una base de datos real, y saber qué hacer cuando el chequeo de CI (`schema-drift-check`) falla en tu PR.
 
 ## Antes de empezar
 
@@ -13,11 +13,9 @@ Recorrer el ciclo completo para llevar un cambio de esquema desde la YAML de Aur
 - Conoces el flujo YAML → CLI → código generado (ver [Scaffolding de un módulo](../../../concepts/backend/module-scaffolding/)).
 - Acceso de escritura a la base de datos de desarrollo si vas a aplicar migraciones localmente.
 
-## El cambio de paradigma: adiós al auto-sync
+## Cómo se materializa el esquema
 
-En proyectos Sequelize es habitual apoyarse en `sequelize.sync({ alter: true })`: el ORM compara los modelos con la base de datos en cada arranque y emite los `ALTER` que hagan falta. Es cómodo en desarrollo — y peligroso en cualquier entorno compartido, porque nadie revisa el DDL antes de que se ejecute. Un modelo mal editado puede alterar una tabla en producción sin que nadie lo apruebe explícitamente.
-
-Aurora Catalyst no tiene ese mecanismo. **No existe ningún `sync()` ni `alter` automático.** En su lugar, cada cambio de esquema pasa por dos artefactos versionados en git:
+En Aurora Catalyst el esquema de la base de datos cambia **exclusivamente** a través de migraciones versionadas. El DDL nunca se deduce ni se aplica "en caliente" comparando código contra la base de datos: cada cambio de esquema pasa por dos artefactos versionados en git, que se revisan en el PR como cualquier otro código:
 
 - Un `migration.sql` con el DDL exacto que se va a ejecutar — legible, revisable en un PR, igual que cualquier otro cambio de código.
 - Un `snapshot.json` que describe el estado del esquema después de aplicar esa migración — es la base contra la que se compara el siguiente cambio.
@@ -86,8 +84,6 @@ Opcionales, con los mismos defaults que drizzle-orm (`drizzle` / `__drizzle_migr
 **Mi migración falla con un choque de nombre de índice que no tiene nada que ver con mi tabla.** Postgres comparte el espacio de nombres de los índices por *schema*, no por tabla. Dos migraciones que generan un índice con el mismo nombre corto (`row_id_key`, por ejemplo) chocan aunque pertenezcan a tablas distintas. Cualifica siempre el nombre del índice con la tabla (`<tabla>_<columnas>_idx`) y mantente por debajo de 63 caracteres (el límite de identificador de Postgres).
 
 **Instalé o regeneré un módulo con el CLI y nada cambió en la base de datos.** Es esperado: el CLI reparte *definiciones* (`*.schema.ts`), nunca migraciones. Después de generar o regenerar un módulo que toca `infrastructure/drizzle/*.schema.ts`, sigue tocando ejecutar `pnpm db:generate --name <algo>` tú mismo.
-
-**Sigo buscando dónde está el `sync`/`alter` de Sequelize.** No existe — se retiró junto con las variables de entorno que lo controlaban (`DATABASE_SYNCHRONIZE`, `DATABASE_SYNCHRONIZE_ALTER`). Todo el DDL de esquema llega exclusivamente a través de migraciones commiteadas; si necesitas cambiar la base de datos, el camino es siempre el ciclo descrito arriba.
 
 ## Relacionado
 

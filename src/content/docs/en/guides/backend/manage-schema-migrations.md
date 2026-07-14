@@ -1,11 +1,11 @@
 ---
 title: "Manage schema migrations with drizzle-kit"
-description: "The complete cycle for evolving the database schema: edit the YAML, generate the migration, review it, and apply it — and what replaces Sequelize's sync()/alter()."
+description: "The complete cycle for evolving the database schema: edit the YAML, generate the migration, review it, and apply it — with drift verification in CI."
 ---
 
 ## Goal
 
-Walk through the complete cycle for taking a schema change from the Aurora YAML to a real database, understand what replaces the old Sequelize auto-sync, and know what to do when the CI check (`schema-drift-check`) fails on your PR.
+Walk through the complete cycle for taking a schema change from the Aurora YAML to a real database, and know what to do when the CI check (`schema-drift-check`) fails on your PR.
 
 ## Before you start
 
@@ -13,11 +13,9 @@ Walk through the complete cycle for taking a schema change from the Aurora YAML 
 - You know the YAML → CLI → generated code flow (see [Module scaffolding](../../../concepts/backend/module-scaffolding/)).
 - Write access to the development database if you're going to apply migrations locally.
 
-## The paradigm shift: goodbye auto-sync
+## How the schema materializes
 
-Sequelize projects commonly lean on `sequelize.sync({ alter: true })`: the ORM compares your models against the database on every boot and emits whatever `ALTER`s are needed. It's convenient in development — and dangerous in any shared environment, because nobody reviews the DDL before it runs. A mis-edited model can alter a production table without anyone explicitly approving it.
-
-Aurora Catalyst has no such mechanism. **There is no `sync()`, no automatic `alter`.** Instead, every schema change goes through two artifacts checked into git:
+In Aurora Catalyst the database schema changes **exclusively** through versioned migrations. DDL is never inferred or applied "live" by comparing code against the database: every schema change goes through two artifacts checked into git, reviewed in the PR like any other code:
 
 - A `migration.sql` with the exact DDL that will run — readable, reviewable in a PR, just like any other code change.
 - A `snapshot.json` describing the schema's state after that migration is applied — the baseline the next change is diffed against.
@@ -86,8 +84,6 @@ Optional, with the same defaults as drizzle-orm (`drizzle` / `__drizzle_migratio
 **My migration fails on an index-name clash that has nothing to do with my table.** Postgres shares the index namespace per *schema*, not per table. Two migrations that generate an index with the same short name (`row_id_key`, for example) collide even if they belong to unrelated tables. Always qualify the index name with the table (`<table>_<columns>_idx`) and stay under 63 characters (Postgres's identifier limit).
 
 **I installed or regenerated a module with the CLI and nothing changed in the database.** That's expected: the CLI distributes *definitions* (`*.schema.ts`), never migrations. After generating or regenerating a module that touches `infrastructure/drizzle/*.schema.ts`, you still owe the repo a `pnpm db:generate --name <something>` yourself.
-
-**I'm still looking for Sequelize's `sync`/`alter`.** It doesn't exist anymore — it was removed along with the environment variables that controlled it (`DATABASE_SYNCHRONIZE`, `DATABASE_SYNCHRONIZE_ALTER`). All schema DDL arrives exclusively through committed migrations; if you need to change the database, the path is always the cycle described above.
 
 ## Related
 
