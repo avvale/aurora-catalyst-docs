@@ -17,7 +17,9 @@ Coger un módulo frontend recién scaffoldeado y configurarlo a través de su `*
 
 1. **Elige el shell de detalle.** El campo opcional `front.detailMode` del YAML acepta `view` (por defecto) o `dialog`. Elige según el caso: formularios largos, deep-links y muchos tabs → `view`; lookups pequeños donde la edición inline gana → `dialog`. El modo view emite `*-detail.component.ts` más rutas `/new` y `/edit/:id`; el modo dialog omite el detail y embebe un `<hlm-dialog>` sobre la lista. Concepto: [Detail mode: view o dialog](../../../concepts/frontend/detail-mode/).
 
-2. **Configura los widgets relacionales.** Para cada FK o relación, declara `widget.type` según el tamaño del set de opciones y la UX que quieras:
+2. **(Solo modo dialog) Dimensiona el diálogo.** El campo opcional `front.dialogWidth` acepta `sm`, `md` (por defecto), `lg`, `xl` o `full`. Solo se lee cuando `front.detailMode: dialog` — déjalo sin declarar en modo view. Elige un token más ancho para un formulario con más campos que necesite espacio desde el principio; el `md` por defecto encaja en un formulario típico. Concepto: [Detail mode: view o dialog](../../../concepts/frontend/detail-mode/#ajustar-el-ancho-del-diálogo-con-frontdialogwidth).
+
+3. **Configura los widgets relacionales.** Para cada FK o relación, declara `widget.type` según el tamaño del set de opciones y la UX que quieras:
 
    | `widget.type`                       | Para                                                                 |
    | ----------------------------------- | -------------------------------------------------------------------- |
@@ -31,15 +33,15 @@ Coger un módulo frontend recién scaffoldeado y configurarlo a través de su `*
    | `grid-select-multiple-elements`     | many-to-many renderizado como tabla multi-fila                       |
    | `grid-elements-manager`             | CRUD one-to-many embebido dentro del detail del padre                |
 
-3. **Agrupa y tabula el form.** `widget.group` agrupa visualmente campos relacionados dentro del form (un wrapper por grupo, cada uno con su propia pasada de auto-expansión). `widget.tab` reparte los campos en paneles `<hlm-tabs-content>`. Ambos son contenedores independientes — la matemática del span no cruza entre ellos.
+4. **Agrupa y tabula el form.** `widget.group` agrupa visualmente campos relacionados dentro del form (un wrapper por grupo, cada uno con su propia pasada de auto-expansión). `widget.tab` reparte los campos en paneles `<hlm-tabs-content>`. Ambos son contenedores independientes — la matemática del span no cruza entre ellos.
 
-4. **Ajusta los anchos de los campos.** La tabla de defaults cubre la mayoría de los casos — `boolean` / `date` / `time` → 3, numéricos → 4, `varchar` por `maxLength` (≤30 → 4, 31–80 → 6, >80 → 12), `text` y relaciones grid → 12. Sobreescribe por property con `widget.span: 1–12` cuando el default no encaje. El último campo de una fila incompleta se auto-expande para rellenar el hueco. Concepto: [Ancho de campos en formulario](../../../concepts/frontend/form-field-widths/).
+5. **Ajusta los anchos de los campos.** La tabla de defaults cubre la mayoría de los casos — `boolean` / `date` / `time` → 3, numéricos → 4, `varchar` por `maxLength` (≤30 → 4, 31–80 → 6, >80 → 12), `text` y relaciones grid → 12. Sobreescribe por property con `widget.span: 1–12` cuando el default no encaje. El último campo de una fila incompleta se auto-expande para rellenar el hueco. Concepto: [Ancho de campos en formulario](../../../concepts/frontend/form-field-widths/).
 
-5. **(Opcional) Opta al módulo al modo embed.** Si este módulo es un HIJO que debe editarse dentro del detail de su padre, declara `front.embedSupport: true` a nivel raíz. El codegen emite entonces la lista polimórfica (`mode: 'standalone' | 'embed'`), el componente form-embed y la factory de columnas embed. El YAML del PADRE declara aparte `widget.type: grid-elements-manager` sobre la property que apunta aquí. Concepto: [Embed mode (padre-hijo)](../../../concepts/frontend/embed-mode/). Receta: [Implementar un widget grid-elements-manager](../implement-grid-elements-manager/).
+6. **(Opcional) Opta al módulo al modo embed.** Si este módulo es un HIJO que debe editarse dentro del detail de su padre, declara `front.embedSupport: true` a nivel raíz. El codegen emite entonces la lista polimórfica (`mode: 'standalone' | 'embed'`), el componente form-embed y la factory de columnas embed. El YAML del PADRE declara aparte `widget.type: grid-elements-manager` sobre la property que apunta aquí. Concepto: [Embed mode (padre-hijo)](../../../concepts/frontend/embed-mode/). Receta: [Implementar un widget grid-elements-manager](../implement-grid-elements-manager/).
 
-6. **Personaliza campos más allá de lo que el YAML expresa.** La plantilla del form-component emite los marcadores `AURORA:FORM-FIELDS-START/END` alrededor del bloque de campos. Cualquier cosa que escribas dentro de esa región sobrevive a la regeneración byte por byte — validadores custom, reordenamientos manuales, markup libre, todo lo que el layout no exprese de forma declarativa. Concepto: [Regiones de preservación](../../../concepts/frontend/preservation-regions/).
+7. **Personaliza campos más allá de lo que el YAML expresa.** La plantilla del form-component emite los marcadores `AURORA:FORM-FIELDS-START/END` alrededor del bloque de campos. Cualquier cosa que escribas dentro de esa región sobrevive a la regeneración byte por byte — validadores custom, reordenamientos manuales, markup libre, todo lo que el layout no exprese de forma declarativa. Concepto: [Regiones de preservación](../../../concepts/frontend/preservation-regions/).
 
-7. **Regenera.**
+8. **Regenera.**
 
    ```bash
    catalyst generate front module --name=<bounded-context>/<module> --force
@@ -47,7 +49,7 @@ Coger un módulo frontend recién scaffoldeado y configurarlo a través de su `*
 
    Para escenarios embed, regenera el **hijo primero** para que el regen del padre pueda leer el YAML del hijo con `embedSupport: true` ya puesto.
 
-8. **Añade las keys de traducción.** Aurora publica `Aurora.NoResults` para los estados vacíos; el resto te toca. Las labels de campos, los headers de columnas de la lista, el título de la card del widget embed y las labels de las secciones del form vienen de tus ficheros transloco usando keys derivadas de los nombres del bounded context, del módulo y del agregado.
+9. **Añade las keys de traducción.** Aurora publica `Aurora.NoResults` para los estados vacíos; el resto te toca. Las labels de campos, los headers de columnas de la lista, el título de la card del widget embed y las labels de las secciones del form vienen de tus ficheros transloco usando keys derivadas de los nombres del bounded context, del módulo y del agregado.
 
 ## Verifica que funcionó
 

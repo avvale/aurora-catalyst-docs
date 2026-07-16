@@ -670,6 +670,13 @@
       "classified_at": "2026-06-17T15:06:06.052Z",
       "source_commit": "49897aa3760888352f7db1b4d1c304418293528e",
       "override": null
+    },
+    "2026-07-16-add-configurable-dialog-width": {
+      "status": "published",
+      "classification": "feature",
+      "classified_at": "2026-07-16T19:18:15.379Z",
+      "source_commit": "e62292d9117737e633cd9f5424aa0e8e5104c458",
+      "override": null
     }
   }
 }

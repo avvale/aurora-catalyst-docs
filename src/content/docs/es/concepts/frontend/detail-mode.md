@@ -44,6 +44,20 @@ En modo **view**, al clicar Crear en la lista navega a `/new`; al clicar Editar 
 
 En modo **dialog**, la lista embebe un `<hlm-dialog>` cuyo `[state]` está enlazado a un signal. Al clicar Crear se abre el diálogo con `mode = 'new'` e `initial = null`. Al clicar Editar en una fila, primero se llama a `shell.fetchForEdit(row.id)` para hidratar el agregado completo (incluyendo los includes relacionales que la query de la lista no cargó), luego se abre el diálogo con `mode = 'edit'` e `initial` ya hidratado. Cancelar y un guardado correcto cierran el diálogo.
 
+### Ajustar el ancho del diálogo con `front.dialogWidth`
+
+El campo opcional del YAML `front.dialogWidth` es una decisión exclusiva del modo dialog — solo tiene efecto cuando `front.detailMode: dialog`, y es inerte en modo `view`, porque ahí no hay diálogo que dimensionar. Acepta cinco tokens con nombre:
+
+| Token          | Ancho típico                                              | Para                                  |
+| -------------- | ----------------------------------------------------------- | --------------------------------------- |
+| `sm`           | ~28rem                                                       | Formularios de 1–2 campos               |
+| `md` (por defecto) | ~42rem                                                    | Formularios típicos                     |
+| `lg`           | ~56rem                                                       | Formularios densos                      |
+| `xl`           | ~72rem                                                       | Formularios muy anchos o multi-columna  |
+| `full`         | Casi toda la pantalla (acotado alrededor de ~90rem en ultrawide) | Formularios que necesitan casi toda la pantalla |
+
+Cada token renderiza un ancho **definido y responsive**: casi a pantalla completa en móvil, acotado a un tamaño fijo en pantallas grandes. Lo importante es lo que NO pasa: el diálogo no cambia de tamaño mientras rellenas campos o eliges distintos valores en un select — el ancho es estable desde el momento en que se abre. Elige un token más grande para un módulo cuyo formulario tenga suficientes campos como para necesitar más espacio desde el principio; deja el `md` por defecto para un formulario típico.
+
 ### `useAggregateShell<T>` es la costura compartida de data access
 
 Los dos shells llaman al mismo composable hand-authored desde `aurora-catalyst/frontend/src/@aurora/lib/use-aggregate-shell.ts`:
@@ -78,3 +92,4 @@ El código generado no se ramifica según `detailMode` al llamarlo — solo el c
 - [Cómo: Configurar un módulo frontend](../../../guides/frontend/configure-a-frontend-module/) — el flujo más amplio donde este concepto encaja.
 - [Cómo: Implementar un widget grid-elements-manager](../../../guides/frontend/implement-grid-elements-manager/) — receta que depende de que el padre se quede en modo `view`.
 - [Detail mode: view o dialog](../../../changes/cli/2026-04-25-spec-08-form-extraction-detail-mode/) — el cambio que introdujo el split.
+- [Ancho de diálogo configurable](../../../changes/cli/2026-07-16-add-configurable-dialog-width/) — el cambio que introdujo `front.dialogWidth`.

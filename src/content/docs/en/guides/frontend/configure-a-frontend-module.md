@@ -17,7 +17,9 @@ Take a freshly-scaffolded frontend module and configure it through its `*.aurora
 
 1. **Pick the detail shell.** The optional `front.detailMode` field on the module's YAML accepts `view` (default) or `dialog`. Choose by use case: long forms, deep links, and many tabs → `view`; small lookups where inline editing wins → `dialog`. View mode emits `*-detail.component.ts` plus `/new` and `/edit/:id` routes; dialog mode skips the detail file and embeds an `<hlm-dialog>` over the list. Concept: [Detail mode: view or dialog](../../../concepts/frontend/detail-mode/).
 
-2. **Configure relational widgets.** For each FK or relationship, declare `widget.type` based on the option-set size and the UX you want:
+2. **(Dialog mode only) Size the dialog.** The optional `front.dialogWidth` field accepts `sm`, `md` (default), `lg`, `xl`, or `full`. It is only read when `front.detailMode: dialog` — leave it unset in view mode. Pick a wider token for a form with more fields that needs room from the start; the default `md` fits a typical form. Concept: [Detail mode: view or dialog](../../../concepts/frontend/detail-mode/#sizing-the-dialog-with-frontdialogwidth).
+
+3. **Configure relational widgets.** For each FK or relationship, declare `widget.type` based on the option-set size and the UX you want:
 
    | `widget.type`                       | Best for                                                          |
    | ----------------------------------- | ----------------------------------------------------------------- |
@@ -31,15 +33,15 @@ Take a freshly-scaffolded frontend module and configure it through its `*.aurora
    | `grid-select-multiple-elements`     | many-to-many rendered as a multi-row table picker                 |
    | `grid-elements-manager`             | one-to-many CRUD embedded inside the parent's detail              |
 
-3. **Group and tab the form.** `widget.group` clusters related fields visually inside the form (one wrapper per group, each with its own auto-expand pass). `widget.tab` spreads fields across `<hlm-tabs-content>` panels. Both are independent containers — span math never crosses between them.
+4. **Group and tab the form.** `widget.group` clusters related fields visually inside the form (one wrapper per group, each with its own auto-expand pass). `widget.tab` spreads fields across `<hlm-tabs-content>` panels. Both are independent containers — span math never crosses between them.
 
-4. **Tweak field widths.** The default span table covers most cases — `boolean` / `date` / `time` → 3, numerics → 4, `varchar` by `maxLength` (≤30 → 4, 31–80 → 6, >80 → 12), `text` and grid relations → 12. Override per property with `widget.span: 1–12` when the default does not fit. The last field of an incomplete row auto-expands to fill the gap. Concept: [Form field widths](../../../concepts/frontend/form-field-widths/).
+5. **Tweak field widths.** The default span table covers most cases — `boolean` / `date` / `time` → 3, numerics → 4, `varchar` by `maxLength` (≤30 → 4, 31–80 → 6, >80 → 12), `text` and grid relations → 12. Override per property with `widget.span: 1–12` when the default does not fit. The last field of an incomplete row auto-expands to fill the gap. Concept: [Form field widths](../../../concepts/frontend/form-field-widths/).
 
-5. **(Optional) Opt the module into embed mode.** If this module is a CHILD that should be edited inside its parent's detail, declare `front.embedSupport: true` at the top level. The codegen then emits the polymorphic list (`mode: 'standalone' | 'embed'`), the form-embed component, and the embed columns factory. The PARENT's YAML separately declares `widget.type: grid-elements-manager` on the property pointing here. Concept: [Embed mode (parent-child)](../../../concepts/frontend/embed-mode/). Recipe: [Implement a grid-elements-manager widget](../implement-grid-elements-manager/).
+6. **(Optional) Opt the module into embed mode.** If this module is a CHILD that should be edited inside its parent's detail, declare `front.embedSupport: true` at the top level. The codegen then emits the polymorphic list (`mode: 'standalone' | 'embed'`), the form-embed component, and the embed columns factory. The PARENT's YAML separately declares `widget.type: grid-elements-manager` on the property pointing here. Concept: [Embed mode (parent-child)](../../../concepts/frontend/embed-mode/). Recipe: [Implement a grid-elements-manager widget](../implement-grid-elements-manager/).
 
-6. **Customize fields beyond the YAML's reach.** The form-component template emits `AURORA:FORM-FIELDS-START/END` markers around the field block. Anything you write inside that region survives regeneration byte-for-byte — custom validators, hand-tuned field reorderings, freeform markup, anything the layout cannot express declaratively. Concept: [Preservation regions](../../../concepts/frontend/preservation-regions/).
+7. **Customize fields beyond the YAML's reach.** The form-component template emits `AURORA:FORM-FIELDS-START/END` markers around the field block. Anything you write inside that region survives regeneration byte-for-byte — custom validators, hand-tuned field reorderings, freeform markup, anything the layout cannot express declaratively. Concept: [Preservation regions](../../../concepts/frontend/preservation-regions/).
 
-7. **Regenerate.**
+8. **Regenerate.**
 
    ```bash
    catalyst generate front module --name=<bounded-context>/<module> --force
@@ -47,7 +49,7 @@ Take a freshly-scaffolded frontend module and configure it through its `*.aurora
 
    For embed scenarios, regenerate the **child first** so the parent's regen can read the child's YAML with `embedSupport: true` already in place.
 
-8. **Add the translation keys.** Aurora ships `Aurora.NoResults` for empty states; everything else is on you. Field labels, list column headers, the embed widget card title, and the form section labels all come from your transloco files using keys derived from the bounded context, module, and aggregate names.
+9. **Add the translation keys.** Aurora ships `Aurora.NoResults` for empty states; everything else is on you. Field labels, list column headers, the embed widget card title, and the form section labels all come from your transloco files using keys derived from the bounded context, module, and aggregate names.
 
 ## Verify it worked
 

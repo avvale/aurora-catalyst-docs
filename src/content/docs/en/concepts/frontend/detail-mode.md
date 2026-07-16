@@ -44,6 +44,20 @@ In **view** mode, clicking Create on the list navigates to `/new`; clicking Edit
 
 In **dialog** mode, the list embeds an `<hlm-dialog>` whose `[state]` is bound to a signal. Clicking Create opens the dialog with `mode = 'new'` and `initial = null`. Clicking Edit on a row first calls `shell.fetchForEdit(row.id)` to hydrate the full aggregate (including relational includes the list query did not load), then opens the dialog with `mode = 'edit'` and the hydrated `initial`. Cancel and successful save both close the dialog.
 
+### Sizing the dialog with `front.dialogWidth`
+
+The optional YAML field `front.dialogWidth` is a dialog-mode-only decision — it is only meaningful when `front.detailMode: dialog`, and inert in `view` mode, since there is no dialog to size. It accepts five named tokens:
+
+| Token          | Typical width                                       | Use for                            |
+| -------------- | ---------------------------------------------------- | ----------------------------------- |
+| `sm`           | ~28rem                                                | 1–2 field forms                     |
+| `md` (default) | ~42rem                                                | Typical forms                       |
+| `lg`           | ~56rem                                                | Dense forms                         |
+| `xl`           | ~72rem                                                | Very wide or multi-column forms     |
+| `full`         | Near-full screen (capped around ~90rem on ultrawide)  | Forms that need most of the screen  |
+
+Every token renders a **definite, responsive** width: near-full on small screens, capped at a fixed size on larger ones. The important part is what does NOT happen: the dialog does not resize as you fill in fields or pick different values in a select — the width is stable from the moment it opens. Pick a larger token for a module whose form has enough fields that it needs more room from the start; leave the default `md` for a typical form.
+
 ### `useAggregateShell<T>` is the shared data-access seam
 
 Both shells call the same hand-authored composable from `aurora-catalyst/frontend/src/@aurora/lib/use-aggregate-shell.ts`:
@@ -78,3 +92,4 @@ The generated code does not branch on `detailMode` when calling it — only the 
 - [How-to: Configure a frontend module](../../../guides/frontend/configure-a-frontend-module/) — the broader workflow this concept fits into.
 - [How-to: Implement a grid-elements-manager widget](../../../guides/frontend/implement-grid-elements-manager/) — recipe that depends on the parent staying in `view` mode.
 - [Detail mode: view or dialog](../../../changes/cli/2026-04-25-spec-08-form-extraction-detail-mode/) — the change that introduced the split.
+- [Configurable dialog width](../../../changes/cli/2026-07-16-add-configurable-dialog-width/) — the change that introduced `front.dialogWidth`.
