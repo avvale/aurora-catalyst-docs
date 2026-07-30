@@ -44,7 +44,7 @@ Fires on every prompt submitted.
 
 | Command | Timeout | Notes |
 | --- | --- | --- |
-| `inject-rules-context.ts` | 15 s | anything on standard output is injected ahead of the prompt |
+| `inject-prompt-context.ts` | 15 s | anything on standard output is injected ahead of the prompt |
 
 Can block.
 
@@ -72,10 +72,10 @@ Seven hooks, all in `.claude/hooks/`, all `deterministic`, all shipped. Every on
 
 | Hook | Trigger point | Authority | What it does |
 | --- | --- | --- | --- |
-| `generate-skills-index.ts` | `SessionStart` | advisory | rewrites the `[Project Skills Index]` block inside every `CLAUDE.md` from what is on disk |
+| `generate-skills-index.ts` | `SessionStart` | advisory | rewrites the `[Project Skills Index]` block inside every `CLAUDE.md`, and regenerates `.claude/skills-triggers-index.json`, both from what is on disk |
 | `check-required-plugins.ts` | `SessionStart` | advisory | checks the required plugins are installed and enabled, reading merged runtime state rather than settings files |
 | `instructions-loaded-log.ts` | `InstructionsLoaded` | none | appends one line per loaded instruction file to `.claude/.cache/instructions-loaded.log` |
-| `inject-rules-context.ts` | `UserPromptSubmit` | advisory | injects up to 3 business rules and up to 3 harness rules matching the prompt, 4 000 characters of body each, on separate budgets |
+| `inject-prompt-context.ts` | `UserPromptSubmit` | advisory | injects up to 3 business rules, up to 3 harness rules and up to 3 skill pointers matching the prompt — rule bodies capped at 4 000 characters each, all three on separate budgets; skill pointers carry a path and matched terms only, never a skill's body |
 | `architecture-checkpoint.ts` | `PreToolUse` (`Write`) | nudge | surfaces path classification, the governing project-structure skill and applicable rules when a new architectural file is created |
 | `harness-rules-content-guard.ts` | `PreToolUse` | block | blocks a write whose content matches an active rule's detection pattern inside that rule's governed paths |
 | `lint-barrels.ts` | `PostToolUse` | mixed | lints barrel imports on the file just written; one rule blocks, the other informs |
@@ -117,7 +117,7 @@ Four entries in `.claude/scripts/`, all `deterministic`, all shipped.
 
 | Script | Runs at | What it does |
 | --- | --- | --- |
-| `generate-skills-index.ts` | `SessionStart` | regenerates the skills index inside every `CLAUDE.md` |
+| `generate-skills-index.ts` | `SessionStart` | regenerates the skills index inside every `CLAUDE.md` and the skill-trigger index at `.claude/skills-triggers-index.json` |
 | `daily-tip.sh` | `SessionStart` | prints one tip from `daily-tips.txt` |
 | `catalyst-dev-mode.sh` | `SessionStart` | injects the active development mode |
 | `status-line.sh` | continuously | renders the status line; configured outside the `hooks` block, so it is not a trigger point |
@@ -127,6 +127,18 @@ The hooks also draw on shared code under `scripts/`: the catalogue runtime that 
 ## Skills
 
 Thirty-eight skills, `contextual`, all shipped. They are scoped: a skill lives with the workspace it serves, and the scope rule for that workspace routes to it.
+
+### Trigger vocabulary (`metadata.triggers`)
+
+A skill activates through judgement by default: the model reads its `description` and decides it applies. Seven skills in the monorepo scope also declare a `metadata.triggers` array in their `SKILL.md` frontmatter — an explicit, curated list of keywords, kept separate from the prose `description` on purpose: a description is a paragraph aimed at persuading the model, not a list of terms with a match threshold, and deriving one from the other would let a wording tweak silently change what fires.
+
+`generate-skills-index.ts` consolidates every `SKILL.md`, in any scope, that declares the field into `.claude/skills-triggers-index.json` — a repo-root file, sibling of `skills/`, `hooks/` and `scripts/`, never inside `skills/` itself. The index is deterministic: no timestamp, entries sorted by path, byte-identical across runs for the same set of `SKILL.md` files on disk. Nothing is hard-coded — any skill anywhere in the monorepo that adds the field joins the index on the next `SessionStart`.
+
+`inject-prompt-context.ts` reads that index and scores it against the prompt with the same keyword primitive the business-rule and harness-rule blocks use (a term under 4 characters never matches), plus a +50 bonus when the prompt names the skill literally. It injects up to 3 matches as pointers — never skill bodies.
+
+The seven skills currently indexed: `business-rules-guard`, `catalyst-delegation`, `catalyst-langs`, `catalyst-query-dsl`, `catalyst-report-creator`, `catalyst-skill-creator`, `judgment-day`.
+
+`typescript` deliberately opts out, and says so in its own `SKILL.md`: its real trigger is "any `.ts`/`.tsx` file", which as a keyword vocabulary would fire on almost every prompt or none — a non-discriminating trigger is worse than no trigger at all. It stays discoverable through the `[Project Skills Index]` and its `description` instead.
 
 ### Monorepo scope — 16
 
@@ -145,7 +157,7 @@ Thirty-eight skills, `contextual`, all shipped. They are scoped: a skill lives w
 | `catalyst-update-skill-registry` | regenerating the skill registry after any skill changes |
 | `harness-rules-guard` | the harness-rule catalogue |
 | `judgment-day` | dual adversarial review |
-| `openspec-explore` | exploring an idea before committing to a change |
+| `openspec-explore` | exploring an idea before committing to a change; searches the change archive for prior decisions on the topic before laying out options |
 | `openspec-propose` | creating a change and its artifacts |
 | `openspec-apply-change` | implementing the tasks of a change |
 | `openspec-archive-change` | closing a change and syncing specs |
@@ -204,7 +216,7 @@ Thirteen command files in `.claude/commands/`, `contextual`, shipped. They load 
 | `/create-schema` | analyse or create an Aurora YAML schema |
 | `/load-skill` | load a skill by name, or list them |
 | `/review-module` | deep coherence review of a module |
-| `/opsx:explore` | think an idea through before committing to it |
+| `/opsx:explore` | think an idea through before committing to it — checks the change archive for prior decisions before laying out options |
 | `/opsx:propose` | create a change and generate its artifacts |
 | `/opsx:apply` | implement the tasks of a change |
 | `/opsx:archive` | close a completed change |

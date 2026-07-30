@@ -88,7 +88,7 @@ Ubicación: `cliter/business-rules-index.json`. Generado, nunca editado a mano. 
 }
 ```
 
-Cinco consumidores dependen de él: `audit.ts` (salud + drift), `check.ts` (sus cuatro modos), `promote.ts` (para localizar reglas a derogar), `validate-citations.ts` (para cruzar IDs `@rule`) y el hook `inject-rules-context.ts` (para puntuar relevancia contra un prompt).
+Cinco consumidores dependen de él: `audit.ts` (salud + drift), `check.ts` (sus cuatro modos), `promote.ts` (para localizar reglas a derogar), `validate-citations.ts` (para cruzar IDs `@rule`) y el hook `inject-prompt-context.ts` (para puntuar relevancia contra un prompt).
 
 Las claves están en inglés a propósito. El JSON es un artefacto estructural consumido por tooling; la mezcla bilingüe solo aplica al contenido de las reglas, nunca a las claves de formato.
 
@@ -164,7 +164,7 @@ La distinción con los slash commands importa. Un slash command es una acción d
 
 **`SessionStart` — `generate-skills-index.ts`.** No específico de business rules; pre-existente en el proyecto. Cuando se añadieron el skill y los slash commands, este hook actualizó el índice de skills del `CLAUDE.md` raíz para que Claude los viese. Corre al inicio de cada sesión de Claude Code.
 
-**`UserPromptSubmit` — `inject-rules-context.ts`.** Específico de business rules. Corre antes de cada prompt del usuario:
+**`UserPromptSubmit` — `inject-prompt-context.ts`.** Específico de business rules. Corre antes de cada prompt del usuario:
 
 1. Lee el prompt del JSON que Claude Code pasa por stdin.
 2. Localiza la raíz del repo (busca `package.json` con `name: aurora`).

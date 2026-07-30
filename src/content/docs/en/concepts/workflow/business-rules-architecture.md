@@ -88,7 +88,7 @@ Location: `cliter/business-rules-index.json`. Generated, never edited by hand. I
 }
 ```
 
-Five consumers depend on it: `audit.ts` (health + drift), `check.ts` (all four modes), `promote.ts` (to locate rules being derogated), `validate-citations.ts` (to cross `@rule` IDs), and the `inject-rules-context.ts` hook (to score relevance against a prompt).
+Five consumers depend on it: `audit.ts` (health + drift), `check.ts` (all four modes), `promote.ts` (to locate rules being derogated), `validate-citations.ts` (to cross `@rule` IDs), and the `inject-prompt-context.ts` hook (to score relevance against a prompt).
 
 The keys are in English on purpose. The JSON is a structural artifact consumed by tooling; the bilingual mix only applies to rule content, never to formatting keys.
 
@@ -164,7 +164,7 @@ The distinction with slash commands matters. A slash command is a delimited acti
 
 **`SessionStart` — `generate-skills-index.ts`.** Not specific to business rules; pre-existed in the project. When the skill and the slash commands were added, this hook updated the root `CLAUDE.md` skills index so Claude would see them. Runs at the start of every Claude Code session.
 
-**`UserPromptSubmit` — `inject-rules-context.ts`.** Specific to business rules. Runs before every prompt the user submits:
+**`UserPromptSubmit` — `inject-prompt-context.ts`.** Specific to business rules. Runs before every prompt the user submits:
 
 1. Reads the prompt from the JSON Claude Code passes via stdin.
 2. Locates the repo root (looks for `package.json` with `name: aurora`).

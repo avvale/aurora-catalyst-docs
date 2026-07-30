@@ -145,7 +145,7 @@ pnpm br:generate
 # → ✓ Index regenerated: 5 rules (4 active, 0 derogated, 1 proposed) across 3 files.
 ```
 
-You normally do not need to run it by hand; the pre-commit hook does it automatically when it detects staged changes under `cliter/<bc>/business-rules/*.md`. Run it manually after editing a rule and before opening Claude Code if you want the hook (`inject-rules-context.ts`) to see the latest version immediately.
+You normally do not need to run it by hand; the pre-commit hook does it automatically when it detects staged changes under `cliter/<bc>/business-rules/*.md`. Run it manually after editing a rule and before opening Claude Code if you want the hook (`inject-prompt-context.ts`) to see the latest version immediately.
 
 ### `pnpm br:validate`
 

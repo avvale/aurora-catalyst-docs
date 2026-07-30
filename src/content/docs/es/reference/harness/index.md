@@ -44,7 +44,7 @@ Se dispara en cada prompt enviado.
 
 | Comando | Timeout | Notas |
 | --- | --- | --- |
-| `inject-rules-context.ts` | 15 s | todo lo que escriba en la salida estándar se inyecta por delante del prompt |
+| `inject-prompt-context.ts` | 15 s | todo lo que escriba en la salida estándar se inyecta por delante del prompt |
 
 Puede bloquear.
 
@@ -72,10 +72,10 @@ Siete hooks, todos en `.claude/hooks/`, todos `deterministas`, todos viajan. Cad
 
 | Hook | Punto de disparo | Autoridad | Qué hace |
 | --- | --- | --- | --- |
-| `generate-skills-index.ts` | `SessionStart` | informativo | reescribe el bloque `[Project Skills Index]` dentro de cada `CLAUDE.md` a partir de lo que hay en disco |
+| `generate-skills-index.ts` | `SessionStart` | informativo | reescribe el bloque `[Project Skills Index]` dentro de cada `CLAUDE.md` y regenera `.claude/skills-triggers-index.json`, ambos a partir de lo que hay en disco |
 | `check-required-plugins.ts` | `SessionStart` | informativo | comprueba que los plugins requeridos estén instalados y habilitados, leyendo el estado combinado en tiempo de ejecución y no los ficheros de configuración |
 | `instructions-loaded-log.ts` | `InstructionsLoaded` | ninguna | añade una línea por fichero de instrucciones cargado a `.claude/.cache/instructions-loaded.log` |
-| `inject-rules-context.ts` | `UserPromptSubmit` | informativo | inyecta hasta 3 business rules y hasta 3 harness rules que casen con el prompt, 4000 caracteres de cuerpo cada una, con presupuestos separados |
+| `inject-prompt-context.ts` | `UserPromptSubmit` | informativo | inyecta hasta 3 business rules, hasta 3 harness rules y hasta 3 punteros a skills que casen con el prompt — el cuerpo de cada regla topa en 4000 caracteres, las tres con presupuestos separados; los punteros a skills solo llevan ruta y términos casados, nunca el cuerpo de la skill |
 | `architecture-checkpoint.ts` | `PreToolUse` (`Write`) | aviso | saca a la superficie la clasificación de la ruta, la skill de estructura que la gobierna y las reglas aplicables al crear un fichero arquitectónico nuevo |
 | `harness-rules-content-guard.ts` | `PreToolUse` | bloqueo | bloquea una escritura cuyo contenido casa con el patrón de detección de una regla activa dentro de las rutas que esa regla gobierna |
 | `lint-barrels.ts` | `PostToolUse` | mixta | linta los imports de barrels del fichero recién escrito; una regla bloquea, la otra informa |
@@ -117,7 +117,7 @@ Cuatro entradas en `.claude/scripts/`, todas `deterministas`, todas viajan.
 
 | Script | Corre en | Qué hace |
 | --- | --- | --- |
-| `generate-skills-index.ts` | `SessionStart` | regenera el índice de skills dentro de cada `CLAUDE.md` |
+| `generate-skills-index.ts` | `SessionStart` | regenera el índice de skills dentro de cada `CLAUDE.md` y el índice de disparadores en `.claude/skills-triggers-index.json` |
 | `daily-tip.sh` | `SessionStart` | imprime un consejo de `daily-tips.txt` |
 | `catalyst-dev-mode.sh` | `SessionStart` | inyecta el modo de desarrollo activo |
 | `status-line.sh` | continuamente | renderiza la status line; se configura fuera del bloque `hooks`, así que no es un punto de disparo |
@@ -127,6 +127,18 @@ Los hooks se apoyan además en código compartido bajo `scripts/`: el runtime de
 ## Skills
 
 Treinta y ocho skills, `contextuales`, todas viajan. Están por ámbito: una skill vive con el workspace al que sirve, y la rule de ámbito de ese workspace enruta hacia ella.
+
+### Vocabulario de disparo (`metadata.triggers`)
+
+Por defecto una skill se activa por criterio: el modelo lee su `description` y decide que aplica. Siete skills del ámbito monorepo declaran además un array `metadata.triggers` en el frontmatter de su `SKILL.md` — una lista curada de keywords, deliberadamente separada de la prosa del `description`: una `description` es un párrafo pensado para persuadir al modelo, no una lista de términos con umbral de coincidencia, y derivarla de ahí haría que retocar una frase cambiara en silencio qué dispara la skill.
+
+`generate-skills-index.ts` consolida todo `SKILL.md`, de cualquier ámbito, que declare el campo dentro de `.claude/skills-triggers-index.json` — un fichero en la raíz del repo, hermano de `skills/`, `hooks/` y `scripts/`, nunca dentro de `skills/`. El índice es determinista: sin timestamp, entradas ordenadas por ruta, idéntico byte a byte entre ejecuciones para el mismo conjunto de `SKILL.md` en disco. Nada está fijado en el código — cualquier skill del monorepo que añada el campo entra en el índice en el siguiente `SessionStart`.
+
+`inject-prompt-context.ts` lee ese índice y lo puntúa contra el prompt con la misma primitiva de keywords que usan los bloques de business rules y harness rules (un término de menos de 4 caracteres nunca casa), más un bonus de +50 cuando el prompt nombra la skill literalmente. Inyecta hasta 3 coincidencias como punteros — nunca el cuerpo de la skill.
+
+Las siete skills indexadas hoy: `business-rules-guard`, `catalyst-delegation`, `catalyst-langs`, `catalyst-query-dsl`, `catalyst-report-creator`, `catalyst-skill-creator`, `judgment-day`.
+
+`typescript` queda fuera a propósito, y lo dice en su propio `SKILL.md`: su disparador real es «cualquier fichero `.ts`/`.tsx`», que como vocabulario de keywords dispararía casi siempre o nunca — un disparador que no discrimina es peor que ninguno. Sigue siendo descubrible a través del `[Project Skills Index]` y su `description`.
 
 ### Ámbito monorepo — 16
 
@@ -145,7 +157,7 @@ Treinta y ocho skills, `contextuales`, todas viajan. Están por ámbito: una ski
 | `catalyst-update-skill-registry` | regenerar el registro de skills tras cualquier cambio en ellas |
 | `harness-rules-guard` | el catálogo de harness rules |
 | `judgment-day` | revisión adversarial doble |
-| `openspec-explore` | explorar una idea antes de comprometerse con un cambio |
+| `openspec-explore` | explorar una idea antes de comprometerse con un cambio; busca en el archivo de cambios decisiones previas sobre el tema antes de plantear opciones |
 | `openspec-propose` | crear un cambio y sus artefactos |
 | `openspec-apply-change` | implementar las tareas de un cambio |
 | `openspec-archive-change` | cerrar un cambio y sincronizar las specs |
@@ -204,7 +216,7 @@ Trece ficheros de comando en `.claude/commands/`, `contextuales`, viajan. Solo s
 | `/create-schema` | analizar o crear un esquema YAML de Aurora |
 | `/load-skill` | cargar una skill por nombre, o listarlas |
 | `/review-module` | revisión profunda de coherencia de un módulo |
-| `/opsx:explore` | pensar una idea antes de comprometerse con ella |
+| `/opsx:explore` | pensar una idea antes de comprometerse con ella — comprueba el archivo por decisiones previas antes de plantear opciones |
 | `/opsx:propose` | crear un cambio y generar sus artefactos |
 | `/opsx:apply` | implementar las tareas de un cambio |
 | `/opsx:archive` | cerrar un cambio completado |

@@ -62,9 +62,11 @@ That is why the `scope-*` rules route to the scoped `CLAUDE.md` instead of dupli
 
 ## 3. `UserPromptSubmit` — arming the prompt
 
-`inject-rules-context.ts` (15 s) runs on every prompt you send. It reads your prompt, matches it against the business-rule and harness-rule catalogue indexes, and injects the relevant rules into context before the assistant sees your message.
+`inject-prompt-context.ts` (15 s) runs on every prompt you send. It reads your prompt, matches it against the business-rule, harness-rule and skill-trigger catalogue indexes, and injects the relevant context before the assistant sees your message — in three separate blocks, in that order.
 
 Budgets are deliberately separate: up to **3 business rules** and up to **3 harness rules**, at most 4 000 characters of body per rule. The separation matters — harness rules are constraints, business rules are domain memory, and letting them compete for the same three slots would mean a busy domain prompt silently starves the architectural constraints.
+
+The third block, last and with its own budget of up to **3 skills**, scores the prompt against `.claude/skills-triggers-index.json` — the keywords a skill's own `SKILL.md` declares in `metadata.triggers`. Unlike the first two, it never injects a body: a `SKILL.md` runs to hundreds of lines, so the block writes a pointer instead (a path plus the matched terms) and leaves opening the file to the assistant. The same fail-open contract applies: an absent or malformed skill index means the block writes nothing.
 
 Anything written to standard output at this trigger point is injected ahead of the prompt.
 
