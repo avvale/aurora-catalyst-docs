@@ -145,7 +145,7 @@ pnpm br:generate
 # → ✓ Índice regenerado: 5 reglas (4 activas, 0 derogadas, 1 propuesta) en 3 archivos.
 ```
 
-Normalmente no hace falta correrlo a mano; el pre-commit hook lo hace automáticamente cuando detecta cambios staged bajo `cliter/<bc>/business-rules/*.md`. Córrelo manualmente después de editar una regla y antes de abrir Claude Code si quieres que el hook (`inject-rules-context.ts`) vea la última versión inmediatamente.
+Normalmente no hace falta correrlo a mano; el pre-commit hook lo hace automáticamente cuando detecta cambios staged bajo `cliter/<bc>/business-rules/*.md`. Córrelo manualmente después de editar una regla y antes de abrir Claude Code si quieres que el hook (`inject-prompt-context.ts`) vea la última versión inmediatamente.
 
 ### `pnpm br:validate`
 
