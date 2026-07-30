@@ -1,0 +1,368 @@
+---
+/**
+ * Navigable map of the AI harness.
+ *
+ * Every node is a real `<a>` in the static HTML, so `pnpm check:links` crawls it.
+ * Clickable mermaid was rejected for this: `astro-mermaid` renders client-side, so
+ * the link checker never sees URLs declared inside a diagram, and mermaid does not
+ * resolve Astro's `base`.
+ *
+ * Geometry is declared once and shared by both locales; only labels and the locale
+ * prefix vary. That is what keeps the two language versions from drifting apart.
+ */
+interface Props {
+  lang: 'en' | 'es';
+}
+
+const { lang } = Astro.props;
+
+// Same pattern as ChangelogIndex.astro — BASE_URL carries a trailing slash.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const href = (anchor: string) => `${base}/${lang}/reference/harness/#${anchor}`;
+
+// ─── Geometry (written once, shared by both locales) ──────────────────────────
+// Five columns, one per lifecycle trigger point.
+const COLS = [0, 1, 2, 3, 4].map((i) => {
+  const x = 20 + i * 195;
+  return { x, cx: x + 90 };
+});
+// Six boxes for the contextual band, on its own grid.
+const BAND = [0, 1, 2, 3, 4, 5].map((i) => {
+  const x = 25 + i * 160;
+  return { x, cx: x + 75 };
+});
+
+const COL_W = 180;
+const BAND_W = 150;
+const SPINE_Y = 190;
+
+// ─── Labels ───────────────────────────────────────────────────────────────────
+// Trigger-point names and piece names are identifiers: they stay untranslated so
+// both locales resolve to the same anchors on the reference page.
+const STRINGS = {
+  en: {
+    mapTitle:
+      'Map of the AI harness: three layers and five lifecycle trigger points. Every node links to its catalogue entry.',
+    contextual: 'CONTEXTUAL LAYER · the harness loads it',
+    deterministic: 'DETERMINISTIC LAYER · the harness executes it · 7 hooks · 4 scripts',
+    judgement: 'JUDGEMENT LAYER · the model applies it',
+    onInvocation: 'loaded on invocation — no fixed trigger point',
+    onRead: 'loaded on read',
+    context: [
+      { anchor: 'claudemd', title: 'CLAUDE.md', sub: 'project + scoped' },
+      { anchor: 'rules', title: 'rules', sub: '9 · by path' },
+      { anchor: 'skills', title: 'skills', sub: '38 · by task' },
+      { anchor: 'commands', title: 'commands', sub: '13 · explicit' },
+      { anchor: 'agents', title: 'agents', sub: '1 · delegated' },
+      { anchor: 'plugins', title: 'plugins', sub: '4 · per user' },
+    ],
+    triggers: [
+      {
+        anchor: 'sessionstart',
+        name: 'SessionStart',
+        lines: [
+          'generate-skills-index · 30 s',
+          'daily-tip · 5 s',
+          'catalyst-dev-mode · 5 s',
+          'check-required-plugins · 15 s',
+          'cache wipe · startup|clear',
+        ],
+      },
+      {
+        anchor: 'instructionsloaded',
+        name: 'InstructionsLoaded',
+        lines: ['instructions-loaded-log · 10 s', 'notification only', 'cannot block'],
+      },
+      {
+        anchor: 'userpromptsubmit',
+        name: 'UserPromptSubmit',
+        lines: ['inject-rules-context · 15 s', 'up to 3 BR + 3 HR', 'injected before the prompt'],
+      },
+      {
+        anchor: 'pretooluse',
+        name: 'PreToolUse',
+        lines: [
+          'architecture-checkpoint · 15 s',
+          'nudge, not a gate',
+          'harness-rules-content-guard · 15 s',
+          'blocks on a catalogue match',
+        ],
+      },
+      {
+        anchor: 'posttooluse',
+        name: 'PostToolUse',
+        lines: [
+          'format-with-prettier · 30 s',
+          'never blocks',
+          'lint-barrels · 30 s',
+          'blocks on HR-BARRELS-002',
+        ],
+      },
+    ],
+    judgementNodes: [
+      { anchor: 'intent-gate', title: 'Intent Gate' },
+      { anchor: 'task-weight-triage', title: 'Task-Weight Triage' },
+      { anchor: 'worktree-gate', title: 'Worktree Gate' },
+      { anchor: 'quality-gates', title: 'Quality Gates' },
+      { anchor: 'delegation-contracts', title: 'Delegation' },
+    ],
+  },
+  es: {
+    mapTitle:
+      'Mapa del harness de IA: tres capas y cinco puntos de disparo del ciclo de vida. Cada nodo enlaza con su ficha en el catálogo.',
+    contextual: 'CAPA CONTEXTUAL · el harness la carga',
+    deterministic: 'CAPA DETERMINISTA · el harness la ejecuta · 7 hooks · 4 scripts',
+    judgement: 'CAPA DE CRITERIO · el modelo la aplica',
+    onInvocation: 'se cargan al invocarse — sin punto de disparo fijo',
+    onRead: 'se cargan al leer',
+    context: [
+      { anchor: 'claudemd', title: 'CLAUDE.md', sub: 'raíz + por ámbito' },
+      { anchor: 'rules', title: 'rules', sub: '9 · por ruta' },
+      { anchor: 'skills', title: 'skills', sub: '38 · por tarea' },
+      { anchor: 'commands', title: 'commands', sub: '13 · explícitos' },
+      { anchor: 'agents', title: 'agents', sub: '1 · delegado' },
+      { anchor: 'plugins', title: 'plugins', sub: '4 · por usuario' },
+    ],
+    triggers: [
+      {
+        anchor: 'sessionstart',
+        name: 'SessionStart',
+        lines: [
+          'generate-skills-index · 30 s',
+          'daily-tip · 5 s',
+          'catalyst-dev-mode · 5 s',
+          'check-required-plugins · 15 s',
+          'borrado de caché · startup|clear',
+        ],
+      },
+      {
+        anchor: 'instructionsloaded',
+        name: 'InstructionsLoaded',
+        lines: ['instructions-loaded-log · 10 s', 'solo notifica', 'no puede bloquear'],
+      },
+      {
+        anchor: 'userpromptsubmit',
+        name: 'UserPromptSubmit',
+        lines: ['inject-rules-context · 15 s', 'hasta 3 BR + 3 HR', 'se inyecta antes del prompt'],
+      },
+      {
+        anchor: 'pretooluse',
+        name: 'PreToolUse',
+        lines: [
+          'architecture-checkpoint · 15 s',
+          'aviso, no es un gate',
+          'harness-rules-content-guard · 15 s',
+          'bloquea si el catálogo casa',
+        ],
+      },
+      {
+        anchor: 'posttooluse',
+        name: 'PostToolUse',
+        lines: [
+          'format-with-prettier · 30 s',
+          'nunca bloquea',
+          'lint-barrels · 30 s',
+          'bloquea con HR-BARRELS-002',
+        ],
+      },
+    ],
+    judgementNodes: [
+      { anchor: 'intent-gate', title: 'Intent Gate' },
+      { anchor: 'task-weight-triage', title: 'Task-Weight Triage' },
+      { anchor: 'worktree-gate', title: 'Worktree Gate' },
+      { anchor: 'quality-gates', title: 'Quality Gates' },
+      { anchor: 'delegation-contracts', title: 'Delegación' },
+    ],
+  },
+} as const;
+
+const t = STRINGS[lang];
+const titleId = 'harness-map-title';
+---
+
+<figure class="harness-map">
+  <svg viewBox="0 0 1000 470" aria-labelledby={titleId}>
+    <title id={titleId}>{t.mapTitle}</title>
+    <defs>
+      <marker id="hm-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" class="hm-arrowhead"></path>
+      </marker>
+    </defs>
+
+    {/* ── Contextual layer ─────────────────────────────────────────────── */}
+    <rect class="hm-band" x="12" y="24" width="976" height="112" rx="10"></rect>
+    <text class="hm-caption" x="26" y="45">{t.contextual}</text>
+    {
+      t.context.map((node, i) => (
+        <a href={href(node.anchor)} aria-label={`${node.title} — ${node.sub}`}>
+          <rect class="hm-node" x={BAND[i].x} y="58" width={BAND_W} height="58" rx="8" />
+          <text class="hm-node-title" x={BAND[i].cx} y="82">
+            {node.title}
+          </text>
+          <text class="hm-node-sub" x={BAND[i].cx} y="100">
+            {node.sub}
+          </text>
+        </a>
+      ))
+    }
+
+    {/* CLAUDE.md and rules reach the model through InstructionsLoaded. */}
+    <path class="hm-edge" d="M100,116 V150 H305 V177" marker-end="url(#hm-arrow)"></path>
+    <path class="hm-edge" d="M260,116 V150"></path>
+    <text class="hm-note" x="341" y="146">{t.onRead}</text>
+    <text class="hm-note hm-note-end" x="975" y="160">{t.onInvocation}</text>
+
+    {/* ── The spine: five trigger points ───────────────────────────────── */}
+    <line class="hm-spine" x1="20" y1={SPINE_Y} x2="980" y2={SPINE_Y} marker-end="url(#hm-arrow)"
+    ></line>
+
+    {
+      t.triggers.map((trigger, i) => (
+        <a href={href(trigger.anchor)} aria-label={trigger.name}>
+          <text class="hm-trigger" x={COLS[i].cx} y="172">
+            {trigger.name}
+          </text>
+          <circle class="hm-marker" cx={COLS[i].cx} cy={SPINE_Y} r="13" />
+          <text class="hm-marker-text" x={COLS[i].cx} y={SPINE_Y + 4}>
+            {i + 1}
+          </text>
+          <rect class="hm-node" x={COLS[i].x} y="212" width={COL_W} height="104" rx="8" />
+          {trigger.lines.map((line, j) => (
+            <text class="hm-node-line" x={COLS[i].cx} y={234 + j * 17}>
+              {line}
+            </text>
+          ))}
+        </a>
+      ))
+    }
+
+    <text class="hm-caption" x="26" y="340">{t.deterministic}</text>
+
+    {/* ── Judgement layer ──────────────────────────────────────────────── */}
+    <rect class="hm-band" x="12" y="356" width="976" height="100" rx="10"></rect>
+    <text class="hm-caption" x="26" y="376">{t.judgement}</text>
+    {
+      t.judgementNodes.map((node, i) => (
+        <a href={href(node.anchor)} aria-label={node.title}>
+          <rect class="hm-node" x={COLS[i].x} y="388" width={COL_W} height="54" rx="8" />
+          <text class="hm-node-title" x={COLS[i].cx} y="420">
+            {node.title}
+          </text>
+        </a>
+      ))
+    }
+  </svg>
+</figure>
+
+<style>
+  .harness-map {
+    margin: 1.5rem 0;
+    /* Wide content scrolls inside its own container; the page never scrolls sideways. */
+    overflow-x: auto;
+  }
+
+  .harness-map svg {
+    display: block;
+    /* Below this the labels stop being legible, so scroll instead of shrinking. */
+    min-width: 720px;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Starlight's custom properties flip with the light/dark theme on their own. */
+  .hm-band {
+    fill: var(--sl-color-gray-7, #f6f6f9);
+    stroke: var(--sl-color-hairline, #d0d0d8);
+    stroke-width: 1;
+  }
+
+  .hm-node {
+    fill: var(--sl-color-bg, #fff);
+    stroke: var(--sl-color-hairline-shade, #c8c8d2);
+    stroke-width: 1.2;
+    transition: stroke 0.15s ease;
+  }
+
+  .hm-caption {
+    font-family: var(--sl-font-system-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    fill: var(--sl-color-gray-3, #7a7a8c);
+  }
+
+  .hm-node-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-anchor: middle;
+    fill: var(--sl-color-white, #17181c);
+  }
+
+  .hm-node-sub,
+  .hm-node-line {
+    font-family: var(--sl-font-system-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 9.5px;
+    text-anchor: middle;
+    fill: var(--sl-color-gray-2, #6b6b7b);
+  }
+
+  .hm-trigger {
+    font-size: 12px;
+    font-weight: 600;
+    text-anchor: middle;
+    fill: var(--sl-color-text-accent, #3b6ef5);
+  }
+
+  .hm-marker {
+    fill: var(--sl-color-text-accent, #3b6ef5);
+  }
+
+  .hm-marker-text {
+    font-family: var(--sl-font-system-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 12px;
+    font-weight: 700;
+    text-anchor: middle;
+    fill: var(--sl-color-bg, #fff);
+  }
+
+  .hm-spine,
+  .hm-edge {
+    fill: none;
+    stroke: var(--sl-color-gray-4, #9a9aad);
+    stroke-width: 1.4;
+  }
+
+  .hm-arrowhead {
+    fill: var(--sl-color-gray-4, #9a9aad);
+  }
+
+  .hm-note {
+    font-family: var(--sl-font-system-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 9.5px;
+    fill: var(--sl-color-gray-3, #7a7a8c);
+  }
+
+  .hm-note-end {
+    text-anchor: end;
+  }
+
+  /* Focus and hover share one affordance, so keyboard users get the same cue. */
+  .harness-map a {
+    cursor: pointer;
+  }
+
+  .harness-map a:hover .hm-node,
+  .harness-map a:focus-visible .hm-node {
+    stroke: var(--sl-color-text-accent, #3b6ef5);
+    stroke-width: 2;
+  }
+
+  .harness-map a:focus-visible {
+    outline: 2px solid var(--sl-color-text-accent, #3b6ef5);
+    outline-offset: 2px;
+  }
+
+  .harness-map a:hover .hm-node-title,
+  .harness-map a:focus-visible .hm-node-title {
+    fill: var(--sl-color-text-accent, #3b6ef5);
+  }
+</style>

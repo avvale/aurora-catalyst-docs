@@ -152,6 +152,11 @@ export default defineConfig({
               items: [{ autogenerate: { directory: 'reference/cli-commands' } }],
             },
             {
+              label: 'Harness',
+              translations: { es: 'Harness' },
+              items: [{ autogenerate: { directory: 'reference/harness' } }],
+            },
+            {
               label: 'API',
               collapsed: true,
               items: [{ autogenerate: { directory: 'reference/api' } }],
@@ -181,6 +186,11 @@ export default defineConfig({
               label: 'Workflow',
               translations: { es: 'Workflow' },
               items: [{ autogenerate: { directory: 'concepts/workflow' } }],
+            },
+            {
+              label: 'Harness',
+              translations: { es: 'Harness' },
+              items: [{ autogenerate: { directory: 'concepts/harness' } }],
             },
           ],
         },

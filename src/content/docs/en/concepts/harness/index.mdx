@@ -1,0 +1,70 @@
+---
+title: The AI harness
+description: The machinery that guides AI assistants inside an Aurora Catalyst project — three layers, five lifecycle trigger points, and the principle that decides where each piece belongs.
+---
+
+import HarnessMap from '~/components/HarnessMap.astro';
+
+Every project created with `catalyst new` inherits more than code. It inherits a **harness**: hooks that run at fixed moments of a session, rules that load when you open certain files, skills that carry the project's conventions, and a set of gates the assistant is expected to apply before it writes anything.
+
+The harness is not decoration around the AI. It is the difference between an assistant that guesses your conventions and one that is handed them at the exact moment it needs them.
+
+This page is the map. Every node below links to that piece's entry in the [harness reference](../../reference/harness/).
+
+<HarnessMap lang="en" />
+
+## Three layers, three different kinds of guarantee
+
+The single most useful idea about the harness is that its pieces are not all the same kind of thing. They differ in **who runs them**, and that determines what they can promise.
+
+### Layer 1 — Deterministic: the harness executes it
+
+Hooks and scripts. They are commands declared in `.claude/settings.json` and run by Claude Code itself at fixed points in the session. The assistant does not decide whether they run. It cannot forget them, skip them, or reason its way around them.
+
+This is the only layer that offers a real guarantee. When the project says "code never reaches the repo without going through Prettier", that promise is kept by `format-with-prettier` running after every write — not by an instruction the model is asked to remember.
+
+### Layer 2 — Contextual: the harness loads it
+
+`CLAUDE.md`, the path rules, the skills, the commands and the agent. This layer is **material**, not behaviour: text that arrives in the assistant's context so it can reason with the right information. Each family arrives by a different route:
+
+| Family | How it arrives |
+| --- | --- |
+| `CLAUDE.md` | at session start; the scoped ones when a file in their directory is read |
+| `rules` | when a file matching their `paths:` globs is read |
+| `skills` | when the task matches them, or when invoked by name |
+| `commands` | only when you type them |
+| `agents` | when work is delegated to them |
+
+The guarantee here is weaker and honest about it: the material is *available*, and the assistant is expected to use it. A skill that is never loaded teaches nobody.
+
+### Layer 3 — Judgement: the model applies it
+
+The Intent Gate, the Task-Weight Triage, the Worktree Gate, the Quality Gates, the delegation contracts. These live in `CLAUDE.md` as instructions, and they are executed by reasoning — there is no script behind them.
+
+This layer exists because some decisions cannot be automated. No script can tell a typo from a new function, and therefore no script can decide whether a change needs test-driven development and a review, or whether it should just be made. That judgement is delegated to the model, deliberately and explicitly.
+
+## The principle that assigns a piece to a layer
+
+Aurora does not put everything in layer 1 just because layer 1 is the strongest. The rule is **enforcement proportional to damage**:
+
+- A behaviour that must happen every single time, and whose cost of being skipped is real → **layer 1**. Formatting, barrel linting, injecting the rules that govern the file being touched.
+- A convention whose violation is annoying but recoverable → **layer 2**. Where a file belongs, how a handler is composed, which skill covers a task.
+- A decision that requires weighing context → **layer 3**. How heavy is this task, does it need a worktree, which review gate applies.
+
+The reason for the restraint is practical. An alarm that fires constantly stops being information and becomes noise; people learn to click through it. Reserving mechanical blocking for the few rules where a violation genuinely breaks architectural integrity is what keeps the blocks meaningful when they do fire.
+
+## What you actually have
+
+Almost all of it ships. `catalyst new` copies the monorepo template recursively — the entire `.claude/` directory, the rule catalogues under `cliter/`, and the `scripts/` the hooks depend on. That template is not maintained by hand: it is a mirror of the real harness, produced by a packager script, which is why what you get matches what the Aurora team uses.
+
+The one part that does not travel is the **plugins**. Plugin *declarations* are in the shipped `settings.json`, so your editor offers to install them when you trust the folder — but the installs themselves are per user. That is exactly why a startup hook checks for them on every fresh session.
+
+Which piece is which is marked, one by one, in the [reference inventory](../../reference/harness/).
+
+## Where to go next
+
+- [Lifecycle](./lifecycle/) — the five trigger points in order: what runs, when, and with what timeout.
+- [Enforcement levels](./enforcement/) — why some hooks block, why most only nudge, and why none of them can break your session.
+- [Reference](../../reference/harness/) — the complete catalogue, piece by piece.
+
+In short: three layers with three different strengths of promise, wired to five moments in a session, and one principle — enforcement proportional to damage — deciding which piece gets which strength.

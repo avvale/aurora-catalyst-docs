@@ -233,7 +233,7 @@ Las relaciones muchos-a-muchos usan la misma forma que cualquier otra relación 
 
 > `relations` da forma a los hijos cargados y **nunca** filtra a los padres. `where` filtra a los padres y **nunca** da forma a los hijos.
 
-Son dos ejes independientes ([ortogonales](./glossary/#ortogonal), en el sentido del glosario): cambiar uno nunca arrastra al otro. Es una separación deliberada respecto al `include` de Sequelize, que mezclaba en una sola bolsa de opciones "carga esta asociación", "filtra los padres por ella" y "da forma a las filas unidas por el join".
+Son dos ejes independientes ([ortogonales](../glossary/#ortogonal), en el sentido del glosario): cambiar uno nunca arrastra al otro. Es una separación deliberada respecto al `include` de Sequelize, que mezclaba en una sola bolsa de opciones "carga esta asociación", "filtra los padres por ella" y "da forma a las filas unidas por el join".
 
 La diferencia se ve mejor lado a lado, sobre los mismos datos subyacentes (cuentas, cada una con un `role`):
 
