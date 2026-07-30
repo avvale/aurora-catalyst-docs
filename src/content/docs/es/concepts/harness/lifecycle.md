@@ -62,9 +62,11 @@ Por eso las rules `scope-*` enrutan hacia el `CLAUDE.md` de ámbito en vez de du
 
 ## 3. `UserPromptSubmit` — armar el prompt
 
-`inject-rules-context.ts` (15 s) corre en cada prompt que envías. Lee tu prompt, lo cruza con los índices de los catálogos de business rules y harness rules, e inyecta las reglas relevantes en el contexto antes de que el asistente vea tu mensaje.
+`inject-prompt-context.ts` (15 s) corre en cada prompt que envías. Lee tu prompt, lo cruza con los índices de los catálogos de business rules, harness rules y disparadores de skills, e inyecta el contexto relevante antes de que el asistente vea tu mensaje — en tres bloques separados, en ese orden.
 
 Los presupuestos son deliberadamente separados: hasta **3 business rules** y hasta **3 harness rules**, con un máximo de 4000 caracteres de cuerpo por regla. La separación importa: las harness rules son restricciones y las business rules son memoria de dominio, y dejarlas competir por las mismas tres plazas haría que un prompt cargado de dominio dejara sin sitio, en silencio, a las restricciones arquitectónicas.
+
+El tercer bloque, el último y con su propio presupuesto de hasta **3 skills**, puntúa el prompt contra `.claude/skills-triggers-index.json` — las keywords que cada skill declara en `metadata.triggers` dentro de su propio `SKILL.md`. A diferencia de los dos primeros, nunca inyecta un cuerpo: un `SKILL.md` ocupa cientos de líneas, así que el bloque escribe un puntero (una ruta más los términos casados) y deja que sea el asistente quien abra el fichero. Se aplica el mismo contrato fail-open: si el índice de skills falta o está corrupto, el bloque no escribe nada.
 
 Todo lo que se escriba en la salida estándar en este punto se inyecta por delante del prompt.
 

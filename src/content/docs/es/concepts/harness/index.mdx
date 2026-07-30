@@ -37,6 +37,8 @@ Es la única capa que ofrece una garantía real. Cuando el proyecto dice «el c�
 
 Aquí la garantía es más débil, y lo reconoce: el material está *disponible*, y se espera que el asistente lo use. Una skill que nunca se carga no enseña nada a nadie.
 
+Las skills son la única familia que recibe una ayuda parcial de la capa 1. La mayoría dependen solo de que el modelo reconozca la tarea y las cargue; un puñado declara además un vocabulario curado de keywords (`metadata.triggers`) que `inject-prompt-context.ts` —un hook de `UserPromptSubmit`, de pleno capa 1— puntúa contra cada prompt y convierte en un puntero dentro del contexto. El hook solo entrega una ruta, nunca la skill en sí: cargarla de vuelta sigue siendo una decisión de capa 2, solo que ya no depende únicamente de que el asistente se acuerde.
+
 ### Capa 3 — De criterio: la aplica el modelo
 
 El Intent Gate, el Task-Weight Triage, el Worktree Gate, los Quality Gates y los contratos de delegación. Viven en `CLAUDE.md` como instrucciones y se ejecutan razonando: no hay ningún script detrás.

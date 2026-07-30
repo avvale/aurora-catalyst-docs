@@ -37,6 +37,8 @@ This is the only layer that offers a real guarantee. When the project says "code
 
 The guarantee here is weaker and honest about it: the material is *available*, and the assistant is expected to use it. A skill that is never loaded teaches nobody.
 
+Skills are the one family that gets a partial assist from layer 1. Most rely purely on the model recognising the task and loading them; a handful also declare a curated keyword vocabulary (`metadata.triggers`) that `inject-prompt-context.ts` — a `UserPromptSubmit` hook, squarely layer 1 — scores against every prompt and turns into a pointer in context. The hook only ever hands over a path, never the skill itself: loading it back is still a layer-2 decision, just one the assistant is no longer expected to make from memory alone.
+
 ### Layer 3 — Judgement: the model applies it
 
 The Intent Gate, the Task-Weight Triage, the Worktree Gate, the Quality Gates, the delegation contracts. These live in `CLAUDE.md` as instructions, and they are executed by reasoning — there is no script behind them.
