@@ -20,6 +20,10 @@ yarn-error.log*
 .vscode/
 .idea/
 
+# git worktrees (local isolation)
+.claude/worktrees/
+.worktrees/
+
 # NOTE: content imported by scripts/import-from-sources.ts (cli-commands,
 # api, changes) is committed intentionally so the GitHub Pages build has
 # everything it needs. Run `pnpm sync` locally before committing any change
