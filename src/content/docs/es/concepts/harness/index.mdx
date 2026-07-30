@@ -1,0 +1,70 @@
+---
+title: El harness de IA
+description: La maquinaria que guía a los asistentes de IA dentro de un proyecto Aurora Catalyst — tres capas, cinco puntos de disparo del ciclo de vida y el principio que decide dónde va cada pieza.
+---
+
+import HarnessMap from '~/components/HarnessMap.astro';
+
+Todo proyecto creado con `catalyst new` hereda algo más que código. Hereda un **harness**: hooks que corren en momentos fijos de la sesión, rules que se cargan al abrir determinados ficheros, skills que llevan dentro las convenciones del proyecto, y una serie de gates que el asistente debe aplicar antes de escribir nada.
+
+El harness no es un adorno alrededor de la IA. Es la diferencia entre un asistente que adivina tus convenciones y uno al que se las entregan en el momento exacto en que las necesita.
+
+Esta página es el mapa. Cada nodo enlaza con la ficha de esa pieza en la [referencia del harness](../../reference/harness/).
+
+<HarnessMap lang="es" />
+
+## Tres capas, tres tipos de garantía distintos
+
+La idea más útil sobre el harness es que sus piezas no son todas lo mismo. Se diferencian en **quién las ejecuta**, y eso determina qué pueden prometer.
+
+### Capa 1 — Determinista: la ejecuta el harness
+
+Hooks y scripts. Son comandos declarados en `.claude/settings.json` que ejecuta Claude Code por su cuenta, en puntos fijos de la sesión. El asistente no decide si corren. No puede olvidarlos, ni saltárselos, ni razonar para esquivarlos.
+
+Es la única capa que ofrece una garantía real. Cuando el proyecto dice «el código nunca llega al repositorio sin pasar por Prettier», esa promesa la sostiene `format-with-prettier` corriendo después de cada escritura — no una instrucción que le pedimos al modelo que recuerde.
+
+### Capa 2 — Contextual: la carga el harness
+
+`CLAUDE.md`, las rules de ruta, las skills, los comandos y el agente. Esta capa es **material**, no comportamiento: texto que llega al contexto del asistente para que razone con la información correcta. Cada familia llega por una vía distinta:
+
+| Familia | Cómo llega |
+| --- | --- |
+| `CLAUDE.md` | al arrancar la sesión; los de ámbito, al leer un fichero de su directorio |
+| `rules` | al leer un fichero que casa con sus globs `paths:` |
+| `skills` | cuando la tarea encaja con ellas, o al invocarlas por nombre |
+| `commands` | solo cuando los escribes tú |
+| `agents` | cuando se les delega trabajo |
+
+Aquí la garantía es más débil, y lo reconoce: el material está *disponible*, y se espera que el asistente lo use. Una skill que nunca se carga no enseña nada a nadie.
+
+### Capa 3 — De criterio: la aplica el modelo
+
+El Intent Gate, el Task-Weight Triage, el Worktree Gate, los Quality Gates y los contratos de delegación. Viven en `CLAUDE.md` como instrucciones y se ejecutan razonando: no hay ningún script detrás.
+
+Esta capa existe porque hay decisiones que no se pueden automatizar. Ningún script distingue una errata de una función nueva y, por tanto, ningún script puede decidir si un cambio necesita desarrollo dirigido por tests y una revisión, o si basta con hacerlo. Ese juicio se delega en el modelo, de forma deliberada y explícita.
+
+## El principio que asigna cada pieza a su capa
+
+Aurora no mete todo en la capa 1 por el hecho de que sea la más fuerte. La regla es **enforcement proporcional al daño**:
+
+- Un comportamiento que debe ocurrir siempre, y cuyo coste de omitirse es real → **capa 1**. Formatear, lintar los barrels, inyectar las reglas que gobiernan el fichero que se está tocando.
+- Una convención cuya violación molesta pero se recupera → **capa 2**. Dónde va un fichero, cómo se compone un handler, qué skill cubre una tarea.
+- Una decisión que exige sopesar el contexto → **capa 3**. Cuánto pesa esta tarea, si necesita worktree, qué gate de revisión le toca.
+
+La contención tiene una razón práctica. Una alarma que salta constantemente deja de ser información y se convierte en ruido; la gente aprende a descartarla sin leerla. Reservar el bloqueo mecánico para las pocas reglas donde una violación rompe de verdad la integridad arquitectónica es lo que mantiene el bloqueo significativo cuando sí salta.
+
+## Qué tienes realmente
+
+Casi todo viaja contigo. `catalyst new` copia la plantilla del monorepo de forma recursiva: el directorio `.claude/` entero, los catálogos de reglas bajo `cliter/` y los `scripts/` de los que dependen los hooks. Esa plantilla no se mantiene a mano, es un espejo del harness real generado por un script empaquetador — por eso lo que recibes coincide con lo que usa el equipo de Aurora.
+
+Lo único que no viaja son los **plugins**. Las *declaraciones* de plugin sí están en el `settings.json` que recibes, así que tu editor te ofrece instalarlos al confiar en la carpeta, pero las instalaciones son por usuario. Justo por eso hay un hook que los comprueba en cada sesión nueva.
+
+Qué pieza es cuál está marcado, una por una, en el [inventario de referencia](../../reference/harness/).
+
+## Por dónde seguir
+
+- [Ciclo de vida](./lifecycle/) — los cinco puntos de disparo en orden: qué corre, cuándo y con qué timeout.
+- [Niveles de enforcement](./enforcement/) — por qué unos hooks bloquean, por qué la mayoría solo avisa, y por qué ninguno puede romperte la sesión.
+- [Referencia](../../reference/harness/) — el catálogo completo, pieza a pieza.
+
+En resumen: tres capas con tres fuerzas de promesa distintas, conectadas a cinco momentos de la sesión, y un principio —enforcement proporcional al daño— decidiendo qué fuerza le toca a cada pieza.
