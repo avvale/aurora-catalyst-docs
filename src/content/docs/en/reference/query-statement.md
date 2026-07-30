@@ -233,7 +233,7 @@ Many-to-many relations use the same shape as any other relation — the DSL has 
 
 > `relations` shapes loaded children and **never** filters parents. `where` filters parents and **never** shapes children.
 
-These are two independent axes ([orthogonal](./glossary/#orthogonal), in the glossary's sense): changing one never drags the other along. This is a deliberate split from Sequelize's `include`, which conflated "load this association", "filter parents by it", and "shape the joined rows" into a single option bag.
+These are two independent axes ([orthogonal](../glossary/#orthogonal), in the glossary's sense): changing one never drags the other along. This is a deliberate split from Sequelize's `include`, which conflated "load this association", "filter parents by it", and "shape the joined rows" into a single option bag.
 
 The difference is easiest to see side by side, on the same underlying data (accounts, each with a `role`):
 
