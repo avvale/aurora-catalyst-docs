@@ -10,7 +10,7 @@ title: "DnsRecordResult"
 
 # Interface: DnsRecordResult
 
-Defined in: [deploy/domain/model.ts:29](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L29)
+Defined in: [deploy/domain/model.ts:22](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L22)
 
 Outcome of an idempotent DNS upsert. Reveals whether anything actually changed.
 
@@ -20,7 +20,7 @@ Outcome of an idempotent DNS upsert. Reveals whether anything actually changed.
 
 > **action**: `"created"` \| `"unchanged"` \| `"updated"`
 
-Defined in: [deploy/domain/model.ts:30](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L30)
+Defined in: [deploy/domain/model.ts:23](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L23)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [deploy/domain/model.ts:30](https://github.com/avvale/aurora-catalys
 
 > **domain**: `string`
 
-Defined in: [deploy/domain/model.ts:31](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L31)
+Defined in: [deploy/domain/model.ts:24](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L24)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [deploy/domain/model.ts:31](https://github.com/avvale/aurora-catalys
 
 > **recordType**: [`DnsRecordType`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/type-aliases/dnsrecordtype/)
 
-Defined in: [deploy/domain/model.ts:32](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L32)
+Defined in: [deploy/domain/model.ts:25](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L25)
 
 ***
 
@@ -44,4 +44,4 @@ Defined in: [deploy/domain/model.ts:32](https://github.com/avvale/aurora-catalys
 
 > **value**: `string`
 
-Defined in: [deploy/domain/model.ts:33](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L33)
+Defined in: [deploy/domain/model.ts:26](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L26)

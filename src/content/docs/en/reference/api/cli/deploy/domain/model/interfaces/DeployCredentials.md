@@ -10,7 +10,7 @@ title: "DeployCredentials"
 
 # Interface: DeployCredentials
 
-Defined in: [deploy/domain/model.ts:132](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L132)
+Defined in: [deploy/domain/model.ts:118](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L118)
 
 Aggregated credentials passed to the adapter factory.
 
@@ -20,7 +20,7 @@ Aggregated credentials passed to the adapter factory.
 
 > **ionos**: [`IonosCredentials`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/ionoscredentials/)
 
-Defined in: [deploy/domain/model.ts:133](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L133)
+Defined in: [deploy/domain/model.ts:119](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L119)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [deploy/domain/model.ts:133](https://github.com/avvale/aurora-cataly
 
 > **plesk**: [`PleskCredentials`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/pleskcredentials/)
 
-Defined in: [deploy/domain/model.ts:134](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L134)
+Defined in: [deploy/domain/model.ts:120](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L120)

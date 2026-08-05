@@ -75,7 +75,7 @@ Componer un `QueryStatement` tipado dentro de un handler — `where`, `include`,
 // account.user.password → '$2b$10$...' ← FILTRA el hash bcrypt
 ```
 
-El fix aguas arriba está trackeado como **SPEC-07** en `aurora-catalyst-cli/ROADMAP.md` (un `formatRecord` recursivo que aplica el schema propio de cada relación). Hasta que aterrice, dos patrones viables:
+El fix aguas arriba está trackeado como **SPEC-07** en `aurora-catalyst/packages/cli/ROADMAP.md` (un `formatRecord` recursivo que aplica el schema propio de cada relación). Hasta que aterrice, dos patrones viables:
 
 **Opción A — format manual sobre la relación.** Preferible cuando el cliente necesita la entidad relacionada de forma atómica:
 

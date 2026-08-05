@@ -12,7 +12,7 @@ title: "RenderString"
 
 > **renderString**(`template`, `data`): `string`
 
-Defined in: [generator/engine/template-engine.ts:136](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/template-engine.ts#L136)
+Defined in: [generator/engine/template-engine.ts:152](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/engine/template-engine.ts#L152)
 
 Render a raw template string (not a file) with the same helper namespaces
 as [render](/aurora-catalyst-docs/es/reference/api/cli/generator/engine/template-engine/functions/render/).

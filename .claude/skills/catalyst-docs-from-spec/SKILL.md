@@ -6,12 +6,14 @@ description: >
   a change is archived in the source repo.
 metadata:
   version: "0.1"
-  trigger: "After /opsx:archive in aurora-catalyst-cli or similar, when the user wants to document the new feature."
+  trigger: "After /opsx:archive in aurora-catalyst (packages/cli or the framework) or similar, when the user wants to document the new feature."
 ---
 
 ## When to use
 
-You have just archived (or plan to reflect) a feature in `aurora-catalyst-cli` (or another Aurora repo) and need to update the docs site. The archive lives at `<cli-repo>/openspec/changes/archive/YYYY-MM-DD-<change-name>/`.
+You have just archived (or plan to reflect) a feature in `aurora-catalyst` — either scoped to `packages/cli/` (the generator) or to the framework itself — and need to update the docs site. The archive lives at `<source-repo>/openspec/changes/archive/YYYY-MM-DD-<change-name>/`, at the monorepo root, shared by both scopes.
+
+> The standalone `aurora-catalyst-cli` repo was consolidated into `aurora-catalyst` as `packages/cli` (archived change `2026-08-03-consolidate-cli-into-monorepo`) and is now **frozen** — historical only. Do not read new archives from it.
 
 You do NOT use this skill for:
 
@@ -20,17 +22,17 @@ You do NOT use this skill for:
 
 ## Required context before you start
 
-1. **Path of the source repo** where the archive lives (defaults to `../aurora-catalyst-cli` relative to this repo). Confirm with the user or use `--add-dir` / `additionalWorkingDirectories`.
+1. **Path of the source repo** where the archive lives (defaults to `../aurora-catalyst` relative to this repo — the shared monorepo for both the CLI at `packages/cli/` and the framework). Confirm with the user or use `--add-dir` / `additionalWorkingDirectories`.
 2. **Change identifier** — the archive directory name (e.g. `2026-04-18-preservation-regions`).
-3. The canonical spec synced to `<cli-repo>/openspec/specs/<capability>/spec.md` if it exists.
+3. The canonical spec synced to `<source-repo>/openspec/specs/<capability>/spec.md` if it exists.
 
 ## Inputs you MUST read
 
 In this order:
 
-1. `<cli-repo>/openspec/changes/archive/<change>/proposal.md` — the "why" and the scope (`Impact` section lists the files the change touched).
-2. `<cli-repo>/openspec/changes/archive/<change>/design.md` — architectural decisions and the rationale behind each.
-3. `<cli-repo>/openspec/changes/archive/<change>/specs/<capability>/spec.md` OR the canonical spec at `<cli-repo>/openspec/specs/<capability>/spec.md` — the normative requirements and scenarios.
+1. `<source-repo>/openspec/changes/archive/<change>/proposal.md` — the "why" and the scope (`Impact` section lists the files the change touched).
+2. `<source-repo>/openspec/changes/archive/<change>/design.md` — architectural decisions and the rationale behind each.
+3. `<source-repo>/openspec/changes/archive/<change>/specs/<capability>/spec.md` OR the canonical spec at `<source-repo>/openspec/specs/<capability>/spec.md` — the normative requirements and scenarios.
 4. The **source files mentioned in Impact** — enough to confirm the public surface (exported functions, new flags, types). Do not read more than you need.
 
 Do NOT read the tasks.md file in detail. It is implementation history; the design doc is a better source of "why".
@@ -174,5 +176,5 @@ Both versions live in the same PR.
 When done:
 
 1. Summarize in a PR description which Diátaxis categories you touched and why.
-2. Link the PR to the source archive: `Documents change: <cli-repo>/openspec/changes/archive/<change>/`.
+2. Link the PR to the source archive: `Documents change: <source-repo>/openspec/changes/archive/<change>/`.
 3. Run `pnpm build` locally to catch broken links before pushing. If you can't, say so explicitly.

@@ -12,7 +12,7 @@ title: "Render"
 
 > **render**(`templatePath`, `data`): `string`
 
-Defined in: [generator/engine/template-engine.ts:112](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/template-engine.ts#L112)
+Defined in: [generator/engine/template-engine.ts:126](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/engine/template-engine.ts#L126)
 
 Render an `.eta` template file found under the codegen templates directory
 with injected utility namespaces. Returns the rendered source as a string.
@@ -44,6 +44,8 @@ If the template renders to a non-string value (e.g. an
   Eta compile error swallowed by an async helper).
 
 ## Example
+
+**Inside a template:**
 
 ```eta
 <%~ it.gen.importManager({ imports }) %>

@@ -12,7 +12,7 @@ title: "GetTemplatesDir"
 
 > **getTemplatesDir**(): `string`
 
-Defined in: [generator/engine/template-engine.ts:147](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/template-engine.ts#L147)
+Defined in: [generator/engine/template-engine.ts:163](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/engine/template-engine.ts#L163)
 
 Get the absolute path to the codegen templates directory.
 

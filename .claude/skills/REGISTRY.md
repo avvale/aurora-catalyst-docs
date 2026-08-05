@@ -23,7 +23,7 @@ auto-generated reference, changelog entries).
 | Skill | Trigger | Path |
 | --- | --- | --- |
 | `catalyst-changelog-sync` | After new archives land in a sibling repo; refreshes `/changes/` with classified, bilingual entries. Supports dry-run and bidirectional override. | `.claude/skills/catalyst-changelog-sync/SKILL.md` |
-| `catalyst-docs-from-spec` | After a change is archived in `aurora-catalyst-cli` or similar; drafts concepts, guides, and reference stubs in EN + ES. | `.claude/skills/catalyst-docs-from-spec/SKILL.md` |
+| `catalyst-docs-from-spec` | After a change is archived in `aurora-catalyst` (`packages/cli` or the framework) or similar; drafts concepts, guides, and reference stubs in EN + ES. | `.claude/skills/catalyst-docs-from-spec/SKILL.md` |
 
 ---
 

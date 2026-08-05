@@ -1,6 +1,6 @@
 ---
 title: "Comandos del CLI"
-description: "Referencia de los comandos de `aurora-catalyst-cli`. Generada por `oclif readme --multi`."
+description: "Referencia de los comandos de Aurora Catalyst CLI. Generada por `oclif readme --multi`."
 ---
 
 Cada página describe un topic de `catalyst` con sus flags, args y ejemplos.

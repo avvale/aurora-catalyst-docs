@@ -10,7 +10,7 @@ title: "ConstructorInjectionStatement"
 
 # Interface: ConstructorInjectionStatement
 
-Defined in: [generator/domain/model.ts:376](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L376)
+Defined in: [generator/domain/model.ts:426](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L426)
 
 Declaration of a constructor parameter marked for DI (`constructor(private readonly x: X)`).
 Consumed by the `constructorInjection` helper in `code-gen`.
@@ -21,7 +21,7 @@ Consumed by the `constructorInjection` helper in `code-gen`.
 
 > **className**: `string`
 
-Defined in: [generator/domain/model.ts:378](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L378)
+Defined in: [generator/domain/model.ts:428](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L428)
 
 Type name / class used as the parameter type.
 
@@ -31,7 +31,7 @@ Type name / class used as the parameter type.
 
 > `optional` **readonly?**: `boolean`
 
-Defined in: [generator/domain/model.ts:379](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L379)
+Defined in: [generator/domain/model.ts:429](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L429)
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: [generator/domain/model.ts:379](https://github.com/avvale/aurora-cat
 
 > **scope**: `"private"` \| `"protected"` \| `"public"`
 
-Defined in: [generator/domain/model.ts:380](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L380)
+Defined in: [generator/domain/model.ts:430](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L430)
 
 ***
 
@@ -47,6 +47,6 @@ Defined in: [generator/domain/model.ts:380](https://github.com/avvale/aurora-cat
 
 > **variableName**: `string`
 
-Defined in: [generator/domain/model.ts:382](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L382)
+Defined in: [generator/domain/model.ts:432](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L432)
 
 Identifier the parameter binds to.

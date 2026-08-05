@@ -12,6 +12,6 @@ title: "ResolverType"
 
 > **ResolverType** = `"mutation"` \| `"query"`
 
-Defined in: [generator/domain/model.ts:69](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L69)
+Defined in: [generator/domain/model.ts:82](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L82)
 
 GraphQL resolver shape for an additional API endpoint.

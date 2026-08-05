@@ -10,7 +10,7 @@ title: "PropertyRelationship"
 
 # Interface: PropertyRelationship
 
-Defined in: [generator/domain/model.ts:146](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L146)
+Defined in: [generator/domain/model.ts:144](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L144)
 
 Relationship metadata for properties of type `relationship`. Fully
 describes how the local aggregate connects to a remote one.
@@ -21,7 +21,7 @@ describes how the local aggregate connects to a remote one.
 
 > **aggregateName**: `string`
 
-Defined in: [generator/domain/model.ts:148](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L148)
+Defined in: [generator/domain/model.ts:146](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L146)
 
 Target aggregate name.
 
@@ -31,7 +31,7 @@ Target aggregate name.
 
 > **avoidConstraint**: `boolean`
 
-Defined in: [generator/domain/model.ts:150](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L150)
+Defined in: [generator/domain/model.ts:148](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L148)
 
 If true, the generated SQL does not add a foreign key constraint.
 
@@ -41,7 +41,7 @@ If true, the generated SQL does not add a foreign key constraint.
 
 > **field**: `string`
 
-Defined in: [generator/domain/model.ts:152](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L152)
+Defined in: [generator/domain/model.ts:150](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L150)
 
 Field name on the remote aggregate (e.g. the FK column).
 
@@ -51,7 +51,7 @@ Field name on the remote aggregate (e.g. the FK column).
 
 > `optional` **isDenormalized?**: `boolean`
 
-Defined in: [generator/domain/model.ts:154](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L154)
+Defined in: [generator/domain/model.ts:152](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L152)
 
 If true, the target column is denormalized into this aggregate.
 
@@ -61,7 +61,7 @@ If true, the target column is denormalized into this aggregate.
 
 > `optional` **key?**: `string`
 
-Defined in: [generator/domain/model.ts:156](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L156)
+Defined in: [generator/domain/model.ts:154](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L154)
 
 Local column name when it differs from the property name.
 
@@ -71,7 +71,7 @@ Local column name when it differs from the property name.
 
 > **modulePath**: `string`
 
-Defined in: [generator/domain/model.ts:158](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L158)
+Defined in: [generator/domain/model.ts:156](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L156)
 
 Module path of the target aggregate (e.g. `iam/user`).
 
@@ -81,7 +81,7 @@ Module path of the target aggregate (e.g. `iam/user`).
 
 > `optional` **packageName?**: `string`
 
-Defined in: [generator/domain/model.ts:160](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L160)
+Defined in: [generator/domain/model.ts:158](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L158)
 
 External package when the target lives outside the current bounded context.
 
@@ -91,7 +91,7 @@ External package when the target lives outside the current bounded context.
 
 > `optional` **pivot?**: [`RelationshipPivot`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/relationshippivot/)
 
-Defined in: [generator/domain/model.ts:162](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L162)
+Defined in: [generator/domain/model.ts:160](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L160)
 
 Pivot metadata for many-to-many relationships.
 
@@ -101,7 +101,7 @@ Pivot metadata for many-to-many relationships.
 
 > `optional` **singularName?**: `string`
 
-Defined in: [generator/domain/model.ts:164](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L164)
+Defined in: [generator/domain/model.ts:162](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L162)
 
 Singular form of the target name (used for foreign key column naming).
 
@@ -111,4 +111,4 @@ Singular form of the target name (used for foreign key column naming).
 
 > **type**: [`RelationshipType`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/relationshiptype/)
 
-Defined in: [generator/domain/model.ts:165](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L165)
+Defined in: [generator/domain/model.ts:163](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L163)

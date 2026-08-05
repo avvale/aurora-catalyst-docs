@@ -32,7 +32,7 @@ import {
   type Locale,
   type Source,
   SOURCES,
-  sourcePath,
+  sourceAssetsPath,
   targetFor,
 } from './lib/sources.js';
 import { rewriteApiLinks } from './lib/api-links.js';
@@ -148,12 +148,12 @@ async function injectGenericFrontmatterUnder(dir: string): Promise<void> {
 // ─── Importers ───────────────────────────────────────────────────────
 
 async function mirrorCliCommandsFor(source: Source): Promise<void> {
-  const repoRoot = sourcePath(source);
-  if (!existsSync(repoRoot)) {
-    console.warn(`[skip] ${source.slug}: repo not found at ${repoRoot}`);
+  const assetsRoot = sourceAssetsPath(source);
+  if (!existsSync(assetsRoot)) {
+    console.warn(`[skip] ${source.slug}: repo not found at ${assetsRoot}`);
     return;
   }
-  const sourceDir = path.join(repoRoot, 'docs');
+  const sourceDir = path.join(assetsRoot, 'docs');
   if (!existsSync(sourceDir)) {
     console.warn(
       `[skip] ${source.slug}: no CLI docs at ${sourceDir}. Run \`oclif readme --multi\` in ${source.repo}.`,
@@ -169,8 +169,8 @@ async function mirrorCliCommandsFor(source: Source): Promise<void> {
     const title = locale === 'es' ? 'Comandos del CLI' : 'CLI commands';
     const description =
       locale === 'es'
-        ? `Referencia de los comandos de \`${source.repo}\`. Generada por \`oclif readme --multi\`.`
-        : `Reference for the \`${source.repo}\` commands. Produced by \`oclif readme --multi\`.`;
+        ? `Referencia de los comandos de ${source.label.es}. Generada por \`oclif readme --multi\`.`
+        : `Reference for the ${source.label.en} commands. Produced by \`oclif readme --multi\`.`;
     const intro =
       locale === 'es'
         ? `Cada página describe un topic de \`catalyst\` con sus flags, args y ejemplos.`
@@ -195,12 +195,12 @@ async function mirrorCliCommandsFor(source: Source): Promise<void> {
 }
 
 async function mirrorApiFor(source: Source): Promise<void> {
-  const repoRoot = sourcePath(source);
-  if (!existsSync(repoRoot)) {
-    console.warn(`[skip] ${source.slug}: repo not found at ${repoRoot}`);
+  const assetsRoot = sourceAssetsPath(source);
+  if (!existsSync(assetsRoot)) {
+    console.warn(`[skip] ${source.slug}: repo not found at ${assetsRoot}`);
     return;
   }
-  const sourceDir = path.join(repoRoot, 'docs-api');
+  const sourceDir = path.join(assetsRoot, 'docs-api');
   if (!existsSync(sourceDir)) {
     console.warn(
       `[skip] ${source.slug}: no TypeDoc output at ${sourceDir}. Run the TypeDoc script in ${source.repo}.`,
@@ -227,12 +227,12 @@ async function mirrorApiFor(source: Source): Promise<void> {
       locale === 'es' ? `API · ${source.label.es}` : `API · ${source.label.en}`;
     const description =
       locale === 'es'
-        ? `Superficie TypeScript pública de \`${source.repo}\`. Generada por TypeDoc.`
-        : `Public TypeScript surface of \`${source.repo}\`. Produced by TypeDoc.`;
+        ? `Superficie TypeScript pública de ${source.label.es}. Generada por TypeDoc.`
+        : `Public TypeScript surface of ${source.label.en}. Produced by TypeDoc.`;
     const intro =
       locale === 'es'
-        ? `Cada página corresponde a un módulo, interfaz, función o tipo exportado desde \`${source.repo}\`.`
-        : `Each page corresponds to a module, interface, function, or type exported from \`${source.repo}\`.`;
+        ? `Cada página corresponde a un módulo, interfaz, función o tipo exportado desde ${source.label.es}.`
+        : `Each page corresponds to a module, interface, function, or type exported from ${source.label.en}.`;
     await writeFile(
       path.join(dest, 'index.md'),
       [

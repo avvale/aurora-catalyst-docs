@@ -9,7 +9,7 @@ Cada entrada se redacta a partir de la propuesta original del openspec en el rep
 
 ## Por repo fuente
 
-- [**Aurora Catalyst CLI**](./cli/) — `aurora-catalyst-cli`, el generador de código.
+- [**Aurora Catalyst CLI**](./cli/) — el generador de código, `packages/cli` dentro del monorepo `aurora-catalyst` desde que se consolidó ahí (el repo independiente `aurora-catalyst-cli` está ahora congelado, solo con valor histórico).
 - [**Aurora Catalyst Framework**](./catalyst/) — `aurora-catalyst`, el framework Angular + NestJS que genera el CLI.
 
 Las entradas se agrupan por la versión semver que las publica. Los cambios archivados después del último release aparecen bajo **Sin publicar** hasta que se corta una nueva versión.

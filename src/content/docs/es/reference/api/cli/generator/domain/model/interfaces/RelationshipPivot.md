@@ -10,7 +10,7 @@ title: "RelationshipPivot"
 
 # Interface: RelationshipPivot
 
-Defined in: [generator/domain/model.ts:256](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L256)
+Defined in: [generator/domain/model.ts:259](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L259)
 
 Pivot table definition used when a property declares a many-to-many
 relationship with extra columns. The generator emits a first-class module
@@ -22,7 +22,7 @@ for the pivot itself using this metadata.
 
 > `optional` **additionalApis?**: [`AdditionalApi`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/additionalapi/)[]
 
-Defined in: [generator/domain/model.ts:257](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L257)
+Defined in: [generator/domain/model.ts:260](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L260)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [generator/domain/model.ts:257](https://github.com/avvale/aurora-cat
 
 > **aggregateName**: `string`
 
-Defined in: [generator/domain/model.ts:258](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L258)
+Defined in: [generator/domain/model.ts:261](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L261)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [generator/domain/model.ts:258](https://github.com/avvale/aurora-cat
 
 > **aggregateProperties**: [`Property`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/property/)[]
 
-Defined in: [generator/domain/model.ts:260](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L260)
+Defined in: [generator/domain/model.ts:263](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L263)
 
 Columns of the pivot table (usually the two foreign keys plus extras).
 
@@ -48,7 +48,7 @@ Columns of the pivot table (usually the two foreign keys plus extras).
 
 > **boundedContextName**: `string`
 
-Defined in: [generator/domain/model.ts:261](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L261)
+Defined in: [generator/domain/model.ts:264](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L264)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [generator/domain/model.ts:261](https://github.com/avvale/aurora-cat
 
 > `optional` **excludedFiles?**: `string`[]
 
-Defined in: [generator/domain/model.ts:263](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L263)
+Defined in: [generator/domain/model.ts:266](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L266)
 
 Templates skipped when generating the pivot module.
 
@@ -66,7 +66,7 @@ Templates skipped when generating the pivot module.
 
 > `optional` **excludedOperations?**: `string`[]
 
-Defined in: [generator/domain/model.ts:265](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L265)
+Defined in: [generator/domain/model.ts:268](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L268)
 
 CRUD operations skipped when generating the pivot module.
 
@@ -76,7 +76,7 @@ CRUD operations skipped when generating the pivot module.
 
 > `optional` **hasAuditing?**: `boolean`
 
-Defined in: [generator/domain/model.ts:266](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L266)
+Defined in: [generator/domain/model.ts:269](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L269)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [generator/domain/model.ts:266](https://github.com/avvale/aurora-cat
 
 > `optional` **hasOAuth?**: `boolean`
 
-Defined in: [generator/domain/model.ts:267](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L267)
+Defined in: [generator/domain/model.ts:270](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L270)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [generator/domain/model.ts:267](https://github.com/avvale/aurora-cat
 
 > `optional` **hasTenant?**: `boolean`
 
-Defined in: [generator/domain/model.ts:268](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L268)
+Defined in: [generator/domain/model.ts:271](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L271)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [generator/domain/model.ts:268](https://github.com/avvale/aurora-cat
 
 > **moduleName**: `string`
 
-Defined in: [generator/domain/model.ts:269](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L269)
+Defined in: [generator/domain/model.ts:272](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L272)
 
 ***
 
@@ -108,4 +108,4 @@ Defined in: [generator/domain/model.ts:269](https://github.com/avvale/aurora-cat
 
 > **moduleNames**: `string`
 
-Defined in: [generator/domain/model.ts:270](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L270)
+Defined in: [generator/domain/model.ts:273](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L273)

@@ -34,7 +34,7 @@ EXAMPLES
   $ catalyst env decrypt --key-file .keys/custom.txt
 ```
 
-_See code: [src/commands/env/decrypt.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/env/decrypt.ts)_
+_See code: [src/commands/env/decrypt.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/env/decrypt.ts)_
 
 ## `catalyst env encrypt`
 
@@ -60,4 +60,4 @@ EXAMPLES
   $ catalyst env encrypt --key-file .keys/custom.txt
 ```
 
-_See code: [src/commands/env/encrypt.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/env/encrypt.ts)_
+_See code: [src/commands/env/encrypt.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/env/encrypt.ts)_

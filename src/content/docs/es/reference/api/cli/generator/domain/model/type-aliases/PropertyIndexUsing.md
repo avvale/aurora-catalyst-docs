@@ -12,6 +12,6 @@ title: "PropertyIndexUsing"
 
 > **PropertyIndexUsing** = `"BRIN"` \| `"Btree"` \| `"GIN"` \| `"GiST"` \| `"HASH"` \| `"spgist"`
 
-Defined in: [generator/domain/model.ts:52](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L52)
+Defined in: [generator/domain/model.ts:65](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L65)
 
 PostgreSQL index access method for properties that declare `indexUsing`.

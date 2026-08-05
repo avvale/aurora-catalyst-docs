@@ -1,6 +1,6 @@
 ---
 title: Instalar el CLI de Aurora Catalyst
-description: Instala aurora-catalyst-cli de forma global para que el comando `catalyst` esté disponible antes de generar nada.
+description: Instala @aurorajs.dev/catalyst-cli de forma global para que el comando `catalyst` esté disponible antes de generar nada.
 sidebar:
   order: 1
   hidden: true

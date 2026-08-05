@@ -27,7 +27,6 @@
     ]
   },
   "additionalWorkingDirectories": [
-    "~/Projects/aurora/aurora-catalyst-cli",
     "~/Projects/aurora/aurora-catalyst"
   ]
 }

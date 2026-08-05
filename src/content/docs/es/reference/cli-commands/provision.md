@@ -48,4 +48,4 @@ EXAMPLES
   DEV_FTP_PASSWORD=x PROD_FTP_PASSWORD=y aurora provision  # per-env passwords
 ```
 
-_See code: [src/commands/provision/index.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/provision/index.ts)_
+_See code: [src/commands/provision/index.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/provision/index.ts)_

@@ -10,7 +10,7 @@ title: "ImportStatement"
 
 # Interface: ImportStatement
 
-Defined in: [generator/domain/model.ts:361](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L361)
+Defined in: [generator/domain/model.ts:411](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L411)
 
 Declaration of an import statement handled by `code-gen.importManager`.
 Allows templates to declare imports at render time and let the helper
@@ -22,7 +22,7 @@ de-duplicate, group and sort them consistently.
 
 > `optional` **defaultImport?**: `boolean`
 
-Defined in: [generator/domain/model.ts:363](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L363)
+Defined in: [generator/domain/model.ts:413](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L413)
 
 If true, emitted as a default import (`import X from '...'`).
 
@@ -32,7 +32,7 @@ If true, emitted as a default import (`import X from '...'`).
 
 > **items**: `string` \| `string`[]
 
-Defined in: [generator/domain/model.ts:365](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L365)
+Defined in: [generator/domain/model.ts:415](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L415)
 
 Named imports, or a single default/namespace identifier.
 
@@ -42,7 +42,7 @@ Named imports, or a single default/namespace identifier.
 
 > `optional` **oneRowByItem?**: `boolean`
 
-Defined in: [generator/domain/model.ts:367](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L367)
+Defined in: [generator/domain/model.ts:417](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L417)
 
 If true, each named item goes on its own line.
 
@@ -52,6 +52,6 @@ If true, each named item goes on its own line.
 
 > **path**: `string`
 
-Defined in: [generator/domain/model.ts:369](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L369)
+Defined in: [generator/domain/model.ts:419](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L419)
 
 Module specifier (`@nestjs/common`, `./user.model`, ...).

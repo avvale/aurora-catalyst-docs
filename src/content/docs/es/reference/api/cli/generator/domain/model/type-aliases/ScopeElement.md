@@ -12,6 +12,6 @@ title: "ScopeElement"
 
 > **ScopeElement** = `"bounded-context"` \| `"module"`
 
-Defined in: [generator/domain/model.ts:98](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L98)
+Defined in: [generator/domain/model.ts:104](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L104)
 
 Granularity of a generation step: an entire bounded context or a single module.

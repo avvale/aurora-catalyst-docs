@@ -10,14 +10,11 @@ title: "DeploymentPlan"
 
 # Interface: DeploymentPlan
 
-Defined in: [deploy/domain/model.ts:53](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L53)
+Defined in: [deploy/domain/model.ts:41](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L41)
 
 Fully resolved plan for deploying a single target in a single environment.
-
-Built by `src/deploy/domain/plan-builder.ts` from the project's
-`aurora.yaml`, the active environment, CLI flags, env vars, and file-based
-secrets (`plan-resolver.ts`). Every provider port receives data derived
-from one of these plans.
+Built by `plan-builder.ts` from `aurora.yaml`, CLI flags, env vars, and file-based
+secrets (`plan-resolver.ts`). Every provider port receives data derived from a plan.
 
 ## Properties
 
@@ -25,7 +22,7 @@ from one of these plans.
 
 > `optional` **database?**: `object`
 
-Defined in: [deploy/domain/model.ts:55](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L55)
+Defined in: [deploy/domain/model.ts:43](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L43)
 
 Database provisioning config. Omitted when the target has no DB.
 
@@ -51,7 +48,7 @@ Database provisioning config. Omitted when the target has no DB.
 
 > **dir**: `string`
 
-Defined in: [deploy/domain/model.ts:62](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L62)
+Defined in: [deploy/domain/model.ts:50](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L50)
 
 Working directory on the server (e.g. `/httpdocs`).
 
@@ -61,7 +58,7 @@ Working directory on the server (e.g. `/httpdocs`).
 
 > **dnsRecordType**: [`DnsRecordType`](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/type-aliases/dnsrecordtype/)
 
-Defined in: [deploy/domain/model.ts:63](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L63)
+Defined in: [deploy/domain/model.ts:51](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L51)
 
 ***
 
@@ -69,7 +66,7 @@ Defined in: [deploy/domain/model.ts:63](https://github.com/avvale/aurora-catalys
 
 > `optional` **dnsValue?**: `string`
 
-Defined in: [deploy/domain/model.ts:65](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L65)
+Defined in: [deploy/domain/model.ts:53](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L53)
 
 DNS target value. Defaults to the server host when omitted.
 
@@ -79,7 +76,7 @@ DNS target value. Defaults to the server host when omitted.
 
 > **dnsZone**: `string`
 
-Defined in: [deploy/domain/model.ts:67](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L67)
+Defined in: [deploy/domain/model.ts:55](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L55)
 
 DNS zone that owns the record (the registrable parent domain).
 
@@ -89,7 +86,7 @@ DNS zone that owns the record (the registrable parent domain).
 
 > **domain**: `string`
 
-Defined in: [deploy/domain/model.ts:69](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L69)
+Defined in: [deploy/domain/model.ts:57](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L57)
 
 Fully qualified domain this deployment serves.
 
@@ -99,7 +96,7 @@ Fully qualified domain this deployment serves.
 
 > `optional` **dotEnv?**: `string`
 
-Defined in: [deploy/domain/model.ts:71](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L71)
+Defined in: [deploy/domain/model.ts:59](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L59)
 
 Plaintext `.env` content, if resolved. Sensitive.
 
@@ -109,7 +106,7 @@ Plaintext `.env` content, if resolved. Sensitive.
 
 > `optional` **dotEnvEnc?**: `string`
 
-Defined in: [deploy/domain/model.ts:73](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L73)
+Defined in: [deploy/domain/model.ts:61](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L61)
 
 Encrypted `.env.{env}.enc` content produced by SOPS.
 
@@ -119,7 +116,7 @@ Encrypted `.env.{env}.enc` content produced by SOPS.
 
 > `optional` **envConfiguration?**: `string`
 
-Defined in: [deploy/domain/model.ts:75](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L75)
+Defined in: [deploy/domain/model.ts:63](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L63)
 
 Frontend-only: Angular `configuration` name. Defaults to env name.
 
@@ -129,7 +126,7 @@ Frontend-only: Angular `configuration` name. Defaults to env name.
 
 > **environment**: `string`
 
-Defined in: [deploy/domain/model.ts:77](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L77)
+Defined in: [deploy/domain/model.ts:65](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L65)
 
 Environment slug (`dev`, `qa`, `prod`, ...).
 
@@ -139,7 +136,7 @@ Environment slug (`dev`, `qa`, `prod`, ...).
 
 > **ftpLogin**: `string`
 
-Defined in: [deploy/domain/model.ts:78](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L78)
+Defined in: [deploy/domain/model.ts:66](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L66)
 
 ***
 
@@ -147,7 +144,7 @@ Defined in: [deploy/domain/model.ts:78](https://github.com/avvale/aurora-catalys
 
 > **ftpPassword**: `string`
 
-Defined in: [deploy/domain/model.ts:79](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L79)
+Defined in: [deploy/domain/model.ts:67](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L67)
 
 ***
 
@@ -155,7 +152,7 @@ Defined in: [deploy/domain/model.ts:79](https://github.com/avvale/aurora-catalys
 
 > `optional` **nginxDirectives?**: `string`
 
-Defined in: [deploy/domain/model.ts:81](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L81)
+Defined in: [deploy/domain/model.ts:69](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L69)
 
 Extra Nginx directives to inject in the vhost, if any.
 
@@ -165,7 +162,7 @@ Extra Nginx directives to inject in the vhost, if any.
 
 > `optional` **oauthPrivateKey?**: `string`
 
-Defined in: [deploy/domain/model.ts:83](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L83)
+Defined in: [deploy/domain/model.ts:71](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L71)
 
 OAuth private key (backend targets that require JWT signing).
 
@@ -175,7 +172,7 @@ OAuth private key (backend targets that require JWT signing).
 
 > `optional` **oauthPublicKey?**: `string`
 
-Defined in: [deploy/domain/model.ts:85](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L85)
+Defined in: [deploy/domain/model.ts:73](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L73)
 
 OAuth public key (verification half of the pair above).
 
@@ -185,7 +182,7 @@ OAuth public key (verification half of the pair above).
 
 > **pleskSshUser**: `string`
 
-Defined in: [deploy/domain/model.ts:87](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L87)
+Defined in: [deploy/domain/model.ts:75](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L75)
 
 Plesk SSH user for operations that require shell access.
 
@@ -195,7 +192,7 @@ Plesk SSH user for operations that require shell access.
 
 > **project**: `object`
 
-Defined in: [deploy/domain/model.ts:88](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L88)
+Defined in: [deploy/domain/model.ts:76](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L76)
 
 #### email?
 
@@ -217,7 +214,7 @@ Defined in: [deploy/domain/model.ts:88](https://github.com/avvale/aurora-catalys
 
 > **secretPrefix**: `string`
 
-Defined in: [deploy/domain/model.ts:95](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L95)
+Defined in: [deploy/domain/model.ts:83](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L83)
 
 Prefix applied to every CI/CD secret/variable name (`ENV_TARGET_...`).
 
@@ -227,7 +224,7 @@ Prefix applied to every CI/CD secret/variable name (`ENV_TARGET_...`).
 
 > **server**: `object`
 
-Defined in: [deploy/domain/model.ts:96](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L96)
+Defined in: [deploy/domain/model.ts:84](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L84)
 
 #### host
 
@@ -245,7 +242,7 @@ Hosting plan identifier, provider-specific.
 
 > **skipCicd**: `boolean`
 
-Defined in: [deploy/domain/model.ts:102](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L102)
+Defined in: [deploy/domain/model.ts:90](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L90)
 
 If true, skip the CI/CD phase for this target.
 
@@ -255,7 +252,7 @@ If true, skip the CI/CD phase for this target.
 
 > **skipDns**: `boolean`
 
-Defined in: [deploy/domain/model.ts:104](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L104)
+Defined in: [deploy/domain/model.ts:92](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L92)
 
 If true, skip DNS upsert.
 
@@ -265,7 +262,7 @@ If true, skip DNS upsert.
 
 > **skipHosting**: `boolean`
 
-Defined in: [deploy/domain/model.ts:106](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L106)
+Defined in: [deploy/domain/model.ts:94](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L94)
 
 If true, skip hosting provisioning (subscription, SSL, etc.).
 
@@ -275,7 +272,7 @@ If true, skip hosting provisioning (subscription, SSL, etc.).
 
 > **skipSsh**: `boolean`
 
-Defined in: [deploy/domain/model.ts:108](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L108)
+Defined in: [deploy/domain/model.ts:96](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L96)
 
 If true, do not install SSH keys on the server.
 
@@ -285,7 +282,7 @@ If true, do not install SSH keys on the server.
 
 > `optional` **sopsAgeKey?**: `string`
 
-Defined in: [deploy/domain/model.ts:110](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L110)
+Defined in: [deploy/domain/model.ts:98](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L98)
 
 SOPS age key used to decrypt `dotEnvEnc`. Sensitive.
 
@@ -295,7 +292,7 @@ SOPS age key used to decrypt `dotEnvEnc`. Sensitive.
 
 > **startupFile**: `string`
 
-Defined in: [deploy/domain/model.ts:112](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L112)
+Defined in: [deploy/domain/model.ts:100](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L100)
 
 Node.js entry file. Auto-detected from `package.json` `main`.
 
@@ -305,4 +302,4 @@ Node.js entry file. Auto-detected from `package.json` `main`.
 
 > **target**: [`DeployTarget`](/aurora-catalyst-docs/es/reference/api/cli/deploy/domain/model/type-aliases/deploytarget/)
 
-Defined in: [deploy/domain/model.ts:113](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L113)
+Defined in: [deploy/domain/model.ts:101](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L101)

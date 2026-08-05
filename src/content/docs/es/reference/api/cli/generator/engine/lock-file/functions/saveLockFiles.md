@@ -12,7 +12,7 @@ title: "SaveLockFiles"
 
 > **saveLockFiles**(`boundedContextName`, `moduleName`, `lockFiles`, `scope`, `cwd?`): `void`
 
-Defined in: [generator/engine/lock-file.ts:309](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L309)
+Defined in: [generator/engine/lock-file.ts:51](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/engine/lock-file.ts#L51)
 
 Save lock files to `cliter/{boundedContext}/.locks/{scope}/{moduleName}.lock.json`.
 

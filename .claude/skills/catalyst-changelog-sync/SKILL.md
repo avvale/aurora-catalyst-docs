@@ -72,7 +72,19 @@ Capture the JSON output. Each element has: `repo`, `slug`, `archiveAbsPath`, `fi
 
 If the array is empty → nothing to do. Tell the user and exit.
 
-### 2. Classify each change
+### 2. Route each change to its source (`cli` vs `catalyst`)
+
+The standalone `aurora-catalyst-cli` repo was consolidated into the `aurora-catalyst` monorepo as `packages/cli` (archived change `2026-08-03-consolidate-cli-into-monorepo`) and is now **frozen** — historical only, never sync from it. As a consequence, the `cli` and `catalyst` sources in `scripts/lib/sources.ts` both resolve to the SAME repo (`aurora-catalyst`) and scan the SAME shared archive at `openspec/changes/archive/`. Running `detect --source cli` and `detect --source catalyst` will therefore both surface the SAME slugs as "new" candidates — the source repo no longer distinguishes CLI vs framework changes; you must, before classifying PUBLISH/DISMISS.
+
+For every detected change, read `files.proposal`'s `Impact` section and decide:
+
+- **Belongs to `cli`** if the change touches `packages/cli/` — the generator, its templates, or its CLI-facing surface.
+- **Belongs to `catalyst`** for everything else (backend/frontend framework code, cross-cutting monorepo tooling not scoped to `packages/cli/`).
+- **Never both.** A change is scoped to exactly one source. In the source it does NOT belong to, register it as `dismissed` with `reason: "Out of scope for this source — belongs to <other-source>"` so it stops showing up as a pending candidate on future `detect` runs.
+
+This routing decision is orthogonal to the PUBLISH/DISMISS classification below: a change can be `publish`-worthy for `cli` (feature notes go to `changes/cli/`) while simultaneously getting a scope-based `dismiss` recorded under `catalyst` (and vice versa) — never published under both.
+
+### 3. Classify each change
 
 For every element, read `files.proposal` and apply the **classification contract** below. Never read `design.md` or `tasks.md` of the archived change — they bias toward implementation noise that does not reach the developer.
 
@@ -107,7 +119,7 @@ OUTPUT per change:
 
 `classification` is null for dismiss decisions. `reason` is always required — for publish it summarises what shipped, for dismiss it names the kind of work.
 
-### 3. Author bilingual entries for PUBLISH
+### 4. Author bilingual entries for PUBLISH
 
 Skip this step in `--dry-run`.
 
@@ -155,7 +167,7 @@ Rules:
 - NEVER quote the proposal verbatim. Rewrite in the reader's voice.
 - Length: the whole body (excluding frontmatter) stays under ~200 words. A changelog entry that takes a minute to read has failed.
 
-### 4. Write the Spanish version
+### 5. Write the Spanish version
 
 The Spanish file is NOT a literal translation. Rewrite idiomatically in **neutral / international Spanish using tuteo**:
 
@@ -168,7 +180,7 @@ Write the Spanish file AFTER the English one, but rewrite — do not auto-transl
 
 Section titles translate to: "Qué cambió" (What changed), "Por qué importa" (Why it matters), and the footer link reads "Ver propuesta original" (View original proposal). The auto-generated blockquote becomes: `> Generado automáticamente desde el archivo fuente. No editar a mano — vuelve a ejecutar \`catalyst-changelog-sync\`.`
 
-### 5. Persist decisions
+### 6. Persist decisions
 
 Build the decisions JSON in a temp file (use `$TMPDIR/changelog-decisions.json` or similar). Shape:
 
@@ -200,7 +212,7 @@ pnpm sync:changelog commit --decisions <path-to-tmp-file>
 
 Skip this step in `--dry-run` — instead print the decisions array to the user as a markdown table.
 
-### 6. Verify consistency
+### 7. Verify consistency
 
 ```bash
 pnpm sync:changelog check
@@ -208,7 +220,7 @@ pnpm sync:changelog check
 
 If it exits non-zero, something got out of sync. Read the reported issues, fix them, re-run. Never commit with a failing check.
 
-### 7. Report back to the user
+### 8. Report back to the user
 
 Summarise:
 
@@ -225,7 +237,7 @@ The user says: *"include `<slug>` from the dismissed list"* (or equivalent) — 
 1. Run `pnpm sync:changelog list --status dismissed --source <slug>` to confirm the slug exists and grab its `source_commit`.
 2. Locate the archive directory at `<sibling-repo>/openspec/changes/archive/<slug>/`. Read `proposal.md` and every `specs/<cap>/spec.md`.
 3. Re-classify it applying the classification contract, but with the assumption that the user's judgement overrides — still decide `feature` / `breaking` / `deprecation`.
-4. Author the EN + ES entry files exactly like a normal PUBLISH (step 3–4 above).
+4. Author the EN + ES entry files exactly like a normal PUBLISH (step 4–5 above).
 5. Build a decisions array with a SINGLE entry using the new status and classification. The `commit` command will detect the status change (`dismissed → published`) and record `override: { by: "user", ..., previous_status: "dismissed" }` automatically.
 6. Run `pnpm sync:changelog commit --decisions <tmp>`.
 7. Run `pnpm sync:changelog check`.
@@ -239,7 +251,7 @@ The user says: *"include `<slug>` from the dismissed list"* (or equivalent) — 
 
 ## Dry-run
 
-`--dry-run` means: do steps 1 and 2 (detect + classify), then print the classification table to the user, and STOP. Do not author files. Do not invoke `commit`. Do not modify anything.
+`--dry-run` means: do steps 1–3 (detect + route + classify), then print the classification table to the user, and STOP. Do not author files. Do not invoke `commit`. Do not modify anything.
 
 Output table shape:
 

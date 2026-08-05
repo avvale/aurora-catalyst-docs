@@ -1,6 +1,6 @@
 # Aurora Catalyst Docs
 
-Documentation site for the Aurora Catalyst ecosystem: the `aurora-catalyst-cli` code generator and the `aurora-catalyst` Angular + NestJS framework it scaffolds.
+Documentation site for the Aurora Catalyst ecosystem: the `catalyst` CLI code generator (now `packages/cli` inside the `aurora-catalyst` monorepo, since the standalone `aurora-catalyst-cli` repo was consolidated and frozen) and the `aurora-catalyst` Angular + NestJS framework it scaffolds.
 
 ## Architecture
 
@@ -44,24 +44,29 @@ All generated directories are **committed to the repo** so the GitHub Pages buil
 
 This repo **consumes** information from sibling Aurora repos but **never** modifies them. The inverse is true too: the source repos do not know this repo exists.
 
+`aurora-catalyst-cli` (the standalone CLI repo) was consolidated into the `aurora-catalyst` monorepo as `packages/cli` (archived change `2026-08-03-consolidate-cli-into-monorepo`) and is now **frozen** — historical only, never sync from it again. Both the `cli` and `catalyst` sources in `scripts/lib/sources.ts` now resolve to the SAME repo (`aurora-catalyst`) and therefore share ONE archive; `cli` additionally reads its CLI-specific build outputs from the `packages/cli/` subdirectory:
+
 ```
-aurora-catalyst-cli (source of truth)     aurora-catalyst-docs (you are here)
-├── openspec/changes/archive/       ─────►  changes/<repo>/<slug>.md (curated by skill)
-├── docs/ (oclif readme output)     ─────►  reference/cli-commands/
-└── docs-api/ (TypeDoc output)      ─────►  reference/api/
-                                   ◄────── scripts/import-from-sources.ts  (deterministic)
-                                   ◄────── catalyst-changelog-sync skill   (LLM-curated)
+aurora-catalyst (source of truth for BOTH slugs)     aurora-catalyst-docs (you are here)
+├── openspec/changes/archive/                  ─────►  changes/<repo>/<slug>.md (curated by skill,
+│                                                       shared by cli + catalyst; the skill decides
+│                                                       which section a change belongs to)
+├── packages/cli/docs/ (oclif readme output)   ─────►  reference/cli-commands/   (slug: cli)
+└── packages/cli/docs-api/ (TypeDoc output)    ─────►  reference/api/cli/        (slug: cli)
+                                               ◄────── scripts/import-from-sources.ts  (deterministic)
+                                               ◄────── catalyst-changelog-sync skill   (LLM-curated)
 ```
 
 To update docs from a freshly-archived change:
 
 ```bash
-# 1. Make sure the source repo is at the commit you want to document.
-# 2. Run the skill with both repos in scope:
-claude --add-dir ../aurora-catalyst-cli
+# 1. Make sure the source repo (aurora-catalyst) is at the commit you want to document.
+# 2. Run the skill with the monorepo in scope:
+claude --add-dir ../aurora-catalyst
 
 # 3. Invoke the catalyst-changelog-sync skill (from this repo):
 #    → detects the new archive, classifies it (publish / dismiss),
+#      routes it to cli or catalyst (never both — see the skill's routing rule),
 #      drafts EN + ES entries when it qualifies, updates the registry.
 # 4. Optionally also invoke catalyst-docs-from-spec if concept / guide pages need rewriting.
 # 5. Refresh the deterministic reference (CLI commands, API) if relevant:
@@ -104,7 +109,7 @@ pnpm sync
 
 | Skill                      | When to use                                                                                                                                                                                                                                                |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `catalyst-docs-from-spec`           | After a change is archived in `aurora-catalyst-cli` (or similar). Generates concept + guide + reference stubs in EN and ES from the archive. Lives at `.claude/skills/catalyst-docs-from-spec/SKILL.md`.                                                            |
+| `catalyst-docs-from-spec`           | After a change is archived in `aurora-catalyst` (`packages/cli` or the framework) or similar. Generates concept + guide + reference stubs in EN and ES from the archive. Lives at `.claude/skills/catalyst-docs-from-spec/SKILL.md`.                                                            |
 | `catalyst-changelog-sync`  | After one or more changes are archived in a sibling repo. Detects new archives, classifies each as publish / dismiss (user-facing impact contract), drafts bilingual entries for publish, records every decision in `scripts/changelog-registry.json`. Supports dry-run and bidirectional override. Lives at `.claude/skills/catalyst-changelog-sync/SKILL.md`. |
 | `catalyst-update-skill-registry` | After creating, editing, deleting, or renaming ANY `SKILL.md` — auto-invoke even if the user does not ask. Regenerates `.claude/skills/REGISTRY.md` by scanning every skill and grouping by type (Docs automation, Workflow — OpenSpec SDD, Meta). Complements the compact `[Project Skills Index]` that `.claude/scripts/generate-skills-index.ts` maintains inside this file. Lives at `.claude/skills/catalyst-update-skill-registry/SKILL.md`. |
 

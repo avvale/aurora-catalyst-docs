@@ -10,7 +10,7 @@ title: "LoggerPort"
 
 # Interface: LoggerPort
 
-Defined in: [deploy/ports/logger.port.ts:22](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L22)
+Defined in: [deploy/ports/logger.port.ts:22](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/logger.port.ts#L22)
 
 Port for writing user-facing progress output during a deploy run.
 
@@ -24,7 +24,7 @@ to a file for CI logs, or to a silent sink for tests. The business logic in
 
 > **logFilePath**: `string`
 
-Defined in: [deploy/ports/logger.port.ts:35](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L35)
+Defined in: [deploy/ports/logger.port.ts:35](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/logger.port.ts#L35)
 
 Absolute path to the log file the logger is currently writing to.
 
@@ -34,7 +34,7 @@ Absolute path to the log file the logger is currently writing to.
 
 > **error**(`message`): `void`
 
-Defined in: [deploy/ports/logger.port.ts:24](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L24)
+Defined in: [deploy/ports/logger.port.ts:24](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/logger.port.ts#L24)
 
 Print an error-level message. Does not throw.
 
@@ -54,7 +54,7 @@ Print an error-level message. Does not throw.
 
 > **header**(`title`): `void`
 
-Defined in: [deploy/ports/logger.port.ts:26](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L26)
+Defined in: [deploy/ports/logger.port.ts:26](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/logger.port.ts#L26)
 
 Print a prominent section header (e.g. before starting a phase).
 
@@ -74,7 +74,7 @@ Print a prominent section header (e.g. before starting a phase).
 
 > **info**(`message`): `void`
 
-Defined in: [deploy/ports/logger.port.ts:28](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L28)
+Defined in: [deploy/ports/logger.port.ts:28](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/logger.port.ts#L28)
 
 Print an informational message.
 
@@ -94,7 +94,7 @@ Print an informational message.
 
 > **logError**(`context`, `error`): `void`
 
-Defined in: [deploy/ports/logger.port.ts:33](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L33)
+Defined in: [deploy/ports/logger.port.ts:33](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/logger.port.ts#L33)
 
 Append a structured entry to the log file about a caught error.
 `context` identifies where the error came from; `error` is pretty-printed.
@@ -119,7 +119,7 @@ Append a structured entry to the log file about a caught error.
 
 > **step**(`label`): [`Spinner`](/aurora-catalyst-docs/en/reference/api/cli/deploy/ports/loggerport/interfaces/spinner/)
 
-Defined in: [deploy/ports/logger.port.ts:40](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L40)
+Defined in: [deploy/ports/logger.port.ts:40](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/logger.port.ts#L40)
 
 Start a spinner with `label` and return it. The caller is responsible for
 closing it via `succeed` / `fail` / `warn`.
@@ -140,7 +140,7 @@ closing it via `succeed` / `fail` / `warn`.
 
 > **success**(`message`): `void`
 
-Defined in: [deploy/ports/logger.port.ts:42](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L42)
+Defined in: [deploy/ports/logger.port.ts:42](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/logger.port.ts#L42)
 
 Print a success-level message.
 
@@ -160,7 +160,7 @@ Print a success-level message.
 
 > **warn**(`message`): `void`
 
-Defined in: [deploy/ports/logger.port.ts:44](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/logger.port.ts#L44)
+Defined in: [deploy/ports/logger.port.ts:44](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/logger.port.ts#L44)
 
 Print a warning-level message.
 

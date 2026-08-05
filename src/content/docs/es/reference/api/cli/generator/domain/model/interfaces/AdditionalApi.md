@@ -10,10 +10,9 @@ title: "AdditionalApi"
 
 # Interface: AdditionalApi
 
-Defined in: [generator/domain/model.ts:244](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L244)
+Defined in: [generator/domain/model.ts:247](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L247)
 
-Metadata for an ad-hoc endpoint the generator should emit in addition to
-the CRUD defaults. Produces a GraphQL resolver or a REST controller route.
+Metadata for an ad-hoc endpoint emitted alongside CRUD defaults — GraphQL resolver or REST route.
 
 ## Properties
 
@@ -21,7 +20,7 @@ the CRUD defaults. Produces a GraphQL resolver or a REST controller route.
 
 > **httpMethod**: [`HttpMethod`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/httpmethod/)
 
-Defined in: [generator/domain/model.ts:245](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L245)
+Defined in: [generator/domain/model.ts:248](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L248)
 
 ***
 
@@ -29,7 +28,7 @@ Defined in: [generator/domain/model.ts:245](https://github.com/avvale/aurora-cat
 
 > **path**: `string`
 
-Defined in: [generator/domain/model.ts:247](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L247)
+Defined in: [generator/domain/model.ts:250](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L250)
 
 URL path of the endpoint (REST) or operation name (GraphQL).
 
@@ -39,4 +38,4 @@ URL path of the endpoint (REST) or operation name (GraphQL).
 
 > **resolverType**: [`ResolverType`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/resolvertype/)
 
-Defined in: [generator/domain/model.ts:248](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L248)
+Defined in: [generator/domain/model.ts:251](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L251)

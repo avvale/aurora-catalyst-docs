@@ -8,7 +8,7 @@ In this tutorial you will trace a single piece of data from the GraphQL server a
 - **Fetchers** — pure one-shot functions that return `Observable<T>`. Ideal for `ResolveFn` resolvers and anywhere you just need the HTTP call.
 - **Composables** — `useGraphqlX` functions that wrap a fetcher and expose Angular signals. Ideal for components that need reactive state.
 
-The examples below are taken from `iam/tag`, the first module aurora-catalyst-cli generates. The file paths come from `frontend/src/app/domains/admin/bounded-contexts/iam/tag/`.
+The examples below are taken from `iam/tag`, the first module the CLI generates. The file paths come from `frontend/src/app/domains/admin/bounded-contexts/iam/tag/`.
 
 ## What you will learn
 

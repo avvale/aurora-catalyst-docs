@@ -18,10 +18,10 @@ USAGE
   $ catalyst add SCOPE [-f] [-v]
 
 ARGUMENTS
-  SCOPE  (backend|frontend) Scope where the command will act.
+  SCOPE  (back|front) Scope where the command will act.
 
 FLAGS
-  -f, --force    Overwrite existing files.
+  -f, --force    Overwrite files that already exist (default: skip existing files).
   -v, --verbose  Report all steps on screen.
 
 DESCRIPTION
@@ -35,4 +35,4 @@ EXAMPLES
   $ catalyst add back --force
 ```
 
-_See code: [src/commands/add/index.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/add/index.ts)_
+_See code: [src/commands/add/index.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/add/index.ts)_

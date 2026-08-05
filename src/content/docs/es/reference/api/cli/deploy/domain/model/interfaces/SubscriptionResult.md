@@ -10,7 +10,7 @@ title: "SubscriptionResult"
 
 # Interface: SubscriptionResult
 
-Defined in: [deploy/domain/model.ts:37](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L37)
+Defined in: [deploy/domain/model.ts:30](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L30)
 
 Outcome of a hosting subscription create (or reuse).
 
@@ -20,7 +20,7 @@ Outcome of a hosting subscription create (or reuse).
 
 > **action**: `"created"` \| `"existing"`
 
-Defined in: [deploy/domain/model.ts:38](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L38)
+Defined in: [deploy/domain/model.ts:31](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L31)
 
 ***
 
@@ -28,6 +28,6 @@ Defined in: [deploy/domain/model.ts:38](https://github.com/avvale/aurora-catalys
 
 > **domainId**: `number`
 
-Defined in: [deploy/domain/model.ts:40](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L40)
+Defined in: [deploy/domain/model.ts:33](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L33)
 
 Numeric ID used by the hosting provider to identify this subscription.

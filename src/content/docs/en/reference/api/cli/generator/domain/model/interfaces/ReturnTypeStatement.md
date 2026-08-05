@@ -10,7 +10,7 @@ title: "ReturnTypeStatement"
 
 # Interface: ReturnTypeStatement
 
-Defined in: [generator/domain/model.ts:395](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L395)
+Defined in: [generator/domain/model.ts:445](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L445)
 
 Return-type descriptor used when generating methods that destructure a
 named result. Kept minimal on purpose — see `code-gen` callers for usage.
@@ -21,7 +21,7 @@ named result. Kept minimal on purpose — see `code-gen` callers for usage.
 
 > **className**: `string`
 
-Defined in: [generator/domain/model.ts:396](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L396)
+Defined in: [generator/domain/model.ts:446](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L446)
 
 ***
 
@@ -29,4 +29,4 @@ Defined in: [generator/domain/model.ts:396](https://github.com/avvale/aurora-cat
 
 > **variableName**: `string`
 
-Defined in: [generator/domain/model.ts:397](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L397)
+Defined in: [generator/domain/model.ts:447](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L447)

@@ -38,7 +38,7 @@ EXAMPLES
   $ catalyst sheets diff --all --summary
 ```
 
-_See code: [src/commands/sheets/diff.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/sheets/diff.ts)_
+_See code: [src/commands/sheets/diff.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/sheets/diff.ts)_
 
 ## `catalyst sheets list`
 
@@ -58,7 +58,7 @@ EXAMPLES
   $ catalyst sheets list
 ```
 
-_See code: [src/commands/sheets/list.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/sheets/list.ts)_
+_See code: [src/commands/sheets/list.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/sheets/list.ts)_
 
 ## `catalyst sheets pull`
 
@@ -89,7 +89,7 @@ EXAMPLES
   $ catalyst sheets pull --bc iam --dry-run
 ```
 
-_See code: [src/commands/sheets/pull.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/sheets/pull.ts)_
+_See code: [src/commands/sheets/pull.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/sheets/pull.ts)_
 
 ## `catalyst sheets push`
 
@@ -119,7 +119,7 @@ EXAMPLES
   $ catalyst sheets push --bc iam --dry-run
 ```
 
-_See code: [src/commands/sheets/push.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/sheets/push.ts)_
+_See code: [src/commands/sheets/push.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/sheets/push.ts)_
 
 ## `catalyst sheets validate`
 
@@ -140,4 +140,4 @@ EXAMPLES
   $ catalyst sheets validate --bc iam
 ```
 
-_See code: [src/commands/sheets/validate.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/sheets/validate.ts)_
+_See code: [src/commands/sheets/validate.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/sheets/validate.ts)_

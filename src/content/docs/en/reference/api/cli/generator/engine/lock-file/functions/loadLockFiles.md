@@ -12,7 +12,7 @@ title: "LoadLockFiles"
 
 > **loadLockFiles**(`boundedContextName`, `moduleName`, `scope`, `cwd?`): [`LockFile`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/lockfile/)[]
 
-Defined in: [generator/engine/lock-file.ts:278](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L278)
+Defined in: [generator/engine/lock-file.ts:22](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/engine/lock-file.ts#L22)
 
 Load lock files from `cliter/{boundedContext}/.locks/{scope}/{moduleName}.lock.json`.
 

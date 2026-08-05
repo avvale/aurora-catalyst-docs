@@ -1,6 +1,6 @@
 ---
 title: Install the Aurora Catalyst CLI
-description: Install the aurora-catalyst-cli globally so the `catalyst` command is available before you scaffold anything.
+description: Install @aurorajs.dev/catalyst-cli globally so the `catalyst` command is available before you scaffold anything.
 sidebar:
   order: 1
   hidden: true

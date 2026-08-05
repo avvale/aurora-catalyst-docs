@@ -10,7 +10,7 @@ title: "SshPort"
 
 # Interface: SshPort
 
-Defined in: [deploy/ports/ssh.port.ts:9](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/ssh.port.ts#L9)
+Defined in: [deploy/ports/ssh.port.ts:9](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/ssh.port.ts#L9)
 
 Port for generating SSH key pairs used by the deploy pipeline (e.g. the
 private/public keys installed on hosting + exposed as CI/CD secrets).
@@ -23,7 +23,7 @@ The reference adapter shells out to `ssh-keygen` (`src/deploy/adapters/ssh-keyge
 
 > **generateKeyPair**(`comment`): `Promise`\<[`SshKeyPair`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/sshkeypair/)\>
 
-Defined in: [deploy/ports/ssh.port.ts:16](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/ssh.port.ts#L16)
+Defined in: [deploy/ports/ssh.port.ts:16](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/ssh.port.ts#L16)
 
 Generate a new ED25519 key pair.
 

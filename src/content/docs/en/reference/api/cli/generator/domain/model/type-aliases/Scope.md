@@ -12,6 +12,6 @@ title: "Scope"
 
 > **Scope** = `"back"` \| `"front"`
 
-Defined in: [generator/domain/model.ts:95](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L95)
+Defined in: [generator/domain/model.ts:101](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L101)
 
 Which half of the generated stack a template targets.

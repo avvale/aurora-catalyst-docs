@@ -10,11 +10,10 @@ title: "GenerationContext"
 
 # Interface: GenerationContext
 
-Defined in: [generator/domain/model.ts:407](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L407)
+Defined in: [generator/domain/model.ts:454](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L454)
 
-Aggregated context passed to the top-level commands and the services they
-call. Bundles the schema being generated, its scope (back/front), the
-lockfile slice that applies, and the CLI flags that influence behaviour.
+Aggregated context passed to top-level commands. Bundles the schema being generated,
+its scope, the applicable lockfile slice, and CLI flags.
 
 ## Properties
 
@@ -22,7 +21,7 @@ lockfile slice that applies, and the CLI flags that influence behaviour.
 
 > **baseDir**: `string`
 
-Defined in: [generator/domain/model.ts:409](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L409)
+Defined in: [generator/domain/model.ts:456](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L456)
 
 Directory that anchors every relative path used during this run.
 
@@ -32,7 +31,7 @@ Directory that anchors every relative path used during this run.
 
 > **flags**: `object`
 
-Defined in: [generator/domain/model.ts:410](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L410)
+Defined in: [generator/domain/model.ts:457](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L457)
 
 #### force?
 
@@ -70,7 +69,7 @@ Enable per-file / per-region log lines.
 
 > **lockFiles**: [`LockFile`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/lockfile/)[]
 
-Defined in: [generator/domain/model.ts:423](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L423)
+Defined in: [generator/domain/model.ts:470](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L470)
 
 Lockfile entries applicable to the files about to be generated.
 
@@ -80,7 +79,7 @@ Lockfile entries applicable to the files about to be generated.
 
 > **overwrittenFiles**: `string`[]
 
-Defined in: [generator/domain/model.ts:425](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L425)
+Defined in: [generator/domain/model.ts:472](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L472)
 
 Paths of files whose skeleton was detected as user-modified this run.
 
@@ -90,7 +89,7 @@ Paths of files whose skeleton was detected as user-modified this run.
 
 > **schema**: [`ModuleDefinitionSchema`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/moduledefinitionschema/)
 
-Defined in: [generator/domain/model.ts:426](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L426)
+Defined in: [generator/domain/model.ts:473](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L473)
 
 ***
 
@@ -98,4 +97,4 @@ Defined in: [generator/domain/model.ts:426](https://github.com/avvale/aurora-cat
 
 > **scope**: [`Scope`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/scope/)
 
-Defined in: [generator/domain/model.ts:427](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L427)
+Defined in: [generator/domain/model.ts:474](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L474)

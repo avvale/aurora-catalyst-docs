@@ -7,6 +7,7 @@ import {
   describeChanges,
   detectNewSlugs,
   listArchiveSlugs,
+  resolveArchiveDir,
 } from '../changelog-detect.js';
 import {
   makeDismissedEntry,
@@ -15,9 +16,10 @@ import {
   setEntry,
 } from '../changelog-registry.js';
 import { type GitRunner } from '../changelog-git.js';
-import { SOURCES } from '../sources.js';
+import { type Source, SOURCES, sourceAssetsPath, sourcePath } from '../sources.js';
 
 const cliSource = SOURCES.find((s) => s.slug === 'cli')!;
+const catalystSource = SOURCES.find((s) => s.slug === 'catalyst')!;
 
 async function makeArchive(root: string, slugs: string[]): Promise<void> {
   for (const slug of slugs) {
@@ -38,6 +40,31 @@ let fakeRepo: string;
 
 beforeEach(async () => {
   fakeRepo = await mkdtemp(path.join(tmpdir(), 'changelog-detect-'));
+});
+
+describe('resolveArchiveDir — real resolution WITHOUT repoRootOverride (regression guard)', () => {
+  // Every other test in this file passes a repoRootOverride (a tmp fixture),
+  // which never exercises the `repoRootOverride ?? sourcePath(source)`
+  // fallback branch. That branch MUST resolve via `sourcePath` (the repo
+  // root, shared by every source pointing at the same monorepo), never via
+  // `sourceAssetsPath` (which for `cli` is nested under `packages/cli` and
+  // would silently point at a non-existent archive dir).
+  it('for the cli source (which HAS an assetsSubdir), resolves under the repo root', () => {
+    const archiveDir = resolveArchiveDir(cliSource);
+    expect(archiveDir).toBe(path.join(sourcePath(cliSource), 'openspec/changes/archive'));
+    // sourceAssetsPath(cli) !== sourcePath(cli) because cli declares
+    // assetsSubdir: 'packages/cli' — so this second assertion only holds
+    // if the real repo-root resolution is used, not the assets one.
+    expect(archiveDir).not.toBe(
+      path.join(sourceAssetsPath(cliSource), 'openspec/changes/archive'),
+    );
+  });
+
+  it('for the catalyst source (no assetsSubdir), matches the same repo root as cli', () => {
+    const archiveDir = resolveArchiveDir(catalystSource);
+    expect(archiveDir).toBe(path.join(sourcePath(catalystSource), 'openspec/changes/archive'));
+    expect(archiveDir).toBe(resolveArchiveDir(cliSource));
+  });
 });
 
 describe('listArchiveSlugs', () => {
@@ -83,7 +110,12 @@ describe('detectNewSlugs', () => {
     expect(newSlugs).toEqual(['slug-c']);
   });
 
-  it('does not mix repos in the registry check', async () => {
+  it('a slug known under ANY source sharing the same repo is NOT reported as new (never-both semantics)', async () => {
+    // cli and catalyst both declare repo: 'aurora-catalyst' — they share ONE
+    // archive since the CLI was consolidated into the monorepo. A change
+    // registered (published OR dismissed) under 'catalyst' must count as
+    // "known" for 'cli' too, or every slug classified under one source would
+    // perpetually re-surface as "new" under the other.
     await makeArchive(fakeRepo, ['shared-slug']);
     let registry: Registry = {};
     registry = setEntry(
@@ -97,6 +129,36 @@ describe('detectNewSlugs', () => {
       }),
     );
     const newSlugs = await detectNewSlugs(cliSource, registry, fakeRepo);
+    expect(newSlugs).toEqual([]);
+  });
+
+  it('still isolates registries across sources that point at genuinely DIFFERENT repos', async () => {
+    // Guard against over-correcting fix #2 into "always cross-check every
+    // source" — isolation must hold when the underlying repo actually
+    // differs. Build a synthetic source outside SOURCES to prove this,
+    // since every real source today shares repo: 'aurora-catalyst'.
+    const otherRepoSource: Source = {
+      slug: 'unrelated',
+      repo: 'some-other-repo',
+      hasArchives: true,
+      hasCli: false,
+      hasApi: false,
+      label: { en: 'Unrelated', es: 'No relacionado' },
+      github: 'avvale',
+    };
+    await makeArchive(fakeRepo, ['shared-slug']);
+    let registry: Registry = {};
+    registry = setEntry(
+      registry,
+      'catalyst',
+      'shared-slug',
+      makePublishedEntry({
+        classification: 'feature',
+        source_commit: 'c1',
+        classified_at: '2026-04-20T00:00:00.000Z',
+      }),
+    );
+    const newSlugs = await detectNewSlugs(otherRepoSource, registry, fakeRepo);
     expect(newSlugs).toEqual(['shared-slug']);
   });
 });

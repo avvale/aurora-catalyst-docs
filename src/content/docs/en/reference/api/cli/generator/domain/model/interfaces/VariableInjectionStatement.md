@@ -10,7 +10,7 @@ title: "VariableInjectionStatement"
 
 # Interface: VariableInjectionStatement
 
-Defined in: [generator/domain/model.ts:386](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L386)
+Defined in: [generator/domain/model.ts:436](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L436)
 
 Declaration of a locally injected variable (used by `variableInjection` helper).
 
@@ -20,7 +20,7 @@ Declaration of a locally injected variable (used by `variableInjection` helper).
 
 > **className**: `string`
 
-Defined in: [generator/domain/model.ts:387](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L387)
+Defined in: [generator/domain/model.ts:437](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L437)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [generator/domain/model.ts:387](https://github.com/avvale/aurora-cat
 
 > **variableName**: `string`
 
-Defined in: [generator/domain/model.ts:388](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L388)
+Defined in: [generator/domain/model.ts:438](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L438)

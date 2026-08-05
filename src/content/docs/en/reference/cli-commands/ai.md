@@ -42,4 +42,4 @@ EXAMPLES
   $ catalyst ai setup --all --force
 ```
 
-_See code: [src/commands/ai/setup.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/ai/setup.ts)_
+_See code: [src/commands/ai/setup.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/ai/setup.ts)_

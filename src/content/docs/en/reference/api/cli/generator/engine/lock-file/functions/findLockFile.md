@@ -12,9 +12,7 @@ title: "FindLockFile"
 
 > **findLockFile**(`lockFiles`, `relativePath`): [`LockFile`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/lockfile/) \| `undefined`
 
-Defined in: [generator/engine/lock-file.ts:341](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/lock-file.ts#L341)
-
-Find a lock file entry by relative file path.
+Defined in: [generator/engine/lock-file.ts:80](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/engine/lock-file.ts#L80)
 
 ## Parameters
 

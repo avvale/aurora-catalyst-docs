@@ -35,4 +35,4 @@ EXAMPLES
   $ catalyst deploy --env prod -c ../aurora.yaml
 ```
 
-_See code: [src/commands/deploy/index.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/deploy/index.ts)_
+_See code: [src/commands/deploy/index.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/deploy/index.ts)_

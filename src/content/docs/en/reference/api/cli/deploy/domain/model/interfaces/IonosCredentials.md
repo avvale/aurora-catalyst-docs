@@ -10,7 +10,7 @@ title: "IonosCredentials"
 
 # Interface: IonosCredentials
 
-Defined in: [deploy/domain/model.ts:119](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L119)
+Defined in: [deploy/domain/model.ts:105](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L105)
 
 IONOS API credentials (DNS provider).
 
@@ -20,4 +20,4 @@ IONOS API credentials (DNS provider).
 
 > **apiKey**: `string`
 
-Defined in: [deploy/domain/model.ts:120](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L120)
+Defined in: [deploy/domain/model.ts:106](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L106)

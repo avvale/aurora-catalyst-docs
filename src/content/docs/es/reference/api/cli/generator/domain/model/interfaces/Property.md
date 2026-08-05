@@ -10,7 +10,7 @@ title: "Property"
 
 # Interface: Property
 
-Defined in: [generator/domain/model.ts:190](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L190)
+Defined in: [generator/domain/model.ts:198](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L198)
 
 Definition of a single property inside an aggregate. Maps to a SQL column,
 a DTO field, a GraphQL field, and optionally a form control.
@@ -21,7 +21,7 @@ a DTO field, a GraphQL field, and optionally a form control.
 
 > `optional` **aggregateName?**: `string`
 
-Defined in: [generator/domain/model.ts:192](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L192)
+Defined in: [generator/domain/model.ts:200](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L200)
 
 Owning aggregate name. Set by the loader; optional at author time.
 
@@ -31,9 +31,9 @@ Owning aggregate name. Set by the loader; optional at author time.
 
 > `optional` **applyTimezone?**: `boolean`
 
-Defined in: [generator/domain/model.ts:194](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L194)
+Defined in: [generator/domain/model.ts:202](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L202)
 
-For `timestamp`: store with timezone when true.
+For `dateTime` (and `timestamp`): store with timezone when true.
 
 ***
 
@@ -41,7 +41,7 @@ For `timestamp`: store with timezone when true.
 
 > `optional` **arrayOptions?**: [`PropertyArrayOptions`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertyarrayoptions/)
 
-Defined in: [generator/domain/model.ts:196](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L196)
+Defined in: [generator/domain/model.ts:204](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L204)
 
 Element descriptor for `array` types.
 
@@ -51,7 +51,7 @@ Element descriptor for `array` types.
 
 > `optional` **autoIncrement?**: `boolean`
 
-Defined in: [generator/domain/model.ts:198](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L198)
+Defined in: [generator/domain/model.ts:206](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L206)
 
 SQL `AUTO_INCREMENT` for numeric primary keys.
 
@@ -61,7 +61,7 @@ SQL `AUTO_INCREMENT` for numeric primary keys.
 
 > `optional` **decimals?**: `number`[]
 
-Defined in: [generator/domain/model.ts:200](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L200)
+Defined in: [generator/domain/model.ts:208](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L208)
 
 Two-element tuple `[precision, scale]` for `decimal` types.
 
@@ -71,7 +71,7 @@ Two-element tuple `[precision, scale]` for `decimal` types.
 
 > `optional` **defaultValue?**: `string` \| `number`
 
-Defined in: [generator/domain/model.ts:202](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L202)
+Defined in: [generator/domain/model.ts:210](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L210)
 
 Literal default value emitted in the DTO / column definition.
 
@@ -81,7 +81,7 @@ Literal default value emitted in the DTO / column definition.
 
 > `optional` **enumOptions?**: `string`[]
 
-Defined in: [generator/domain/model.ts:204](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L204)
+Defined in: [generator/domain/model.ts:212](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L212)
 
 Values accepted by a scalar `enum` property.
 
@@ -91,7 +91,7 @@ Values accepted by a scalar `enum` property.
 
 > `optional` **example?**: `unknown`
 
-Defined in: [generator/domain/model.ts:206](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L206)
+Defined in: [generator/domain/model.ts:214](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L214)
 
 Concrete example surfaced in Swagger / GraphQL docs.
 
@@ -101,7 +101,7 @@ Concrete example surfaced in Swagger / GraphQL docs.
 
 > `optional` **faker?**: `string`
 
-Defined in: [generator/domain/model.ts:211](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L211)
+Defined in: [generator/domain/model.ts:219](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L219)
 
 Faker locale method name used by the mocker (e.g. `name.firstName`).
 Overrides the default seed picked from [PropertyType](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertytype/).
@@ -112,7 +112,7 @@ Overrides the default seed picked from [PropertyType](/aurora-catalyst-docs/es/r
 
 > `optional` **index?**: [`PropertyIndex`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertyindex/)
 
-Defined in: [generator/domain/model.ts:212](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L212)
+Defined in: [generator/domain/model.ts:220](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L220)
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: [generator/domain/model.ts:212](https://github.com/avvale/aurora-cat
 
 > `optional` **indexFields?**: `string`[]
 
-Defined in: [generator/domain/model.ts:214](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L214)
+Defined in: [generator/domain/model.ts:222](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L222)
 
 Composite index columns when this property owns a multi-column index.
 
@@ -130,7 +130,7 @@ Composite index columns when this property owns a multi-column index.
 
 > `optional` **indexName?**: `string`
 
-Defined in: [generator/domain/model.ts:215](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L215)
+Defined in: [generator/domain/model.ts:223](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L223)
 
 ***
 
@@ -138,7 +138,7 @@ Defined in: [generator/domain/model.ts:215](https://github.com/avvale/aurora-cat
 
 > `optional` **indexUsing?**: [`PropertyIndexUsing`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertyindexusing/)
 
-Defined in: [generator/domain/model.ts:216](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L216)
+Defined in: [generator/domain/model.ts:224](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L224)
 
 ***
 
@@ -146,7 +146,7 @@ Defined in: [generator/domain/model.ts:216](https://github.com/avvale/aurora-cat
 
 > `optional` **isI18n?**: `boolean`
 
-Defined in: [generator/domain/model.ts:218](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L218)
+Defined in: [generator/domain/model.ts:226](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L226)
 
 When true, the property participates in i18n table/relation generation.
 
@@ -156,7 +156,7 @@ When true, the property participates in i18n table/relation generation.
 
 > `optional` **length?**: `number`
 
-Defined in: [generator/domain/model.ts:219](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L219)
+Defined in: [generator/domain/model.ts:227](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L227)
 
 ***
 
@@ -164,7 +164,7 @@ Defined in: [generator/domain/model.ts:219](https://github.com/avvale/aurora-cat
 
 > `optional` **maxLength?**: `number`
 
-Defined in: [generator/domain/model.ts:220](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L220)
+Defined in: [generator/domain/model.ts:228](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L228)
 
 ***
 
@@ -172,7 +172,7 @@ Defined in: [generator/domain/model.ts:220](https://github.com/avvale/aurora-cat
 
 > `optional` **minLength?**: `number`
 
-Defined in: [generator/domain/model.ts:221](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L221)
+Defined in: [generator/domain/model.ts:229](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L229)
 
 ***
 
@@ -180,7 +180,7 @@ Defined in: [generator/domain/model.ts:221](https://github.com/avvale/aurora-cat
 
 > `optional` **modulePath?**: `string`
 
-Defined in: [generator/domain/model.ts:223](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L223)
+Defined in: [generator/domain/model.ts:231](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L231)
 
 Module path for relationship properties. Set by the loader.
 
@@ -190,7 +190,7 @@ Module path for relationship properties. Set by the loader.
 
 > **name**: `string`
 
-Defined in: [generator/domain/model.ts:225](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L225)
+Defined in: [generator/domain/model.ts:233](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L233)
 
 Field name in camelCase (source of truth for every transformation).
 
@@ -200,7 +200,7 @@ Field name in camelCase (source of truth for every transformation).
 
 > `optional` **nullable?**: `boolean`
 
-Defined in: [generator/domain/model.ts:226](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L226)
+Defined in: [generator/domain/model.ts:234](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L234)
 
 ***
 
@@ -208,7 +208,7 @@ Defined in: [generator/domain/model.ts:226](https://github.com/avvale/aurora-cat
 
 > `optional` **primaryKey?**: `boolean`
 
-Defined in: [generator/domain/model.ts:227](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L227)
+Defined in: [generator/domain/model.ts:235](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L235)
 
 ***
 
@@ -216,7 +216,7 @@ Defined in: [generator/domain/model.ts:227](https://github.com/avvale/aurora-cat
 
 > `optional` **readonly?**: `boolean`
 
-Defined in: [generator/domain/model.ts:228](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L228)
+Defined in: [generator/domain/model.ts:236](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L236)
 
 ***
 
@@ -224,7 +224,7 @@ Defined in: [generator/domain/model.ts:228](https://github.com/avvale/aurora-cat
 
 > `optional` **relationship?**: [`PropertyRelationship`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertyrelationship/)
 
-Defined in: [generator/domain/model.ts:230](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L230)
+Defined in: [generator/domain/model.ts:238](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L238)
 
 Relationship metadata when `type` is `relationship`.
 
@@ -234,7 +234,7 @@ Relationship metadata when `type` is `relationship`.
 
 > **type**: [`PropertyType`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/type-aliases/propertytype/)
 
-Defined in: [generator/domain/model.ts:231](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L231)
+Defined in: [generator/domain/model.ts:239](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L239)
 
 ***
 
@@ -242,16 +242,16 @@ Defined in: [generator/domain/model.ts:231](https://github.com/avvale/aurora-cat
 
 > `optional` **unsigned?**: `boolean`
 
-Defined in: [generator/domain/model.ts:233](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L233)
+Defined in: [generator/domain/model.ts:241](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L241)
 
 Integer-only: unsigned column when true.
 
 ***
 
-### webComponent?
+### widget?
 
-> `optional` **webComponent?**: [`PropertyWebComponent`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertywebcomponent/)
+> `optional` **widget?**: [`PropertyWidget`](/aurora-catalyst-docs/es/reference/api/cli/generator/domain/model/interfaces/propertywidget/)
 
-Defined in: [generator/domain/model.ts:235](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L235)
+Defined in: [generator/domain/model.ts:243](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L243)
 
 Frontend widget metadata, when the property is rendered in a form.

@@ -8,7 +8,7 @@ En este tutorial vas a seguir el viaje de un dato desde el servidor GraphQL hast
 - **Fetchers** — funciones puras de una sola emisión que devuelven `Observable<T>`. Su hogar natural son los `ResolveFn` y cualquier sitio donde sólo necesitas la llamada HTTP.
 - **Composables** — funciones `useGraphqlX` que envuelven a un fetcher y exponen signals de Angular. Su hogar natural son los componentes que necesitan estado reactivo.
 
-Los ejemplos salen del módulo `iam/tag`, el primero que genera aurora-catalyst-cli. Las rutas de archivo apuntan a `frontend/src/app/domains/admin/bounded-contexts/iam/tag/`.
+Los ejemplos salen del módulo `iam/tag`, el primero que genera el CLI. Las rutas de archivo apuntan a `frontend/src/app/domains/admin/bounded-contexts/iam/tag/`.
 
 ## Qué vas a aprender
 

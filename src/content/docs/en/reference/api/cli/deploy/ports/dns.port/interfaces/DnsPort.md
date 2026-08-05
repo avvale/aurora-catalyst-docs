@@ -10,7 +10,7 @@ title: "DnsPort"
 
 # Interface: DnsPort
 
-Defined in: [deploy/ports/dns.port.ts:9](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/dns.port.ts#L9)
+Defined in: [deploy/ports/dns.port.ts:9](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/dns.port.ts#L9)
 
 Port for managing DNS records in an external provider (IONOS, Cloudflare, etc.).
 
@@ -23,7 +23,7 @@ Swapping providers is done by implementing a new adapter and wiring it in
 
 > **upsertRecord**(`params`): `Promise`\<[`DnsRecordResult`](/aurora-catalyst-docs/en/reference/api/cli/deploy/domain/model/interfaces/dnsrecordresult/)\>
 
-Defined in: [deploy/ports/dns.port.ts:22](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/ports/dns.port.ts#L22)
+Defined in: [deploy/ports/dns.port.ts:22](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/ports/dns.port.ts#L22)
 
 Ensure a DNS record exists and points to `value`.
 

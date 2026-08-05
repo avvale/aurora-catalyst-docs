@@ -12,7 +12,7 @@ title: "BuildPivotSchema"
 
 > **buildPivotSchema**(`pivot`): [`ModuleDefinitionSchema`](/aurora-catalyst-docs/en/reference/api/cli/generator/domain/model/interfaces/moduledefinitionschema/)
 
-Defined in: [generator/domain/model.ts:313](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L313)
+Defined in: [generator/domain/model.ts:375](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L375)
 
 Build a complete ModuleDefinitionSchema from a RelationshipPivot.
 Every field is explicit — if ModuleDefinitionSchema gains a new required field,

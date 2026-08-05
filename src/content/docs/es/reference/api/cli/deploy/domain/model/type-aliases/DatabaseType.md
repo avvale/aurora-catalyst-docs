@@ -12,6 +12,6 @@ title: "DatabaseType"
 
 > **DatabaseType** = `"mysql"` \| `"postgresql"`
 
-Defined in: [deploy/domain/model.ts:15](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L15)
+Defined in: [deploy/domain/model.ts:10](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L10)
 
 Database engine supported by the hosting adapter.

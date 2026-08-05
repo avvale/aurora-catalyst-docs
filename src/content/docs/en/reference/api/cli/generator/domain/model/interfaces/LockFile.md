@@ -10,13 +10,12 @@ title: "LockFile"
 
 # Interface: LockFile
 
-Defined in: [generator/domain/model.ts:340](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L340)
+Defined in: [generator/domain/model.ts:399](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L399)
 
 Entry persisted in `cliter/<bc>/.locks/<scope>/<module>.lock.json`.
 
-Records the integrity hash of a generated file so subsequent regenerations
-can tell whether the user edited it. The optional `regions` map enables
-per-preservation-region hashing — see the `lock-file.ts` utilities.
+Records the SHA-1 hash of a generated file's full content so subsequent
+regenerations can tell whether the user edited it.
 
 ## Properties
 
@@ -24,9 +23,9 @@ per-preservation-region hashing — see the `lock-file.ts` utilities.
 
 > **integrity**: `string`
 
-Defined in: [generator/domain/model.ts:342](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L342)
+Defined in: [generator/domain/model.ts:401](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L401)
 
-SHA-1 hash of the skeleton (body of preservation regions excluded), prefixed with `sha1:`.
+SHA-1 hash of the full file content, prefixed with `sha1:`.
 
 ***
 
@@ -34,19 +33,6 @@ SHA-1 hash of the skeleton (body of preservation regions excluded), prefixed wit
 
 > **path**: `string`
 
-Defined in: [generator/domain/model.ts:344](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L344)
+Defined in: [generator/domain/model.ts:403](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/domain/model.ts#L403)
 
 Relative path of the file, using POSIX separators.
-
-***
-
-### regions?
-
-> `optional` **regions?**: `Record`\<`string`, `string`\>
-
-Defined in: [generator/domain/model.ts:351](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/domain/model.ts#L351)
-
-Map of preservation region name → SHA-1 of the normalized body the
-template produced on the previous generation. Absence means the entry
-predates preservation-regions support; the merge falls back to preserving
-all region bodies to stay safe.

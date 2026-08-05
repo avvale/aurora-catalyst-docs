@@ -10,7 +10,7 @@ title: "SshKeyPair"
 
 # Interface: SshKeyPair
 
-Defined in: [deploy/domain/model.ts:23](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L23)
+Defined in: [deploy/domain/model.ts:16](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L16)
 
 SSH private + public key material, as text blobs in OpenSSH format.
 
@@ -20,7 +20,7 @@ SSH private + public key material, as text blobs in OpenSSH format.
 
 > **privateKey**: `string`
 
-Defined in: [deploy/domain/model.ts:24](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L24)
+Defined in: [deploy/domain/model.ts:17](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L17)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [deploy/domain/model.ts:24](https://github.com/avvale/aurora-catalys
 
 > **publicKey**: `string`
 
-Defined in: [deploy/domain/model.ts:25](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/deploy/domain/model.ts#L25)
+Defined in: [deploy/domain/model.ts:18](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/deploy/domain/model.ts#L18)

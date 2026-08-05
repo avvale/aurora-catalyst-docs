@@ -75,7 +75,7 @@ Compose a typed `QueryStatement` inside a handler — `where`, `include`, `order
 // account.user.password → '$2b$10$...' ← LEAKS the bcrypt hash
 ```
 
-The upstream fix is tracked as **SPEC-07** in `aurora-catalyst-cli/ROADMAP.md` (a recursive `formatRecord` that applies each relation's own schema). Until it lands, two viable patterns:
+The upstream fix is tracked as **SPEC-07** in `aurora-catalyst/packages/cli/ROADMAP.md` (a recursive `formatRecord` that applies each relation's own schema). Until it lands, two viable patterns:
 
 **Option A — manual format on the related record.** Preferred when the client needs the related entity atomically:
 

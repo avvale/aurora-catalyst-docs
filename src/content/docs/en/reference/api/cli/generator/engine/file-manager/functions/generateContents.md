@@ -12,15 +12,11 @@ title: "GenerateContents"
 
 > **generateContents**(`logger`, `originPath`, `relativeTargetBasePath`, `relativeTargetPath`, `options?`, `result?`): `Promise`\<`void`\>
 
-Defined in: [generator/engine/file-manager.ts:148](https://github.com/avvale/aurora-catalyst-cli/blob/main/src/generator/engine/file-manager.ts#L148)
+Defined in: [generator/engine/file-manager.ts:121](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/generator/engine/file-manager.ts#L121)
 
-Recursively walk a template directory on disk and generate every file
-within it into the target location. Applies filename substitution,
-exclusion filters (`excludedFiles`, `excludedOperations`) and the
-overwrite rules defined in [GenerateOptions](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/interfaces/generateoptions/).
-
-Use [generateFromTemplate](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/functions/generatefromtemplate/) unless you need to generate from a custom
-directory outside the bundled template tree.
+Recursively walk a template directory and generate every file into the target.
+Applies filename substitution, exclusion filters, and overwrite rules from [GenerateOptions](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/interfaces/generateoptions/).
+Prefer [generateFromTemplate](/aurora-catalyst-docs/en/reference/api/cli/generator/engine/file-manager/functions/generatefromtemplate/) unless you need a custom directory outside the bundled tree.
 
 ## Parameters
 

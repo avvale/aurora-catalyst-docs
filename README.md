@@ -1,6 +1,6 @@
 # Aurora Catalyst Docs
 
-Documentation site for the [Aurora Catalyst](https://github.com/avvale) ecosystem — the `aurora-catalyst-cli` code generator and the `aurora-catalyst` Angular + NestJS framework. Built with [Astro Starlight](https://starlight.astro.build/), deployed to GitHub Pages.
+Documentation site for the [Aurora Catalyst](https://github.com/avvale) ecosystem — the `catalyst` CLI code generator (now `packages/cli` inside the `aurora-catalyst` monorepo) and the `aurora-catalyst` Angular + NestJS framework it scaffolds. Built with [Astro Starlight](https://starlight.astro.build/), deployed to GitHub Pages.
 
 - **Live site**: https://avvale.github.io/aurora-catalyst-docs/
 - **Languages**: English (default) and Spanish (tuteo, neutral / international)
@@ -46,11 +46,11 @@ Both kinds are **committed to this repo**. The GitHub Actions workflow that depl
 | `guides/` | Human-curated | Written in this repo (optionally drafted by the `catalyst-docs-from-spec` skill) |
 | `concepts/` | Human-curated | Written in this repo (optionally drafted by the `catalyst-docs-from-spec` skill) |
 | `reference/` (top-level, e.g. YAML schema) | Human-curated | Written in this repo |
-| `reference/cli-commands/` | Auto | `aurora-catalyst-cli/docs/` — produced by `oclif readme --multi` |
-| `reference/api/cli/` | Auto | `aurora-catalyst-cli/docs-api/` — produced by TypeDoc |
+| `reference/cli-commands/` | Auto | `aurora-catalyst/packages/cli/docs/` — produced by `oclif readme --multi` |
+| `reference/api/cli/` | Auto | `aurora-catalyst/packages/cli/docs-api/` — produced by TypeDoc |
 | `reference/api/catalyst/` | Auto (future) | `aurora-catalyst/docs-api/` — not active yet |
-| `changes/cli/` | Auto | `aurora-catalyst-cli/openspec/changes/archive/` |
-| `changes/catalyst/` | Auto | `aurora-catalyst/openspec/changes/archive/` |
+| `changes/cli/` | Auto | `aurora-catalyst/openspec/changes/archive/` — filtered to changes scoped to `packages/cli/` |
+| `changes/catalyst/` | Auto | `aurora-catalyst/openspec/changes/archive/` — filtered to changes scoped to the framework |
 
 Translation rule: auto-imported content is **not translated** — see the next section for the full rationale.
 
@@ -86,8 +86,11 @@ That note lives in `scripts/import-from-sources.ts` (`TRANSLATION_NOTE` constant
 
 | Source repo | Slug | Contributes archives? | Contributes CLI commands? | Contributes API? |
 | --- | --- | --- | --- | --- |
-| [`aurora-catalyst-cli`](https://github.com/avvale/aurora-catalyst-cli) | `cli` | ✅ | ✅ | ✅ |
-| [`aurora-catalyst`](https://github.com/avvale/aurora-catalyst) | `catalyst` | ✅ | ❌ (no CLI) | ❌ (TypeDoc not set up yet) |
+| [`aurora-catalyst-cli`](https://github.com/avvale/aurora-catalyst-cli) — **frozen, historical only** | — | ❌ (consolidated, see below) | ❌ | ❌ |
+| [`aurora-catalyst`](https://github.com/avvale/aurora-catalyst) | `cli` | ✅ (shared archive, see next) | ✅ (`packages/cli/docs/`) | ✅ (`packages/cli/docs-api/`) |
+| [`aurora-catalyst`](https://github.com/avvale/aurora-catalyst) | `catalyst` | ✅ (shared archive, see next) | ❌ (no CLI) | ❌ (TypeDoc not set up yet) |
+
+The CLI was consolidated into the `aurora-catalyst` monorepo as `packages/cli` (archived change `2026-08-03-consolidate-cli-into-monorepo`). `aurora-catalyst-cli` is now **frozen** — do not sync from it, and never route new content there. Both the `cli` and `catalyst` slugs above resolve to the SAME `repo: 'aurora-catalyst'` and therefore scan the SAME shared archive at `openspec/changes/archive/`; the `cli` slug additionally reads its CLI-specific build outputs from the `packages/cli/` subdirectory (`sourceAssetsPath` in `scripts/lib/sources.ts`). Because the archive is shared, the `catalyst-changelog-sync` skill — not the source repo — decides whether a given archived change belongs under `changes/cli/` or `changes/catalyst/` (see its routing rule).
 
 Other repos (`aurora-core-front`, `aurora-core-back`, `aurora-core-common`, `aurora-catalyst-prototype`) are explicitly **out of scope** for automated docs. They are internal libraries or prototyping scratchpads.
 
@@ -99,21 +102,27 @@ If a source repo is added or removed later, the change lives in `scripts/import-
 
 ### When you add / change a feature in a source repo
 
-Steps below assume you just closed a change in `aurora-catalyst-cli` (same pattern for `aurora-catalyst`, minus the CLI/API generation parts).
+Steps below assume you just closed a change in `aurora-catalyst` — either scoped to `packages/cli/` (the generator) or to the framework itself; both share the same archive and workflow.
 
 1. **Finish the change in the source repo.**
    - Implement, test, commit.
-   - Archive the openspec change: `/opsx:archive <change-name>` — this writes to `openspec/changes/archive/YYYY-MM-DD-<change-name>/`.
+   - Archive the openspec change: `/opsx:archive <change-name>` — this writes to `openspec/changes/archive/YYYY-MM-DD-<change-name>/` at the monorepo root (shared by both the CLI and the framework).
 
-2. **Regenerate the auto-outputs that apply to that source repo.**
-
-   In `aurora-catalyst-cli`:
-   ```bash
-   npm run docs:api   # TypeDoc → docs-api/
-   # `oclif readme --multi` already runs on `npm run prepack`, which produces docs/
-   ```
+2. **Regenerate the auto-outputs, if the change touched `packages/cli/`.**
 
    In `aurora-catalyst`:
+   ```bash
+   # `packages/cli` is deliberately excluded from the pnpm workspace, so its
+   # dependencies are NOT installed by the monorepo's root `pnpm install`.
+   # Install them once per checkout before the first `docs:api` run:
+   pnpm --dir packages/cli install
+
+   pnpm --dir packages/cli run docs:api   # TypeDoc → packages/cli/docs-api/
+   # `oclif readme --multi` also runs on `pnpm --dir packages/cli run prepack`,
+   # which produces packages/cli/docs/
+   ```
+
+   If the change is scoped to the framework instead (not `packages/cli/`):
    - Nothing extra to run today. The archive directory is all that's consumed.
 
 3. **Come back to this repo and import.**

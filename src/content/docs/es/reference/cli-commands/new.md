@@ -32,4 +32,4 @@ EXAMPLES
   $ catalyst new my-project --force
 ```
 
-_See code: [src/commands/new/index.ts](https://github.com/avvale/aurora-catalyst-cli/blob/v1.0.0/src/commands/new/index.ts)_
+_See code: [src/commands/new/index.ts](https://github.com/avvale/aurora-catalyst/blob/main/packages/cli/src/commands/new/index.ts)_
