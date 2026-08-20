@@ -27,6 +27,8 @@ Elegir el decorador correcto de field-schema para el handler que acabas de scaff
 
    `@ApplySchema` compone sanitize (input) + format (output). `@Format` solo formatea el retorno (las lecturas son idempotentes). `@Sanitize` solo sanitiza el payload (flujos de escritura cuyo retorno es `void`, un booleano o un tipo resumen).
 
+   **`@Sanitize` casi nunca se escribe suelto.** El CLI no lo emite: todo handler de escritura que genera devuelve la entidad, así que lleva `@ApplySchema`. Y `@ApplySchema` lo compone internamente — `applyDecorators(Format(schema), Sanitize({ schema, payloadIndex }))` — de modo que la sanitización ya corre ahí. Aplica `@Sanitize` a mano solo en un handler de escritura cuyo retorno no sea la entidad. Si lees `@Sanitize` en un comentario del código o en el nombre de un test, se refiere a esa rama interna de `@ApplySchema`, no a un decorador escrito aparte.
+
 2. **Cablea `@ApplySchema` en un handler de escritura que devuelve la entidad.** Ejemplo real desde `iam/tag`:
 
    ```typescript

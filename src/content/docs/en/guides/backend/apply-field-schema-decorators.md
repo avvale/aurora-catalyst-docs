@@ -27,6 +27,8 @@ Pick the correct field-schema decorator for the handler you just scaffolded, wir
 
    `@ApplySchema` composes sanitize (input) + format (output). `@Format` only formats the return (reads are idempotent). `@Sanitize` only sanitizes the payload (write-only flows whose return is `void`, a boolean, or a summary type).
 
+   **`@Sanitize` is rarely written on its own.** The CLI never emits it: every write handler it generates returns the entity, so it gets `@ApplySchema`. And `@ApplySchema` composes it internally — `applyDecorators(Format(schema), Sanitize({ schema, payloadIndex }))` — so sanitation already runs there. Wire a bare `@Sanitize` only on a hand-written write handler whose return value is not the entity. When you read `@Sanitize` in a code comment or a test name, it refers to that inner branch of `@ApplySchema`, not to a separately written decorator.
+
 2. **Wire `@ApplySchema` on a write handler that returns the entity.** Real example from `iam/tag`:
 
    ```typescript
