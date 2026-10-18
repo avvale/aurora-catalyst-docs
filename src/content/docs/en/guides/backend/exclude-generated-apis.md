@@ -50,6 +50,40 @@ Stop the Catalyst CLI from emitting operations or files you do not want — eith
 
 5. **Remove orphan files by hand.** If you just excluded an operation that used to be generated, the files the CLI produced previously stay on disk — the CLI never deletes. Delete them manually, commit, and rerun `catalyst generate …` to confirm the output is consistent.
 
+## Retire only some layers of an operation
+
+A plain string removes the operation from every layer it has. To keep part of it, list an object with `operation` and `layers` instead. Both forms can share one list.
+
+| Layer | What it removes |
+| ----- | --------------- |
+| `rest` | The REST controller and, for `create`, the REST DTO. |
+| `graphql` | The resolver and its field in the module's GraphQL schema. |
+| `api` | Shorthand for `rest` plus `graphql`. |
+| `app` | The `@app` handler and service. |
+| `ui` | The frontend route, button and GraphQL document. Only `create`, `createBatch`, `update`, `updateById`, `delete`, `deleteById`, `find`, `findById`, `get` and `paginate` have it. |
+
+`count`, `max`, `min`, `sum`, `getRaw` and `upsert` have `rest`, `graphql` and `app`. `updateAndIncrement` has only `app`. Listing a layer the operation does not have fails the generation and names the layers it supports.
+
+Retire only the REST route of an operation that stays live over GraphQL:
+
+```yaml
+excludedOperations:
+  - operation: paginate
+    layers: [rest]
+```
+
+Retire the public create (controller, resolver, mutation, `/new` route and button) but keep the `@app` service, so other code in the project can still create records through it:
+
+```yaml
+excludedOperations:
+  - operation: create
+    layers: [api, ui]
+```
+
+The `createBatch` REST controller imports the `create` DTO. Excluding `rest` of `create` without `createBatch` leaves a controller importing a missing file and the backend build fails. Exclude them together or keep both.
+
+The generator does not check that the layers you exclude fit together. `[app]` alone leaves a resolver importing a missing handler.
+
 ## Verify it worked
 
 - Rerun with `--verbose` and confirm the excluded operation is not among the emitted paths:

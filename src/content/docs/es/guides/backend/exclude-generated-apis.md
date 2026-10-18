@@ -50,6 +50,40 @@ Evitar que el CLI de Catalyst emita operaciones o archivos que no quieres — ya
 
 5. **Borra los archivos huérfanos a mano.** Si acabas de excluir una operación que antes se generaba, los archivos que el CLI emitió previamente siguen en disco — el CLI nunca borra. Elimínalos manualmente, commitea y vuelve a ejecutar `catalyst generate …` para confirmar que la salida quedó consistente.
 
+## Retirar solo algunas capas de una operación
+
+Una cadena simple quita la operación de todas las capas que tiene. Para conservar una parte, lista un objeto con `operation` y `layers`. Ambas formas pueden convivir en la misma lista.
+
+| Capa | Qué quita |
+| ---- | --------- |
+| `rest` | El controller REST y, en `create`, el DTO REST. |
+| `graphql` | El resolver y su campo en el esquema GraphQL del módulo. |
+| `api` | Atajo de `rest` más `graphql`. |
+| `app` | El handler y el service de `@app`. |
+| `ui` | La ruta, el botón y el documento GraphQL del frontend. Solo la tienen `create`, `createBatch`, `update`, `updateById`, `delete`, `deleteById`, `find`, `findById`, `get` y `paginate`. |
+
+`count`, `max`, `min`, `sum`, `getRaw` y `upsert` tienen `rest`, `graphql` y `app`. `updateAndIncrement` solo tiene `app`. Si listas una capa que la operación no tiene, la generación falla y nombra las capas que sí admite.
+
+Retirar solo la ruta REST de una operación que sigue activa por GraphQL:
+
+```yaml
+excludedOperations:
+  - operation: paginate
+    layers: [rest]
+```
+
+Retirar el create público (controller, resolver, mutation, ruta `/new` y botón) pero conservar el service de `@app`, de modo que otro código del proyecto pueda seguir creando registros a través de él:
+
+```yaml
+excludedOperations:
+  - operation: create
+    layers: [api, ui]
+```
+
+El controller REST de `createBatch` importa el DTO de `create`. Excluir `rest` de `create` sin `createBatch` deja un controller importando un archivo que no existe y el build del backend falla. Exclúyelas juntas o conserva ambas.
+
+El generador no comprueba que las capas que excluyes encajen entre sí. `[app]` por sí sola deja un resolver importando un handler que no existe.
+
 ## Verifica que funcionó
 
 - Vuelve a correr con `--verbose` y confirma que la operación excluida no aparece entre las rutas emitidas:
