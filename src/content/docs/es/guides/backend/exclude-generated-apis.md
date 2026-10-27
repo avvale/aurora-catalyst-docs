@@ -21,6 +21,7 @@ Evitar que el CLI de Catalyst emita operaciones o archivos que no quieres — ya
 
    - Para sacar una operación completa — sin controller, sin resolver, sin handler, sin service, sin DTO, sin fragmento de GraphQL — usa `excludedOperations`.
    - Para mantener la operación pero omitir **un archivo específico** (porque lo escribiste a mano o choca con un archivo de `additionalApis`), usa `excludedFiles`.
+   - Para mantener un endpoint personalizado de `additionalApis` solo en algunas capas — por ejemplo, solo REST — usa `excludedLayers` en esa entrada (ver [Hacer que una API adicional sea solo REST](#hacer-que-una-api-adicional-sea-solo-rest)).
 
 3. **Edita la YAML en su nivel superior.** Las dos claves viven junto a `aggregateProperties` y `additionalApis`. Los nombres que puedes listar en `excludedOperations` son los de la [tabla de operaciones](../../../concepts/backend/module-scaffolding/#operaciones-que-el-cli-reconoce).
 
@@ -84,6 +85,33 @@ El controller REST de `createBatch` importa el DTO de `create`. Excluir `rest` d
 
 El generador no comprueba que las capas que excluyes encajen entre sí. `[app]` por sí sola deja un resolver importando un handler que no existe.
 
+## Hacer que una API adicional sea solo REST
+
+Una entrada de `additionalApis` se genera en todas las capas. Lista las capas que quieres omitir en su clave `excludedLayers`. Son las mismas capas que usa la entrada de `excludedOperations` cualificada por capa:
+
+| Capa | Qué elimina para la API adicional |
+| ---- | --------------------------------- |
+| `rest` | El controller REST y su entrada en el barrel del módulo `@api`. |
+| `graphql` | El resolver, su entrada en el barrel del módulo `@api` y su campo de query o mutation en el SDL del módulo. |
+| `api` | Atajo de `rest` más `graphql`. |
+| `app` | El handler de `@app` y sus entradas en el barrel del módulo `@app`. |
+| `ui` | El documento GraphQL de la entrada en el `<module>.graphql.ts` del frontend. |
+
+Un endpoint de restablecimiento de contraseña que existe solo por REST, tal como lo declara `iam/user`:
+
+```yaml
+# cliter/iam/user.aurora.yaml
+additionalApis:
+  - path: iam/user/forgot-password
+    resolverType: mutation
+    httpMethod: post
+    excludedLayers: [graphql, ui]
+```
+
+Regenera el módulo de backend y el de frontend. El controller y el handler de `@app` se mantienen; el resolver, el campo del SDL y el documento del frontend no se generan, así que la regeneración deja de proponerlos como hunks `.origin`.
+
+Una capa se excluye solo cuando la listas. `graphql` no implica `ui`: si listas solo `graphql`, el documento del frontend sigue apuntando a un campo del SDL que ya no existe y el paso `graphql:types` del frontend falla. Lista ambas. Una lista vacía, un valor que no es una lista o un nombre de capa distinto de `api`, `rest`, `graphql`, `app`, `ui` detiene la carga y nombra el módulo y la entrada. `excludedFiles` sigue funcionando por encima de `excludedLayers`.
+
 ## Verifica que funcionó
 
 - Vuelve a correr con `--verbose` y confirma que la operación excluida no aparece entre las rutas emitidas:
@@ -93,6 +121,7 @@ El generador no comprueba que las capas que excluyes encajen entre sí. `[app]` 
   ```
 
 - Para `excludedFiles`: confirma que la ruta que listaste no aparece en el log de salida.
+- Para `excludedLayers`: confirma que no se escribe ningún archivo de una capa excluida para esa entrada (con `[graphql, ui]`, ningún `*.resolver.ts`) y que el SDL `.graphql` del módulo no declara ningún campo para ella.
 - Ejecuta tu build de backend habitual (`pnpm back:build` o el equivalente de tu proyecto) para detectar imports colgantes que referenciaban al artefacto removido.
 
 ## Solución de problemas

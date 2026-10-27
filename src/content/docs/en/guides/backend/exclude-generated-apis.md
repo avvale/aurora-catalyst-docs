@@ -21,6 +21,7 @@ Stop the Catalyst CLI from emitting operations or files you do not want — eith
 
    - To remove a whole operation — no controller, no resolver, no handler, no service, no DTO, no GraphQL fragment — use `excludedOperations`.
    - To keep the operation but skip **one specific file** (because you wrote it by hand or it collides with an `additionalApis` file), use `excludedFiles`.
+   - To keep a custom `additionalApis` endpoint in some layers only — for example REST only — use `excludedLayers` on that entry (see [Make an additional API REST only](#make-an-additional-api-rest-only)).
 
 3. **Edit the YAML at its top level.** Both keys live next to `aggregateProperties` and `additionalApis`. The names you can list under `excludedOperations` are the ones from the [operations table](../../../concepts/backend/module-scaffolding/#operations-the-cli-recognizes).
 
@@ -84,6 +85,33 @@ The `createBatch` REST controller imports the `create` DTO. Excluding `rest` of 
 
 The generator does not check that the layers you exclude fit together. `[app]` alone leaves a resolver importing a missing handler.
 
+## Make an additional API REST only
+
+An `additionalApis` entry is generated in every layer. List the layers to leave out in its `excludedLayers` key. The layers are the same ones the layer-qualified `excludedOperations` entry uses:
+
+| Layer | What it removes for the additional API |
+| ----- | -------------------------------------- |
+| `rest` | The REST controller, and its entry in the `@api` module barrel. |
+| `graphql` | The resolver, its entry in the `@api` module barrel, and its query or mutation field in the module SDL. |
+| `api` | Shorthand for `rest` plus `graphql`. |
+| `app` | The `@app` handler and its entries in the `@app` module barrel. |
+| `ui` | The GraphQL document of the entry in the frontend `<module>.graphql.ts`. |
+
+A password-reset endpoint that exists only over REST, as `iam/user` declares it:
+
+```yaml
+# cliter/iam/user.aurora.yaml
+additionalApis:
+  - path: iam/user/forgot-password
+    resolverType: mutation
+    httpMethod: post
+    excludedLayers: [graphql, ui]
+```
+
+Regenerate the backend and the frontend module. The controller and the `@app` handler stay; the resolver, the SDL field and the frontend document are not generated, so the regeneration no longer proposes them as `.origin` hunks.
+
+A layer is excluded only when you list it. `graphql` does not imply `ui`: if you list `graphql` alone, the frontend document still points at an SDL field that no longer exists and the frontend `graphql:types` step fails. List both. An empty list, a value that is not a list, or a layer name outside `api`, `rest`, `graphql`, `app`, `ui` stops the load and names the module and the entry. `excludedFiles` keeps working on top of `excludedLayers`.
+
 ## Verify it worked
 
 - Rerun with `--verbose` and confirm the excluded operation is not among the emitted paths:
@@ -93,6 +121,7 @@ The generator does not check that the layers you exclude fit together. `[app]` a
   ```
 
 - For `excludedFiles`: confirm the listed path is not reported in the output log.
+- For `excludedLayers`: confirm no file of an excluded layer is written for that entry (for `[graphql, ui]`, no `*.resolver.ts`), and that the module `.graphql` SDL declares no field for it.
 - Run your usual backend build (`pnpm back:build` or the equivalent in your project) to catch any dangling imports that referred to the removed artefact.
 
 ## Troubleshooting
